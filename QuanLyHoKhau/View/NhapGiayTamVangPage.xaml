@@ -1,0 +1,211 @@
+﻿<Page x:Class="QuanLyHoKhau.View.NhapGiayTamVangPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:QuanLyHoKhau.View"
+      mc:Ignorable="d"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TrangChu"
+      DataContext="{StaticResource NhapGiayTamVangVM}">
+
+    <Grid x:Name="trangChu" Background="WhiteSmoke">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid
+            Grid.ColumnSpan="22" Grid.RowSpan="10">
+            <materialDesign:Card Padding="5" Margin="5,5,0,0">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBox 
+                            Width="250"
+                            MinWidth="100"
+                            FontSize="18" 
+                            materialDesign:HintAssist.Hint="Mã nhân khẩu" 
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                            Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <DatePicker
+                            Width="250"
+                            MinWidth="100"
+                            FontSize="18"
+                            materialDesign:HintAssist.Hint="Ngày bắt đầu"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                            SelectedDate="{Binding StartDate}"
+                            IsEnabled="{Binding IsEnabledElements}"/>
+                    </Grid>
+                    <Grid Grid.Row="2">
+                        <DatePicker
+                            Width="250"
+                            MinWidth="100"
+                            FontSize="18"
+                            materialDesign:HintAssist.Hint="Ngày kết thúc"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                            SelectedDate="{Binding StartDate}"
+                            IsEnabled="{Binding IsEnabledElements}"/>
+                    </Grid>
+                    <Grid Grid.Row="3">
+                        <TextBox 
+                            Width="250"
+                            MinWidth="100"
+                            FontSize="18" 
+                            materialDesign:HintAssist.Hint="Lý do" 
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                            Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </Grid>
+                    <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="5">
+                        <GroupBox
+                            x:Name="childrenList"
+                            Header="Danh sách trẻ em đi theo"
+                            Margin="8">
+                            <TextBox 
+                                materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                                BorderThickness="0"
+                                Width="{Binding ElementName=childrenList, Path=ActualWidth}"
+                                Height="{Binding ElementName=childrenList, Path=ActualHeight}"
+                                MinWidth="100"
+                                FontSize="22"
+                                FontWeight="Bold"
+                                TextWrapping="Wrap"
+                                AcceptsReturn="True"
+                                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                                Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                        </GroupBox>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+        <Grid
+            Grid.Column="23"
+            Grid.ColumnSpan="8" Grid.RowSpan="10">
+            <materialDesign:Card x:Name="cardInfo" Padding="10" Margin="0,5,5,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <TextBox 
+                            Width="300"
+                            MinWidth="200"
+                            FontSize="18" 
+                            materialDesign:HintAssist.Hint="Mã phiếu khai báo" 
+                            IsEnabled="False"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                            Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <DatePicker
+                            Width="300"
+                            MinWidth="200"
+                            FontSize="18"
+                            materialDesign:HintAssist.Hint="Ngày khai báo"
+                            Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
+                            SelectedDate="{Binding StartDate}"
+                            IsEnabled="{Binding IsEnabledElements}"/>
+                    </Grid>
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+        <Grid
+            Grid.Row="11"
+            Grid.ColumnSpan="31" Grid.RowSpan="6">
+            <materialDesign:Card Margin="5,0,5,0">
+                <DataGrid 
+                x:Name="listUsingExamDatagrid"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Top" 
+                ItemsSource="{Binding ListUsingExam}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectionMode="Extended"
+                AutoGenerateColumns="False"
+                SelectedItem="{Binding SelectedUsingExam, Mode=TwoWay}"
+                SelectionUnit="FullRow" 
+                CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Trạng thái" Binding="{Binding StatusString}"/>
+                        <DataGridTextColumn Header="Phòng" Binding="{Binding RoomID}"/>
+                        <DataGridTextColumn Header="Lớp" Binding="{Binding EXAM.CLASS.ClassName}"/>
+                        <DataGridTextColumn Header="Giám thị" Binding="{Binding EXAM.LECTURER.LecturerName}"/>
+                    </DataGrid.Columns>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction 
+                            Command="{Binding UsingExam_SelectionChangedCommand}"                       
+                            CommandParameter="{Binding ElementName=listUsingExamDatagrid}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </DataGrid>
+            </materialDesign:Card>
+        </Grid>
+    </Grid>
+</Page>

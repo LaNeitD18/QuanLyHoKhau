@@ -2,8 +2,24 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:QuanLyHoKhau"
-             StartupUri="MainWindow.xaml">
+             StartupUri="MainWindow.xaml"
+             xmlns:viewmodel="clr-namespace:QuanLyHoKhau.ViewModel">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+            <viewmodel:TrangChu_VM x:Key="TrangChuVM"></viewmodel:TrangChu_VM>
+            <viewmodel:NhapHoKhau_VM x:Key="NhapHoKhauVM"></viewmodel:NhapHoKhau_VM>
+            <viewmodel:NhapGiayTamVang_VM x:Key="NhapGiayTamVangVM"></viewmodel:NhapGiayTamVang_VM>
+
+            <SolidColorBrush x:Key="MidNight" Color="#1c2938"/>
+            <SolidColorBrush x:Key="Bunting" Color="#263246"/>
+            <SolidColorBrush x:Key="DarkGrayishBlue" Color="#3D435A"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
