@@ -62,6 +62,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -83,16 +85,105 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\CHITIET_PHANQUYEN.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\CONGAN.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DataProvider.cs" />
+    <Compile Include="Model\GIAYTAMTRU.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LOAICONGAN.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NGUOI.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NHANKHAU.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\NHANKHAUCHODUYET.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PHIEUKHAIBAOTAMVANG.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PHIEUTHAYDOI_HK_NK.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QLHKEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLHKEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QLHKEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QLHKEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLHKEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QUYEN.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SOHOKHAU.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SOHOKHAUCHODUYET.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SOLUUCHUYENKHAU.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SOLUUNHANKHAU.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SOLUUTAMTRU.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\SOLUUTAMVANG.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\THAMSO.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NhapGiayTamTru_VM.cs" />
     <Compile Include="ViewModel\NhapGiayTamVang_VM.cs" />
     <Compile Include="ViewModel\NhapHoKhau_VM.cs" />
+    <Compile Include="ViewModel\NhapNhanKhau_VM.cs" />
+    <Compile Include="ViewModel\QuanLyHoKhau_VM.cs" />
+    <Compile Include="ViewModel\QuanLyNhanKhau_VM.cs" />
+    <Compile Include="ViewModel\QuanLyTamTru_VM.cs" />
+    <Compile Include="ViewModel\QuanLyTamVang_VM.cs" />
     <Compile Include="ViewModel\TrangChu_VM.cs" />
-    <Compile Include="View\NhapGiayTamVangPage.xaml.cs">
-      <DependentUpon>NhapGiayTamVangPage.xaml</DependentUpon>
+    <Compile Include="View\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\NhapHoKhauPage.xaml.cs">
-      <DependentUpon>NhapHoKhauPage.xaml</DependentUpon>
+    <Compile Include="View\NhapGiayTamVangWindow.xaml.cs">
+      <DependentUpon>NhapGiayTamVangWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NhapHoKhauWindow.xaml.cs">
+      <DependentUpon>NhapHoKhauWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLyTamTruPage.xaml.cs">
+      <DependentUpon>QuanLyTamTruPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLyTamVangPage.xaml.cs">
+      <DependentUpon>QuanLyTamVangPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLyHoKhauPage.xaml.cs">
+      <DependentUpon>QuanLyHoKhauPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\NhapNhanKhauWindow.xaml.cs">
+      <DependentUpon>NhapNhanKhauWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\TrangChu.xaml.cs">
       <DependentUpon>TrangChu.xaml</DependentUpon>
@@ -109,11 +200,31 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\NhapGiayTamVangPage.xaml">
+    <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\NhapHoKhauPage.xaml">
+    <Page Include="View\NhapGiayTamVangWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NhapHoKhauWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLyTamTruPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLyTamVangPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLyHoKhauPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NhapNhanKhauWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,6 +251,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Model\QLHKEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLHKEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\QLHKEntities.edmx.diagram">
+      <DependentUpon>QLHKEntities.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -149,9 +267,23 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Model\QLHKEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLHKEntities.edmx</DependentUpon>
+      <LastGenOutput>QLHKEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\QLHKEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLHKEntities.edmx</DependentUpon>
+      <LastGenOutput>QLHKEntities.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="images\classroom.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.2.0\build\MaterialDesignThemes.targets')" />

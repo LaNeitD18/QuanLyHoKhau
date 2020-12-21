@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace QuanLyHoKhau.View
 {
     /// <summary>
-    /// Interaction logic for NhapHoKhau.xaml
+    /// Interaction logic for NhapGiayTamTruPage.xaml
     /// </summary>
-    public partial class NhapHoKhauPage : Page
+    public partial class QuanLyTamTruPage : Page
     {
-        public NhapHoKhauPage()
+        public QuanLyTamTruPage()
         {
             InitializeComponent();
         }

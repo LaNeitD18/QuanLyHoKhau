@@ -7,9 +7,16 @@
     <Application.Resources>
         <ResourceDictionary>
             <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+            <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
             <viewmodel:TrangChu_VM x:Key="TrangChuVM"></viewmodel:TrangChu_VM>
             <viewmodel:NhapHoKhau_VM x:Key="NhapHoKhauVM"></viewmodel:NhapHoKhau_VM>
             <viewmodel:NhapGiayTamVang_VM x:Key="NhapGiayTamVangVM"></viewmodel:NhapGiayTamVang_VM>
+            <viewmodel:NhapGiayTamTru_VM x:Key="NhapGiayTamTruVM"></viewmodel:NhapGiayTamTru_VM>
+            <viewmodel:NhapNhanKhau_VM x:Key="NhapNhanKhauVM"></viewmodel:NhapNhanKhau_VM>
+            <viewmodel:QuanLyHoKhau_VM x:Key="QuanLyHoKhauVM"></viewmodel:QuanLyHoKhau_VM>
+            <viewmodel:QuanLyNhanKhau_VM x:Key="QuanLyNhanKhauVM"></viewmodel:QuanLyNhanKhau_VM>
+            <viewmodel:QuanLyTamTru_VM x:Key="QuanLyTamTruVM"></viewmodel:QuanLyTamTru_VM>
+            <viewmodel:QuanLyTamVang_VM x:Key="QuanLyTamVangVM"></viewmodel:QuanLyTamVang_VM>
 
             <SolidColorBrush x:Key="MidNight" Color="#1c2938"/>
             <SolidColorBrush x:Key="Bunting" Color="#263246"/>

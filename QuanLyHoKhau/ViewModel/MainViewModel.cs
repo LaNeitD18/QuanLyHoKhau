@@ -28,6 +28,11 @@ namespace QuanLyHoKhau.ViewModel
 
         #region ICommand
         public ICommand LoadedWindowCommand { get; set; }
+        public ICommand TrangChu_SelectedCommand { get; set; }
+        public ICommand NhapHoKhau_Page_SelectedCommand { get; set; }
+        public ICommand NhapGiayTamVang_Page_SelectedCommand { get; set; }
+        public ICommand NhapGiayTamTru_Page_SelectedCommand { get; set; }
+
         #endregion
 
         #region Functions
@@ -43,7 +48,7 @@ namespace QuanLyHoKhau.ViewModel
                 //mainWindow.Hide(); // main view hide in login window
                 //LoginWindow loginWindow = new LoginWindow();
                 //loginWindow.ShowDialog();
-                isLoaded = true;
+                //isLoaded = true;
 
                 //if (loginWindow.DataContext == null) return;
                 //var loginVM = loginWindow.DataContext as LoginViewModel;
@@ -70,7 +75,33 @@ namespace QuanLyHoKhau.ViewModel
                 //};
                 //_timer.Start();
 
-                FrameContent = new NhapGiayTamVangPage();
+                FrameContent = new TrangChu();
+            });
+
+            TrangChu_SelectedCommand = new RelayCommand((p) => {
+                //Title = "Trang chủ";
+                FrameContent = new TrangChu();
+                NhapNhanKhauWindow nhapNhanKhauWindow = new NhapNhanKhauWindow();
+                nhapNhanKhauWindow.ShowDialog();
+            });
+
+            NhapHoKhau_Page_SelectedCommand = new RelayCommand((p) => {
+                //Title = "Trang chủ";
+                FrameContent = new QuanLyHoKhauPage();
+                NhapHoKhauWindow nhapHoKhauWindow = new NhapHoKhauWindow();
+                nhapHoKhauWindow.ShowDialog();
+            });
+
+            NhapGiayTamVang_Page_SelectedCommand = new RelayCommand((p) => {
+                //Title = "Trang chủ";
+                FrameContent = new QuanLyTamVangPage();
+                NhapGiayTamVangWindow nhapGiayTamVangWindow = new NhapGiayTamVangWindow();
+                nhapGiayTamVangWindow.ShowDialog();
+            });
+
+            NhapGiayTamTru_Page_SelectedCommand = new RelayCommand((p) => {
+                //Title = "Trang chủ";
+                FrameContent = new QuanLyTamTruPage();
             });
         }
     }
