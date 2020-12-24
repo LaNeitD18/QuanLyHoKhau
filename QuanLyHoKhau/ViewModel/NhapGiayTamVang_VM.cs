@@ -111,8 +111,19 @@ namespace QuanLyHoKhau.ViewModel
 
         #region Functions
 
+        bool CheckValidInfo()
+        {
+            if (this.endDate < this.startDate) return false;
+
+            if (DataProvider.Ins.DB.NHANKHAUs.Find(this.maNhanKhau) == null) return false;
+
+            return true;
+        }
+
         public void Accept()
         {
+            if (CheckValidInfo() == false) return;
+
             string DiaPhuong = DataProvider.Ins.DB.CONGANs.Find(GlobalState.Ins().maCongAn).MaDiaPhuong;
 
             PHIEUKHAIBAOTAMVANG phieu = new PHIEUKHAIBAOTAMVANG();
