@@ -24,6 +24,7 @@ namespace QuanLyHoKhau.Model
         public string MaSoLuuNhanKhau { get; set; }
         public string DiaPhuong { get; set; }
     
+        public virtual DIAPHUONG DIAPHUONG1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SOHOKHAU> SOHOKHAUs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

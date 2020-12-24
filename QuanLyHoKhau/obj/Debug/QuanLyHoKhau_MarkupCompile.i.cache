@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 E:\MW\WPF\QuanLyHoKhau\QuanLyHoKhau\App.xaml
-9-1086798863
+10-1356024741
 21385137081
-471303218033
+49-1285602614
 24-949383620
-MainWindow.xaml;View\LoginWindow.xaml;View\NhapGiayTamVangWindow.xaml;View\NhapHoKhauWindow.xaml;View\QuanLyTamTruPage.xaml;View\QuanLyTamVangPage.xaml;View\QuanLyHoKhauPage.xaml;View\NhapNhanKhauWindow.xaml;View\TrangChu.xaml;
+MainWindow.xaml;View\LoginWindow.xaml;View\NhapGiayTamTruWindow.xaml;View\NhapGiayTamVangWindow.xaml;View\NhapHoKhauWindow.xaml;View\QuanLyTamTruPage.xaml;View\QuanLyTamVangPage.xaml;View\QuanLyHoKhauPage.xaml;View\NhapNhanKhauWindow.xaml;View\TrangChu.xaml;
 
 True
 

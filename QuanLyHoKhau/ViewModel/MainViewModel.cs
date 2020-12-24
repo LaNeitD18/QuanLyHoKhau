@@ -102,6 +102,8 @@ namespace QuanLyHoKhau.ViewModel
             NhapGiayTamTru_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyTamTruPage();
+                NhapGiayTamTruWindow nhapGiayTamTruWindow = new NhapGiayTamTruWindow();
+                nhapGiayTamTruWindow.ShowDialog();
             });
         }
     }

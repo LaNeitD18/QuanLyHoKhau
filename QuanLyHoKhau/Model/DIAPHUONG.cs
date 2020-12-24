@@ -12,32 +12,27 @@ namespace QuanLyHoKhau.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class NHANKHAU
+    public partial class DIAPHUONG
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public NHANKHAU()
+        public DIAPHUONG()
         {
-            this.GIAYTAMTRUs = new HashSet<GIAYTAMTRU>();
-            this.PHIEUKHAIBAOTAMVANGs = new HashSet<PHIEUKHAIBAOTAMVANG>();
-            this.PHIEUTHAYDOI_HK_NK = new HashSet<PHIEUTHAYDOI_HK_NK>();
-            this.SOHOKHAUs = new HashSet<SOHOKHAU>();
+            this.CONGANs = new HashSet<CONGAN>();
+            this.SOLUUNHANKHAUs = new HashSet<SOLUUNHANKHAU>();
+            this.SOLUUTAMTRUs = new HashSet<SOLUUTAMTRU>();
+            this.SOLUUTAMVANGs = new HashSet<SOLUUTAMVANG>();
         }
     
-        public string MaNhanKhau { get; set; }
-        public string MASHK { get; set; }
-        public string MaNguoi { get; set; }
-        public string QuanHeVoiChuHo { get; set; }
-        public string ChoOHienNay { get; set; }
+        public string MaDiaPhuong { get; set; }
+        public string TenDiaPhuong { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GIAYTAMTRU> GIAYTAMTRUs { get; set; }
-        public virtual NGUOI NGUOI { get; set; }
-        public virtual SOHOKHAU SOHOKHAU { get; set; }
+        public virtual ICollection<CONGAN> CONGANs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUKHAIBAOTAMVANG> PHIEUKHAIBAOTAMVANGs { get; set; }
+        public virtual ICollection<SOLUUNHANKHAU> SOLUUNHANKHAUs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUTHAYDOI_HK_NK> PHIEUTHAYDOI_HK_NK { get; set; }
+        public virtual ICollection<SOLUUTAMTRU> SOLUUTAMTRUs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SOHOKHAU> SOHOKHAUs { get; set; }
+        public virtual ICollection<SOLUUTAMVANG> SOLUUTAMVANGs { get; set; }
     }
 }

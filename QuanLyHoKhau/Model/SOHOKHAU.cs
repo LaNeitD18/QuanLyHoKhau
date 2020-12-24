@@ -27,11 +27,12 @@ namespace QuanLyHoKhau.Model
         public string MaSoLuuNhanKhau { get; set; }
         public string DiaChi { get; set; }
         public System.DateTime NgayTaoSo { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual CONGAN CONGAN { get; set; }
-        public virtual NGUOI NGUOI { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NHANKHAU> NHANKHAUs { get; set; }
+        public virtual NHANKHAU NHANKHAU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NHANKHAUCHODUYET> NHANKHAUCHODUYETs { get; set; }
         public virtual SOLUUNHANKHAU SOLUUNHANKHAU { get; set; }

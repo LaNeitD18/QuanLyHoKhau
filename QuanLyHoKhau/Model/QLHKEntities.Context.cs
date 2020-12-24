@@ -27,6 +27,7 @@ namespace QuanLyHoKhau.Model
     
         public virtual DbSet<CHITIET_PHANQUYEN> CHITIET_PHANQUYEN { get; set; }
         public virtual DbSet<CONGAN> CONGANs { get; set; }
+        public virtual DbSet<DIAPHUONG> DIAPHUONGs { get; set; }
         public virtual DbSet<GIAYTAMTRU> GIAYTAMTRUs { get; set; }
         public virtual DbSet<LOAICONGAN> LOAICONGANs { get; set; }
         public virtual DbSet<NGUOI> NGUOIs { get; set; }

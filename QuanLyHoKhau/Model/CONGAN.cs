@@ -27,7 +27,9 @@ namespace QuanLyHoKhau.Model
         public string MaCongAn { get; set; }
         public string MaNguoi { get; set; }
         public string MaLoaiCongAn { get; set; }
+        public string MaDiaPhuong { get; set; }
     
+        public virtual DIAPHUONG DIAPHUONG { get; set; }
         public virtual LOAICONGAN LOAICONGAN { get; set; }
         public virtual NGUOI NGUOI { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
