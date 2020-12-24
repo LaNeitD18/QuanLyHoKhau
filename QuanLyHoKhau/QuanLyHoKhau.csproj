@@ -171,6 +171,9 @@
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\NhapGiayTamTruWindow.xaml.cs">
+      <DependentUpon>NhapGiayTamTruWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NhapGiayTamVangWindow.xaml.cs">
       <DependentUpon>NhapGiayTamVangWindow.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\LoginWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\NhapGiayTamTruWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

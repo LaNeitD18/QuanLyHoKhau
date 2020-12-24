@@ -51,6 +51,7 @@
         <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaSoLu__37A5467C" />
         <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaSHK__3A81B327" />
         <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaSoL__3D5E1FD2" />
+        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaGia__5629CD9C" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

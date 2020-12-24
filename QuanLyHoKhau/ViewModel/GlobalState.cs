@@ -23,5 +23,6 @@ namespace QuanLyHoKhau.ViewModel
         #endregion
 
         public string maCongAn = "CA001";
+        public int maxFreeDaysStay = 10; // so luong ngay duoc tam tru ma khong can phieu tam vang
     }
 }
