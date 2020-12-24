@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace QuanLyHoKhau.ViewModel
+{
+    class GlobalState
+    {
+        #region SingleTon
+        private GlobalState() { }
+
+        private static GlobalState __instance;
+
+        public static GlobalState Ins()
+        {
+            if (__instance == null)
+                __instance = new GlobalState();
+
+            return __instance;
+        }
+        #endregion
+
+        public string maCongAn = "CA001";
+    }
+}

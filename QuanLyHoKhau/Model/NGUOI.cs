@@ -20,7 +20,6 @@ namespace QuanLyHoKhau.Model
             this.CONGANs = new HashSet<CONGAN>();
             this.NHANKHAUs = new HashSet<NHANKHAU>();
             this.NHANKHAUCHODUYETs = new HashSet<NHANKHAUCHODUYET>();
-            this.SOHOKHAUs = new HashSet<SOHOKHAU>();
             this.SOHOKHAUCHODUYETs = new HashSet<SOHOKHAUCHODUYET>();
         }
     
@@ -41,8 +40,6 @@ namespace QuanLyHoKhau.Model
         public virtual ICollection<NHANKHAU> NHANKHAUs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NHANKHAUCHODUYET> NHANKHAUCHODUYETs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SOHOKHAU> SOHOKHAUs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SOHOKHAUCHODUYET> SOHOKHAUCHODUYETs { get; set; }
     }

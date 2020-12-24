@@ -85,28 +85,6 @@ namespace QuanLyHoKhau.ViewModel
                 _acceptCommand = value;
             }
         }
-        public void Accept()
-        {
-            string DiaPhuong = (from nk in DataProvider.Ins.DB.NHANKHAUs
-                                where nk.MaNhanKhau == this.maNhanKhau
-                                join shk in DataProvider.Ins.DB.SOHOKHAUs on nk.MASHK equals shk.MaSHK
-                                join slnk in DataProvider.Ins.DB.SOLUUNHANKHAUs on shk.MaSoLuuNhanKhau equals slnk.MaSoLuuNhanKhau
-                                select slnk).Single().DiaPhuong;
-
-            PHIEUKHAIBAOTAMVANG phieu = new PHIEUKHAIBAOTAMVANG();
-
-            phieu.MaPhieuKhaiBao = this.maNhanKhau + this.startDate.Day.ToString() + "/" + this.startDate.Month.ToString() + "/" + this.startDate.Year.ToString();
-            phieu.MaSoLuuTamVang = DataProvider.Ins.DB.SOLUUTAMVANGs.Where(x => x.DiaPhuong == DiaPhuong).Single().MaSoLuuTamVang;
-            phieu.MaCongAn = "CA001";
-            phieu.MaNhanKhau = this.maNhanKhau;
-            phieu.NgayKhaiBao = DateTime.Now;
-            phieu.NgayBatDau = this.startDate;
-            phieu.NgayKetThuc = this.endDate;
-            phieu.LyDo = this.reason;
-
-            DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Add(phieu);
-            DataProvider.Ins.DB.SaveChanges();
-        }
 
         private ICommand _cancelCommand;
         public ICommand cancelCommand
@@ -127,6 +105,29 @@ namespace QuanLyHoKhau.ViewModel
             {
                 _cancelCommand = value;
             }
+        }
+
+        #endregion
+
+        #region Functions
+
+        public void Accept()
+        {
+            string DiaPhuong = DataProvider.Ins.DB.CONGANs.Find(GlobalState.Ins().maCongAn).MaDiaPhuong;
+
+            PHIEUKHAIBAOTAMVANG phieu = new PHIEUKHAIBAOTAMVANG();
+
+            phieu.MaPhieuKhaiBao = this.maNhanKhau + this.startDate.Day.ToString() + "/" + this.startDate.Month.ToString() + "/" + this.startDate.Year.ToString();
+            phieu.MaSoLuuTamVang = DataProvider.Ins.DB.SOLUUTAMVANGs.Where(x => x.DiaPhuong == DiaPhuong).Single().MaSoLuuTamVang;
+            phieu.MaCongAn = "CA001";
+            phieu.MaNhanKhau = this.maNhanKhau;
+            phieu.NgayKhaiBao = DateTime.Now;
+            phieu.NgayBatDau = this.startDate;
+            phieu.NgayKetThuc = this.endDate;
+            phieu.LyDo = this.reason;
+
+            DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Add(phieu);
+            DataProvider.Ins.DB.SaveChanges();
         }
         public void Cancel()
         {
