@@ -80,30 +80,22 @@ namespace QuanLyHoKhau.ViewModel
 
             TrangChu_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
-                FrameContent = new TrangChu();
-                NhapNhanKhauWindow nhapNhanKhauWindow = new NhapNhanKhauWindow();
-                nhapNhanKhauWindow.ShowDialog();
+                FrameContent = new QuanLyNhanKhauPage();
             });
 
             NhapHoKhau_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyHoKhauPage();
-                NhapHoKhauWindow nhapHoKhauWindow = new NhapHoKhauWindow();
-                nhapHoKhauWindow.ShowDialog();
             });
 
             NhapGiayTamVang_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyTamVangPage();
-                NhapGiayTamVangWindow nhapGiayTamVangWindow = new NhapGiayTamVangWindow();
-                nhapGiayTamVangWindow.ShowDialog();
             });
 
             NhapGiayTamTru_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyTamTruPage();
-                NhapGiayTamTruWindow nhapGiayTamTruWindow = new NhapGiayTamTruWindow();
-                nhapGiayTamTruWindow.ShowDialog();
             });
         }
     }
