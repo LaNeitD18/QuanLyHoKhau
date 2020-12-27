@@ -155,7 +155,7 @@ namespace QuanLyHoKhau.ViewModel
 
             GIAYTAMTRU phieu = new GIAYTAMTRU();
 
-            phieu.MaGiayTamTru = this.maNhanKhau + this.startDate.Day.ToString() + "/" + this.startDate.Month.ToString() + "/" + this.startDate.Year.ToString();
+            phieu.MaGiayTamTru = this.maNhanKhau + "-" + this.startDate.Day.ToString() + "/" + this.startDate.Month.ToString() + "/" + this.startDate.Year.ToString();
             phieu.MaSoLuuTamTru = DataProvider.Ins.DB.SOLUUTAMVANGs.Where(x => x.DiaPhuong == DiaPhuong).Single().MaSoLuuTamVang;
             phieu.MaCongAn = GlobalState.Ins().maCongAn;
             phieu.MaNhanKhau = this.maNhanKhau;
