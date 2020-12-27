@@ -180,6 +180,9 @@
     <Compile Include="View\NhapHoKhauWindow.xaml.cs">
       <DependentUpon>NhapHoKhauWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\QuanLyNhanKhauPage.xaml.cs">
+      <DependentUpon>QuanLyNhanKhauPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\QuanLyTamTruPage.xaml.cs">
       <DependentUpon>QuanLyTamTruPage.xaml</DependentUpon>
     </Compile>
@@ -195,6 +198,10 @@
     <Compile Include="View\TrangChu.xaml.cs">
       <DependentUpon>TrangChu.xaml</DependentUpon>
     </Compile>
+    <Page Include="icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -220,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\NhapHoKhauWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLyNhanKhauPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

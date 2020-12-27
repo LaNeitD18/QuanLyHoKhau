@@ -166,9 +166,11 @@
             Grid.Column="5" 
             Grid.ColumnSpan="31" Grid.RowSpan="17"
             Margin="0">
-            <Frame x:Name="main" NavigationUIVisibility="Hidden"
+            <Border CornerRadius="10">
+                <Frame x:Name="main" NavigationUIVisibility="Hidden"
                 Content="{Binding FrameContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            </Frame>
+                </Frame>
+            </Border>
         </Grid>
     </Grid>
 </Window>
