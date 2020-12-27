@@ -10,8 +10,53 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow"
+        FontSize="15"
         WindowState="Maximized"
         DataContext="{StaticResource MainVM}">
+    <Window.Resources>
+        <ResourceDictionary>
+            <Style x:Key="MenuButtonStyle" TargetType="{x:Type ToggleButton}">
+                <Setter Property="Background" Value="WhiteSmoke"/>
+                <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                            <Border
+                                CornerRadius="10,0,0,10"
+                                Background="{TemplateBinding Background}"
+                                BorderThickness="{TemplateBinding BorderThickness}">
+                                <Grid Margin="10,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="30"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Path 
+                                        Data="{TemplateBinding Tag}"
+                                        Fill="{TemplateBinding Foreground}"
+                                        Style="{StaticResource {x:Type Path}}"/>
+                                    <ContentPresenter
+                                        Margin="8,0,0,0"
+                                        Grid.Column="1"
+                                        TextBlock.TextAlignment="Left"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        Content="{TemplateBinding Content}"/>
+                                </Grid>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="True">
+                                    <Setter Property="Background" Value="#E1E4E6"/>
+                                    <Setter Property="Foreground" Value="Teal"/>
+                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
@@ -92,11 +137,12 @@
         <Grid
             x:Name="menuGrid"
             Grid.Row="3"
-            Grid.RowSpan="17" Grid.ColumnSpan="5">
+            Grid.RowSpan="12" Grid.ColumnSpan="5"
+            Background="WhiteSmoke">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"></DropShadowEffect>
             </Grid.Effect>
-            <DockPanel
+            <!--<DockPanel
                 Background="{DynamicResource Bunting}" 
                 Panel.ZIndex="2" 
                 LastChildFill="True">
@@ -160,7 +206,69 @@
                         </Button>
                     </Canvas>
                 </WrapPanel>
-            </DockPanel>
+            </DockPanel>-->
+            <StackPanel Margin="0,10">
+                <RadioButton
+                    GroupName="Menu"
+                    Style="{StaticResource MenuButtonStyle}"
+                    Tag="{StaticResource home}"
+                    Content="Trang chủ"
+                    Command="{Binding TrangChu_SelectedCommand}"
+                    IsChecked="True"/>
+                <RadioButton
+                    GroupName="Menu"
+                    Style="{StaticResource MenuButtonStyle}"
+                    Tag="{StaticResource home}"
+                    Content="Quản lý hộ khẩu"
+                    Command="{Binding QLHoKhau_Page_SelectedCommand}"/>
+                <RadioButton
+                    GroupName="Menu"
+                    Style="{StaticResource MenuButtonStyle}"
+                    Tag="{StaticResource home}"
+                    Content="Quản lý tạm vắng"
+                    Command="{Binding QLGiayTamVang_Page_SelectedCommand}"/>
+                <RadioButton
+                    GroupName="Menu"
+                    Style="{StaticResource MenuButtonStyle}"
+                    Tag="{StaticResource home}"
+                    Content="Quản lý tạm trú"
+                    Command="{Binding QLGiayTamTru_Page_SelectedCommand}"/>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="15" Grid.RowSpan="2" Grid.ColumnSpan="5" Background="WhiteSmoke">
+            <Button 
+                Grid.Column="1"
+                Margin="20,10"
+                BorderThickness="0"
+                Background="Teal"
+                Foreground="White"
+                Height="50"
+                Command="{Binding BtnAddSoHoKhau_Command}"
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+                <Button.Content>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock 
+                            Grid.Column="0" Text="Đăng xuất" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Path
+                            Grid.Column="1"
+                            Style="{StaticResource {x:Type Path}}"
+                            Data="{StaticResource right}"
+                            Fill="White"
+                            HorizontalAlignment="Center"/>
+                    </Grid>
+                </Button.Content>
+            </Button>
         </Grid>
         <Grid 
             Grid.Column="5" 

@@ -22,6 +22,7 @@
           <Property Name="MaNguoi" Type="varchar" MaxLength="20" />
           <Property Name="MaLoaiCongAn" Type="varchar" MaxLength="20" />
           <Property Name="MaDiaPhuong" Type="varchar" MaxLength="20" />
+          <Property Name="MatKhau" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DIAPHUONG">
           <Key>
@@ -803,6 +804,7 @@
           <Property Name="MaNguoi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MaLoaiCongAn" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MaDiaPhuong" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MatKhau" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DIAPHUONG" Relationship="QLHKModel.FK__CONGAN__MaDiaPhu__2C3393D0" FromRole="CONGAN" ToRole="DIAPHUONG" />
           <NavigationProperty Name="LOAICONGAN" Relationship="QLHKModel.FK__CONGAN__MaLoaiCo__2B3F6F97" FromRole="CONGAN" ToRole="LOAICONGAN" />
           <NavigationProperty Name="NGUOI" Relationship="QLHKModel.FK__CONGAN__MaNguoi__2A4B4B5E" FromRole="CONGAN" ToRole="NGUOI" />
@@ -1369,6 +1371,7 @@
           <EntitySetMapping Name="CONGANs">
             <EntityTypeMapping TypeName="QLHKModel.CONGAN">
               <MappingFragment StoreEntitySet="CONGAN">
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
                 <ScalarProperty Name="MaDiaPhuong" ColumnName="MaDiaPhuong" />
                 <ScalarProperty Name="MaLoaiCongAn" ColumnName="MaLoaiCongAn" />
                 <ScalarProperty Name="MaNguoi" ColumnName="MaNguoi" />
