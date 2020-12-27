@@ -123,33 +123,39 @@ namespace QuanLyHoKhau.ViewModel
         #endregion
 
         #region Functions
-        bool checkValidInfo()
+        public string  CheckValidInfo()
         {
-            if (this.endDate < this.startDate) return false;
+            if (this.endDate < this.startDate) return "Ngày bắt đầu phải bé hơn ngày kết thúc";
 
-            if (DataProvider.Ins.DB.NHANKHAUs.Find(this.maNhanKhau) == null) return false;
+            if (DataProvider.Ins.DB.NHANKHAUs.Find(this.maNhanKhau) == null) return "Không tìm thấy mã nhân khẩu";
 
             if((this.endDate - this.startDate).Days > GlobalState.Ins().maxFreeDaysStay)
             {
-                var listPHIEUTAMVANG = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.MaNhanKhau == this.maNhanKhau).ToList();
-                listPHIEUTAMVANG = listPHIEUTAMVANG.Where(x =>
+                if(this.maPhieuTamVang == "" || this.maPhieuTamVang == null)
                 {
-                    return x.NgayKetThuc > DateTime.Now;
-                }).ToList();
+                    return "Tạm trú trên " + GlobalState.Ins().maxFreeDaysStay.ToString() + " ngày cần phải có phiếu tạm vắng";
+                }
 
-                if(listPHIEUTAMVANG.Count == 0)
+                var listPHIEUTAMVANG = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.MaPhieuKhaiBao == this.maPhieuTamVang).ToList();
+
+                if (listPHIEUTAMVANG.Count == 0)
                 {
-                    return false;
+                    return "Không tìm thấy thông tin phiếu tạm vắng";
+                }
+
+                if(listPHIEUTAMVANG[0].NgayKetThuc > this.endDate)
+                {
+                    return "Không thể ở lâu hơn thời hạn của phiếu tạm vắng";
                 }
             }
 
-            return true;
+            return null;
         }
 
-        public void Accept()
+        public bool Accept()
         {
-            if (checkValidInfo() == false)
-                return;
+            if (CheckValidInfo() != null)
+                return false;
 
             string DiaPhuong = DataProvider.Ins.DB.CONGANs.Find(GlobalState.Ins().maCongAn).MaDiaPhuong;
 
@@ -174,7 +180,16 @@ namespace QuanLyHoKhau.ViewModel
             }
 
             DataProvider.Ins.DB.GIAYTAMTRUs.Add(phieu);
-            DataProvider.Ins.DB.SaveChanges();
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+
+            return true;
         }
         public void Cancel()
         {
