@@ -1,0 +1,102 @@
+﻿<Window x:Class="QuanLyHoKhau.View.NhapHoKhauWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:QuanLyHoKhau.View"
+        mc:Ignorable="d"
+        Title="NhapHoKhauWindow" Height="450" Width="600"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        
+        WindowStartupLocation="CenterScreen"
+        DataContext="{StaticResource NhapHoKhauVM}">
+    <materialDesign:Card>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBox 
+                    Width="400"
+                    MinWidth="200"
+                    FontSize="18" 
+                    materialDesign:HintAssist.Hint="Mã sổ hộ khẩu" 
+                    IsEnabled="False"
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                    Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
+            <Grid Grid.Row="1">
+                <ComboBox 
+                    FontSize="18" Width="400" MinWidth="100"
+                    materialDesign:HintAssist.Hint="Chọn mã sổ lưu hộ khẩu" 
+                    VerticalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    ItemsSource="{Binding ListClass}" 
+                    KeyboardNavigation.TabIndex="1" 
+                    SelectedItem="{Binding SelectedClass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    IsEnabled="{Binding IsEnabledElements}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding ClassID}"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </Grid>
+            <Grid Grid.Row="2">
+                <TextBox 
+                    Width="400"
+                    MinWidth="100"
+                    FontSize="18" 
+                    materialDesign:HintAssist.Hint="Số CMND chủ hộ" 
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                    Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
+            <Grid Grid.Row="3">
+                <TextBox 
+                    Width="400"
+                    MinWidth="100"
+                    FontSize="18" 
+                    materialDesign:HintAssist.Hint="Địa chỉ" 
+                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                    Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
+            <Grid Grid.Row="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <Button 
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
+                    Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
+                    Width="150" Height="35"
+                    IsEnabled="{Binding IsAddingEnabled}"
+                    Command="{Binding AddRoomCommand}"/>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Button 
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
+                    Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
+                    Width="150" Height="35"
+                    IsEnabled="{Binding IsAddingEnabled}"
+                    Command="{Binding AddRoomCommand}"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </materialDesign:Card>
+</Window>

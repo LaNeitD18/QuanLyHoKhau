@@ -1,0 +1,176 @@
+﻿<Window x:Class="QuanLyHoKhau.MainWindow"
+        x:Name="mainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:QuanLyHoKhau"
+        xmlns:s="clr-namespace:System;assembly=mscorlib"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        WindowState="Maximized"
+        DataContext="{StaticResource MainVM}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.ColumnSpan="5" Grid.RowSpan="3" Background="{DynamicResource MidNight}">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"></DropShadowEffect>
+            </Grid.Effect>
+            <StackPanel 
+                Orientation="Vertical"
+                VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image Source="/images/classroom.png" MaxHeight="100"></Image>
+                <TextBlock Foreground="White"
+                    Text="ZZZ"
+                    FontWeight="Bold"
+                    FontSize="16"
+                    HorizontalAlignment="Center">
+                </TextBlock>
+            </StackPanel>
+        </Grid>
+        
+        <Grid
+            x:Name="menuGrid"
+            Grid.Row="3"
+            Grid.RowSpan="17" Grid.ColumnSpan="5">
+            <Grid.Effect>
+                <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"></DropShadowEffect>
+            </Grid.Effect>
+            <DockPanel
+                Background="{DynamicResource Bunting}" 
+                Panel.ZIndex="2" 
+                LastChildFill="True">
+                <WrapPanel DockPanel.Dock="Top" Margin="0,30,0,10" IsEnabled="{Binding IsHomeEnabled}" Visibility="{Binding IsHomeVisible}">
+                    <Canvas>
+                        <md:PackIcon Kind="Home" Panel.ZIndex="0" Margin="5,10,5,0" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="30" Height="30" />
+                        <Button
+                            Panel.ZIndex="1"
+                            Width="{Binding ElementName=menuGrid, Path=ActualWidth}"
+                            MinHeight="50"
+                            Command="{Binding TrangChu_SelectedCommand}" 
+                            Background="{x:Null}" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            Margin="0">
+                            <TextBlock Text="Trang chủ" Foreground="White" FontSize="16" HorizontalAlignment="Center"></TextBlock>
+                        </Button>
+                    </Canvas>
+                </WrapPanel>
+                <WrapPanel DockPanel.Dock="Top" Margin="0,80,0,10" IsEnabled="{Binding IsHomeEnabled}" Visibility="{Binding IsHomeVisible}">
+                    <Canvas>
+                        <md:PackIcon Kind="Home" Panel.ZIndex="0" Margin="5,10,5,0" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="30" Height="30" />
+                        <Button
+                            Panel.ZIndex="1"
+                            Width="{Binding ElementName=menuGrid, Path=ActualWidth}"
+                            MinHeight="50"
+                            Command="{Binding NhapHoKhau_Page_SelectedCommand}" 
+                            Background="{x:Null}" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            Margin="0">
+                            <TextBlock Text="Nhập hộ khẩu" Foreground="White" FontSize="16" HorizontalAlignment="Center"></TextBlock>
+                        </Button>
+                    </Canvas>
+                </WrapPanel>
+                <WrapPanel DockPanel.Dock="Top" Margin="0,80,0,10" IsEnabled="{Binding IsHomeEnabled}" Visibility="{Binding IsHomeVisible}">
+                    <Canvas>
+                        <md:PackIcon Kind="Home" Panel.ZIndex="0" Margin="5,10,5,0" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="30" Height="30" />
+                        <Button
+                            Panel.ZIndex="1"
+                            Width="{Binding ElementName=menuGrid, Path=ActualWidth}"
+                            MinHeight="50"
+                            Command="{Binding NhapGiayTamVang_Page_SelectedCommand}" 
+                            Background="{x:Null}" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            Margin="0">
+                            <TextBlock Text="Nhập phiếu tạm vắng" Foreground="White" FontSize="16" HorizontalAlignment="Center"></TextBlock>
+                        </Button>
+                    </Canvas>
+                </WrapPanel>
+                <WrapPanel DockPanel.Dock="Top" Margin="0,80,0,10" IsEnabled="{Binding IsHomeEnabled}" Visibility="{Binding IsHomeVisible}">
+                    <Canvas>
+                        <md:PackIcon Kind="Home" Panel.ZIndex="0" Margin="5,10,5,0" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="30" Height="30" />
+                        <Button
+                            Panel.ZIndex="1"
+                            Width="{Binding ElementName=menuGrid, Path=ActualWidth}"
+                            MinHeight="50"
+                            Command="{Binding NhapGiayTamTru_Page_SelectedCommand}" 
+                            Background="{x:Null}" 
+                            HorizontalAlignment="Center" VerticalAlignment="Center" 
+                            Margin="0">
+                            <TextBlock Text="Nhập giấy tạm trú" Foreground="White" FontSize="16" HorizontalAlignment="Center"></TextBlock>
+                        </Button>
+                    </Canvas>
+                </WrapPanel>
+            </DockPanel>
+        </Grid>
+        <Grid 
+            Grid.Column="5" 
+            Grid.ColumnSpan="31" Grid.RowSpan="17"
+            Margin="0">
+            <Border CornerRadius="10">
+                <Frame x:Name="main" NavigationUIVisibility="Hidden"
+                Content="{Binding FrameContent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                </Frame>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
