@@ -25,6 +25,7 @@ namespace QuanLyHoKhau.ViewModel
 
         public NhapHoKhau_VM(SOHOKHAU soHoKhau)
         {
+            Reset();
             ResultSoHoKhau = new SOHOKHAU(soHoKhau);
         }
         #endregion
@@ -55,6 +56,22 @@ namespace QuanLyHoKhau.ViewModel
         {
             get => ResultSoHoKhau.MaSHK;
             set { ResultSoHoKhau.MaSHK = value; OnPropertyChanged(); }
+        }
+
+        public NHANKHAU SelectedChuHo
+        {
+            get => ResultSoHoKhau.NHANKHAU;
+            set
+            {
+                ResultSoHoKhau.NHANKHAU = value;
+
+                if (value != null)
+                    ResultSoHoKhau.CMNDChuHo = value.CMND;
+                else
+                    ResultSoHoKhau.CMNDChuHo = null;
+
+                OnPropertyChanged();
+            }
         }
 
         public SOLUUNHANKHAU SelectedSoLuuNhanKhau
@@ -105,6 +122,30 @@ namespace QuanLyHoKhau.ViewModel
             set
             {
                 _listSOLUUNHANKHAU = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
+        #region ListNHANKHAU
+        private BindingList<NHANKHAU> LoadNhanKhau()
+        {
+            BindingList<NHANKHAU> result = new BindingList<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.ToList());
+            return result;
+        }
+
+        private BindingList<NHANKHAU> _listNHANKHAU = null;
+        public BindingList<NHANKHAU> ListNHANKHAU
+        {
+            get
+            {
+                if (_listNHANKHAU == null)
+                    _listNHANKHAU = LoadNhanKhau();
+                return _listNHANKHAU;
+            }
+            set
+            {
+                _listNHANKHAU = value;
                 OnPropertyChanged();
             }
         }
@@ -227,12 +268,17 @@ namespace QuanLyHoKhau.ViewModel
         private void Reset()
         {
             ResultSoHoKhau = null;
+            MaSoHoKhau = null;
+            SelectedSoLuuNhanKhau = null;
+            SelectedChuHo = null;
+            DiaChi = "";
             Refresh();
         }
 
         private void Refresh()
         {
             ListSOLUUNHANKHAU = LoadSLNK();
+            ListNHANKHAU = LoadNhanKhau();
         }
         #endregion
     }

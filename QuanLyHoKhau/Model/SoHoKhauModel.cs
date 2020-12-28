@@ -13,9 +13,9 @@ namespace QuanLyHoKhau.Model
             if(shk == null)
             {
                 MaSHK = "";
-                CMNDChuHo = "";
-                MaCongAn = "";
-                MaSoLuuNhanKhau = "";
+                CMNDChuHo = null;
+                MaCongAn = null;
+                MaSoLuuNhanKhau = null;
                 DiaChi = "";
                 NgayTaoSo = DateTime.Now;
                 IsDeleted = false;

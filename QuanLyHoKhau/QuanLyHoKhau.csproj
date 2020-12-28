@@ -104,6 +104,7 @@
     <Compile Include="Model\NGUOI.cs">
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\NguoiModel.cs" />
     <Compile Include="Model\NHANKHAU.cs">
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
@@ -160,6 +161,7 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="Model\NhanKhauModel.cs" />
     <Compile Include="ViewModel\NhapGiayTamTru_VM.cs" />
     <Compile Include="ViewModel\NhapGiayTamVang_VM.cs" />
     <Compile Include="ViewModel\NhapHoKhau_VM.cs" />

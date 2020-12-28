@@ -25,54 +25,120 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
+            <Grid Grid.Row="0"/>
             <Grid Grid.Row="0">
-                <TextBox 
-                Width="400"
-                MinWidth="100"
-                FontSize="18" 
-                materialDesign:HintAssist.Hint="Mã nhân khẩu" 
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-            </Grid>
-            <Grid Grid.Row="1">
                 <TextBox 
                 Width="400"
                 MinWidth="100"
                 FontSize="18" 
                 materialDesign:HintAssist.Hint="Số CMND" 
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                Text="{Binding CMND, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </Grid>
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1">
                 <TextBox 
                 Width="400"
                 MinWidth="100"
                 FontSize="18" 
                 materialDesign:HintAssist.Hint="Họ tên" 
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                Text="{Binding HoTen, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </Grid>
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="2">
                 <DatePicker
                 Width="400"
                 MinWidth="100"
                 FontSize="18"
                 materialDesign:HintAssist.Hint="Ngày sinh"
                 Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                SelectedDate="{Binding StartDate}"
-                IsEnabled="{Binding IsEnabledElements}"/>
+                SelectedDate="{Binding NgaySinh}"
+                />
             </Grid>
-            <Grid Grid.Row="4">
+            <Grid Grid.Row="3">
                 <ComboBox 
                 FontSize="18" Width="400" MinWidth="100"
-                materialDesign:HintAssist.Hint="Chọn giới tính" 
+                materialDesign:HintAssist.Hint="Giới tính" 
                 VerticalAlignment="Center" 
                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                ItemsSource="{Binding ListClass}" 
+                ItemsSource="{Binding ListGioitinh}" 
                 KeyboardNavigation.TabIndex="1" 
-                SelectedItem="{Binding SelectedClass, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
-                IsEnabled="{Binding IsEnabledElements}">
+                SelectedItem="{Binding GioiTinh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                >
+                <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+            </Grid>
+            <Grid Grid.Row="4">
+                <TextBox 
+                Width="400"
+                MinWidth="100"
+                FontSize="18" 
+                materialDesign:HintAssist.Hint="Nơi sinh" 
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                Text="{Binding NoiSinh, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
+            <Grid Grid.Row="5">
+                <TextBox 
+                Width="400"
+                MinWidth="100"
+                FontSize="18" 
+                materialDesign:HintAssist.Hint="Quê quán" 
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                Text="{Binding QueQuan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
+            <Grid Grid.Row="6">
+                <TextBox 
+                Width="400"
+                MinWidth="100"
+                FontSize="18" 
+                materialDesign:HintAssist.Hint="Dân tộc" 
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                Text="{Binding DanToc, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
+            <Grid Grid.Row="7">
+                <TextBox 
+                Width="400"
+                MinWidth="100"
+                FontSize="18" 
+                materialDesign:HintAssist.Hint="Tôn giáo" 
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                Text="{Binding TonGiao, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
+            <Grid Grid.Row="8">
+                <TextBox 
+                Width="400"
+                MinWidth="100"
+                FontSize="18" 
+                materialDesign:HintAssist.Hint="Nghề nghiệp" 
+                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                Text="{Binding NgheNghiep, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+            </Grid>
+            <Grid Grid.Row="9">
+                <CheckBox
+                    FontSize="18" Width="400" MinWidth="100"
+                    IsChecked="{Binding EnableNhapHoKhau}"
+                    >
+                    Nhập thông tin hộ khẩu
+                </CheckBox>
+            </Grid>
+            <Grid Grid.Row="10">
+                <ComboBox 
+                FontSize="18" Width="400" MinWidth="100"
+                materialDesign:HintAssist.Hint="Mã sổ hộ khẩu" 
+                VerticalAlignment="Center" 
+                Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                ItemsSource="{Binding ListSOHOKHAU}" 
+                KeyboardNavigation.TabIndex="1" 
+                IsEnabled="{Binding EnableNhapHoKhau}"
+                SelectedItem="{Binding SelectedSoHoKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
@@ -81,58 +147,33 @@
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding ClassID}"></TextBlock>
+                                <TextBlock Text="{Binding MaSHK}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </Grid>
-            <Grid Grid.Row="5">
+            <Grid Grid.Row="11">
                 <TextBox 
                 Width="400"
                 MinWidth="100"
                 FontSize="18" 
-                materialDesign:HintAssist.Hint="Nơi sinh" 
+                materialDesign:HintAssist.Hint="Quan hệ với chủ hộ" 
+                IsEnabled="{Binding EnableNhapHoKhau}"
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                Text="{Binding QuanHeVoiChuHo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </Grid>
-            <Grid Grid.Row="6">
+            <Grid Grid.Row="12">
                 <TextBox 
                 Width="400"
                 MinWidth="100"
                 FontSize="18" 
-                materialDesign:HintAssist.Hint="Quê quán" 
+                IsEnabled="{Binding EnableNhapHoKhau}"
+                materialDesign:HintAssist.Hint="Chỗ ở hiện nay" 
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                Text="{Binding ChoOHienNay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="97,2,96.6,2.2" />
             </Grid>
-            <Grid Grid.Row="7">
-                <TextBox 
-                Width="400"
-                MinWidth="100"
-                FontSize="18" 
-                materialDesign:HintAssist.Hint="Dân tộc" 
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-            </Grid>
-            <Grid Grid.Row="8">
-                <TextBox 
-                Width="400"
-                MinWidth="100"
-                FontSize="18" 
-                materialDesign:HintAssist.Hint="Tôn giáo" 
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-            </Grid>
-            <Grid Grid.Row="9">
-                <TextBox 
-                Width="400"
-                MinWidth="100"
-                FontSize="18" 
-                materialDesign:HintAssist.Hint="Nghề nghiệp" 
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-            </Grid>
-            <Grid Grid.Row="10">
+            <Grid Grid.Row="13">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
@@ -143,7 +184,7 @@
                     Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
                     Width="150" Height="35"
                     IsEnabled="{Binding IsAddingEnabled}"
-                    Command="{Binding AddRoomCommand}"/>
+                    Command="{Binding CmdConfirm}"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Button 
@@ -151,7 +192,7 @@
                     Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
                     Width="150" Height="35"
                     IsEnabled="{Binding IsAddingEnabled}"
-                    Command="{Binding AddRoomCommand}"/>
+                    Command="{Binding CmdCancel}"/>
                 </Grid>
             </Grid>
         </Grid>
