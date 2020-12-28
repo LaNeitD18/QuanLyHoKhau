@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyHoKhau.ViewModel;
 
 namespace QuanLyHoKhau.View
 {
@@ -23,6 +24,16 @@ namespace QuanLyHoKhau.View
         public QuanLyTamTruPage()
         {
             InitializeComponent();
+        }
+
+        private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                QuanLyTamTru_VM vm = DataContext as QuanLyTamTru_VM;
+                vm.FilterListPhieuTamTru();
+                e.Handled = true;
+            }
         }
     }
 }

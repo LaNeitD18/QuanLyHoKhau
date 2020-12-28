@@ -81,7 +81,7 @@
                     Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
                     Width="150" Height="35"
                     IsEnabled="{Binding IsAddingEnabled}"
-                    Command="{Binding acceptCommand}"/>
+                    RenderTransformOrigin="0.5,0.505" Click="Button_Click_1"/>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Button 
@@ -89,7 +89,7 @@
                     Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
                     Width="150" Height="35"
                     IsEnabled="{Binding IsAddingEnabled}"
-                    Command="{Binding AddRoomCommand}"/>
+                    Command="{Binding AddRoomCommand}" Click="Button_Click"/>
                 </Grid>
             </Grid>
 

@@ -159,6 +159,7 @@
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\GlobalState.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NhapGiayTamTru_VM.cs" />

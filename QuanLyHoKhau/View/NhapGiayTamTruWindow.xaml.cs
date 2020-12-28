@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using QuanLyHoKhau.ViewModel;
 
 namespace QuanLyHoKhau.View
 {
@@ -22,6 +23,35 @@ namespace QuanLyHoKhau.View
         public NhapGiayTamTruWindow()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            NhapGiayTamTru_VM vm = DataContext as NhapGiayTamTru_VM;
+            string result = vm.CheckValidInfo();
+            if (result != null)
+            {
+                MessageBox.Show(result);
+            }
+            else
+            {
+                if (vm.Accept() == true)
+                {
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Có lỗi xảy ra trong quá trình lưu thông tin!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc muốn thoát?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                this.Close();
+            }
         }
     }
 }

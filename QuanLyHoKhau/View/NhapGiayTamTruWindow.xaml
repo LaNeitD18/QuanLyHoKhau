@@ -40,7 +40,7 @@
                     FontSize="18" 
                     materialDesign:HintAssist.Hint="Mã nhân khẩu" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                    Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    Text="{Binding maNhanKhau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                 </Grid>
                 <Grid Grid.Row="2">
                     <DatePicker
@@ -49,7 +49,7 @@
                     FontSize="18"
                     materialDesign:HintAssist.Hint="Ngày bắt đầu"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                    SelectedDate="{Binding StartDate}"
+                    SelectedDate="{Binding startDate}"
                     IsEnabled="{Binding IsEnabledElements}"/>
                 </Grid>
                 <Grid Grid.Row="3">
@@ -59,7 +59,7 @@
                     FontSize="18"
                     materialDesign:HintAssist.Hint="Ngày kết thúc"
                     Style="{StaticResource MaterialDesignFloatingHintDatePicker}"
-                    SelectedDate="{Binding StartDate}"
+                    SelectedDate="{Binding endDate}"
                     IsEnabled="{Binding IsEnabledElements}"/>
                 </Grid>
                 <Grid Grid.Row="4">
@@ -69,7 +69,7 @@
                     FontSize="18" 
                     materialDesign:HintAssist.Hint="Mã phiếu tạm vắng" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                    Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    Text="{Binding maPhieuTamVang, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                 </Grid>
                 <Grid Grid.Row="5">
                     <TextBox 
@@ -78,7 +78,7 @@
                     FontSize="18" 
                     materialDesign:HintAssist.Hint="Nơi đăng ký tạm trú" 
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                    Text="{Binding UsingExamID, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    Text="{Binding noiDKTamTru, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
                 </Grid>
                 <Grid Grid.Row="6">
                     <Grid.ColumnDefinitions>
@@ -90,8 +90,7 @@
                     Style="{StaticResource MaterialDesignRaisedButton}" 
                     Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
                     Width="150" Height="35"
-                    IsEnabled="{Binding IsAddingEnabled}"
-                    Command="{Binding AddRoomCommand}"/>
+                    IsEnabled="{Binding IsAddingEnabled}" Click="Button_Click"/>
                     </Grid>
                     <Grid Grid.Column="1">
                         <Button 
@@ -99,7 +98,7 @@
                     Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
                     Width="150" Height="35"
                     IsEnabled="{Binding IsAddingEnabled}"
-                    Command="{Binding AddRoomCommand}"/>
+                    Command="{Binding AddRoomCommand}" Click="Button_Click_1"/>
                     </Grid>
                 </Grid>
 

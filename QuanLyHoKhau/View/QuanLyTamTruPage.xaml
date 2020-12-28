@@ -98,7 +98,8 @@
                             Padding="30,0"
                             TextAlignment="Left"
                             HorizontalAlignment="Stretch"
-                            VerticalAlignment="Center"/>
+                            VerticalAlignment="Center"
+                            Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" PreviewKeyDown="TextBox_PreviewKeyDown"/>
                     </Grid>
                 </Border>
                 <Button 
@@ -140,30 +141,23 @@
                         x:Name="listUsingExamDatagrid"
                         HorizontalAlignment="Stretch" 
                         VerticalAlignment="Top" 
-                        ItemsSource="{Binding ListSoHoKhau}"
+                        ItemsSource="{Binding ListPhieuTamTru}"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         SelectionMode="Extended"
                         AutoGenerateColumns="False"
-                        SelectedItem="{Binding SelectedUsingExam, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedPhieuTamTru, Mode=TwoWay}"
                         SelectionUnit="FullRow" 
                         CanUserAddRows="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding StatusString}"/>
-                            <DataGridTextColumn Header="Phòng" Binding="{Binding RoomID}"/>
-                            <DataGridTextColumn Header="Lớp" Binding="{Binding EXAM.CLASS.ClassName}"/>
-                            <DataGridTextColumn Header="Giám thị" Binding="{Binding EXAM.LECTURER.LecturerName}"/>
-                            <DataGridTemplateColumn Header="Edit">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                            x:Name="btnEdit"
-                                            Width="75"
-                                            Height="Auto"
-                                            Margin="10"
-                                            Content="Edit" />
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
+                            <DataGridTextColumn Header="Mã Phiếu" Binding="{Binding MaGiayTamTru}"/>
+                            <DataGridTextColumn Header="Mã nhân khẩu" Binding="{Binding MaNhanKhau}"/>
+                            <DataGridTextColumn Header="Ngày khai báo" Binding="{Binding NgayKhaiBao, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Header="Bắt đầu" Binding="{Binding NgayBatDau, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Header="Kết thúc" Binding="{Binding NgayKetThuc, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Header="Lý do" Binding="{Binding LyDo}"/>
+                            <DataGridTextColumn Header="Nơi đăng ký tạm trú" Binding="{Binding NoiDangKyTamTru}"/>
+                            <DataGridTextColumn Header="Mã giấy tạm vắng" Binding="{Binding MaGiayTamVang}"/>
+                            
                         </DataGrid.Columns>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
