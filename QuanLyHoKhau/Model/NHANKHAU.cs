@@ -23,9 +23,8 @@ namespace QuanLyHoKhau.Model
             this.SOHOKHAUs = new HashSet<SOHOKHAU>();
         }
     
-        public string MaNhanKhau { get; set; }
+        public string CMND { get; set; }
         public string MASHK { get; set; }
-        public string MaNguoi { get; set; }
         public string QuanHeVoiChuHo { get; set; }
         public string ChoOHienNay { get; set; }
     

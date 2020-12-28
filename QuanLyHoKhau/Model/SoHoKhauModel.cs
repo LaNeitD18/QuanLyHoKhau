@@ -13,7 +13,7 @@ namespace QuanLyHoKhau.Model
             if(shk == null)
             {
                 MaSHK = "";
-                MaChuHo = "";
+                CMNDChuHo = "";
                 MaCongAn = "";
                 MaSoLuuNhanKhau = "";
                 DiaChi = "";
@@ -23,7 +23,7 @@ namespace QuanLyHoKhau.Model
             else
             { 
                 this.MaSHK = shk.MaSHK;
-                this.MaChuHo = shk.MaChuHo;
+                this.CMNDChuHo = shk.CMNDChuHo;
                 this.MaCongAn = shk.MaCongAn;
                 this.MaSoLuuNhanKhau = shk.MaSoLuuNhanKhau;
                 this.DiaChi = shk.DiaChi;

@@ -17,7 +17,7 @@ namespace QuanLyHoKhau.Model
         public string MaPhieuKhaiBao { get; set; }
         public string MaSoLuuTamVang { get; set; }
         public string MaCongAn { get; set; }
-        public string MaNhanKhau { get; set; }
+        public string CMND { get; set; }
         public System.DateTime NgayKhaiBao { get; set; }
         public System.DateTime NgayBatDau { get; set; }
         public System.DateTime NgayKetThuc { get; set; }

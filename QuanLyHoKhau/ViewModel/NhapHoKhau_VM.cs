@@ -36,7 +36,10 @@ namespace QuanLyHoKhau.ViewModel
             get 
             {
                 if(_resultSoHoKhau == null)
+                { 
                     _resultSoHoKhau = new SOHOKHAU(null);
+                    OnPropertyChanged();
+                }
                 return _resultSoHoKhau;
             }
             set { _resultSoHoKhau = value; OnPropertyChanged(); }
@@ -72,8 +75,8 @@ namespace QuanLyHoKhau.ViewModel
 
         public string SoCmndChuHo
         {
-            get => ResultSoHoKhau.MaChuHo;
-            set { ResultSoHoKhau.MaChuHo = value; OnPropertyChanged(); }
+            get => ResultSoHoKhau.CMNDChuHo;
+            set { ResultSoHoKhau.CMNDChuHo = value; OnPropertyChanged(); }
         }
 
         public string DiaChi
@@ -117,10 +120,19 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleConfirmButton(Object obj)
         {
-            if(string.IsNullOrEmpty(MaSoHoKhau))
-                AddNewSoHoKhauToDB();
+            string error;
 
-            Reset();
+            if(ValidateResult(out error))
+            { 
+                if(string.IsNullOrEmpty(MaSoHoKhau))
+                    AddNewSoHoKhauToDB();
+
+                Reset();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show(error, "Lỗi", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
         }
         #endregion
 
@@ -134,7 +146,7 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleCancelButton(Object obj)
         {
-            ResultSoHoKhau = new SOHOKHAU(null);
+            Reset();
         }
         #endregion
 
@@ -144,7 +156,7 @@ namespace QuanLyHoKhau.ViewModel
             Debug.WriteLine(
                 $"[= Test so ho khau ===========]\n"
                 + $"    Ma so ho khau: {ResultSoHoKhau.MaSHK}\n"
-                + $"    Ma chu ho: {ResultSoHoKhau.MaChuHo}\n"
+                + $"    CMND chu ho: {ResultSoHoKhau.CMNDChuHo}\n"
                 + $"    Ma cong an: {ResultSoHoKhau.MaCongAn}\n"
                 + $"    Ma so luu nhan khau: {ResultSoHoKhau.MaSoLuuNhanKhau}\n"
                 + $"    Dia chi: {ResultSoHoKhau.DiaChi}\n"
@@ -162,6 +174,41 @@ namespace QuanLyHoKhau.ViewModel
                 MaCongAn = null;
             if(SoCmndChuHo == "")
                 SoCmndChuHo = null;
+        }
+
+        private bool ValidateResult(out string errors)
+        {
+            if(!string.IsNullOrEmpty(MaCongAn))
+                if(DataProvider.Ins.DB.CONGANs.Find(MaCongAn) == null)
+                {
+                    errors = $"Mã công an {MaCongAn} không tồn tại";
+                    return false;
+                }
+
+            if(!string.IsNullOrEmpty(SoCmndChuHo))
+            {
+                var filteredNguoi = DataProvider.Ins.DB.NGUOIs.Where(nguoi => (nguoi.CMND == SoCmndChuHo));
+
+                // check if there is a person has this cmnd
+                if (filteredNguoi.Count() == 0)
+                {
+                    errors = $"Công dân với số CMND {SoCmndChuHo} không tồn tại";
+                    return false;
+                }
+
+                // check if this person is actually a NHANKHAU
+                var nguoiDo = filteredNguoi.First();
+                var filteredNhanKhau = DataProvider.Ins.DB.NHANKHAUs.Where(nhankhau => (nhankhau.CMND == nguoiDo.CMND));
+
+                if(filteredNguoi.Count() == 0)
+                {
+                    errors = $"Công dân với số CMND {SoCmndChuHo} không phải là nhân khẩu";
+                    return false;
+                }
+            }
+
+            errors = "";
+            return true;
         }
         #endregion
 
