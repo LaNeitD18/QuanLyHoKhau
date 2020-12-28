@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Windows.Input;
 using QuanLyHoKhau.Model;
+using QuanLyHoKhau.Utilities;
 
 namespace QuanLyHoKhau.ViewModel
 {
     class NhapHoKhau_VM : BaseViewModel
     {
         // CuteTN Note: the goal is to make this class immutable from the outside :)
+
+        const int SOHOKHAU_ID_LENGTH = 8;
+        const string SOHOKHAU_ID_PREFIX = "SHK";
 
         #region Init
         public NhapHoKhau_VM() : this(null)
@@ -29,7 +33,12 @@ namespace QuanLyHoKhau.ViewModel
         private SOHOKHAU _resultSoHoKhau = null;
         public SOHOKHAU ResultSoHoKhau
         {
-            get => _resultSoHoKhau;
+            get 
+            {
+                if(_resultSoHoKhau == null)
+                    _resultSoHoKhau = new SOHOKHAU(null);
+                return _resultSoHoKhau;
+            }
             set { _resultSoHoKhau = value; OnPropertyChanged(); }
         }
 
@@ -108,7 +117,10 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleConfirmButton(Object obj)
         {
-            TestPrintResult();
+            if(string.IsNullOrEmpty(MaSoHoKhau))
+                AddNewSoHoKhauToDB();
+
+            Reset();
         }
         #endregion
 
@@ -122,7 +134,7 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleCancelButton(Object obj)
         {
-            // CuteTN Note:
+            ResultSoHoKhau = new SOHOKHAU(null);
         }
         #endregion
 
@@ -140,6 +152,40 @@ namespace QuanLyHoKhau.ViewModel
                 + $"    Da xoa: {ResultSoHoKhau.IsDeleted}\n"
                 + $"[==============================]\n"
             );
+        }
+        #endregion
+
+        #region Adjust and Validation
+        private void AdjustResult()
+        {
+            if(MaCongAn == "")
+                MaCongAn = null;
+            if(SoCmndChuHo == "")
+                SoCmndChuHo = null;
+        }
+        #endregion
+
+        #region database
+        private void AddNewSoHoKhauToDB()
+        {
+            AdjustResult();
+            MaSoHoKhau = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, SOHOKHAU_ID_PREFIX, SOHOKHAU_ID_LENGTH);
+            TestPrintResult();
+            DataProvider.Ins.DB.SOHOKHAUs.Add(ResultSoHoKhau);
+            DataProvider.Ins.DB.SaveChanges();
+        }
+        #endregion
+
+        #region Utils
+        private void Reset()
+        {
+            ResultSoHoKhau = null;
+            Refresh();
+        }
+
+        private void Refresh()
+        {
+            ListSOLUUNHANKHAU = LoadSLNK();
         }
         #endregion
     }
