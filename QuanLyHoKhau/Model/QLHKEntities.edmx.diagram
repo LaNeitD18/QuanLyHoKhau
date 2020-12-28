@@ -5,47 +5,52 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="237c8c481f24412fb52081912e6aad79" Name="Diagram1">
-        <EntityTypeShape EntityType="QLHKModel.CHITIET_PHANQUYEN" Width="1.5" PointX="3" PointY="4.875" />
-        <EntityTypeShape EntityType="QLHKModel.CONGAN" Width="1.5" PointX="3" PointY="11.5" />
-        <EntityTypeShape EntityType="QLHKModel.GIAYTAMTRU" Width="1.5" PointX="8.25" PointY="11.25" />
-        <EntityTypeShape EntityType="QLHKModel.LOAICONGAN" Width="1.5" PointX="0.75" PointY="8" />
-        <EntityTypeShape EntityType="QLHKModel.NGUOI" Width="1.5" PointX="0.75" PointY="11" />
-        <EntityTypeShape EntityType="QLHKModel.NHANKHAU" Width="1.5" PointX="10.5" PointY="5.625" />
-        <EntityTypeShape EntityType="QLHKModel.NHANKHAUCHODUYET" Width="1.5" PointX="7.5" PointY="7.75" />
-        <EntityTypeShape EntityType="QLHKModel.PHIEUKHAIBAOTAMVANG" Width="1.5" PointX="5.25" PointY="15.25" />
-        <EntityTypeShape EntityType="QLHKModel.PHIEUTHAYDOI_HK_NK" Width="1.5" PointX="5.25" PointY="11.5" />
-        <EntityTypeShape EntityType="QLHKModel.QUYEN" Width="1.5" PointX="0.75" PointY="5" />
-        <EntityTypeShape EntityType="QLHKModel.SOHOKHAU" Width="1.5" PointX="5.25" PointY="7.25" />
-        <EntityTypeShape EntityType="QLHKModel.SOHOKHAUCHODUYET" Width="1.5" PointX="10.5" PointY="9.5" />
-        <EntityTypeShape EntityType="QLHKModel.SOLUUCHUYENKHAU" Width="1.5" PointX="3" PointY="16.125" />
+        <EntityTypeShape EntityType="QLHKModel.CHITIET_PHANQUYEN" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="QLHKModel.CONGAN" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="QLHKModel.DIAPHUONG" Width="1.5" PointX="0.75" PointY="16.25" />
+        <EntityTypeShape EntityType="QLHKModel.GIAYTAMTRU" Width="1.5" PointX="8.25" PointY="15.375" />
+        <EntityTypeShape EntityType="QLHKModel.LOAICONGAN" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="QLHKModel.NGUOI" Width="1.5" PointX="0.75" PointY="11.125" />
+        <EntityTypeShape EntityType="QLHKModel.NHANKHAU" Width="1.5" PointX="10.5" PointY="7.5" />
+        <EntityTypeShape EntityType="QLHKModel.NHANKHAUCHODUYET" Width="1.5" PointX="10.5" PointY="11.75" />
+        <EntityTypeShape EntityType="QLHKModel.PHIEUKHAIBAOTAMVANG" Width="1.5" PointX="8.25" PointY="7.375" />
+        <EntityTypeShape EntityType="QLHKModel.PHIEUTHAYDOI_HK_NK" Width="1.5" PointX="8.25" PointY="11.5" />
+        <EntityTypeShape EntityType="QLHKModel.QUYEN" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="QLHKModel.SOHOKHAU" Width="1.5" PointX="5.25" PointY="11.25" />
+        <EntityTypeShape EntityType="QLHKModel.SOHOKHAUCHODUYET" Width="1.5" PointX="10.5" PointY="15.5" />
+        <EntityTypeShape EntityType="QLHKModel.SOLUUCHUYENKHAU" Width="1.5" PointX="6" PointY="16.25" />
         <EntityTypeShape EntityType="QLHKModel.SOLUUNHANKHAU" Width="1.5" PointX="3" PointY="8" />
-        <EntityTypeShape EntityType="QLHKModel.SOLUUTAMTRU" Width="1.5" PointX="6" PointY="4.125" />
-        <EntityTypeShape EntityType="QLHKModel.SOLUUTAMVANG" Width="1.5" PointX="3" PointY="19.125" />
+        <EntityTypeShape EntityType="QLHKModel.SOLUUTAMTRU" Width="1.5" PointX="6" PointY="19.125" />
+        <EntityTypeShape EntityType="QLHKModel.SOLUUTAMVANG" Width="1.5" PointX="6" PointY="6.75" />
         <EntityTypeShape EntityType="QLHKModel.THAMSO" Width="1.5" PointX="0.75" PointY="0.75" />
-        <AssociationConnector Association="QLHKModel.FK__CHITIET_P__MaLoa__2E1BDC42" />
-        <AssociationConnector Association="QLHKModel.FK__CHITIET_P__MaQuy__2F10007B" />
-        <AssociationConnector Association="QLHKModel.FK__CONGAN__MaLoaiCo__29572725" />
-        <AssociationConnector Association="QLHKModel.FK__CONGAN__MaNguoi__286302EC" />
-        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaCon__45F365D3" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAI__MaCon__3F466844" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAY__MaCon__4D94879B" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaCong__34C8D9D1" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaCon__5441852A" />
-        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaNha__46E78A0C" />
-        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaSoL__44FF419A" />
-        <AssociationConnector Association="QLHKModel.FK__NHANKHAU__MaNguo__398D8EEE" />
-        <AssociationConnector Association="QLHKModel.FK__NHANKHAUC__MaNgu__59063A47" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaChuH__33D4B598" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaChu__534D60F1" />
-        <AssociationConnector Association="QLHKModel.FK__NHANKHAU__MASHK__38996AB5" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAI__MaNha__403A8C7D" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAY__MaNha__4BAC3F29" />
-        <AssociationConnector Association="QLHKModel.FK__NHANKHAUC__MASHK__5812160E" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAI__MaSoL__3E52440B" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAY__MaSoL__4CA06362" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaSoLu__35BCFE0A" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaSHK__52593CB8" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaSoL__5535A963" />
+        <AssociationConnector Association="QLHKModel.FK__CHITIET_P__MaLoa__300424B4" />
+        <AssociationConnector Association="QLHKModel.FK__CHITIET_P__MaQuy__30F848ED" />
+        <AssociationConnector Association="QLHKModel.FK__CONGAN__MaDiaPhu__2B3F6F97" />
+        <AssociationConnector Association="QLHKModel.FK__CONGAN__MaLoaiCo__2A4B4B5E" />
+        <AssociationConnector Association="QLHKModel.FK__CONGAN__MaNguoi__29572725" />
+        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaCon__5441852A" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAI__MaCon__4CA06362" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAY__MaCon__5BE2A6F2" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaCong__36B12243" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaCon__3C69FB99" />
+        <AssociationConnector Association="QLHKModel.FK__SOLUUNHAN__DiaPh__33D4B598" />
+        <AssociationConnector Association="QLHKModel.FK__SOLUUTAMT__DiaPh__5070F446" />
+        <AssociationConnector Association="QLHKModel.FK__SOLUUTAMV__DiaPh__48CFD27E" />
+        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaNha__5535A963" />
+        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaSoL__534D60F1" />
+        <AssociationConnector Association="QLHKModel.FK__NHANKHAU__MaNguo__412EB0B6" />
+        <AssociationConnector Association="QLHKModel.FK__NHANKHAUC__MaNgu__45F365D3" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaChu__3B75D760" />
+        <AssociationConnector Association="QLHKModel.FK__NHANKHAU__MASHK__403A8C7D" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAI__MaNha__4D94879B" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAY__MaNha__59FA5E80" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaChuH__4222D4EF" />
+        <AssociationConnector Association="QLHKModel.FK__NHANKHAUC__MASHK__44FF419A" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAI__MaSoL__4BAC3F29" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAY__MaSoL__5AEE82B9" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaSoLu__37A5467C" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaSHK__3A81B327" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaSoL__3D5E1FD2" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

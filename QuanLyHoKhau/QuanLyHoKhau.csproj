@@ -92,6 +92,9 @@
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DataProvider.cs" />
+    <Compile Include="Model\DIAPHUONG.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\GIAYTAMTRU.cs">
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
@@ -137,6 +140,7 @@
     <Compile Include="Model\SOHOKHAUCHODUYET.cs">
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\SoHoKhauModel.cs" />
     <Compile Include="Model\SOLUUCHUYENKHAU.cs">
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
