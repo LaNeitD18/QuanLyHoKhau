@@ -275,6 +275,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+          
         <Association Name="FK__GIAYTAMTRU__CMND__5629CD9C">
           <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
           <End Role="GIAYTAMTRU" Type="Self.GIAYTAMTRU" Multiplicity="*" />
@@ -568,7 +569,6 @@
           </AssociationSet>
           <AssociationSet Name="FK__GIAYTAMTR__MaCon__5535A963" Association="Self.FK__GIAYTAMTR__MaCon__5535A963">
             <End Role="CONGAN" EntitySet="CONGAN" />
-            <End Role="GIAYTAMTRU" EntitySet="GIAYTAMTRU" />
           </AssociationSet>
           <AssociationSet Name="FK__GIAYTAMTR__MaGia__571DF1D5" Association="Self.FK__GIAYTAMTR__MaGia__571DF1D5">
             <End Role="PHIEUKHAIBAOTAMVANG" EntitySet="PHIEUKHAIBAOTAMVANG" />
@@ -1415,6 +1415,14 @@
               <MappingFragment StoreEntitySet="DIAPHUONG">
                 <ScalarProperty Name="MaDiaPhuong" ColumnName="MaDiaPhuong" />
                 <ScalarProperty Name="TenDiaPhuong" ColumnName="TenDiaPhuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DIAPHUONGs">
+            <EntityTypeMapping TypeName="QLHKModel.DIAPHUONG">
+              <MappingFragment StoreEntitySet="DIAPHUONG">
+                <ScalarProperty Name="TenDiaPhuong" ColumnName="TenDiaPhuong" />
+                <ScalarProperty Name="MaDiaPhuong" ColumnName="MaDiaPhuong" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
