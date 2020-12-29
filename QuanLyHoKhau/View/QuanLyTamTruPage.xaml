@@ -156,7 +156,20 @@
                             <DataGridTextColumn Header="Kết thúc" Binding="{Binding NgayKetThuc, StringFormat={}{0:dd/MM/yyyy}}"/>
                             <DataGridTextColumn Header="Nơi đăng ký tạm trú" Binding="{Binding NoiDangKyTamTru}"/>
                             <DataGridTextColumn Header="Mã giấy tạm vắng" Binding="{Binding MaGiayTamVang}"/>
-                            
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">

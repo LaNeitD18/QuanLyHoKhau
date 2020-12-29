@@ -152,15 +152,17 @@
                             <DataGridTextColumn Header="Phòng" Binding="{Binding RoomID}"/>
                             <DataGridTextColumn Header="Lớp" Binding="{Binding EXAM.CLASS.ClassName}"/>
                             <DataGridTextColumn Header="Giám thị" Binding="{Binding EXAM.LECTURER.LecturerName}"/>
-                            <DataGridTemplateColumn Header="Edit">
+                            <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button
-                                            x:Name="btnEdit"
-                                            Width="75"
-                                            Height="Auto"
-                                            Margin="10"
-                                            Content="Edit" />
+                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

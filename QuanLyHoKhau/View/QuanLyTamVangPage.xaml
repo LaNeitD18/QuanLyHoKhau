@@ -149,13 +149,27 @@
                         SelectionUnit="FullRow" 
                         CanUserAddRows="False">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã Phiếu" Binding="{Binding MaPhieuKhaiBao}"/>
-                            <DataGridTextColumn Header="Mã nhân khẩu" Binding="{Binding CMND}"/>
-                            <DataGridTextColumn Header="Ngày khai báo" Binding="{Binding NgayKhaiBao, StringFormat={}{0:dd/MM/yyyy}}"/>
-                            <DataGridTextColumn Header="Bắt đầu" Binding="{Binding NgayBatDau, StringFormat={}{0:dd/MM/yyyy}}"/>
-                            <DataGridTextColumn Header="Kết thúc" Binding="{Binding NgayKetThuc, StringFormat={}{0:dd/MM/yyyy}}"/>
-                            <DataGridTextColumn Header="Lý do" Binding="{Binding LyDo}"/>
-                            <DataGridTextColumn Header="Trẻ em" Binding="{Binding CoTreEmDiTheo}"/>
+                            <DataGridTextColumn Width="150" Header="Mã Phiếu" Binding="{Binding MaPhieuKhaiBao}"/>
+                            <DataGridTextColumn Width="150" Header="Mã nhân khẩu" Binding="{Binding CMND}"/>
+                            <DataGridTextColumn Width="140" Header="Ngày khai báo" Binding="{Binding NgayKhaiBao, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Width="140" Header="Bắt đầu" Binding="{Binding NgayBatDau, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Width="140" Header="Kết thúc" Binding="{Binding NgayKetThuc, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Width="150" Header="Lý do" Binding="{Binding LyDo}"/>
+                            <DataGridTextColumn Width="150" Header="Trẻ em" Binding="{Binding CoTreEmDiTheo}"/>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
