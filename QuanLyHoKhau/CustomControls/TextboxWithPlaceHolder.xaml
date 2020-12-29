@@ -1,0 +1,191 @@
+﻿<UserControl x:Class="QuanLyHoKhau.CustomControls.TextboxWithPlaceHolder"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:QuanLyHoKhau.CustomControls" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             MinWidth="300"
+             x:Name="_this"
+             DataContext="{StaticResource LoginVM}">
+    <UserControl.Resources>
+        <Style x:Key="credentialTxTtitleStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Foreground" Value="#a3a3a4"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Text" Value="{Binding PlaceHolder, ElementName=_this}"/>
+            <Setter Property="Padding" Value="2,0"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Text, ElementName=username}" Value="">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard SpeedRatio="10">
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="20"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard SpeedRatio="10">
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="15"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0,0,0,30"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="credentialTxTStyle" TargetType="{x:Type TextBox}">
+            <Setter Property="Text" Value="{Binding Text, Mode=TwoWay, ElementName=_this}"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextAlignment" Value="Left"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="2,0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding FontSize, ElementName=title}" Value="15">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard SpeedRatio="10">
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="20"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0,20,0,0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard SpeedRatio="10">
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="15"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+
+                <!--get password inside the textbox if text is empty-->
+                <DataTrigger Binding="{Binding Text, Mode=TwoWay, ElementName=_this}" Value="">
+                    <Setter Property="Text" Value="{Binding Password, ElementName=passwordBox}"/>
+                </DataTrigger>
+
+                <!--also show only when the show pass btn is pressed-->
+                <DataTrigger Binding="{Binding Visibility, ElementName=passwordBox}" Value="Visible">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type PasswordBox}">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="2,0,30,0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding FontSize, ElementName=title}" Value="15">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard SpeedRatio="10">
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="20"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0,20,0,0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard SpeedRatio="10">
+                                <DoubleAnimation Storyboard.TargetProperty="FontSize" To="15"/>
+                                <ThicknessAnimation Storyboard.TargetProperty="Margin" To="0"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+
+                <!--hide password if IsPassword = false-->
+                <DataTrigger Binding="{Binding IsPassword, ElementName=_this}" Value="False">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+
+                <!--also hide when the show pass btn is pressed-->
+                <DataTrigger Binding="{Binding IsPressed, ElementName=btnShowPass}" Value="True">
+                    <Setter Property="Visibility" Value="Collapsed"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Foreground" Value="#a3a3a4"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Background="{TemplateBinding Background}">
+                            <Path
+                                Width="20"
+                                Stretch="Uniform"
+                                Fill="{TemplateBinding Foreground}"
+                                Data="{StaticResource showPass}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <!--hide button if IsPassword = false-->
+                            <DataTrigger Binding="{Binding IsPassword, ElementName=_this}" Value="false">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    
+    <Border
+        Background="White"
+        Height="70"
+        CornerRadius="10">
+        
+        <!--Border Shadow Effect-->
+        <Border.Effect>
+            <DropShadowEffect BlurRadius="23" ShadowDepth="5" Direction="270" Color="WhiteSmoke"/>
+        </Border.Effect>
+
+        <Grid x:Name="txbGrid" Margin="20,8">
+            <TextBlock
+                x:Name="title"
+                Style="{StaticResource credentialTxTtitleStyle}"/>
+
+            <TextBox
+                x:Name="username"
+                Text="{Binding Text, ElementName=_this}"
+                Width="{Binding ElementName=txbGrid, Path=ActualWidth}"
+                Style="{StaticResource credentialTxTStyle}"/>
+
+            <PasswordBox
+                x:Name="passwordBox">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <i:InvokeCommandAction 
+                            Command="{Binding PasswordChangedCommand}"                       
+                            CommandParameter="{Binding ElementName=passwordBox}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </PasswordBox>
+
+            <Button
+                x:Name="btnShowPass"
+                Height="30"
+                Background="Transparent"
+                BorderThickness="0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center">
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

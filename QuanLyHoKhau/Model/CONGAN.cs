@@ -28,6 +28,7 @@ namespace QuanLyHoKhau.Model
         public string MaNguoi { get; set; }
         public string MaLoaiCongAn { get; set; }
         public string MaDiaPhuong { get; set; }
+        public string MatKhau { get; set; }
     
         public virtual DIAPHUONG DIAPHUONG { get; set; }
         public virtual LOAICONGAN LOAICONGAN { get; set; }

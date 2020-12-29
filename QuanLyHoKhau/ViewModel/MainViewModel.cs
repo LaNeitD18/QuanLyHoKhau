@@ -29,9 +29,9 @@ namespace QuanLyHoKhau.ViewModel
         #region ICommand
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand TrangChu_SelectedCommand { get; set; }
-        public ICommand NhapHoKhau_Page_SelectedCommand { get; set; }
-        public ICommand NhapGiayTamVang_Page_SelectedCommand { get; set; }
-        public ICommand NhapGiayTamTru_Page_SelectedCommand { get; set; }
+        public ICommand QLHoKhau_Page_SelectedCommand { get; set; }
+        public ICommand QLGiayTamVang_Page_SelectedCommand { get; set; }
+        public ICommand QLGiayTamTru_Page_SelectedCommand { get; set; }
 
         #endregion
 
@@ -45,10 +45,10 @@ namespace QuanLyHoKhau.ViewModel
                 if (p == null)
                     MessageBox.Show(p.GetType().Name);
                 Window mainWindow = p as Window;
-                //mainWindow.Hide(); // main view hide in login window
-                //LoginWindow loginWindow = new LoginWindow();
-                //loginWindow.ShowDialog();
-                //isLoaded = true;
+                mainWindow.Hide(); // main view hide in login window
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.ShowDialog();
+                isLoaded = true;
 
                 //if (loginWindow.DataContext == null) return;
                 //var loginVM = loginWindow.DataContext as LoginViewModel;
@@ -83,17 +83,17 @@ namespace QuanLyHoKhau.ViewModel
                 FrameContent = new QuanLyNhanKhauPage();
             });
 
-            NhapHoKhau_Page_SelectedCommand = new RelayCommand((p) => {
+            QLHoKhau_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyHoKhauPage();
             });
 
-            NhapGiayTamVang_Page_SelectedCommand = new RelayCommand((p) => {
+            QLGiayTamVang_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyTamVangPage();
             });
 
-            NhapGiayTamTru_Page_SelectedCommand = new RelayCommand((p) => {
+            QLGiayTamTru_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyTamTruPage();
                 NhapGiayTamTruWindow nhapGiayTamTruWindow = new NhapGiayTamTruWindow();
