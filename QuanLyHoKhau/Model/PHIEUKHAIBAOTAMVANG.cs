@@ -14,6 +14,12 @@ namespace QuanLyHoKhau.Model
     
     public partial class PHIEUKHAIBAOTAMVANG
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public PHIEUKHAIBAOTAMVANG()
+        {
+            this.GIAYTAMTRUs = new HashSet<GIAYTAMTRU>();
+        }
+    
         public string MaPhieuKhaiBao { get; set; }
         public string MaSoLuuTamVang { get; set; }
         public string MaCongAn { get; set; }
@@ -25,6 +31,8 @@ namespace QuanLyHoKhau.Model
         public Nullable<int> CoTreEmDiTheo { get; set; }
     
         public virtual CONGAN CONGAN { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GIAYTAMTRU> GIAYTAMTRUs { get; set; }
         public virtual NHANKHAU NHANKHAU { get; set; }
         public virtual SOLUUTAMVANG SOLUUTAMVANG { get; set; }
     }

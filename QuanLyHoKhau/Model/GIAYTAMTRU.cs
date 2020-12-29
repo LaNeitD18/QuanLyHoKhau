@@ -23,8 +23,10 @@ namespace QuanLyHoKhau.Model
         public Nullable<System.DateTime> NgayKetThuc { get; set; }
         public string LyDo { get; set; }
         public string NoiDangKyTamTru { get; set; }
+        public string MaGiayTamVang { get; set; }
     
         public virtual CONGAN CONGAN { get; set; }
+        public virtual PHIEUKHAIBAOTAMVANG PHIEUKHAIBAOTAMVANG { get; set; }
         public virtual SOLUUTAMTRU SOLUUTAMTRU { get; set; }
         public virtual NHANKHAU NHANKHAU { get; set; }
     }
