@@ -15,7 +15,7 @@ namespace QuanLyHoKhau.Model
     public partial class PHIEUTHAYDOI_HK_NK
     {
         public string MaPhieuThayDoi { get; set; }
-        public string MaNhanKhau { get; set; }
+        public string CMND { get; set; }
         public string MaSoLuuChuyenKhau { get; set; }
         public string MaCongAn { get; set; }
         public System.DateTime NgayKhaiBao { get; set; }

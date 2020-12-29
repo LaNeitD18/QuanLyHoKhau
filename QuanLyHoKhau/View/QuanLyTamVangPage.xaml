@@ -150,7 +150,7 @@
                         CanUserAddRows="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Mã Phiếu" Binding="{Binding MaPhieuKhaiBao}"/>
-                            <DataGridTextColumn Header="Mã nhân khẩu" Binding="{Binding MaNhanKhau}"/>
+                            <DataGridTextColumn Header="Mã nhân khẩu" Binding="{Binding CMND}"/>
                             <DataGridTextColumn Header="Ngày khai báo" Binding="{Binding NgayKhaiBao, StringFormat={}{0:dd/MM/yyyy}}"/>
                             <DataGridTextColumn Header="Bắt đầu" Binding="{Binding NgayBatDau, StringFormat={}{0:dd/MM/yyyy}}"/>
                             <DataGridTextColumn Header="Kết thúc" Binding="{Binding NgayKetThuc, StringFormat={}{0:dd/MM/yyyy}}"/>

@@ -131,7 +131,7 @@ namespace QuanLyHoKhau.ViewModel
             phieu.MaPhieuKhaiBao = this.maNhanKhau + "-" + this.startDate.Day.ToString() + "/" + this.startDate.Month.ToString() + "/" + this.startDate.Year.ToString();
             phieu.MaSoLuuTamVang = DataProvider.Ins.DB.SOLUUTAMVANGs.Where(x => x.DiaPhuong == DiaPhuong).Single().MaSoLuuTamVang;
             phieu.MaCongAn = GlobalState.Ins().maCongAn;
-            phieu.MaNhanKhau = this.maNhanKhau;
+            phieu.CMND = this.maNhanKhau;
             phieu.NgayKhaiBao = DateTime.Now;
             phieu.NgayBatDau = this.startDate;
             phieu.NgayKetThuc = this.endDate;
