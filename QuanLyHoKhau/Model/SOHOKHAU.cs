@@ -22,7 +22,7 @@ namespace QuanLyHoKhau.Model
         }
     
         public string MaSHK { get; set; }
-        public string MaChuHo { get; set; }
+        public string CMNDChuHo { get; set; }
         public string MaCongAn { get; set; }
         public string MaSoLuuNhanKhau { get; set; }
         public string DiaChi { get; set; }
