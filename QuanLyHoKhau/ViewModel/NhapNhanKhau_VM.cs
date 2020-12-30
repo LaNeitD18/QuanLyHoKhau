@@ -19,7 +19,7 @@ namespace QuanLyHoKhau.ViewModel
 
         public NhapNhanKhau_VM(NGUOI nguoi, NHANKHAU nhanKhau)
         {
-            Reset();
+            Refresh();
             ResultNguoi = new NGUOI(nguoi);
             ResultNhanKhau = new NHANKHAU(nhanKhau);
         }
@@ -337,7 +337,7 @@ namespace QuanLyHoKhau.ViewModel
             Refresh();
         }
 
-        private void Refresh()
+        public void Refresh()
         {
             ListSOHOKHAU = LoadSoHoKhau();
         }

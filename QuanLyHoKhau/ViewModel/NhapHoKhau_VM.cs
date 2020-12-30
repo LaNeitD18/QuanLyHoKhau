@@ -275,7 +275,7 @@ namespace QuanLyHoKhau.ViewModel
             Refresh();
         }
 
-        private void Refresh()
+        public void Refresh()
         {
             ListSOLUUNHANKHAU = LoadSLNK();
             ListNHANKHAU = LoadNhanKhau();

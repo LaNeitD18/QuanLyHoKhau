@@ -16,6 +16,7 @@ namespace QuanLyHoKhau.ViewModel
         {
             BtnAddNhanKhau_Command = new RelayCommand((p) => {
                 NhapNhanKhauWindow nhapNhanKhauWindow = new NhapNhanKhauWindow();
+                nhapNhanKhauWindow.DataContext = new NhapNhanKhau_VM();
                 nhapNhanKhauWindow.ShowDialog();
             });
         }

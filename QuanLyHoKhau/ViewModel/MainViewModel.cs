@@ -76,26 +76,31 @@ namespace QuanLyHoKhau.ViewModel
                 //_timer.Start();
 
                 FrameContent = new TrangChu();
+                FrameContent.DataContext = new TrangChu_VM();
             });
 
             TrangChu_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyNhanKhauPage();
+                FrameContent.DataContext = new QuanLyNhanKhau_VM();
             });
 
             QLHoKhau_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyHoKhauPage();
+                FrameContent.DataContext = new QuanLyHoKhau_VM();
             });
 
             QLGiayTamVang_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyTamVangPage();
+                FrameContent.DataContext = new QuanLyTamVang_VM();
             });
 
             QLGiayTamTru_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyTamTruPage();
+                FrameContent.DataContext = new QuanLyTamTru_VM();
             });
         }
     }
