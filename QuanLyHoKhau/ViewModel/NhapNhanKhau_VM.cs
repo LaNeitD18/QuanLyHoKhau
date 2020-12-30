@@ -108,11 +108,30 @@ namespace QuanLyHoKhau.ViewModel
             set { ResultNguoi.NgheNghiep = value; OnPropertyChanged(); }
         }
 
-        private bool _enableNhapHoKhau = false;
-        public bool EnableNhapHoKhau
+        private bool _isChuHo = false;
+        public bool IsChuHo
         {
-            get => _enableNhapHoKhau;
-            set { _enableNhapHoKhau = value; OnPropertyChanged(); }
+            get => _isChuHo;
+            set 
+            {
+                _isChuHo = value;
+                
+                if(_isChuHo)
+                    QuanHeVoiChuHo = "Chủ hộ";
+                else
+                    QuanHeVoiChuHo = "";
+
+                IsNotChuHo = !value;
+
+                OnPropertyChanged(); 
+            }
+        }
+
+        // cant set this property :)
+        public bool IsNotChuHo
+        {
+            get => !_isChuHo;
+            set { /* cant set this */ OnPropertyChanged(); }
         }
 
         private SOHOKHAU _selectedSoHoKhau = null;
@@ -204,9 +223,7 @@ namespace QuanLyHoKhau.ViewModel
                 if (! CheckCMNDExist(CMND))
                 { 
                     AddNewNguoiToDB();
-
-                    if(EnableNhapHoKhau)
-                        AddNewNhanKhauToDB();
+                    AddNewNhanKhauToDB();
 
                     TestPrintResult();
                 }
@@ -293,6 +310,24 @@ namespace QuanLyHoKhau.ViewModel
                 return false;
             }
 
+            if(SelectedSoHoKhau == null)
+            {
+                errors = $"Vui lòng chọn mã sổ hộ khẩu";
+                return false;
+            }
+
+            if(string.IsNullOrEmpty(QuanHeVoiChuHo))
+            {
+                errors = $"Vui lòng nhập quan hệ với chủ hộ";
+                return false;
+            }
+
+            if(string.IsNullOrEmpty(ChoOHienNay))
+            {
+                errors = $"Vui lòng nhập chỗ ở hiện nay";
+                return false;
+            }
+
             errors = "";
             return true;
         }
@@ -329,7 +364,6 @@ namespace QuanLyHoKhau.ViewModel
             TonGiao = "";
             NgheNghiep = "";
 
-            EnableNhapHoKhau = false;
             SelectedSoHoKhau = null;
             QuanHeVoiChuHo = "";
             ChoOHienNay = "";

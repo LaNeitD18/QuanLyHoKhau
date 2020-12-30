@@ -121,14 +121,6 @@
                 Text="{Binding NgheNghiep, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </Grid>
             <Grid Grid.Row="9">
-                <CheckBox
-                    FontSize="18" Width="400" MinWidth="100"
-                    IsChecked="{Binding EnableNhapHoKhau}"
-                    >
-                    Nhập thông tin hộ khẩu
-                </CheckBox>
-            </Grid>
-            <Grid Grid.Row="10">
                 <ComboBox 
                 FontSize="18" Width="400" MinWidth="100"
                 materialDesign:HintAssist.Hint="Mã sổ hộ khẩu" 
@@ -136,7 +128,6 @@
                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                 ItemsSource="{Binding ListSOHOKHAU}" 
                 KeyboardNavigation.TabIndex="1" 
-                IsEnabled="{Binding EnableNhapHoKhau}"
                 SelectedItem="{Binding SelectedSoHoKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
                 >
                     <i:Interaction.Triggers>
@@ -153,22 +144,39 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </Grid>
+            <Grid Grid.Row="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <CheckBox
+                        Width="400"
+                        MinWidth="100"
+                        FontSize="18" 
+                        IsChecked="{Binding IsChuHo}"
+                    >
+                        <TextBlock>Là chủ hộ</TextBlock>
+                    </CheckBox>
+                </Grid>
+                <Grid Grid.Column="1" Grid.ColumnSpan="3">
+                    <TextBox 
+                        Width="400"
+                        MinWidth="100"
+                        FontSize="18" 
+                        materialDesign:HintAssist.Hint="Quan hệ với chủ hộ" 
+                        IsEnabled = "{Binding IsNotChuHo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                        Text="{Binding QuanHeVoiChuHo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </Grid>
+            </Grid>
             <Grid Grid.Row="11">
                 <TextBox 
                 Width="400"
                 MinWidth="100"
                 FontSize="18" 
-                materialDesign:HintAssist.Hint="Quan hệ với chủ hộ" 
-                IsEnabled="{Binding EnableNhapHoKhau}"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                Text="{Binding QuanHeVoiChuHo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-            </Grid>
-            <Grid Grid.Row="12">
-                <TextBox 
-                Width="400"
-                MinWidth="100"
-                FontSize="18" 
-                IsEnabled="{Binding EnableNhapHoKhau}"
                 materialDesign:HintAssist.Hint="Chỗ ở hiện nay" 
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
                 Text="{Binding ChoOHienNay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="97,2,96.6,2.2" />
