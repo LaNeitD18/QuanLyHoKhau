@@ -98,6 +98,7 @@
                             Padding="30,0"
                             TextAlignment="Left"
                             HorizontalAlignment="Stretch"
+                            Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
@@ -140,7 +141,7 @@
                         x:Name="listUsingExamDatagrid"
                         HorizontalAlignment="Stretch" 
                         VerticalAlignment="Top" 
-                        ItemsSource="{Binding ListNhanKhau}"
+                        ItemsSource="{Binding ListFilteredNhanKhau}"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         SelectionMode="Extended"
                         AutoGenerateColumns="False"
