@@ -282,6 +282,9 @@ namespace QuanLyHoKhau.ViewModel
         #region Adjust and Validation
         private void AdjustResult()
         {
+            // CuteTN Note: but.. why???
+            // ResultNguoi.NHANKHAU = ResultNhanKhau;
+            ResultNhanKhau.NGUOI = ResultNguoi;
         }
 
         private bool ValidateResult(out string errors)
@@ -340,6 +343,7 @@ namespace QuanLyHoKhau.ViewModel
             AdjustResult();
             DataProvider.Ins.DB.NGUOIs.Add(ResultNguoi);
             DataProvider.Ins.DB.SaveChanges();
+            OnDatabaseUpdated?.Invoke(this, null);
         }
 
         private void AddNewNhanKhauToDB()
@@ -347,6 +351,7 @@ namespace QuanLyHoKhau.ViewModel
             AdjustResult();
             DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
             DataProvider.Ins.DB.SaveChanges();
+            OnDatabaseUpdated?.Invoke(this, null);
         }
         #endregion
 
@@ -380,6 +385,10 @@ namespace QuanLyHoKhau.ViewModel
         {
             return (DataProvider.Ins.DB.NGUOIs.Find(cmnd) != null);
         }
+        #endregion
+
+        #region Events
+        public EventHandler OnDatabaseUpdated = null;
         #endregion
     }
 }
