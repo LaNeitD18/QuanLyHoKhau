@@ -261,6 +261,7 @@ namespace QuanLyHoKhau.ViewModel
             TestPrintResult();
             DataProvider.Ins.DB.SOHOKHAUs.Add(ResultSoHoKhau);
             DataProvider.Ins.DB.SaveChanges();
+            OnDatabaseUpdated?.Invoke(this, null);
         }
         #endregion
 
@@ -280,6 +281,10 @@ namespace QuanLyHoKhau.ViewModel
             ListSOLUUNHANKHAU = LoadSLNK();
             ListNHANKHAU = LoadNhanKhau();
         }
+        #endregion
+
+        #region Events
+        public EventHandler OnDatabaseUpdated = null;
         #endregion
     }
 }
