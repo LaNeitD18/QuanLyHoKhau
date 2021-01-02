@@ -32,7 +32,20 @@ namespace QuanLyHoKhau.View
             try
             {
                 Object shkItem = (e.Source as Button).DataContext;
-                (DataContext as QuanLyHoKhau_VM)?.BtnDeleteSohoKhau(shkItem);
+                (DataContext as QuanLyHoKhau_VM)?.DeleteSohoKhau(shkItem);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void btnEditSoHoKhau_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Object shkItem = (e.Source as Button).DataContext;
+                (DataContext as QuanLyHoKhau_VM)?.EditSohoKhau(shkItem);
             }
             catch (Exception ex)
             {

@@ -35,6 +35,7 @@
                 Width="400"
                 MinWidth="100"
                 FontSize="18" 
+                IsReadOnly="{Binding IsCmndReadOnly}"
                 materialDesign:HintAssist.Hint="Số CMND" 
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
                 Text="{Binding CMND, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
@@ -126,7 +127,7 @@
                 materialDesign:HintAssist.Hint="Mã sổ hộ khẩu" 
                 VerticalAlignment="Center" 
                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                ItemsSource="{Binding ListSOHOKHAU}" 
+                ItemsSource="{Binding ListSOHOKHAU, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                 KeyboardNavigation.TabIndex="1" 
                 SelectedItem="{Binding SelectedSoHoKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
                 >

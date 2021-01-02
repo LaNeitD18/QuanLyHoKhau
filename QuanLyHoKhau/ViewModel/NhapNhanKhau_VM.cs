@@ -13,15 +13,53 @@ namespace QuanLyHoKhau.ViewModel
     class NhapNhanKhau_VM : BaseViewModel
     {
         #region Init
+        bool isAddingMode = true;
+
+        private bool _isCmndReadOnly = false;
+        public bool IsCmndReadOnly
+        {
+            get => _isCmndReadOnly;
+            set { _isCmndReadOnly = value; OnPropertyChanged(); }
+        }
+
         public NhapNhanKhau_VM() : this(null, null)
         {
         }
 
         public NhapNhanKhau_VM(NGUOI nguoi, NHANKHAU nhanKhau)
         {
-            Refresh();
+            isAddingMode = (nguoi == null) || (nhanKhau == null);
+            IsCmndReadOnly = !isAddingMode;
+
             ResultNguoi = new NGUOI(nguoi);
             ResultNhanKhau = new NHANKHAU(nhanKhau);
+            LoadInfo(nguoi, nhanKhau);
+        }
+
+        private void LoadInfo(NGUOI nguoi, NHANKHAU nhanKhau)
+        {
+            Reset();
+
+            if(nguoi != null)
+            {
+                CMND = nguoi.CMND;
+                HoTen = nguoi.Ten;
+                NgaySinh = nguoi.NgaySinh;
+                GioiTinh = nguoi.GioiTinh;
+                NoiSinh = nguoi.NoiSinh;
+                QueQuan = nguoi.QueQuan;
+                DanToc = nguoi.DanToc;
+                TonGiao = nguoi.TonGiao;
+                NgheNghiep = nguoi.NgheNghiep;
+            }
+
+            if(nhanKhau != null)
+            {
+                SelectedSoHoKhau = nhanKhau.SOHOKHAU;
+                QuanHeVoiChuHo = nhanKhau.QuanHeVoiChuHo;
+                IsChuHo = QuanHeVoiChuHo == "Chủ hộ";
+                ChoOHienNay = nhanKhau.ChoOHienNay;
+            }
         }
         #endregion
 
@@ -114,13 +152,15 @@ namespace QuanLyHoKhau.ViewModel
             get => _isChuHo;
             set 
             {
-                _isChuHo = value;
-                
-                if(_isChuHo)
+                if(value == _isChuHo)
+                    return;
+
+                if(value)
                     QuanHeVoiChuHo = "Chủ hộ";
                 else
                     QuanHeVoiChuHo = "";
 
+                _isChuHo = value;
                 IsNotChuHo = !value;
 
                 OnPropertyChanged(); 
@@ -220,14 +260,7 @@ namespace QuanLyHoKhau.ViewModel
 
             if (ValidateResult(out error))
             {
-                if (! CheckCMNDExist(CMND))
-                { 
-                    AddNewNguoiToDB();
-                    AddNewNhanKhauToDB();
-
-                    TestPrintResult();
-                }
-
+                UpsertResult();
                 Reset();
             }
             else
@@ -294,6 +327,16 @@ namespace QuanLyHoKhau.ViewModel
                 errors = $"Vui lòng nhập số CMND";
                 return false;
             }
+            else
+            {
+                var cntFiltered = DataProvider.Ins.DB.NGUOIs.Where(nguoi => ((!nguoi.IsDeleted) && (CMND == nguoi.CMND))).Count();
+
+                if (cntFiltered != 0 && isAddingMode)
+                {
+                    errors = $"Công dân với CMND {CMND} đã tồn tại trong hệ thống";
+                    return false;
+                }
+            }
 
             if(string.IsNullOrEmpty(HoTen))
             {
@@ -338,18 +381,33 @@ namespace QuanLyHoKhau.ViewModel
 
 
         #region database
-        private void AddNewNguoiToDB()
+        private void UpsertResult()
         {
             AdjustResult();
-            DataProvider.Ins.DB.NGUOIs.Add(ResultNguoi);
-            DataProvider.Ins.DB.SaveChanges();
-            OnDatabaseUpdated?.Invoke(this, null);
-        }
 
-        private void AddNewNhanKhauToDB()
-        {
-            AdjustResult();
-            DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
+            NGUOI targetNguoi = DataProvider.Ins.DB.NGUOIs.Find(CMND);
+            NHANKHAU targetNK = DataProvider.Ins.DB.NHANKHAUs.Find(CMND);
+
+            if (targetNguoi == null)
+            {
+                DataProvider.Ins.DB.NGUOIs.Add(ResultNguoi);
+            }
+            else
+            {
+                targetNguoi.CopyInfo(ResultNguoi);
+                targetNguoi.IsDeleted = false;
+            }
+
+            if (targetNK == null)
+            {
+                DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
+            }
+            else
+            {
+                targetNK.CopyInfo(ResultNhanKhau);
+                targetNK.IsDeleted = false;
+            }
+
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
         }

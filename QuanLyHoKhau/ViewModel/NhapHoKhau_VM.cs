@@ -15,18 +15,36 @@ namespace QuanLyHoKhau.ViewModel
     {
         // CuteTN Note: the goal is to make this class immutable from the outside :)
 
-        const int SOHOKHAU_ID_LENGTH = 8;
+        const int SOHOKHAU_ID_LENGTH = 5;
         const string SOHOKHAU_ID_PREFIX = "SHK";
 
         #region Init
+        bool isAddingMode = true;
+
         public NhapHoKhau_VM() : this(null)
         {
+
         }
 
         public NhapHoKhau_VM(SOHOKHAU soHoKhau)
         {
-            Reset();
+            isAddingMode = soHoKhau == null;
+
             ResultSoHoKhau = new SOHOKHAU(soHoKhau);
+            LoadInfo(soHoKhau);
+        }
+
+        public void LoadInfo(SOHOKHAU soHoKhau)
+        {
+            Reset();
+
+            if(soHoKhau != null)
+            {
+                MaSoHoKhau = soHoKhau.MaSHK;
+                SelectedSoLuuNhanKhau = soHoKhau.SOLUUNHANKHAU;
+                SelectedChuHo = soHoKhau.NHANKHAU;
+                DiaChi = soHoKhau.DiaChi;
+            }
         }
         #endregion
 
@@ -165,9 +183,7 @@ namespace QuanLyHoKhau.ViewModel
 
             if(ValidateResult(out error))
             { 
-                if(string.IsNullOrEmpty(MaSoHoKhau))
-                    AddNewSoHoKhauToDB();
-
+                UpsertResult();
                 Reset();
             }
             else
@@ -219,6 +235,17 @@ namespace QuanLyHoKhau.ViewModel
 
         private bool ValidateResult(out string errors)
         {
+            if(!string.IsNullOrEmpty(MaSoHoKhau))
+            {
+                var cntFiltered = DataProvider.Ins.DB.SOHOKHAUs.Where(shk => ((!shk.IsDeleted) && (MaSoHoKhau == shk.MaSHK))).Count();
+
+                if(cntFiltered != 0 && isAddingMode)
+                { 
+                    errors = $"Mã sổ hộ khẩu {MaSoHoKhau} đã tồn tại trong hệ thống";
+                    return false;
+                }
+            }
+
             if(!string.IsNullOrEmpty(MaCongAn))
                 if(DataProvider.Ins.DB.CONGANs.Find(MaCongAn) == null)
                 {
@@ -228,7 +255,7 @@ namespace QuanLyHoKhau.ViewModel
 
             if(!string.IsNullOrEmpty(SoCmndChuHo))
             {
-                var filteredNguoi = DataProvider.Ins.DB.NGUOIs.Where(nguoi => (nguoi.CMND == SoCmndChuHo));
+                var filteredNguoi = DataProvider.Ins.DB.NGUOIs.Where(nguoi => (nguoi.CMND == SoCmndChuHo) && (!nguoi.IsDeleted));
 
                 // check if there is a person has this cmnd
                 if (filteredNguoi.Count() == 0)
@@ -239,9 +266,9 @@ namespace QuanLyHoKhau.ViewModel
 
                 // check if this person is actually a NHANKHAU
                 var nguoiDo = filteredNguoi.First();
-                var filteredNhanKhau = DataProvider.Ins.DB.NHANKHAUs.Where(nhankhau => (nhankhau.CMND == nguoiDo.CMND));
+                var filteredNhanKhau = DataProvider.Ins.DB.NHANKHAUs.Where(nhankhau => (nhankhau.CMND == nguoiDo.CMND) && (!nhankhau.IsDeleted));
 
-                if(filteredNguoi.Count() == 0)
+                if(filteredNhanKhau.Count() == 0)
                 {
                     errors = $"Công dân với số CMND {SoCmndChuHo} không phải là nhân khẩu";
                     return false;
@@ -254,12 +281,22 @@ namespace QuanLyHoKhau.ViewModel
         #endregion
 
         #region database
-        private void AddNewSoHoKhauToDB()
+        private void UpsertResult()
         {
             AdjustResult();
-            MaSoHoKhau = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, SOHOKHAU_ID_PREFIX, SOHOKHAU_ID_LENGTH);
-            TestPrintResult();
-            DataProvider.Ins.DB.SOHOKHAUs.Add(ResultSoHoKhau);
+
+            SOHOKHAU targetSHK = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+
+            if(targetSHK == null)
+            { 
+                MaSoHoKhau = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, SOHOKHAU_ID_PREFIX, SOHOKHAU_ID_LENGTH);
+                DataProvider.Ins.DB.SOHOKHAUs.Add(ResultSoHoKhau);
+            }
+            else
+            {
+                targetSHK.CopyInfo(ResultSoHoKhau);
+            }
+
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
         }

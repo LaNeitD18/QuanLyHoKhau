@@ -107,7 +107,7 @@ namespace QuanLyHoKhau.ViewModel
         #endregion
 
         #region Button Delete Nhan Khau
-        public void BtnDeleteNhanKhau(Object item)
+        public void DeleteNhanKhau(Object item)
         {
             NHANKHAU nk = item as NHANKHAU;
             if (nk == null)
@@ -124,6 +124,23 @@ namespace QuanLyHoKhau.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
                 Refresh();
             }
+        }
+        #endregion
+
+        #region Button Edit Nhan Khau
+        public void EditNhanKhau(Object item)
+        {
+            NHANKHAU nk = item as NHANKHAU;
+            if (nk == null)
+                return;
+
+            NhapNhanKhauWindow nhapNhanKhauWindow = new NhapNhanKhauWindow();
+            nhapNhanKhauWindow.DataContext = new NhapNhanKhau_VM(nk.NGUOI, nk);
+            (nhapNhanKhauWindow.DataContext as NhapNhanKhau_VM).OnDatabaseUpdated = new EventHandler(HandleOnDbUpdated);
+            nhapNhanKhauWindow.ShowDialog();
+
+            DataProvider.Ins.DB.SaveChanges();
+            Refresh();
         }
         #endregion
 

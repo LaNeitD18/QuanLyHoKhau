@@ -109,7 +109,7 @@ namespace QuanLyHoKhau.ViewModel
         #endregion
 
         #region Button Delete So Ho Khau
-        public void BtnDeleteSohoKhau(Object item)
+        public void DeleteSohoKhau(Object item)
         {
             SOHOKHAU shk = item as SOHOKHAU;
             if(shk == null)
@@ -122,6 +122,20 @@ namespace QuanLyHoKhau.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
                 Refresh();
             }
+        }
+        #endregion
+
+        #region Button Edit So Ho Khau
+        public void EditSohoKhau(Object item)
+        {
+            SOHOKHAU shk = item as SOHOKHAU;
+            if (shk == null)
+                return;
+
+            NhapHoKhauWindow nhapHoKhauWindow = new NhapHoKhauWindow();
+            nhapHoKhauWindow.DataContext = new NhapHoKhau_VM(shk);
+            (nhapHoKhauWindow.DataContext as NhapHoKhau_VM).OnDatabaseUpdated = new EventHandler(HandleOnDbUpdated);
+            nhapHoKhauWindow.ShowDialog();
         }
         #endregion
 
