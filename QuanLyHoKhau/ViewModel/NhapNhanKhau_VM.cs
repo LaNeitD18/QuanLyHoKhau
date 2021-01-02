@@ -185,7 +185,7 @@ namespace QuanLyHoKhau.ViewModel
         #region ListSOHOKHAU
         private BindingList<SOHOKHAU> LoadSoHoKhau()
         {
-            BindingList<SOHOKHAU> result = new BindingList<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.ToList());
+            BindingList<SOHOKHAU> result = new BindingList<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.Where(shk => !shk.IsDeleted).ToList());
             return result;
         }
 

@@ -180,7 +180,7 @@
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5"/>
+                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5" Click="btnDeleteSoHoKhau_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

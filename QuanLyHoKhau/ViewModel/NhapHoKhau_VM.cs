@@ -130,7 +130,7 @@ namespace QuanLyHoKhau.ViewModel
         #region ListNHANKHAU
         private BindingList<NHANKHAU> LoadNhanKhau()
         {
-            BindingList<NHANKHAU> result = new BindingList<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.ToList());
+            BindingList<NHANKHAU> result = new BindingList<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.Where(nk => !nk.IsDeleted).ToList());
             return result;
         }
 

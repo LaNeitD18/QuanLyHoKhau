@@ -9,6 +9,7 @@ using System.Windows.Input;
 using QuanLyHoKhau.Model;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
+using System.Windows;
 
 namespace QuanLyHoKhau.ViewModel
 {
@@ -17,7 +18,7 @@ namespace QuanLyHoKhau.ViewModel
         #region List Nhan khau (full)
         ObservableCollection<NHANKHAU> LoadNhanKhaus()
         {
-            return new ObservableCollection<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.ToList());
+            return new ObservableCollection<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.Where(nk => !nk.IsDeleted).ToList());
         }
 
         ObservableCollection<NHANKHAU> _listNhanKhau = null;
@@ -102,6 +103,27 @@ namespace QuanLyHoKhau.ViewModel
                 (nhapNhanKhauWindow.DataContext as NhapNhanKhau_VM).OnDatabaseUpdated = new EventHandler(HandleOnDbUpdated);
                 nhapNhanKhauWindow.ShowDialog();
             });
+        }
+        #endregion
+
+        #region Button Delete Nhan Khau
+        public void BtnDeleteNhanKhau(Object item)
+        {
+            NHANKHAU nk = item as NHANKHAU;
+            if (nk == null)
+                return;
+
+            MessageBoxResult msgRes = MessageBox.Show($"Bạn có chắc muốn xoá thông tin nhân khẩu {nk.CMND} không?", "Xoá", MessageBoxButton.YesNo);
+            if (msgRes == MessageBoxResult.Yes)
+            {
+                nk.IsDeleted = true;
+                
+                if(nk.NGUOI != null)
+                    nk.NGUOI.IsDeleted = true;
+
+                DataProvider.Ins.DB.SaveChanges();
+                Refresh();
+            }
         }
         #endregion
 

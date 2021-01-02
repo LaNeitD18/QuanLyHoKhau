@@ -21,6 +21,7 @@ namespace QuanLyHoKhau.Model
         public string DiaChi { get; set; }
         public System.DateTime NgayTaoSo { get; set; }
         public string ActionType { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual CONGAN CONGAN { get; set; }
         public virtual NHANKHAU NHANKHAU { get; set; }

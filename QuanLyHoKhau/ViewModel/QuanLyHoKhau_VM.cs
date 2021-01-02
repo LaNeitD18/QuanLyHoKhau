@@ -7,16 +7,29 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace QuanLyHoKhau.ViewModel
 {
     class QuanLyHoKhau_VM : BaseViewModel
     {
+        #region Init
+        public QuanLyHoKhau_VM()
+        {
+            BtnAddSoHoKhau_Command = new RelayCommand((p) => {
+                NhapHoKhauWindow nhapHoKhauWindow = new NhapHoKhauWindow();
+                nhapHoKhauWindow.DataContext = new NhapHoKhau_VM();
+                (nhapHoKhauWindow.DataContext as NhapHoKhau_VM).OnDatabaseUpdated = new EventHandler(HandleOnDbUpdated);
+                nhapHoKhauWindow.ShowDialog();
+            });
+        }
+        #endregion
+
         #region List So ho khau (full)
         ObservableCollection<SOHOKHAU> LoadSoHoKhaus()
         {
-            return new ObservableCollection<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.ToList());
+            return new ObservableCollection<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.Where(shk => !shk.IsDeleted).ToList());
         }
 
         ObservableCollection<SOHOKHAU> _listSoHoKhau = null;
@@ -93,15 +106,22 @@ namespace QuanLyHoKhau.ViewModel
 
         #region Button Add SoHoKhau
         public ICommand BtnAddSoHoKhau_Command { get; set; }
+        #endregion
 
-        public QuanLyHoKhau_VM()
+        #region Button Delete So Ho Khau
+        public void BtnDeleteSohoKhau(Object item)
         {
-            BtnAddSoHoKhau_Command = new RelayCommand((p) => {
-                NhapHoKhauWindow nhapHoKhauWindow = new NhapHoKhauWindow();
-                nhapHoKhauWindow.DataContext = new NhapHoKhau_VM();
-                (nhapHoKhauWindow.DataContext as NhapHoKhau_VM).OnDatabaseUpdated = new EventHandler(HandleOnDbUpdated);
-                nhapHoKhauWindow.ShowDialog();
-            });
+            SOHOKHAU shk = item as SOHOKHAU;
+            if(shk == null)
+                return;
+
+            MessageBoxResult msgRes = MessageBox.Show($"Bạn có chắc muốn xoá thông tin sổ hộ khẩu {shk.MaSHK} không?", "Xoá", MessageBoxButton.YesNo);
+            if(msgRes == MessageBoxResult.Yes)
+            {
+                shk.IsDeleted = true;
+                DataProvider.Ins.DB.SaveChanges();
+                Refresh();
+            }
         }
         #endregion
 

@@ -19,6 +19,7 @@ namespace QuanLyHoKhau.Model
         public string QuanHeVoiChuHo { get; set; }
         public string ChoOHienNay { get; set; }
         public string ActionType { get; set; }
+        public bool IsDeleted { get; set; }
     
         public virtual NGUOI NGUOI { get; set; }
         public virtual SOHOKHAU SOHOKHAU { get; set; }
