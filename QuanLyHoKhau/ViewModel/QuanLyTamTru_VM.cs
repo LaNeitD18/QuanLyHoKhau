@@ -19,6 +19,7 @@ namespace QuanLyHoKhau.ViewModel
             BtnAddTamTru_Command = new RelayCommand((p) => {
                 NhapGiayTamTruWindow nhapGiayTamTruWindow = new NhapGiayTamTruWindow();
                 nhapGiayTamTruWindow.ShowDialog();
+                FilterListPhieuTamTru();
             });
         }
 
@@ -53,14 +54,90 @@ namespace QuanLyHoKhau.ViewModel
         {
             if (_searchText == "" || _searchText == null)
             {
-                _listPhieuTamTru = new ObservableCollection<GIAYTAMTRU>(DataProvider.Ins.DB.GIAYTAMTRUs.ToList());
+                _listPhieuTamTru = new ObservableCollection<GIAYTAMTRU>(GetDefaultListPhieuTamTru());
             }
             else
             {
-                List<GIAYTAMTRU> listPhieuTamTruFiltered = DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.MaGiayTamTru.Contains(_searchText)).ToList();
-                _listPhieuTamTru = new ObservableCollection<GIAYTAMTRU>(listPhieuTamTruFiltered);
+                string[] listOption = _searchText.Split(' ');
+
+                List<GIAYTAMTRU> listPhieuTamVangFiltered = GetDefaultListPhieuTamTru();
+
+                for (int i = 0; i < listOption.Count();)
+                {
+                    switch (listOption[i])
+                    {
+                        case "-id":
+                            {
+                                listPhieuTamVangFiltered = SearchByMaPhieu(listOption[i + 1], listPhieuTamVangFiltered);
+                                i += 2;
+                                break;
+                            }
+
+                        case "-u":
+                            {
+                                listPhieuTamVangFiltered = SearchByMaNhanKhau(listOption[i + 1], listPhieuTamVangFiltered);
+                                i += 2;
+                                break;
+                            }
+                        case "-d":
+                            {
+                                DateTime ngayKhaiBao;
+
+                                try
+                                {
+                                    ngayKhaiBao = DateTime.Parse(listOption[i + 1]);
+                                }
+                                catch (Exception e)
+                                {
+                                    i += 2;
+                                    break;
+                                }
+
+                                listPhieuTamVangFiltered = SearchByNgayKhaiBao(ngayKhaiBao, listPhieuTamVangFiltered);
+
+                                i += 2;
+                                break;
+                            }
+                        default:
+                            return;
+                    }
+                }
+
+                _listPhieuTamTru = new ObservableCollection<GIAYTAMTRU>(listPhieuTamVangFiltered);
             }
             OnPropertyChanged("ListPhieuTamTru");
+        }
+
+        List<GIAYTAMTRU> SearchByMaPhieu(string id, List<GIAYTAMTRU> list)
+        {
+            List<GIAYTAMTRU> returnList = new List<GIAYTAMTRU>();
+
+            returnList.AddRange(list.Where(x => x.MaGiayTamTru == id));
+
+            return returnList;
+        }
+
+        List<GIAYTAMTRU> SearchByMaNhanKhau(string id, List<GIAYTAMTRU> list)
+        {
+            List<GIAYTAMTRU> returnList = new List<GIAYTAMTRU>();
+
+            returnList.AddRange(list.Where(x => x.CMND == id));
+
+            return returnList;
+        }
+
+        List<GIAYTAMTRU> SearchByNgayKhaiBao(DateTime id, List<GIAYTAMTRU> list)
+        {
+            List<GIAYTAMTRU> returnList = new List<GIAYTAMTRU>();
+
+            returnList.AddRange(list.Where(x => (x.NgayKhaiBao).Value.Date == id.Date));
+
+            return returnList;
+        }
+
+        List<GIAYTAMTRU> GetDefaultListPhieuTamTru()
+        {
+            return DataProvider.Ins.DB.GIAYTAMTRUs.ToList();
         }
     }
 }
