@@ -29,6 +29,7 @@ namespace QuanLyHoKhau.Model
         public string QueQuan { get; set; }
         public string DanToc { get; set; }
         public string TonGiao { get; set; }
+        public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONGAN> CONGANs { get; set; }
