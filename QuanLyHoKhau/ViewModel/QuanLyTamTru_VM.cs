@@ -139,5 +139,24 @@ namespace QuanLyHoKhau.ViewModel
         {
             return DataProvider.Ins.DB.GIAYTAMTRUs.ToList();
         }
+
+        /// <summary>
+        /// Remove PhieuTamTru with primary key
+        /// If remove success, function return null. Otherwise, it return string with error description
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string DeletePhieuTamTru(string id)
+        {
+            var target = DataProvider.Ins.DB.GIAYTAMTRUs.Find(id);
+
+            if (target == null)
+                return "Không tìm thấy phiếu tạm trú tương ứng với id: " + id.ToString();
+
+            if (target != null)
+                DataProvider.Ins.DB.GIAYTAMTRUs.Remove(target);
+
+            return null;
+        }
     }
 }

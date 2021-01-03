@@ -139,5 +139,29 @@ namespace QuanLyHoKhau.ViewModel
         {
             return DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.ToList();
         }
+
+        /// <summary>
+        /// Remove PhieuTamVang with primary key
+        /// If remove success, function return null. Otherwise, it return string with error description
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public string DeletePhieuTamVang(string id)
+        {
+            var target = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Find(id);
+
+            if (target == null)
+                return "Không tìm thấy phiếu tạm vắng tương ứng với id: " + id.ToString();
+
+            if(DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.MaGiayTamVang == id).ToList().Count > 0)
+            {
+                return "Phiếu này đã được sủ dụng để đăng ký tạm trú, không thể xóa";
+            }
+
+            if (target != null)
+                DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Remove(target);
+
+            return null;
+        }
     }
 }
