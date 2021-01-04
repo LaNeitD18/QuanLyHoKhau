@@ -362,6 +362,17 @@ namespace QuanLyHoKhau.ViewModel
                 return false;
             }
 
+            if(IsChuHo)
+            {
+                // if there's already CHUHO and they have not been deleted
+                if(! (string.IsNullOrEmpty(SelectedSoHoKhau.CMNDChuHo) || SelectedSoHoKhau.NHANKHAU.IsDeleted))
+                    if(SelectedSoHoKhau.CMNDChuHo != CMND)
+                    {
+                        errors = $"Sổ hộ khẩu {SelectedSoHoKhau.MaSHK} đã tồn tại chủ hộ. với CMND {SelectedSoHoKhau.CMNDChuHo}";
+                        return false;
+                    }
+            }
+
             if(string.IsNullOrEmpty(QuanHeVoiChuHo))
             {
                 errors = $"Vui lòng nhập quan hệ với chủ hộ";
@@ -408,8 +419,22 @@ namespace QuanLyHoKhau.ViewModel
                 targetNK.IsDeleted = false;
             }
 
+            // Update ChuHo of SHK:
+            UpdateChuHoOfShk();
+
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
+        }
+
+        private void UpdateChuHoOfShk()
+        {
+            if(IsChuHo)
+                SelectedSoHoKhau.CMNDChuHo = CMND;
+            else
+            {
+                if(SelectedSoHoKhau.CMNDChuHo == CMND)
+                    SelectedSoHoKhau.CMNDChuHo = null;
+            }
         }
         #endregion
 
