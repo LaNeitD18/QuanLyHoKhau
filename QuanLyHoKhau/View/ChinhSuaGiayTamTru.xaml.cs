@@ -16,18 +16,18 @@ using QuanLyHoKhau.ViewModel;
 namespace QuanLyHoKhau.View
 {
     /// <summary>
-    /// Interaction logic for ChinhSuaGiayTamVang.xaml
+    /// Interaction logic for ChinhSuaGiayTamTru.xaml
     /// </summary>
-    public partial class ChinhSuaGiayTamVang : Window
+    public partial class ChinhSuaGiayTamTru : Window
     {
-        public ChinhSuaGiayTamVang()
+        public ChinhSuaGiayTamTru()
         {
             InitializeComponent();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            ChinhSuaTamVang_VM vm = DataContext as ChinhSuaTamVang_VM;
+            ChinhSuaTamTru_VM vm = DataContext as ChinhSuaTamTru_VM;
             string result = vm.CheckValidInfo();
             if (result != null)
             {
@@ -46,11 +46,11 @@ namespace QuanLyHoKhau.View
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (MessageBox.Show("Bạn có chắc muốn thoát?", "Question", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                (DataContext as ChinhSuaTamVang_VM).ResetAllField();
+                (DataContext as ChinhSuaTamTru_VM).ResetAllField();
                 this.Close();
             }
         }

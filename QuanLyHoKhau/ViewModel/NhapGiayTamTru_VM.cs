@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace QuanLyHoKhau.ViewModel
 {
-    class NhapGiayTamTru_VM
+    class NhapGiayTamTru_VM: BaseViewModel
     {
         #region UI
 

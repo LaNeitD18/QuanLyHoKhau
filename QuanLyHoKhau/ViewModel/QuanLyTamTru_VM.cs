@@ -141,20 +141,24 @@ namespace QuanLyHoKhau.ViewModel
         }
 
         /// <summary>
-        /// Remove PhieuTamTru with primary key
+        /// Remove PhieuTamTru with PhieuTamTru
         /// If remove success, function return null. Otherwise, it return string with error description
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string DeletePhieuTamTru(string id)
+        public string DeletePhieuTamTru(object PhieuTamTru)
         {
-            var target = DataProvider.Ins.DB.GIAYTAMTRUs.Find(id);
+            var target = PhieuTamTru as GIAYTAMTRU;
+
+            target = DataProvider.Ins.DB.GIAYTAMTRUs.Find(target.MaGiayTamTru);
 
             if (target == null)
-                return "Không tìm thấy phiếu tạm trú tương ứng với id: " + id.ToString();
+                return "Không tìm thấy phiếu tạm trú tương ứng với id: " + target.MaGiayTamTru.ToString();
 
             if (target != null)
                 DataProvider.Ins.DB.GIAYTAMTRUs.Remove(target);
+
+            DataProvider.Ins.DB.SaveChanges();
 
             return null;
         }
