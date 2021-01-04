@@ -261,7 +261,7 @@ namespace QuanLyHoKhau.ViewModel
             if (ValidateResult(out error))
             {
                 UpsertResult();
-                Reset();
+                (obj as System.Windows.Window)?.Close();
             }
             else
             {
@@ -280,7 +280,7 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleCancelButton(Object obj)
         {
-            Reset();
+            (obj as System.Windows.Window)?.Close();
         }
         #endregion
 

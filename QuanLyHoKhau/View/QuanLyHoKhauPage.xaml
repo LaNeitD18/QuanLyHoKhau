@@ -158,18 +158,6 @@
                             <DataGridTextColumn Header="CMND chủ hộ" Binding="{Binding CMNDChuHo}"/>
                             <DataGridTextColumn Header="Mã sổ lưu nhân khẩu" Binding="{Binding MaSoLuuNhanKhau}"/>
                             <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DiaChi}"/>
-                            <DataGridTemplateColumn Header="">
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button
-                                            x:Name="btnEditpppp"
-                                            Width="75"
-                                            Height="Auto"
-                                            Margin="10"
-                                            Content="Edit" />   
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

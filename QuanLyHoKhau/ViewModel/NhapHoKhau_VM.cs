@@ -189,7 +189,7 @@ namespace QuanLyHoKhau.ViewModel
             if(ValidateResult(out error))
             { 
                 UpsertResult();
-                Reset();
+                (obj as System.Windows.Window)?.Close();
             }
             else
             {
@@ -208,7 +208,7 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleCancelButton(Object obj)
         {
-            Reset();
+            (obj as System.Windows.Window)?.Close();
         }
         #endregion
 
@@ -326,6 +326,13 @@ namespace QuanLyHoKhau.ViewModel
         void HandleOnDbUpdated(Object sender, EventArgs args)
         {
             Refresh();
+
+            // Update CMNDChuHo after editting NHANKHAU
+            SOHOKHAU shk = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+            if(shk != null)
+                SoCmndChuHo = shk.CMNDChuHo;
+
+            OnDatabaseUpdated?.Invoke(this, null);
         }
         #endregion
 
