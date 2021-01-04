@@ -5,16 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyHoKhau.View"
         mc:Ignorable="d"
-        Title="NhapHoKhauWindow" Height="450" Width="600"
+        Title="NhapHoKhauWindow" Height="516.4" Width="600"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        ResizeMode="NoResize"
         Background="Transparent"
         
         WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource NhapHoKhauVM}">
     <materialDesign:Card>
         <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="65*"/>
+                <ColumnDefinition Width="529*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
@@ -22,8 +25,16 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+            <Grid Grid.Row="0" Grid.ColumnSpan="2" Margin="0,0,-0.4,0.4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="565*"/>
+                    <ColumnDefinition Width="29*"/>
+                </Grid.ColumnDefinitions>
                 <TextBox 
                     Width="400"
                     MinWidth="200"
@@ -31,9 +42,9 @@
                     materialDesign:HintAssist.Hint="Mã sổ hộ khẩu" 
                     IsEnabled="False"
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                    Text="{Binding MaSoHoKhau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    Text="{Binding MaSoHoKhau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Margin="97,0,68,0" />
             </Grid>
-            <Grid Grid.Row="1">
+            <Grid Grid.ColumnSpan="2" Margin="0,42,-0.4,42.2" Grid.RowSpan="3">
                 <ComboBox 
                     FontSize="18" Width="400" MinWidth="100"
                     materialDesign:HintAssist.Hint="Chọn mã sổ lưu nhân khẩu" 
@@ -56,32 +67,8 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </Grid>
-            <Grid Grid.Row="2">
-                <ComboBox 
-                    FontSize="18" Width="400" MinWidth="100"
-                    materialDesign:HintAssist.Hint="Số CMND chủ hộ" 
-                    VerticalAlignment="Center" 
-                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    ItemsSource="{Binding ListNHANKHAU}" 
-                    KeyboardNavigation.TabIndex="1" 
-                    SelectedItem="{Binding SelectedChuHo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    >
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding NGUOI.Ten}"></TextBlock>
-                                <TextBlock Text="{Binding CMND}" FontSize="10px"></TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </Grid>
-            <Grid Grid.Row="3">
+
+            <Grid Grid.Row="2" Grid.ColumnSpan="2" Margin="0,0.2,-0.4,0.2">
                 <TextBox 
                     Width="400"
                     MinWidth="100"
@@ -90,7 +77,44 @@
                     Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
                     Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </Grid>
-            <Grid Grid.Row="5">
+
+            <Grid Grid.Row="4" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="0,0.4,-0.4,0.4">
+                <materialDesign:Card Margin="5,0,5,0">
+                    <DataGrid 
+                        x:Name="listUsingExamDatagrid"
+                        HorizontalAlignment="Stretch" 
+                        VerticalAlignment="Top" 
+                        ItemsSource="{Binding ListNHANKHAUinSHK}"
+                        ScrollViewer.VerticalScrollBarVisibility="Auto"
+                        SelectionMode="Extended"
+                        AutoGenerateColumns="False"
+                        SelectionUnit="FullRow" 
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        CanUserResizeColumns="True"
+                        CanUserResizeRows="False"
+                        IsReadOnly="True"
+                        >
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="CMND" Binding="{Binding CMND}"/>
+                            <DataGridTextColumn Header="Họ tên" Binding="{Binding NGUOI.Ten}"/>
+                            <DataGridTextColumn Header="Giới tính" Binding="{Binding NGUOI.GioiTinh}"/>
+                            <DataGridTextColumn Header="Quê quán" Binding="{Binding NGUOI.QueQuan}"/>
+                            <DataGridTextColumn Header="Quan hệ với chủ hộ" Binding="{Binding QuanHeVoiChuHo}"/>
+                        </DataGrid.Columns>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction 
+                            Command="{Binding UsingExam_SelectionChangedCommand}"                       
+                            CommandParameter="{Binding ElementName=listUsingExamDatagrid}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </DataGrid>
+                </materialDesign:Card>
+            </Grid>
+
+
+            <Grid Grid.Row="8" Grid.ColumnSpan="2" Margin="0,41.2,-0.4,0" Grid.RowSpan="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>

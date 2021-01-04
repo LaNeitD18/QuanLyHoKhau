@@ -42,7 +42,6 @@ namespace QuanLyHoKhau.ViewModel
             {
                 MaSoHoKhau = soHoKhau.MaSHK;
                 SelectedSoLuuNhanKhau = soHoKhau.SOLUUNHANKHAU;
-                SelectedChuHo = soHoKhau.NHANKHAU;
                 DiaChi = soHoKhau.DiaChi;
             }
         }
@@ -73,24 +72,14 @@ namespace QuanLyHoKhau.ViewModel
         public string MaSoHoKhau
         {
             get => ResultSoHoKhau.MaSHK;
-            set { ResultSoHoKhau.MaSHK = value; OnPropertyChanged(); }
-        }
-
-        public NHANKHAU SelectedChuHo
-        {
-            get => ResultSoHoKhau.NHANKHAU;
-            set
-            {
-                ResultSoHoKhau.NHANKHAU = value;
-
-                if (value != null)
-                    ResultSoHoKhau.CMNDChuHo = value.CMND;
-                else
-                    ResultSoHoKhau.CMNDChuHo = null;
-
-                OnPropertyChanged();
+            set 
+            { 
+                ResultSoHoKhau.MaSHK = value; 
+                ListNHANKHAUinSHK = LoadNhanKhauInSHK();
+                OnPropertyChanged(); 
             }
         }
+
 
         public SOLUUNHANKHAU SelectedSoLuuNhanKhau
         {
@@ -145,25 +134,40 @@ namespace QuanLyHoKhau.ViewModel
         }
         #endregion
 
-        #region ListNHANKHAU
-        private BindingList<NHANKHAU> LoadNhanKhau()
+        #region ListNHANKHAUinSHK
+        private BindingList<NHANKHAU> LoadNhanKhauInSHK()
         {
-            BindingList<NHANKHAU> result = new BindingList<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.Where(nk => !nk.IsDeleted).ToList());
+            SOHOKHAU shk = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+
+            if(shk == null || shk.IsDeleted)
+                return new BindingList<NHANKHAU>();
+
+            //BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
+            //    (
+            //        DataProvider.Ins.DB.NHANKHAUs.Where(nk =>
+            //            (!nk.IsDeleted) && (nk.MASHK == MaSoHoKhau)
+            //        ).ToList()
+            //    );
+            BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
+                (
+                    shk.NHANKHAUs.Where(nk => !nk.IsDeleted).ToList()
+                );
+
             return result;
         }
 
-        private BindingList<NHANKHAU> _listNHANKHAU = null;
-        public BindingList<NHANKHAU> ListNHANKHAU
+        private BindingList<NHANKHAU> _listNHANKHAUinSHK = null;
+        public BindingList<NHANKHAU> ListNHANKHAUinSHK
         {
             get
             {
-                if (_listNHANKHAU == null)
-                    _listNHANKHAU = LoadNhanKhau();
-                return _listNHANKHAU;
+                if (_listNHANKHAUinSHK == null)
+                    _listNHANKHAUinSHK = LoadNhanKhauInSHK();
+                return _listNHANKHAUinSHK;
             }
             set
             {
-                _listNHANKHAU = value;
+                _listNHANKHAUinSHK = value;
                 OnPropertyChanged();
             }
         }
@@ -308,7 +312,6 @@ namespace QuanLyHoKhau.ViewModel
             ResultSoHoKhau = null;
             MaSoHoKhau = null;
             SelectedSoLuuNhanKhau = null;
-            SelectedChuHo = null;
             DiaChi = "";
             Refresh();
         }
@@ -316,7 +319,7 @@ namespace QuanLyHoKhau.ViewModel
         public void Refresh()
         {
             ListSOLUUNHANKHAU = LoadSLNK();
-            ListNHANKHAU = LoadNhanKhau();
+            ListNHANKHAUinSHK = LoadNhanKhauInSHK();
         }
         #endregion
 
