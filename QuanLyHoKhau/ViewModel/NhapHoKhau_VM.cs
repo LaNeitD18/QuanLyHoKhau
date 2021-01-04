@@ -326,13 +326,29 @@ namespace QuanLyHoKhau.ViewModel
         void HandleOnDbUpdated(Object sender, EventArgs args)
         {
             Refresh();
-
-            // Update CMNDChuHo after editting NHANKHAU
-            SOHOKHAU shk = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
-            if(shk != null)
-                SoCmndChuHo = shk.CMNDChuHo;
-
+            UpdateCmndOnNhanKhauUpdate();
             OnDatabaseUpdated?.Invoke(this, null);
+        }
+
+        void UpdateCmndOnNhanKhauUpdate()
+        {
+            // Update CMNDChuHo after editting NHANKHAU
+            SOHOKHAU shkInDb = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+            if (shkInDb != null)
+            {
+                SoCmndChuHo = shkInDb.CMNDChuHo;
+
+                // if ChuHo changes their SoHoKhau
+                NHANKHAU chuHoInDb = DataProvider.Ins.DB.NHANKHAUs.Find(SoCmndChuHo);
+                if (chuHoInDb != null)
+                {
+                    if (chuHoInDb.MASHK != MaSoHoKhau)
+                    {
+                        SoCmndChuHo = null;
+                        shkInDb.CMNDChuHo = null;
+                    }
+                }
+            }
         }
         #endregion
 
