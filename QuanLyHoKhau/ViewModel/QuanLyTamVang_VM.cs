@@ -40,6 +40,20 @@ namespace QuanLyHoKhau.ViewModel
             }
         }
 
+        PHIEUKHAIBAOTAMVANG _selectedPhieuTamVang;
+        public PHIEUKHAIBAOTAMVANG SelectedPhieuTamVang
+        {
+            get
+            {
+                return _selectedPhieuTamVang;
+            }
+
+            set
+            {
+                _selectedPhieuTamVang = value;
+            }
+        }
+
         string _searchText;
         public string SearchText
         {
@@ -146,20 +160,16 @@ namespace QuanLyHoKhau.ViewModel
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public string DeletePhieuTamVang(string id)
+        public string DeletePhieuTamVang(object PhieuTamVang)
         {
-            var target = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Find(id);
+            var target = PhieuTamVang as PHIEUKHAIBAOTAMVANG;
 
-            if (target == null)
-                return "Không tìm thấy phiếu tạm vắng tương ứng với id: " + id.ToString();
-
-            if(DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.MaGiayTamVang == id).ToList().Count > 0)
-            {
-                return "Phiếu này đã được sủ dụng để đăng ký tạm trú, không thể xóa";
-            }
+            target = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Find(target.MaPhieuKhaiBao);
 
             if (target != null)
                 DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Remove(target);
+
+            DataProvider.Ins.DB.SaveChanges();
 
             return null;
         }

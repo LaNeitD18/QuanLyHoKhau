@@ -22,7 +22,8 @@
             <viewmodel:QuanLyNhanKhau_VM x:Key="QuanLyNhanKhauVM"></viewmodel:QuanLyNhanKhau_VM>
             <viewmodel:QuanLyTamTru_VM x:Key="QuanLyTamTruVM"></viewmodel:QuanLyTamTru_VM>
             <viewmodel:QuanLyTamVang_VM x:Key="QuanLyTamVangVM"></viewmodel:QuanLyTamVang_VM>
-
+            <viewmodel:ChinhSuaTamVang_VM x:Key="ChinhSuaTamVangVM"></viewmodel:ChinhSuaTamVang_VM>
+            
             <SolidColorBrush x:Key="MidNight" Color="#1c2938"/>
             <SolidColorBrush x:Key="Bunting" Color="#263246"/>
             <SolidColorBrush x:Key="DarkGrayishBlue" Color="#3D435A"/>

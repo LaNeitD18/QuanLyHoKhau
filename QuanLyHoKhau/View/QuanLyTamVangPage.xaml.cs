@@ -35,5 +35,34 @@ namespace QuanLyHoKhau.View
                 e.Handled = true;
             }
         }
+
+        private void btnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            QuanLyTamVang_VM vm = DataContext as QuanLyTamVang_VM;
+
+            ChinhSuaGiayTamVang chinhSuaWindow = new ChinhSuaGiayTamVang();
+            ChinhSuaTamVang_VM chinhSuaVM = chinhSuaWindow.DataContext as ChinhSuaTamVang_VM;
+
+            chinhSuaVM.InitMaPhieu((sender as Button).DataContext);
+
+            chinhSuaWindow.ShowDialog();
+
+            vm.FilterListPhieuTamVang();
+
+            e.Handled = true;
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            QuanLyTamVang_VM vm = DataContext as QuanLyTamVang_VM;
+
+            if(MessageBox.Show("Bạn có chắc muốn xóa Phiếu Tạm Vắng này không?", "Question?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                vm.DeletePhieuTamVang((sender as Button).DataContext);
+                vm.FilterListPhieuTamVang();
+            }
+
+            e.Handled = true;
+        }
     }
 }
