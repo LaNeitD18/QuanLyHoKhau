@@ -31,17 +31,18 @@ namespace QuanLyHoKhau.ViewModel
         {
             isAddingMode = soHoKhau == null;
 
-            ResultSoHoKhau = new SOHOKHAU(soHoKhau);
+            Reset();
             LoadInfo(soHoKhau);
         }
 
         public void LoadInfo(SOHOKHAU soHoKhau)
         {
-            Reset();
+            ResultSoHoKhau = new SOHOKHAU(soHoKhau);
 
             if(soHoKhau != null)
             {
                 MaSoHoKhau = soHoKhau.MaSHK;
+                MaCongAn = soHoKhau.MaCongAn;
                 SelectedSoLuuNhanKhau = soHoKhau.SOLUUNHANKHAU;
                 DiaChi = soHoKhau.DiaChi;
             }
@@ -337,17 +338,6 @@ namespace QuanLyHoKhau.ViewModel
             if (shkInDb != null)
             {
                 SoCmndChuHo = shkInDb.CMNDChuHo;
-
-                // if ChuHo changes their SoHoKhau
-                NHANKHAU chuHoInDb = DataProvider.Ins.DB.NHANKHAUs.Find(SoCmndChuHo);
-                if (chuHoInDb != null)
-                {
-                    if (chuHoInDb.MASHK != MaSoHoKhau)
-                    {
-                        SoCmndChuHo = null;
-                        shkInDb.CMNDChuHo = null;
-                    }
-                }
             }
         }
         #endregion

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using QuanLyHoKhau.Model;
+using QuanLyHoKhau.Utilities;
 
 namespace QuanLyHoKhau.ViewModel
 {
@@ -31,14 +32,14 @@ namespace QuanLyHoKhau.ViewModel
             isAddingMode = (nguoi == null) || (nhanKhau == null);
             IsCmndReadOnly = !isAddingMode;
 
-            ResultNguoi = new NGUOI(nguoi);
-            ResultNhanKhau = new NHANKHAU(nhanKhau);
+            Reset();
             LoadInfo(nguoi, nhanKhau);
         }
 
         private void LoadInfo(NGUOI nguoi, NHANKHAU nhanKhau)
         {
-            Reset();
+            ResultNguoi = new NGUOI(nguoi);
+            ResultNhanKhau = new NHANKHAU(nhanKhau);
 
             if(nguoi != null)
             {
@@ -421,6 +422,7 @@ namespace QuanLyHoKhau.ViewModel
 
             // Update ChuHo of SHK:
             UpdateChuHoOfShk();
+            Utils.AdjustChuHoInSoHoKhaus();
 
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
