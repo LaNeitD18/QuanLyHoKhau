@@ -101,7 +101,16 @@
                             <DataGridTextColumn Header="Giới tính" Binding="{Binding NGUOI.GioiTinh}"/>
                             <DataGridTextColumn Header="Quê quán" Binding="{Binding NGUOI.QueQuan}"/>
                             <DataGridTextColumn Header="Quan hệ với chủ hộ" Binding="{Binding QuanHeVoiChuHo}"/>
+
+                            <DataGridTemplateColumn>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5" Click="btnEditNhanKhau_Click"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                         </DataGrid.Columns>
+
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction 

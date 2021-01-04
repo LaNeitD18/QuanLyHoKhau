@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using QuanLyHoKhau.Model;
 using QuanLyHoKhau.Utilities;
+using QuanLyHoKhau.View;
 
 namespace QuanLyHoKhau.ViewModel
 {
@@ -321,10 +322,32 @@ namespace QuanLyHoKhau.ViewModel
             ListSOLUUNHANKHAU = LoadSLNK();
             ListNHANKHAUinSHK = LoadNhanKhauInSHK();
         }
+
+        void HandleOnDbUpdated(Object sender, EventArgs args)
+        {
+            Refresh();
+        }
         #endregion
 
         #region Events
         public EventHandler OnDatabaseUpdated = null;
+        #endregion
+
+        #region Edit NHANKHAU
+        public void EditNhanKhau(Object item)
+        {
+            NHANKHAU nk = item as NHANKHAU;
+            if (nk == null)
+                return;
+
+            NhapNhanKhauWindow nhapNhanKhauWindow = new NhapNhanKhauWindow();
+            nhapNhanKhauWindow.DataContext = new NhapNhanKhau_VM(nk.NGUOI, nk);
+            (nhapNhanKhauWindow.DataContext as NhapNhanKhau_VM).OnDatabaseUpdated = new EventHandler(HandleOnDbUpdated);
+            nhapNhanKhauWindow.ShowDialog();
+
+            DataProvider.Ins.DB.SaveChanges();
+            Refresh();
+        }
         #endregion
     }
 }
