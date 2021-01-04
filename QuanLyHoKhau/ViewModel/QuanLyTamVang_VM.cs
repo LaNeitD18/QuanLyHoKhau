@@ -155,7 +155,7 @@ namespace QuanLyHoKhau.ViewModel
         }
 
         /// <summary>
-        /// Remove PhieuTamVang with primary key
+        /// Remove PhieuTamVang with PhieuTamVang
         /// If remove success, function return null. Otherwise, it return string with error description
         /// </summary>
         /// <param name="id"></param>
@@ -165,6 +165,11 @@ namespace QuanLyHoKhau.ViewModel
             var target = PhieuTamVang as PHIEUKHAIBAOTAMVANG;
 
             target = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Find(target.MaPhieuKhaiBao);
+
+            if(DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.MaGiayTamVang == target.MaPhieuKhaiBao).ToList().Count > 0)
+            {
+                return "Giấy tạm vắng này đã được sử dụng để đăng ký tạm trú, không thể xóa.";
+            }
 
             if (target != null)
                 DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Remove(target);
