@@ -16,7 +16,7 @@ namespace QuanLyHoKhau.Model
     public partial class QLHKEntities : DbContext
     {
         public QLHKEntities()
-            : base("name=QLHKEntities1")
+            : base("name=QLHKEntities")
         {
         }
     
