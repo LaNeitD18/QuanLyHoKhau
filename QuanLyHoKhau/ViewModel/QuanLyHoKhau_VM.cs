@@ -112,10 +112,6 @@ namespace QuanLyHoKhau.ViewModel
         }
         #endregion
 
-        #region Button Add SoHoKhau
-        public ICommand BtnAddSoHoKhau_Command { get; set; }
-        #endregion
-
         #region Button Delete So Ho Khau
         public void DeleteSohoKhau(Object item)
         {
