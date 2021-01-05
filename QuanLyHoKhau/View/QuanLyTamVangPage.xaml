@@ -159,14 +159,14 @@
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5"/>
+                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5" Click="btnEdit_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5"/>
+                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5" Click="btnDelete_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

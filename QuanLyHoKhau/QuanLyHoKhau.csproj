@@ -163,6 +163,8 @@
     <Compile Include="Utilities\Utils.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ChuyenKhau_VM.cs" />
+    <Compile Include="ViewModel\ChinhSuaTamTru_VM.cs" />
+    <Compile Include="ViewModel\ChinhSuaTamVang_VM.cs" />
     <Compile Include="ViewModel\GlobalState.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -178,6 +180,12 @@
     <Compile Include="ViewModel\TrangChu_VM.cs" />
     <Compile Include="View\ChuyenKhauWindow.xaml.cs">
       <DependentUpon>ChuyenKhauWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChinhSuaGiayTamTru.xaml.cs">
+      <DependentUpon>ChinhSuaGiayTamTru.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ChinhSuaGiayTamVang.xaml.cs">
+      <DependentUpon>ChinhSuaGiayTamVang.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -230,6 +238,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="View\ChuyenKhauWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChinhSuaGiayTamTru.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ChinhSuaGiayTamVang.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -316,6 +332,8 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\phone.png" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="Model\QLHKEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QLHKEntities.edmx</DependentUpon>

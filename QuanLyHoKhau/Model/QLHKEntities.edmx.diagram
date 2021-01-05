@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="5c55121b15a444e2a9eb073d2665bc07" Name="Diagram1">
+      <Diagram DiagramId="3fb0184cb4a84e248694ac7e2d7958d9" Name="Diagram1">
         <EntityTypeShape EntityType="QLHKModel.CHITIET_PHANQUYEN" Width="1.5" PointX="6" PointY="6.5" IsExpanded="true" />
         <EntityTypeShape EntityType="QLHKModel.CONGAN" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
         <EntityTypeShape EntityType="QLHKModel.DIAPHUONG" Width="1.5" PointX="0.75" PointY="14.5" IsExpanded="true" />
@@ -23,35 +23,35 @@
         <EntityTypeShape EntityType="QLHKModel.SOLUUTAMTRU" Width="1.5" PointX="3" PointY="19.125" IsExpanded="true" />
         <EntityTypeShape EntityType="QLHKModel.SOLUUTAMVANG" Width="1.5" PointX="3" PointY="21.625" IsExpanded="true" />
         <EntityTypeShape EntityType="QLHKModel.THAMSO" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="QLHKModel.FK__CHITIET_P__MaLoa__300424B4" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__CHITIET_P__MaQuy__30F848ED" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__CONGAN__CMND__29572725" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__CONGAN__MaDiaPhu__2B3F6F97" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__CONGAN__MaLoaiCo__2A4B4B5E" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaCon__5441852A" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAI__MaCon__4CA06362" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAY__MaCon__5CD6CB2B" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaCong__36B12243" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaCon__3B75D760" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__SOLUUNHAN__DiaPh__33D4B598" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__SOLUUTAMT__DiaPh__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__SOLUUTAMV__DiaPh__48CFD27E" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaGia__5629CD9C" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaSoL__534D60F1" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTRU__CMND__5535A963" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__NHANKHAU__CMND__3F466844" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__NHANKHAUCH__CMND__44FF419A" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__NHANKHAU__MASHK__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAIB__CMND__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAYD__CMND__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__CMNDCh__412EB0B6" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__CMNDC__4222D4EF" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__NHANKHAUC__MASHK__45F365D3" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAI__MaSoL__4BAC3F29" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAY__MaSoL__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaSoLu__37A5467C" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaSHK__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaSoL__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__CHITIET_P__MaLoa__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__CHITIET_P__MaQuy__31EC6D26" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__CONGAN__CMND__2A4B4B5E" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__CONGAN__MaDiaPhu__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__CONGAN__MaLoaiCo__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaCon__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAI__MaCon__4D94879B" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAY__MaCon__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaCong__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaCon__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__SOLUUNHAN__DiaPh__34C8D9D1" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__SOLUUTAMT__DiaPh__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__SOLUUTAMV__DiaPh__49C3F6B7" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaGia__571DF1D5" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTR__MaSoL__5441852A" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__GIAYTAMTRU__CMND__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__NHANKHAU__CMND__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__NHANKHAUCH__CMND__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__NHANKHAU__MASHK__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAIB__CMND__4E88ABD4" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAYD__CMND__5BE2A6F2" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__CMNDCh__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__CMNDC__4316F928" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__NHANKHAUC__MASHK__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUKHAI__MaSoL__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__PHIEUTHAY__MaSoL__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAU__MaSoLu__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaSHK__3B75D760" ManuallyRouted="false" />
+        <AssociationConnector Association="QLHKModel.FK__SOHOKHAUC__MaSoL__3D5E1FD2" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

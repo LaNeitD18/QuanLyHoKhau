@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace QuanLyHoKhau.ViewModel
 {
-    class NhapGiayTamTru_VM
+    class NhapGiayTamTru_VM: BaseViewModel
     {
         #region UI
 
@@ -159,9 +159,12 @@ namespace QuanLyHoKhau.ViewModel
 
             string DiaPhuong = DataProvider.Ins.DB.CONGANs.Find(GlobalState.Ins().maCongAn).MaDiaPhuong;
 
+            string pre_id = this.maNhanKhau + this.startDate.Day.ToString().PadLeft(2, '0') + this.startDate.Month.ToString().PadLeft(2, '0') + this.startDate.Year.ToString();
+            string pos_id = DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.MaGiayTamTru.Contains(pre_id)).ToList().Count.ToString().PadLeft(2, '0');
+
             GIAYTAMTRU phieu = new GIAYTAMTRU();
 
-            phieu.MaGiayTamTru = this.maNhanKhau + "-" + this.startDate.Day.ToString() + "/" + this.startDate.Month.ToString() + "/" + this.startDate.Year.ToString();
+            phieu.MaGiayTamTru = pre_id + pos_id;
             phieu.MaSoLuuTamTru = DataProvider.Ins.DB.SOLUUTAMVANGs.Where(x => x.DiaPhuong == DiaPhuong).Single().MaSoLuuTamVang;
             phieu.MaCongAn = GlobalState.Ins().maCongAn;
             phieu.CMND = this.maNhanKhau;
@@ -189,10 +192,20 @@ namespace QuanLyHoKhau.ViewModel
                 return false;
             }
 
+            ResetAllField();
             return true;
         }
         public void Cancel()
         {
+
+        }
+
+        public void ResetAllField()
+        {
+            this.maNhanKhau = null;
+            this.maPhieuTamVang = null;
+            this.noiDKTamTru = null;
+            this.startDate = this.endDate = DateTime.Now;
 
         }
 

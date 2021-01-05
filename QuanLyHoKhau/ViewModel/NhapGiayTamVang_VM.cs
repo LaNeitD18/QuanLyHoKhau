@@ -126,9 +126,12 @@ namespace QuanLyHoKhau.ViewModel
 
             string DiaPhuong = DataProvider.Ins.DB.CONGANs.Find(GlobalState.Ins().maCongAn).MaDiaPhuong;
 
+            string pre_id = this.maNhanKhau + this.startDate.Day.ToString().PadLeft(2, '0') + this.startDate.Month.ToString().PadLeft(2, '0') + this.startDate.Year.ToString();
+            string pos_id = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.MaPhieuKhaiBao.Contains(pre_id)).ToList().Count.ToString().PadLeft(2, '0');
+
             PHIEUKHAIBAOTAMVANG phieu = new PHIEUKHAIBAOTAMVANG();
 
-            phieu.MaPhieuKhaiBao = this.maNhanKhau + "-" + this.startDate.Day.ToString() + "/" + this.startDate.Month.ToString() + "/" + this.startDate.Year.ToString();
+            phieu.MaPhieuKhaiBao = pre_id + pos_id;
             phieu.MaSoLuuTamVang = DataProvider.Ins.DB.SOLUUTAMVANGs.Where(x => x.DiaPhuong == DiaPhuong).Single().MaSoLuuTamVang;
             phieu.MaCongAn = GlobalState.Ins().maCongAn;
             phieu.CMND = this.maNhanKhau;
@@ -146,11 +149,19 @@ namespace QuanLyHoKhau.ViewModel
             {
                 return false;
             }
+            ResetAllField();
             return true;
         }
         public void Cancel()
         {
 
+        }
+
+        public void ResetAllField()
+        {
+            this.maNhanKhau = null;
+            this.reason = null;
+            this.startDate = this.endDate = DateTime.Now;
         }
 
         #endregion
