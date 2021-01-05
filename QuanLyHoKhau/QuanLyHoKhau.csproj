@@ -162,6 +162,7 @@
     </Compile>
     <Compile Include="Utilities\Utils.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\ChuyenKhau_VM.cs" />
     <Compile Include="ViewModel\GlobalState.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -175,6 +176,9 @@
     <Compile Include="ViewModel\QuanLyTamTru_VM.cs" />
     <Compile Include="ViewModel\QuanLyTamVang_VM.cs" />
     <Compile Include="ViewModel\TrangChu_VM.cs" />
+    <Compile Include="View\ChuyenKhauWindow.xaml.cs">
+      <DependentUpon>ChuyenKhauWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -225,6 +229,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ChuyenKhauWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -307,6 +315,7 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\phone.png" />
     <Content Include="Model\QLHKEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QLHKEntities.edmx</DependentUpon>

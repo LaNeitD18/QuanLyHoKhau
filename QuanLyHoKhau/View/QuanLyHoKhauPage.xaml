@@ -74,6 +74,8 @@
                 VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Border 
@@ -102,7 +104,7 @@
                     </Grid>
                 </Border>
                 <Button 
-                    Grid.Column="1"
+                    Grid.Column="2"
                     Margin="25, 0, 0, 0"
                     BorderThickness="0"
                     Background="Teal"
@@ -128,6 +130,27 @@
                                 Fill="White"
                                 HorizontalAlignment="Center"/>
                             <TextBlock Grid.Column="1" Text="Thêm" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Grid>
+                    </Button.Content>
+                </Button>
+                <Button 
+                    Grid.Column="3"
+                    Margin="25, 0, 0, 0"
+                    BorderThickness="0"
+                    Background="Teal"
+                    Foreground="White"
+                    Height="50"
+                    Command="{Binding BtnChuyenKhau_Command}"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Content>
+                        <Grid>
+                            <TextBlock Grid.Column="1" Text="Thực hiện chuyển khẩu" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
                         </Grid>
                     </Button.Content>
                 </Button>

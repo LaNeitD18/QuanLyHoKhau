@@ -209,28 +209,29 @@
             </DockPanel>-->
             <StackPanel Margin="0,10">
                 <RadioButton
+                    Grid.ColumnSpan="2"
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"
-                    Tag="{StaticResource home}"
+                    Tag="{StaticResource homePage}"
                     Content="Trang chủ"
                     Command="{Binding TrangChu_SelectedCommand}"
                     IsChecked="True"/>
                 <RadioButton
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"
-                    Tag="{StaticResource home}"
+                    Tag="{StaticResource hoKhau}"
                     Content="Quản lý hộ khẩu"
                     Command="{Binding QLHoKhau_Page_SelectedCommand}"/>
                 <RadioButton
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"
-                    Tag="{StaticResource home}"
+                    Tag="{StaticResource tamVang}"
                     Content="Quản lý tạm vắng"
                     Command="{Binding QLGiayTamVang_Page_SelectedCommand}"/>
                 <RadioButton
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"
-                    Tag="{StaticResource home}"
+                    Tag="{StaticResource tamTru}"
                     Content="Quản lý tạm trú"
                     Command="{Binding QLGiayTamTru_Page_SelectedCommand}"/>
             </StackPanel>
@@ -238,7 +239,7 @@
         <Grid Grid.Row="15" Grid.RowSpan="2" Grid.ColumnSpan="5" Background="WhiteSmoke">
             <Button 
                 Grid.Column="1"
-                Margin="20,10"
+                Margin="30,10"
                 BorderThickness="0"
                 Background="Teal"
                 Foreground="White"
