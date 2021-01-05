@@ -10,7 +10,12 @@ namespace QuanLyHoKhau.Model
     {
         public SOHOKHAU(SOHOKHAU shk)
         {
-            if(shk == null)
+            CopyInfo(shk);
+        }
+
+        public void CopyInfo(SOHOKHAU shk)
+        {
+            if (shk == null)
             {
                 MaSHK = "";
                 CMNDChuHo = null;
@@ -21,7 +26,7 @@ namespace QuanLyHoKhau.Model
                 IsDeleted = false;
             }
             else
-            { 
+            {
                 this.MaSHK = shk.MaSHK;
                 this.CMNDChuHo = shk.CMNDChuHo;
                 this.MaCongAn = shk.MaCongAn;

@@ -28,6 +28,7 @@ namespace QuanLyHoKhau.Model
         public string MASHK { get; set; }
         public string QuanHeVoiChuHo { get; set; }
         public string ChoOHienNay { get; set; }
+        public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<GIAYTAMTRU> GIAYTAMTRUs { get; set; }

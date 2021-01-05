@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Windows.Input;
 using QuanLyHoKhau.Model;
 using QuanLyHoKhau.Utilities;
+using QuanLyHoKhau.View;
 
 namespace QuanLyHoKhau.ViewModel
 {
@@ -15,18 +16,36 @@ namespace QuanLyHoKhau.ViewModel
     {
         // CuteTN Note: the goal is to make this class immutable from the outside :)
 
-        const int SOHOKHAU_ID_LENGTH = 8;
+        const int SOHOKHAU_ID_LENGTH = 5;
         const string SOHOKHAU_ID_PREFIX = "SHK";
 
         #region Init
+        bool isAddingMode = true;
+
         public NhapHoKhau_VM() : this(null)
         {
+
         }
 
         public NhapHoKhau_VM(SOHOKHAU soHoKhau)
         {
+            isAddingMode = soHoKhau == null;
+
             Reset();
+            LoadInfo(soHoKhau);
+        }
+
+        public void LoadInfo(SOHOKHAU soHoKhau)
+        {
             ResultSoHoKhau = new SOHOKHAU(soHoKhau);
+
+            if(soHoKhau != null)
+            {
+                MaSoHoKhau = soHoKhau.MaSHK;
+                MaCongAn = soHoKhau.MaCongAn;
+                SelectedSoLuuNhanKhau = soHoKhau.SOLUUNHANKHAU;
+                DiaChi = soHoKhau.DiaChi;
+            }
         }
         #endregion
 
@@ -55,24 +74,14 @@ namespace QuanLyHoKhau.ViewModel
         public string MaSoHoKhau
         {
             get => ResultSoHoKhau.MaSHK;
-            set { ResultSoHoKhau.MaSHK = value; OnPropertyChanged(); }
-        }
-
-        public NHANKHAU SelectedChuHo
-        {
-            get => ResultSoHoKhau.NHANKHAU;
-            set
-            {
-                ResultSoHoKhau.NHANKHAU = value;
-
-                if (value != null)
-                    ResultSoHoKhau.CMNDChuHo = value.CMND;
-                else
-                    ResultSoHoKhau.CMNDChuHo = null;
-
-                OnPropertyChanged();
+            set 
+            { 
+                ResultSoHoKhau.MaSHK = value; 
+                ListNHANKHAUinSHK = LoadNhanKhauInSHK();
+                OnPropertyChanged(); 
             }
         }
+
 
         public SOLUUNHANKHAU SelectedSoLuuNhanKhau
         {
@@ -127,25 +136,40 @@ namespace QuanLyHoKhau.ViewModel
         }
         #endregion
 
-        #region ListNHANKHAU
-        private BindingList<NHANKHAU> LoadNhanKhau()
+        #region ListNHANKHAUinSHK
+        private BindingList<NHANKHAU> LoadNhanKhauInSHK()
         {
-            BindingList<NHANKHAU> result = new BindingList<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.ToList());
+            SOHOKHAU shk = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+
+            if(shk == null || shk.IsDeleted)
+                return new BindingList<NHANKHAU>();
+
+            //BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
+            //    (
+            //        DataProvider.Ins.DB.NHANKHAUs.Where(nk =>
+            //            (!nk.IsDeleted) && (nk.MASHK == MaSoHoKhau)
+            //        ).ToList()
+            //    );
+            BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
+                (
+                    shk.NHANKHAUs.Where(nk => !nk.IsDeleted).ToList()
+                );
+
             return result;
         }
 
-        private BindingList<NHANKHAU> _listNHANKHAU = null;
-        public BindingList<NHANKHAU> ListNHANKHAU
+        private BindingList<NHANKHAU> _listNHANKHAUinSHK = null;
+        public BindingList<NHANKHAU> ListNHANKHAUinSHK
         {
             get
             {
-                if (_listNHANKHAU == null)
-                    _listNHANKHAU = LoadNhanKhau();
-                return _listNHANKHAU;
+                if (_listNHANKHAUinSHK == null)
+                    _listNHANKHAUinSHK = LoadNhanKhauInSHK();
+                return _listNHANKHAUinSHK;
             }
             set
             {
-                _listNHANKHAU = value;
+                _listNHANKHAUinSHK = value;
                 OnPropertyChanged();
             }
         }
@@ -165,10 +189,8 @@ namespace QuanLyHoKhau.ViewModel
 
             if(ValidateResult(out error))
             { 
-                if(string.IsNullOrEmpty(MaSoHoKhau))
-                    AddNewSoHoKhauToDB();
-
-                Reset();
+                UpsertResult();
+                (obj as System.Windows.Window)?.Close();
             }
             else
             {
@@ -187,7 +209,7 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleCancelButton(Object obj)
         {
-            Reset();
+            (obj as System.Windows.Window)?.Close();
         }
         #endregion
 
@@ -219,6 +241,17 @@ namespace QuanLyHoKhau.ViewModel
 
         private bool ValidateResult(out string errors)
         {
+            if(!string.IsNullOrEmpty(MaSoHoKhau))
+            {
+                var cntFiltered = DataProvider.Ins.DB.SOHOKHAUs.Where(shk => ((!shk.IsDeleted) && (MaSoHoKhau == shk.MaSHK))).Count();
+
+                if(cntFiltered != 0 && isAddingMode)
+                { 
+                    errors = $"Mã sổ hộ khẩu {MaSoHoKhau} đã tồn tại trong hệ thống";
+                    return false;
+                }
+            }
+
             if(!string.IsNullOrEmpty(MaCongAn))
                 if(DataProvider.Ins.DB.CONGANs.Find(MaCongAn) == null)
                 {
@@ -228,7 +261,7 @@ namespace QuanLyHoKhau.ViewModel
 
             if(!string.IsNullOrEmpty(SoCmndChuHo))
             {
-                var filteredNguoi = DataProvider.Ins.DB.NGUOIs.Where(nguoi => (nguoi.CMND == SoCmndChuHo));
+                var filteredNguoi = DataProvider.Ins.DB.NGUOIs.Where(nguoi => (nguoi.CMND == SoCmndChuHo) && (!nguoi.IsDeleted));
 
                 // check if there is a person has this cmnd
                 if (filteredNguoi.Count() == 0)
@@ -239,9 +272,9 @@ namespace QuanLyHoKhau.ViewModel
 
                 // check if this person is actually a NHANKHAU
                 var nguoiDo = filteredNguoi.First();
-                var filteredNhanKhau = DataProvider.Ins.DB.NHANKHAUs.Where(nhankhau => (nhankhau.CMND == nguoiDo.CMND));
+                var filteredNhanKhau = DataProvider.Ins.DB.NHANKHAUs.Where(nhankhau => (nhankhau.CMND == nguoiDo.CMND) && (!nhankhau.IsDeleted));
 
-                if(filteredNguoi.Count() == 0)
+                if(filteredNhanKhau.Count() == 0)
                 {
                     errors = $"Công dân với số CMND {SoCmndChuHo} không phải là nhân khẩu";
                     return false;
@@ -254,13 +287,24 @@ namespace QuanLyHoKhau.ViewModel
         #endregion
 
         #region database
-        private void AddNewSoHoKhauToDB()
+        private void UpsertResult()
         {
             AdjustResult();
-            MaSoHoKhau = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, SOHOKHAU_ID_PREFIX, SOHOKHAU_ID_LENGTH);
-            TestPrintResult();
-            DataProvider.Ins.DB.SOHOKHAUs.Add(ResultSoHoKhau);
+
+            SOHOKHAU targetSHK = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+
+            if(targetSHK == null)
+            { 
+                MaSoHoKhau = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, SOHOKHAU_ID_PREFIX, SOHOKHAU_ID_LENGTH);
+                DataProvider.Ins.DB.SOHOKHAUs.Add(ResultSoHoKhau);
+            }
+            else
+            {
+                targetSHK.CopyInfo(ResultSoHoKhau);
+            }
+
             DataProvider.Ins.DB.SaveChanges();
+            OnDatabaseUpdated?.Invoke(this, null);
         }
         #endregion
 
@@ -270,15 +314,52 @@ namespace QuanLyHoKhau.ViewModel
             ResultSoHoKhau = null;
             MaSoHoKhau = null;
             SelectedSoLuuNhanKhau = null;
-            SelectedChuHo = null;
             DiaChi = "";
             Refresh();
         }
 
-        private void Refresh()
+        public void Refresh()
         {
             ListSOLUUNHANKHAU = LoadSLNK();
-            ListNHANKHAU = LoadNhanKhau();
+            ListNHANKHAUinSHK = LoadNhanKhauInSHK();
+        }
+
+        void HandleOnDbUpdated(Object sender, EventArgs args)
+        {
+            Refresh();
+            UpdateCmndOnNhanKhauUpdate();
+            OnDatabaseUpdated?.Invoke(this, null);
+        }
+
+        void UpdateCmndOnNhanKhauUpdate()
+        {
+            // Update CMNDChuHo after editting NHANKHAU
+            SOHOKHAU shkInDb = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+            if (shkInDb != null)
+            {
+                SoCmndChuHo = shkInDb.CMNDChuHo;
+            }
+        }
+        #endregion
+
+        #region Events
+        public EventHandler OnDatabaseUpdated = null;
+        #endregion
+
+        #region Edit NHANKHAU
+        public void EditNhanKhau(Object item)
+        {
+            NHANKHAU nk = item as NHANKHAU;
+            if (nk == null)
+                return;
+
+            NhapNhanKhauWindow nhapNhanKhauWindow = new NhapNhanKhauWindow();
+            nhapNhanKhauWindow.DataContext = new NhapNhanKhau_VM(nk.NGUOI, nk);
+            (nhapNhanKhauWindow.DataContext as NhapNhanKhau_VM).OnDatabaseUpdated = new EventHandler(HandleOnDbUpdated);
+            nhapNhanKhauWindow.ShowDialog();
+
+            DataProvider.Ins.DB.SaveChanges();
+            Refresh();
         }
         #endregion
     }

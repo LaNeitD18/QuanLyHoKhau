@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using QuanLyHoKhau.ViewModel;
 
 namespace QuanLyHoKhau.View
 {
@@ -23,6 +24,32 @@ namespace QuanLyHoKhau.View
         public QuanLyNhanKhauPage()
         {
             InitializeComponent();
+        }
+
+        private void btnDeleteNhanKhau_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Object shkItem = (e.Source as Button).DataContext;
+                (DataContext as QuanLyNhanKhau_VM)?.DeleteNhanKhau(shkItem);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
+        }
+
+        private void btnEditNhanKhau_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Object shkItem = (e.Source as Button).DataContext;
+                (DataContext as QuanLyNhanKhau_VM)?.EditNhanKhau(shkItem);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

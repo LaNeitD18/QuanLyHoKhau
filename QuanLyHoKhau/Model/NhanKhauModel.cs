@@ -10,6 +10,11 @@ namespace QuanLyHoKhau.Model
     {
         public NHANKHAU(NHANKHAU nhanKhau)
         {
+            CopyInfo(nhanKhau);
+        }
+
+        public void CopyInfo(NHANKHAU nhanKhau)
+        {
             if (nhanKhau == null)
             {
                 CMND = null;
@@ -25,5 +30,6 @@ namespace QuanLyHoKhau.Model
                 ChoOHienNay = nhanKhau.ChoOHienNay;
             }
         }
+
     }
 }

@@ -7,21 +7,60 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using QuanLyHoKhau.Model;
+using QuanLyHoKhau.Utilities;
 
 namespace QuanLyHoKhau.ViewModel
 {
     class NhapNhanKhau_VM : BaseViewModel
     {
         #region Init
+        bool isAddingMode = true;
+
+        private bool _isCmndReadOnly = false;
+        public bool IsCmndReadOnly
+        {
+            get => _isCmndReadOnly;
+            set { _isCmndReadOnly = value; OnPropertyChanged(); }
+        }
+
         public NhapNhanKhau_VM() : this(null, null)
         {
         }
 
         public NhapNhanKhau_VM(NGUOI nguoi, NHANKHAU nhanKhau)
         {
+            isAddingMode = (nguoi == null) || (nhanKhau == null);
+            IsCmndReadOnly = !isAddingMode;
+
             Reset();
+            LoadInfo(nguoi, nhanKhau);
+        }
+
+        private void LoadInfo(NGUOI nguoi, NHANKHAU nhanKhau)
+        {
             ResultNguoi = new NGUOI(nguoi);
             ResultNhanKhau = new NHANKHAU(nhanKhau);
+
+            if(nguoi != null)
+            {
+                CMND = nguoi.CMND;
+                HoTen = nguoi.Ten;
+                NgaySinh = nguoi.NgaySinh;
+                GioiTinh = nguoi.GioiTinh;
+                NoiSinh = nguoi.NoiSinh;
+                QueQuan = nguoi.QueQuan;
+                DanToc = nguoi.DanToc;
+                TonGiao = nguoi.TonGiao;
+                NgheNghiep = nguoi.NgheNghiep;
+            }
+
+            if(nhanKhau != null)
+            {
+                SelectedSoHoKhau = nhanKhau.SOHOKHAU;
+                QuanHeVoiChuHo = nhanKhau.QuanHeVoiChuHo;
+                IsChuHo = QuanHeVoiChuHo == "Chủ hộ";
+                ChoOHienNay = nhanKhau.ChoOHienNay;
+            }
         }
         #endregion
 
@@ -108,11 +147,32 @@ namespace QuanLyHoKhau.ViewModel
             set { ResultNguoi.NgheNghiep = value; OnPropertyChanged(); }
         }
 
-        private bool _enableNhapHoKhau = false;
-        public bool EnableNhapHoKhau
+        private bool _isChuHo = false;
+        public bool IsChuHo
         {
-            get => _enableNhapHoKhau;
-            set { _enableNhapHoKhau = value; OnPropertyChanged(); }
+            get => _isChuHo;
+            set 
+            {
+                if(value == _isChuHo)
+                    return;
+
+                if(value)
+                    QuanHeVoiChuHo = "Chủ hộ";
+                else
+                    QuanHeVoiChuHo = "";
+
+                _isChuHo = value;
+                IsNotChuHo = !value;
+
+                OnPropertyChanged(); 
+            }
+        }
+
+        // cant set this property :)
+        public bool IsNotChuHo
+        {
+            get => !_isChuHo;
+            set { /* cant set this */ OnPropertyChanged(); }
         }
 
         private SOHOKHAU _selectedSoHoKhau = null;
@@ -166,7 +226,7 @@ namespace QuanLyHoKhau.ViewModel
         #region ListSOHOKHAU
         private BindingList<SOHOKHAU> LoadSoHoKhau()
         {
-            BindingList<SOHOKHAU> result = new BindingList<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.ToList());
+            BindingList<SOHOKHAU> result = new BindingList<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.Where(shk => !shk.IsDeleted).ToList());
             return result;
         }
 
@@ -201,17 +261,8 @@ namespace QuanLyHoKhau.ViewModel
 
             if (ValidateResult(out error))
             {
-                if (! CheckCMNDExist(CMND))
-                { 
-                    AddNewNguoiToDB();
-
-                    if(EnableNhapHoKhau)
-                        AddNewNhanKhauToDB();
-
-                    TestPrintResult();
-                }
-
-                Reset();
+                UpsertResult();
+                (obj as System.Windows.Window)?.Close();
             }
             else
             {
@@ -230,7 +281,7 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleCancelButton(Object obj)
         {
-            Reset();
+            (obj as System.Windows.Window)?.Close();
         }
         #endregion
 
@@ -265,6 +316,9 @@ namespace QuanLyHoKhau.ViewModel
         #region Adjust and Validation
         private void AdjustResult()
         {
+            // CuteTN Note: but.. why???
+            // ResultNguoi.NHANKHAU = ResultNhanKhau;
+            ResultNhanKhau.NGUOI = ResultNguoi;
         }
 
         private bool ValidateResult(out string errors)
@@ -273,6 +327,16 @@ namespace QuanLyHoKhau.ViewModel
             {
                 errors = $"Vui lòng nhập số CMND";
                 return false;
+            }
+            else
+            {
+                var cntFiltered = DataProvider.Ins.DB.NGUOIs.Where(nguoi => ((!nguoi.IsDeleted) && (CMND == nguoi.CMND))).Count();
+
+                if (cntFiltered != 0 && isAddingMode)
+                {
+                    errors = $"Công dân với CMND {CMND} đã tồn tại trong hệ thống";
+                    return false;
+                }
             }
 
             if(string.IsNullOrEmpty(HoTen))
@@ -293,6 +357,35 @@ namespace QuanLyHoKhau.ViewModel
                 return false;
             }
 
+            if(SelectedSoHoKhau == null)
+            {
+                errors = $"Vui lòng chọn mã sổ hộ khẩu";
+                return false;
+            }
+
+            if(IsChuHo)
+            {
+                // if there's already CHUHO and they have not been deleted
+                if(! (string.IsNullOrEmpty(SelectedSoHoKhau.CMNDChuHo) || SelectedSoHoKhau.NHANKHAU.IsDeleted))
+                    if(SelectedSoHoKhau.CMNDChuHo != CMND)
+                    {
+                        errors = $"Sổ hộ khẩu {SelectedSoHoKhau.MaSHK} đã tồn tại chủ hộ. với CMND {SelectedSoHoKhau.CMNDChuHo}";
+                        return false;
+                    }
+            }
+
+            if(string.IsNullOrEmpty(QuanHeVoiChuHo))
+            {
+                errors = $"Vui lòng nhập quan hệ với chủ hộ";
+                return false;
+            }
+
+            if(string.IsNullOrEmpty(ChoOHienNay))
+            {
+                errors = $"Vui lòng nhập chỗ ở hiện nay";
+                return false;
+            }
+
             errors = "";
             return true;
         }
@@ -300,18 +393,50 @@ namespace QuanLyHoKhau.ViewModel
 
 
         #region database
-        private void AddNewNguoiToDB()
+        private void UpsertResult()
         {
             AdjustResult();
-            DataProvider.Ins.DB.NGUOIs.Add(ResultNguoi);
+
+            NGUOI targetNguoi = DataProvider.Ins.DB.NGUOIs.Find(CMND);
+            NHANKHAU targetNK = DataProvider.Ins.DB.NHANKHAUs.Find(CMND);
+
+            if (targetNguoi == null)
+            {
+                DataProvider.Ins.DB.NGUOIs.Add(ResultNguoi);
+            }
+            else
+            {
+                targetNguoi.CopyInfo(ResultNguoi);
+                targetNguoi.IsDeleted = false;
+            }
+
+            if (targetNK == null)
+            {
+                DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
+            }
+            else
+            {
+                targetNK.CopyInfo(ResultNhanKhau);
+                targetNK.IsDeleted = false;
+            }
+
+            // Update ChuHo of SHK:
+            UpdateChuHoOfShk();
+            Utils.AdjustChuHoInSoHoKhaus();
+
             DataProvider.Ins.DB.SaveChanges();
+            OnDatabaseUpdated?.Invoke(this, null);
         }
 
-        private void AddNewNhanKhauToDB()
+        private void UpdateChuHoOfShk()
         {
-            AdjustResult();
-            DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
-            DataProvider.Ins.DB.SaveChanges();
+            if(IsChuHo)
+                SelectedSoHoKhau.CMNDChuHo = CMND;
+            else
+            {
+                if(SelectedSoHoKhau.CMNDChuHo == CMND)
+                    SelectedSoHoKhau.CMNDChuHo = null;
+            }
         }
         #endregion
 
@@ -329,7 +454,6 @@ namespace QuanLyHoKhau.ViewModel
             TonGiao = "";
             NgheNghiep = "";
 
-            EnableNhapHoKhau = false;
             SelectedSoHoKhau = null;
             QuanHeVoiChuHo = "";
             ChoOHienNay = "";
@@ -337,7 +461,7 @@ namespace QuanLyHoKhau.ViewModel
             Refresh();
         }
 
-        private void Refresh()
+        public void Refresh()
         {
             ListSOHOKHAU = LoadSoHoKhau();
         }
@@ -346,6 +470,10 @@ namespace QuanLyHoKhau.ViewModel
         {
             return (DataProvider.Ins.DB.NGUOIs.Find(cmnd) != null);
         }
+        #endregion
+
+        #region Events
+        public EventHandler OnDatabaseUpdated = null;
         #endregion
     }
 }

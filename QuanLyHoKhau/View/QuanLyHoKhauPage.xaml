@@ -100,6 +100,7 @@
                             Padding="30,0"
                             TextAlignment="Left"
                             HorizontalAlignment="Stretch"
+                            Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
@@ -163,41 +164,34 @@
                         x:Name="listUsingExamDatagrid"
                         HorizontalAlignment="Stretch" 
                         VerticalAlignment="Top" 
-                        ItemsSource="{Binding ListSoHoKhau}"
+                        ItemsSource="{Binding ListFilteredSoHoKhau}"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         SelectionMode="Extended"
                         AutoGenerateColumns="False"
                         SelectedItem="{Binding SelectedUsingExam, Mode=TwoWay}"
                         SelectionUnit="FullRow" 
-                        CanUserAddRows="False">
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        CanUserResizeColumns="True"
+                        CanUserResizeRows="False"
+                        IsReadOnly="True"
+                        >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding StatusString}"/>
-                            <DataGridTextColumn Header="Phòng" Binding="{Binding RoomID}"/>
-                            <DataGridTextColumn Header="Lớp" Binding="{Binding EXAM.CLASS.ClassName}"/>
-                            <DataGridTextColumn Header="Giám thị" Binding="{Binding EXAM.LECTURER.LecturerName}"/>
-                            <DataGridTemplateColumn Header="Edit">
+                            <DataGridTextColumn Header="Mã sổ hộ khẩu" Binding="{Binding MaSHK}"/>
+                            <DataGridTextColumn Header="CMND chủ hộ" Binding="{Binding CMNDChuHo}"/>
+                            <DataGridTextColumn Header="Mã sổ lưu nhân khẩu" Binding="{Binding MaSoLuuNhanKhau}"/>
+                            <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DiaChi}"/>
+                            <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button
-                                            x:Name="btnEdit"
-                                            Width="75"
-                                            Height="Auto"
-                                            Margin="10"
-                                            Content="Edit" />   
+                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5" Click="btnEditSoHoKhau_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5"/>
-                                    </DataTemplate>
-                                </DataGridTemplateColumn.CellTemplate>
-                            </DataGridTemplateColumn>
-                            <DataGridTemplateColumn>
-                                <DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5"/>
+                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5" Click="btnDeleteSoHoKhau_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

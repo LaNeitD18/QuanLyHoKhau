@@ -35,6 +35,7 @@
                 Width="400"
                 MinWidth="100"
                 FontSize="18" 
+                IsReadOnly="{Binding IsCmndReadOnly}"
                 materialDesign:HintAssist.Hint="Số CMND" 
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
                 Text="{Binding CMND, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
@@ -121,22 +122,13 @@
                 Text="{Binding NgheNghiep, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
             </Grid>
             <Grid Grid.Row="9">
-                <CheckBox
-                    FontSize="18" Width="400" MinWidth="100"
-                    IsChecked="{Binding EnableNhapHoKhau}"
-                    >
-                    Nhập thông tin hộ khẩu
-                </CheckBox>
-            </Grid>
-            <Grid Grid.Row="10">
                 <ComboBox 
                 FontSize="18" Width="400" MinWidth="100"
                 materialDesign:HintAssist.Hint="Mã sổ hộ khẩu" 
                 VerticalAlignment="Center" 
                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                ItemsSource="{Binding ListSOHOKHAU}" 
+                ItemsSource="{Binding ListSOHOKHAU, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                 KeyboardNavigation.TabIndex="1" 
-                IsEnabled="{Binding EnableNhapHoKhau}"
                 SelectedItem="{Binding SelectedSoHoKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
                 >
                     <i:Interaction.Triggers>
@@ -153,22 +145,39 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </Grid>
+            <Grid Grid.Row="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0">
+                    <CheckBox
+                        Width="400"
+                        MinWidth="100"
+                        FontSize="18" 
+                        IsChecked="{Binding IsChuHo}"
+                    >
+                        <TextBlock>Là chủ hộ</TextBlock>
+                    </CheckBox>
+                </Grid>
+                <Grid Grid.Column="1" Grid.ColumnSpan="3">
+                    <TextBox 
+                        Width="400"
+                        MinWidth="100"
+                        FontSize="18" 
+                        materialDesign:HintAssist.Hint="Quan hệ với chủ hộ" 
+                        IsEnabled = "{Binding IsNotChuHo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
+                        Text="{Binding QuanHeVoiChuHo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                </Grid>
+            </Grid>
             <Grid Grid.Row="11">
                 <TextBox 
                 Width="400"
                 MinWidth="100"
                 FontSize="18" 
-                materialDesign:HintAssist.Hint="Quan hệ với chủ hộ" 
-                IsEnabled="{Binding EnableNhapHoKhau}"
-                Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                Text="{Binding QuanHeVoiChuHo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-            </Grid>
-            <Grid Grid.Row="12">
-                <TextBox 
-                Width="400"
-                MinWidth="100"
-                FontSize="18" 
-                IsEnabled="{Binding EnableNhapHoKhau}"
                 materialDesign:HintAssist.Hint="Chỗ ở hiện nay" 
                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
                 Text="{Binding ChoOHienNay, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Grid.ColumnSpan="2" Margin="97,2,96.6,2.2" />
@@ -184,7 +193,9 @@
                     Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
                     Width="150" Height="35"
                     IsEnabled="{Binding IsAddingEnabled}"
-                    Command="{Binding CmdConfirm}"/>
+                    Command="{Binding CmdConfirm}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+                    />
                 </Grid>
                 <Grid Grid.Column="1">
                     <Button 
@@ -192,7 +203,9 @@
                     Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
                     Width="150" Height="35"
                     IsEnabled="{Binding IsAddingEnabled}"
-                    Command="{Binding CmdCancel}"/>
+                    Command="{Binding CmdCancel}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                    />
                 </Grid>
             </Grid>
         </Grid>

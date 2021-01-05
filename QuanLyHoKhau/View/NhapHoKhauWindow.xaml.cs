@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using QuanLyHoKhau.ViewModel;
 
 namespace QuanLyHoKhau.View
 {
@@ -22,6 +23,19 @@ namespace QuanLyHoKhau.View
         public NhapHoKhauWindow()
         {
             InitializeComponent();
+        }
+
+        private void btnEditNhanKhau_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                Object shkItem = (e.Source as Button).DataContext;
+                (DataContext as NhapHoKhau_VM)?.EditNhanKhau(shkItem);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+            }
         }
     }
 }

@@ -98,6 +98,7 @@
                             Padding="30,0"
                             TextAlignment="Left"
                             HorizontalAlignment="Stretch"
+                            Text="{Binding SearchedText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             VerticalAlignment="Center"/>
                     </Grid>
                 </Border>
@@ -140,29 +141,36 @@
                         x:Name="listUsingExamDatagrid"
                         HorizontalAlignment="Stretch" 
                         VerticalAlignment="Top" 
-                        ItemsSource="{Binding ListSoHoKhau}"
+                        ItemsSource="{Binding ListFilteredNhanKhau}"
                         ScrollViewer.VerticalScrollBarVisibility="Auto"
                         SelectionMode="Extended"
                         AutoGenerateColumns="False"
                         SelectedItem="{Binding SelectedUsingExam, Mode=TwoWay}"
                         SelectionUnit="FullRow" 
-                        CanUserAddRows="False">
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        CanUserResizeColumns="True"
+                        CanUserResizeRows="False"
+                        IsReadOnly="True"
+                        >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding StatusString}"/>
-                            <DataGridTextColumn Header="Phòng" Binding="{Binding RoomID}"/>
-                            <DataGridTextColumn Header="Lớp" Binding="{Binding EXAM.CLASS.ClassName}"/>
-                            <DataGridTextColumn Header="Giám thị" Binding="{Binding EXAM.LECTURER.LecturerName}"/>
+                            <DataGridTextColumn Header="CMND" Binding="{Binding CMND}"/>
+                            <DataGridTextColumn Header="Họ tên" Binding="{Binding NGUOI.Ten}"/>
+                            <DataGridTextColumn Header="Giới tính" Binding="{Binding NGUOI.GioiTinh}"/>
+                            <DataGridTextColumn Header="Quê quán" Binding="{Binding NGUOI.QueQuan}"/>
+                            <DataGridTextColumn Header="Mã SHK" Binding="{Binding MASHK}"/>
+                            <DataGridTextColumn Header="Chỗ ở hiện nay" Binding="{Binding ChoOHienNay}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5"/>
+                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5" Click="btnEditNhanKhau_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5"/>
+                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5" Click="btnDeleteNhanKhau_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>

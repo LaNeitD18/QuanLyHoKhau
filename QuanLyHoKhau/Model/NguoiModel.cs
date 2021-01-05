@@ -10,6 +10,11 @@ namespace QuanLyHoKhau.Model
     {
         public NGUOI(NGUOI nguoi)
         {
+            CopyInfo(nguoi);
+        }
+
+        public void CopyInfo(NGUOI nguoi)
+        {
             if (nguoi == null)
             {
                 CMND = null;
