@@ -165,6 +165,7 @@
     <Compile Include="ViewModel\ChuyenKhau_VM.cs" />
     <Compile Include="ViewModel\ChinhSuaTamTru_VM.cs" />
     <Compile Include="ViewModel\ChinhSuaTamVang_VM.cs" />
+    <Compile Include="ViewModel\Duyet_VM.cs" />
     <Compile Include="ViewModel\GlobalState.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -186,6 +187,9 @@
     </Compile>
     <Compile Include="View\ChinhSuaGiayTamVang.xaml.cs">
       <DependentUpon>ChinhSuaGiayTamVang.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DuyetPage.xaml.cs">
+      <DependentUpon>DuyetPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
@@ -246,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ChinhSuaGiayTamVang.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DuyetPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

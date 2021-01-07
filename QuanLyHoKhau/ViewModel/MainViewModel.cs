@@ -32,6 +32,7 @@ namespace QuanLyHoKhau.ViewModel
         public ICommand QLHoKhau_Page_SelectedCommand { get; set; }
         public ICommand QLGiayTamVang_Page_SelectedCommand { get; set; }
         public ICommand QLGiayTamTru_Page_SelectedCommand { get; set; }
+        public ICommand Duyet_Page_SelectedCommand { get; set; }
 
         #endregion
 
@@ -45,6 +46,7 @@ namespace QuanLyHoKhau.ViewModel
                 if (p == null)
                     MessageBox.Show(p.GetType().Name);
                 Window mainWindow = p as Window;
+                mainWindow.DataContext = new MainViewModel();
                 mainWindow.Hide(); // main view hide in login window
                 LoginWindow loginWindow = new LoginWindow();
                 loginWindow.ShowDialog();
@@ -101,6 +103,12 @@ namespace QuanLyHoKhau.ViewModel
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyTamTruPage();
                 FrameContent.DataContext = new QuanLyTamTru_VM();
+            });
+
+            Duyet_Page_SelectedCommand = new RelayCommand((p) => {
+                //Title = "Trang chủ";
+                FrameContent = new DuyetPage();
+                FrameContent.DataContext = new Duyet_VM();
             });
         }
     }

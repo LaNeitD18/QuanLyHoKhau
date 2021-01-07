@@ -234,6 +234,12 @@
                     Tag="{StaticResource tamTru}"
                     Content="Quản lý tạm trú"
                     Command="{Binding QLGiayTamTru_Page_SelectedCommand}"/>
+                <RadioButton
+                    GroupName="Menu"
+                    Style="{StaticResource MenuButtonStyle}"
+                    Tag="{StaticResource tamTru}"
+                    Content="Duyệt/Từ chối"
+                    Command="{Binding Duyet_Page_SelectedCommand}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="15" Grid.RowSpan="2" Grid.ColumnSpan="5" Background="WhiteSmoke">
