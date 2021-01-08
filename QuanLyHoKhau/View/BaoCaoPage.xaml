@@ -80,21 +80,9 @@
                     materialDesign:HintAssist.Hint="Chọn tháng" 
                     VerticalAlignment="Center" 
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    ItemsSource="{Binding ListSOLUUNHANKHAU}" 
+                    ItemsSource="{Binding ListMonth}" 
                     KeyboardNavigation.TabIndex="1" 
-                    SelectedItem="{Binding SelectedSoLuuNhanKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding MaSoLuuNhanKhau}"></TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
+                    SelectedItem="{Binding SelectedMonth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }">
                 </ComboBox>
                 <Button 
                     Grid.Column="2"
@@ -104,7 +92,7 @@
                     Foreground="White"
                     Height="50"
                     Width="150"
-                    Command="{Binding BtnChuyenKhau_Command}"
+                    Command="{Binding DisplayPieChart_Command}"
                     HorizontalContentAlignment="Stretch"
                     VerticalContentAlignment="Stretch">
                     <Button.Resources>
@@ -133,21 +121,9 @@
                     materialDesign:HintAssist.Hint="Chọn năm" 
                     VerticalAlignment="Center" 
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    ItemsSource="{Binding ListSOLUUNHANKHAU}" 
+                    ItemsSource="{Binding ListYear}" 
                     KeyboardNavigation.TabIndex="1" 
-                    SelectedItem="{Binding SelectedSoLuuNhanKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding MaSoLuuNhanKhau}"></TextBlock>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
+                    SelectedItem="{Binding SelectedYear, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }">
                 </ComboBox>
                 <ComboBox 
                     Grid.Column="1"
@@ -156,21 +132,17 @@
                     materialDesign:HintAssist.Hint="Chọn loại giấy tờ" 
                     VerticalAlignment="Center" 
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                    ItemsSource="{Binding ListSOLUUNHANKHAU}" 
+                    ItemsSource="{Binding ListLoaiGiayTo}" 
                     KeyboardNavigation.TabIndex="1" 
-                    SelectedItem="{Binding SelectedSoLuuNhanKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                    <ComboBox.ItemTemplate>
+                    SelectedItem="{Binding SelectedLoaiGiayTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
+                    SelectedIndex="{Binding SelectedIndexLoaiGiayTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    <!--<ComboBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding MaSoLuuNhanKhau}"></TextBlock>
+                                <TextBlock Text="{Binding TxtLoaiGiayTo}"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
-                    </ComboBox.ItemTemplate>
+                    </ComboBox.ItemTemplate>-->
                 </ComboBox>
                 <Button 
                     Grid.Column="2"
@@ -180,7 +152,7 @@
                     Foreground="White"
                     Height="50"
                     Width="150"
-                    Command="{Binding BtnChuyenKhau_Command}"
+                    Command="{Binding DisplayBarChart_Command}"
                     HorizontalContentAlignment="Stretch"
                     VerticalContentAlignment="Stretch">
                     <Button.Resources>
@@ -197,7 +169,10 @@
             </Grid>
 
         </materialDesign:Card>
-        <materialDesign:Card Grid.ColumnSpan="15" Grid.Row="3" Grid.RowSpan="14" Margin="5,5,0,5">
+        <materialDesign:Card
+            Padding="100"
+            Grid.ColumnSpan="15" Grid.Row="3" Grid.RowSpan="14" 
+            Margin="5,5,0,5">
             <lvc:PieChart 
                 LegendLocation="Bottom" 
                 Series="{Binding PieSeries}">
@@ -206,10 +181,10 @@
         <materialDesign:Card Grid.Column="16" Grid.ColumnSpan="15" Grid.Row="3" Grid.RowSpan="14" Margin="0,5,5,5">
             <lvc:CartesianChart LegendLocation="Bottom" Series="{Binding ColumnSeries}">
                 <lvc:CartesianChart.AxisY>
-                    <lvc:Axis Title="Số lượng phòng được sử dụng trong 1 tháng"></lvc:Axis>
+                    <lvc:Axis Title="Số lượng tạo mới"></lvc:Axis>
                 </lvc:CartesianChart.AxisY>
                 <lvc:CartesianChart.AxisX>
-                    <lvc:Axis Labels="Phòng học, Phòng sự kiện, Phòng thi"></lvc:Axis>
+                    <lvc:Axis Labels="1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12"></lvc:Axis>
                 </lvc:CartesianChart.AxisX>
             </lvc:CartesianChart>
         </materialDesign:Card>
