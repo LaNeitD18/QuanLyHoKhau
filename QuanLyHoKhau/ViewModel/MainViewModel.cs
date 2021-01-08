@@ -33,7 +33,7 @@ namespace QuanLyHoKhau.ViewModel
         public ICommand QLGiayTamVang_Page_SelectedCommand { get; set; }
         public ICommand QLGiayTamTru_Page_SelectedCommand { get; set; }
         public ICommand Duyet_Page_SelectedCommand { get; set; }
-
+        public ICommand BaoCao_Page_SelectedCommand { get; set; }
         #endregion
 
         #region Functions
@@ -109,6 +109,12 @@ namespace QuanLyHoKhau.ViewModel
                 //Title = "Trang chủ";
                 FrameContent = new DuyetPage();
                 FrameContent.DataContext = new Duyet_VM();
+            });
+
+            BaoCao_Page_SelectedCommand = new RelayCommand((p) => {
+                //Title = "Trang chủ";
+                FrameContent = new BaoCaoPage();
+                FrameContent.DataContext = new BaoCao_VM();
             });
         }
     }

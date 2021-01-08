@@ -240,6 +240,12 @@
                     Tag="{StaticResource tamTru}"
                     Content="Duyệt/Từ chối"
                     Command="{Binding Duyet_Page_SelectedCommand}"/>
+                <RadioButton
+                    GroupName="Menu"
+                    Style="{StaticResource MenuButtonStyle}"
+                    Tag="{StaticResource documentfile}"
+                    Content="Báo cáo"
+                    Command="{Binding BaoCao_Page_SelectedCommand}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="15" Grid.RowSpan="2" Grid.ColumnSpan="5" Background="WhiteSmoke">

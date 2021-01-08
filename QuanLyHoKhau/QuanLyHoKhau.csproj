@@ -161,6 +161,7 @@
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Utilities\Utils.cs" />
+    <Compile Include="ViewModel\BaoCao_VM.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\ChuyenKhau_VM.cs" />
     <Compile Include="ViewModel\ChinhSuaTamTru_VM.cs" />
@@ -179,6 +180,9 @@
     <Compile Include="ViewModel\QuanLyTamTru_VM.cs" />
     <Compile Include="ViewModel\QuanLyTamVang_VM.cs" />
     <Compile Include="ViewModel\TrangChu_VM.cs" />
+    <Compile Include="View\BaoCaoPage.xaml.cs">
+      <DependentUpon>BaoCaoPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ChuyenKhauWindow.xaml.cs">
       <DependentUpon>ChuyenKhauWindow.xaml</DependentUpon>
     </Compile>
@@ -241,6 +245,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\BaoCaoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ChuyenKhauWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

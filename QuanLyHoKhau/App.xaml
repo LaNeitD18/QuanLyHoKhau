@@ -24,6 +24,7 @@
             <viewmodel:QuanLyTamVang_VM x:Key="QuanLyTamVangVM"></viewmodel:QuanLyTamVang_VM>
             <viewmodel:ChuyenKhau_VM x:Key="ChuyenKhauVM"></viewmodel:ChuyenKhau_VM>
             <viewmodel:Duyet_VM x:Key="DuyetVM"></viewmodel:Duyet_VM>
+            <viewmodel:BaoCao_VM x:Key="BaoCaoVM"></viewmodel:BaoCao_VM>
             <viewmodel:ChinhSuaTamVang_VM x:Key="ChinhSuaTamVangVM"></viewmodel:ChinhSuaTamVang_VM>
             <viewmodel:ChinhSuaTamTru_VM x:Key="ChinhSuaTamTruVM"></viewmodel:ChinhSuaTamTru_VM>
             
