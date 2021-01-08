@@ -152,7 +152,7 @@ namespace QuanLyHoKhau.ViewModel
             //    );
             BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
                 (
-                    shk.NHANKHAUs.Where(nk => !nk.IsDeleted).ToList()
+                    shk.NHANKHAUs.Where(nk => nk.BanChinhThuc && !nk.IsDeleted).ToList()
                 );
 
             return result;
@@ -272,7 +272,7 @@ namespace QuanLyHoKhau.ViewModel
 
                 // check if this person is actually a NHANKHAU
                 var nguoiDo = filteredNguoi.First();
-                var filteredNhanKhau = DataProvider.Ins.DB.NHANKHAUs.Where(nhankhau => (nhankhau.CMND == nguoiDo.CMND) && (!nhankhau.IsDeleted));
+                var filteredNhanKhau = DataProvider.Ins.DB.NHANKHAUs.Where(nhankhau => (nhankhau.CMND == nguoiDo.CMND) && (nhankhau.BanChinhThuc && !nhankhau.IsDeleted));
 
                 if(filteredNhanKhau.Count() == 0)
                 {

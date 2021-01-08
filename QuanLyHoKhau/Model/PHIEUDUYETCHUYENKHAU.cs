@@ -12,16 +12,17 @@ namespace QuanLyHoKhau.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class NHANKHAUCHODUYET
+    public partial class PHIEUDUYETCHUYENKHAU
     {
-        public string CMND { get; set; }
-        public string MASHK { get; set; }
-        public string QuanHeVoiChuHo { get; set; }
-        public string ChoOHienNay { get; set; }
+        public string MaPD_NK { get; set; }
+        public string MaNK_PendingInfo { get; set; }
+        public string MaNK { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
+        public Nullable<System.DateTime> NgayDuyet { get; set; }
         public string ActionType { get; set; }
         public bool IsDeleted { get; set; }
     
-        public virtual NGUOI NGUOI { get; set; }
-        public virtual SOHOKHAU SOHOKHAU { get; set; }
+        public virtual NHANKHAU NHANKHAU { get; set; }
+        public virtual NHANKHAU NHANKHAU1 { get; set; }
     }
 }

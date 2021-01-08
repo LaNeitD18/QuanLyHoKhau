@@ -129,6 +129,7 @@
                 Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                 ItemsSource="{Binding ListSOHOKHAU, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                 KeyboardNavigation.TabIndex="1" 
+                IsEnabled="{Binding IsMaShkEnable}"
                 SelectedItem="{Binding SelectedSoHoKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }"
                 >
                     <i:Interaction.Triggers>

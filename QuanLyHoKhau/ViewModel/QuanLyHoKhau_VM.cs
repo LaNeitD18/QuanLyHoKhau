@@ -37,7 +37,7 @@ namespace QuanLyHoKhau.ViewModel
         #region List So ho khau (full)
         ObservableCollection<SOHOKHAU> LoadSoHoKhaus()
         {
-            return new ObservableCollection<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.Where(shk => !shk.IsDeleted).ToList());
+            return new ObservableCollection<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.Where(shk => shk.BanChinhThuc && !shk.IsDeleted).ToList());
         }
 
         ObservableCollection<SOHOKHAU> _listSoHoKhau = null;

@@ -21,6 +21,8 @@ namespace QuanLyHoKhau.Model
                 MASHK = null;
                 QuanHeVoiChuHo = null;
                 ChoOHienNay = null;
+                BanChinhThuc = true;
+                IsDeleted = false;
             }
             else
             {
@@ -28,6 +30,8 @@ namespace QuanLyHoKhau.Model
                 MASHK = nhanKhau.MASHK;
                 QuanHeVoiChuHo = nhanKhau.QuanHeVoiChuHo;
                 ChoOHienNay = nhanKhau.ChoOHienNay;
+                BanChinhThuc = nhanKhau.BanChinhThuc;
+                IsDeleted = nhanKhau.IsDeleted;
             }
         }
 

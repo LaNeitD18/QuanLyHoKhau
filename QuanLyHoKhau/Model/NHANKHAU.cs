@@ -18,16 +18,20 @@ namespace QuanLyHoKhau.Model
         public NHANKHAU()
         {
             this.GIAYTAMTRUs = new HashSet<GIAYTAMTRU>();
+            this.PHIEUDUYETNHANKHAUs = new HashSet<PHIEUDUYETNHANKHAU>();
+            this.PHIEUDUYETCHUYENKHAUs = new HashSet<PHIEUDUYETCHUYENKHAU>();
+            this.PHIEUDUYETNHANKHAUs1 = new HashSet<PHIEUDUYETNHANKHAU>();
+            this.PHIEUDUYETCHUYENKHAUs1 = new HashSet<PHIEUDUYETCHUYENKHAU>();
             this.PHIEUKHAIBAOTAMVANGs = new HashSet<PHIEUKHAIBAOTAMVANG>();
             this.PHIEUTHAYDOI_HK_NK = new HashSet<PHIEUTHAYDOI_HK_NK>();
             this.SOHOKHAUs = new HashSet<SOHOKHAU>();
-            this.SOHOKHAUCHODUYETs = new HashSet<SOHOKHAUCHODUYET>();
         }
     
         public string CMND { get; set; }
         public string MASHK { get; set; }
         public string QuanHeVoiChuHo { get; set; }
         public string ChoOHienNay { get; set; }
+        public bool BanChinhThuc { get; set; }
         public bool IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -35,12 +39,18 @@ namespace QuanLyHoKhau.Model
         public virtual NGUOI NGUOI { get; set; }
         public virtual SOHOKHAU SOHOKHAU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PHIEUDUYETNHANKHAU> PHIEUDUYETNHANKHAUs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PHIEUDUYETCHUYENKHAU> PHIEUDUYETCHUYENKHAUs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PHIEUDUYETNHANKHAU> PHIEUDUYETNHANKHAUs1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PHIEUDUYETCHUYENKHAU> PHIEUDUYETCHUYENKHAUs1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHIEUKHAIBAOTAMVANG> PHIEUKHAIBAOTAMVANGs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHIEUTHAYDOI_HK_NK> PHIEUTHAYDOI_HK_NK { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SOHOKHAU> SOHOKHAUs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SOHOKHAUCHODUYET> SOHOKHAUCHODUYETs { get; set; }
     }
 }

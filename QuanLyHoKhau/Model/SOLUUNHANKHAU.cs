@@ -18,7 +18,6 @@ namespace QuanLyHoKhau.Model
         public SOLUUNHANKHAU()
         {
             this.SOHOKHAUs = new HashSet<SOHOKHAU>();
-            this.SOHOKHAUCHODUYETs = new HashSet<SOHOKHAUCHODUYET>();
         }
     
         public string MaSoLuuNhanKhau { get; set; }
@@ -27,7 +26,5 @@ namespace QuanLyHoKhau.Model
         public virtual DIAPHUONG DIAPHUONG1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SOHOKHAU> SOHOKHAUs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SOHOKHAUCHODUYET> SOHOKHAUCHODUYETs { get; set; }
     }
 }

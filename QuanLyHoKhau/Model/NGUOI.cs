@@ -34,6 +34,5 @@ namespace QuanLyHoKhau.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONGAN> CONGANs { get; set; }
         public virtual NHANKHAU NHANKHAU { get; set; }
-        public virtual NHANKHAUCHODUYET NHANKHAUCHODUYET { get; set; }
     }
 }

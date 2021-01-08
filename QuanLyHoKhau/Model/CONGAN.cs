@@ -21,7 +21,6 @@ namespace QuanLyHoKhau.Model
             this.PHIEUKHAIBAOTAMVANGs = new HashSet<PHIEUKHAIBAOTAMVANG>();
             this.PHIEUTHAYDOI_HK_NK = new HashSet<PHIEUTHAYDOI_HK_NK>();
             this.SOHOKHAUs = new HashSet<SOHOKHAU>();
-            this.SOHOKHAUCHODUYETs = new HashSet<SOHOKHAUCHODUYET>();
         }
     
         public string MaCongAn { get; set; }
@@ -41,7 +40,5 @@ namespace QuanLyHoKhau.Model
         public virtual ICollection<PHIEUTHAYDOI_HK_NK> PHIEUTHAYDOI_HK_NK { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SOHOKHAU> SOHOKHAUs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SOHOKHAUCHODUYET> SOHOKHAUCHODUYETs { get; set; }
     }
 }

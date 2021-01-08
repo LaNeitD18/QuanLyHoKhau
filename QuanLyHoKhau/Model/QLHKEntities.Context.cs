@@ -32,12 +32,13 @@ namespace QuanLyHoKhau.Model
         public virtual DbSet<LOAICONGAN> LOAICONGANs { get; set; }
         public virtual DbSet<NGUOI> NGUOIs { get; set; }
         public virtual DbSet<NHANKHAU> NHANKHAUs { get; set; }
-        public virtual DbSet<NHANKHAUCHODUYET> NHANKHAUCHODUYETs { get; set; }
+        public virtual DbSet<PHIEUDUYETCHUYENKHAU> PHIEUDUYETCHUYENKHAUs { get; set; }
+        public virtual DbSet<PHIEUDUYETNHANKHAU> PHIEUDUYETNHANKHAUs { get; set; }
+        public virtual DbSet<PHIEUDUYETSOHOKHAU> PHIEUDUYETSOHOKHAUs { get; set; }
         public virtual DbSet<PHIEUKHAIBAOTAMVANG> PHIEUKHAIBAOTAMVANGs { get; set; }
         public virtual DbSet<PHIEUTHAYDOI_HK_NK> PHIEUTHAYDOI_HK_NK { get; set; }
         public virtual DbSet<QUYEN> QUYENs { get; set; }
         public virtual DbSet<SOHOKHAU> SOHOKHAUs { get; set; }
-        public virtual DbSet<SOHOKHAUCHODUYET> SOHOKHAUCHODUYETs { get; set; }
         public virtual DbSet<SOLUUCHUYENKHAU> SOLUUCHUYENKHAUs { get; set; }
         public virtual DbSet<SOLUUNHANKHAU> SOLUUNHANKHAUs { get; set; }
         public virtual DbSet<SOLUUTAMTRU> SOLUUTAMTRUs { get; set; }

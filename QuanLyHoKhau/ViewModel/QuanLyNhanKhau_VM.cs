@@ -18,7 +18,7 @@ namespace QuanLyHoKhau.ViewModel
         #region List Nhan khau (full)
         ObservableCollection<NHANKHAU> LoadNhanKhaus()
         {
-            return new ObservableCollection<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.Where(nk => !nk.IsDeleted).ToList());
+            return new ObservableCollection<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.Where(nk => nk.BanChinhThuc && !nk.IsDeleted).ToList());
         }
 
         ObservableCollection<NHANKHAU> _listNhanKhau = null;
