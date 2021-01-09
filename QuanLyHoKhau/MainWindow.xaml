@@ -209,13 +209,18 @@
             </DockPanel>-->
             <StackPanel Margin="0,10">
                 <RadioButton
-                    Grid.ColumnSpan="2"
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"
                     Tag="{StaticResource homePage}"
                     Content="Trang chủ"
                     Command="{Binding TrangChu_SelectedCommand}"
                     IsChecked="True"/>
+                <RadioButton
+                    GroupName="Menu"
+                    Style="{StaticResource MenuButtonStyle}"
+                    Tag="{StaticResource nhanKhau}"
+                    Content="Quản lý nhân khẩu"
+                    Command="{Binding QLNhanKhau_Page_SelectedCommand}"/>
                 <RadioButton
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"

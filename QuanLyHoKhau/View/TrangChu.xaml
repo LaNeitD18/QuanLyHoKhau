@@ -3,13 +3,14 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:QuanLyHoKhau.View"
+      xmlns:local="clr-namespace:QuanLyHoKhau.View" 
+      xmlns:customcontrols="clr-namespace:QuanLyHoKhau.CustomControls"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="TrangChu"
       DataContext="{StaticResource TrangChuVM}">
 
-    <Grid x:Name="trangChu" Background="WhiteSmoke">
+    <Grid x:Name="trangChu" Background="Transparent">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
@@ -62,6 +63,167 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-
+        <Grid Grid.Column="9" Grid.ColumnSpan="13" Grid.RowSpan="2">
+            <Border BorderThickness="0" CornerRadius="0,0,20,20" Background="White">
+                <StackPanel 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center">
+                    <TextBlock 
+                        FontSize="54" 
+                        FontWeight="SemiBold"
+                        Foreground="DarkSlateGray"
+                        Text="{Binding CurrentTime}" 
+                        HorizontalAlignment="Center" 
+                        LineHeight="26"/>
+                    <TextBlock 
+                        Text="{Binding CurrentDate}" 
+                        HorizontalAlignment="Center" 
+                        LineHeight="26" 
+                        FontSize="18" 
+                        FontWeight="SemiBold"
+                        Foreground="DarkSlateGray"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="2" Grid.ColumnSpan="7">
+            <TextBlock 
+                x:Name="choDuyetBlock"
+                Text="Tổng quan chờ duyệt"
+                FontSize="25"
+                FontWeight="Bold"
+                Foreground="DarkSlateGray"
+                Margin="32,8,0,0"/>
+            <Separator Width="400" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                <Separator.RenderTransform>
+                    <ScaleTransform ScaleY="3" />
+                </Separator.RenderTransform>
+            </Separator>
+        </Grid>
+        <Grid Grid.ColumnSpan="7" Grid.RowSpan="4" Grid.Row="4">
+            <customcontrols:InfoCard 
+                Margin="10,0" 
+                Text1="Sổ hộ khẩu chờ duyệt" Text2="67 Gb / 128 Gb" 
+                imageSource="/images/classroom.png" 
+                Progress="66" 
+                IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
+                ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
+                ProgressBackgroundBrushMouseOver="#2B88C9" 
+                ProgressIndicatorBrush="#58B0ED" 
+                ProgressIndicatorBrushMouseOver="White"
+                ProgressTextColor="DarkSlateGray" 
+                ProgressTextWeight="Bold" 
+                ProgressTextColorMouseOver="White" 
+                ProgressTextWeightMouseOver="Bold"/>
+        </Grid>
+        <Grid Grid.Column="7" Grid.ColumnSpan="7" Grid.Row="4" Grid.RowSpan="4">
+            <customcontrols:InfoCard 
+                Margin="10,0" 
+                Text1="Nhân khẩu chờ duyệt" Text2="67 Gb / 128 Gb" 
+                imageSource="/images/classroom.png" 
+                Progress="66" 
+                IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
+                ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
+                ProgressBackgroundBrushMouseOver="#2B88C9" 
+                ProgressIndicatorBrush="#58B0ED" 
+                ProgressIndicatorBrushMouseOver="White"
+                ProgressTextColor="DarkSlateGray" 
+                ProgressTextWeight="Bold" 
+                ProgressTextColorMouseOver="White" 
+                ProgressTextWeightMouseOver="Bold"/>
+        </Grid>
+        <Grid Grid.Column="14" Grid.ColumnSpan="7" Grid.Row="4" Grid.RowSpan="4">
+            <customcontrols:InfoCard 
+                Margin="10,0" 
+                Text1="Giấy chuyển khẩu chờ duyệt" Text2="67 Gb / 128 Gb" 
+                imageSource="/images/classroom.png" 
+                Progress="66" 
+                IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
+                ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
+                ProgressBackgroundBrushMouseOver="#2B88C9" 
+                ProgressIndicatorBrush="#58B0ED" 
+                ProgressIndicatorBrushMouseOver="White"
+                ProgressTextColor="DarkSlateGray" 
+                ProgressTextWeight="Bold" 
+                ProgressTextColorMouseOver="White" 
+                ProgressTextWeightMouseOver="Bold"/>
+        </Grid>
+        <Grid Grid.Row="9" Grid.ColumnSpan="7">
+            <TextBlock 
+                x:Name="taoMoiBlock"
+                Text="Tổng quan tạo mới"
+                FontSize="25"
+                FontWeight="Bold"
+                Foreground="DarkSlateGray"
+                Margin="32,8,0,0"/>
+            <Separator Width="400" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                <Separator.RenderTransform>
+                    <ScaleTransform ScaleY="3" />
+                </Separator.RenderTransform>
+            </Separator>
+        </Grid>
+        <Grid Grid.ColumnSpan="7" Grid.RowSpan="4" Grid.Row="11">
+            <customcontrols:InfoCard 
+                Margin="10,0" 
+                Text1="Sổ hộ khẩu" Text2="67 Gb / 128 Gb" 
+                imageSource="/images/classroom.png" 
+                Progress="66" 
+                IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
+                ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
+                ProgressBackgroundBrushMouseOver="#2B88C9" 
+                ProgressIndicatorBrush="#58B0ED" 
+                ProgressIndicatorBrushMouseOver="White"
+                ProgressTextColor="DarkSlateGray" 
+                ProgressTextWeight="Bold" 
+                ProgressTextColorMouseOver="White" 
+                ProgressTextWeightMouseOver="Bold"/>
+        </Grid>
+        <Grid Grid.Column="7" Grid.ColumnSpan="7" Grid.Row="11" Grid.RowSpan="4">
+            <customcontrols:InfoCard 
+                Margin="10,0" 
+                Text1="Giấy tạm vắng" Text2="67 Gb / 128 Gb" 
+                imageSource="/images/classroom.png" 
+                Progress="66" 
+                IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
+                ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
+                ProgressBackgroundBrushMouseOver="#2B88C9" 
+                ProgressIndicatorBrush="#58B0ED" 
+                ProgressIndicatorBrushMouseOver="White"
+                ProgressTextColor="DarkSlateGray" 
+                ProgressTextWeight="Bold" 
+                ProgressTextColorMouseOver="White" 
+                ProgressTextWeightMouseOver="Bold"/>
+        </Grid>
+        <Grid Grid.Column="14" Grid.ColumnSpan="7" Grid.Row="11" Grid.RowSpan="4">
+            <customcontrols:InfoCard 
+                Margin="10,0" 
+                Text1="Giấy tạm trú" Text2="67 Gb / 128 Gb" 
+                imageSource="/images/classroom.png" 
+                Progress="66" 
+                IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
+                ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
+                ProgressBackgroundBrushMouseOver="#2B88C9" 
+                ProgressIndicatorBrush="#58B0ED" 
+                ProgressIndicatorBrushMouseOver="White"
+                ProgressTextColor="DarkSlateGray" 
+                ProgressTextWeight="Bold" 
+                ProgressTextColorMouseOver="White" 
+                ProgressTextWeightMouseOver="Bold"/>
+        </Grid>
+        <Grid Grid.Column="21" Grid.ColumnSpan="7" Grid.Row="11" Grid.RowSpan="4">
+            <customcontrols:InfoCard 
+                Margin="10,0" 
+                Text1="Giấy chuyển khẩu" Text2="67 Gb / 128 Gb" 
+                imageSource="/images/classroom.png" 
+                Progress="66" 
+                IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
+                ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
+                ProgressBackgroundBrushMouseOver="#2B88C9" 
+                ProgressIndicatorBrush="#58B0ED" 
+                ProgressIndicatorBrushMouseOver="White"
+                ProgressTextColor="DarkSlateGray" 
+                ProgressTextWeight="Bold" 
+                ProgressTextColorMouseOver="White" 
+                ProgressTextWeightMouseOver="Bold"/>
+        </Grid>
     </Grid>
 </Page>
