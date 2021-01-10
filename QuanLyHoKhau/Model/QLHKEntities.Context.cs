@@ -36,7 +36,6 @@ namespace QuanLyHoKhau.Model
         public virtual DbSet<PHIEUDUYETNHANKHAU> PHIEUDUYETNHANKHAUs { get; set; }
         public virtual DbSet<PHIEUDUYETSOHOKHAU> PHIEUDUYETSOHOKHAUs { get; set; }
         public virtual DbSet<PHIEUKHAIBAOTAMVANG> PHIEUKHAIBAOTAMVANGs { get; set; }
-        public virtual DbSet<PHIEUTHAYDOI_HK_NK> PHIEUTHAYDOI_HK_NK { get; set; }
         public virtual DbSet<QUYEN> QUYENs { get; set; }
         public virtual DbSet<SOHOKHAU> SOHOKHAUs { get; set; }
         public virtual DbSet<SOLUUCHUYENKHAU> SOLUUCHUYENKHAUs { get; set; }

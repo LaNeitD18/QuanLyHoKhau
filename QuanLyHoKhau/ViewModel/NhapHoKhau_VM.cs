@@ -300,11 +300,55 @@ namespace QuanLyHoKhau.ViewModel
             }
             else
             {
-                targetSHK.CopyInfo(ResultSoHoKhau);
+                if(targetSHK.IsDeleted)
+                { 
+                    targetSHK.CopyInfo(ResultSoHoKhau);
+                }
+                else
+                {
+                    AddPendingSoHoKhau();
+                }
             }
 
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
+        }
+
+        private void AddPendingSoHoKhau()
+        {
+            SOHOKHAU targetSHK = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+            SOHOKHAU tempSHK = new SOHOKHAU(ResultSoHoKhau)
+            {
+                MaSHK = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, $"{MaSoHoKhau}_", 3),
+                BanChinhThuc = false,
+                IsDeleted = false,
+            };
+
+            // if the info has not been changed, then it's no need to create Pending entry
+            if (
+                targetSHK.MaSoLuuNhanKhau == tempSHK.MaSoLuuNhanKhau &&
+                targetSHK.DiaChi == tempSHK.DiaChi
+            )
+            {
+                return;
+            }
+
+            DataProvider.Ins.DB.SOHOKHAUs.Add(tempSHK);
+
+            PHIEUDUYETSOHOKHAU pdshk = new PHIEUDUYETSOHOKHAU()
+            {
+                MaPD_SHK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs, "PDSHK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaSHK = targetSHK.MaSHK,
+                MaSHK_PendingInfo = tempSHK.MaSHK,
+
+                ActionType = "Edit",
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Add(pdshk);
         }
         #endregion
 

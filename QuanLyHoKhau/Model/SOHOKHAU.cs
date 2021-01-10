@@ -18,6 +18,7 @@ namespace QuanLyHoKhau.Model
         public SOHOKHAU()
         {
             this.NHANKHAUs = new HashSet<NHANKHAU>();
+            this.PHIEUDUYETCHUYENKHAUs = new HashSet<PHIEUDUYETCHUYENKHAU>();
             this.PHIEUDUYETSOHOKHAUs = new HashSet<PHIEUDUYETSOHOKHAU>();
             this.PHIEUDUYETSOHOKHAUs1 = new HashSet<PHIEUDUYETSOHOKHAU>();
         }
@@ -35,6 +36,8 @@ namespace QuanLyHoKhau.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NHANKHAU> NHANKHAUs { get; set; }
         public virtual NHANKHAU NHANKHAU { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PHIEUDUYETCHUYENKHAU> PHIEUDUYETCHUYENKHAUs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHIEUDUYETSOHOKHAU> PHIEUDUYETSOHOKHAUs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -17,11 +17,14 @@ namespace QuanLyHoKhau.Model
         public string MaPD_SHK { get; set; }
         public string MaSHK_PendingInfo { get; set; }
         public string MaSHK { get; set; }
+        public string MaCongAn { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayDuyet { get; set; }
+        public bool DaDuyet { get; set; }
         public string ActionType { get; set; }
         public bool IsDeleted { get; set; }
     
+        public virtual CONGAN CONGAN { get; set; }
         public virtual SOHOKHAU SOHOKHAU { get; set; }
         public virtual SOHOKHAU SOHOKHAU1 { get; set; }
     }

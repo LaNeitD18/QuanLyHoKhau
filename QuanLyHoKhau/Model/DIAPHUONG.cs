@@ -18,6 +18,7 @@ namespace QuanLyHoKhau.Model
         public DIAPHUONG()
         {
             this.CONGANs = new HashSet<CONGAN>();
+            this.SOLUUCHUYENKHAUs = new HashSet<SOLUUCHUYENKHAU>();
             this.SOLUUNHANKHAUs = new HashSet<SOLUUNHANKHAU>();
             this.SOLUUTAMTRUs = new HashSet<SOLUUTAMTRU>();
             this.SOLUUTAMVANGs = new HashSet<SOLUUTAMVANG>();
@@ -28,6 +29,8 @@ namespace QuanLyHoKhau.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CONGAN> CONGANs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SOLUUCHUYENKHAU> SOLUUCHUYENKHAUs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SOLUUNHANKHAU> SOLUUNHANKHAUs { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

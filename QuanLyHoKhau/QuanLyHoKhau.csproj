@@ -123,9 +123,6 @@
     <Compile Include="Model\PHIEUKHAIBAOTAMVANG.cs">
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\PHIEUTHAYDOI_HK_NK.cs">
-      <DependentUpon>QLHKEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\QLHKEntities.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

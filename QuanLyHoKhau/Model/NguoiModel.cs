@@ -26,6 +26,7 @@ namespace QuanLyHoKhau.Model
                 DanToc = null;
                 TonGiao = null;
                 NgheNghiep = null;
+                IsDeleted = false;
             }
             else
             {
@@ -38,6 +39,7 @@ namespace QuanLyHoKhau.Model
                 DanToc = nguoi.DanToc;
                 TonGiao = nguoi.TonGiao;
                 NgheNghiep = nguoi.NgheNghiep;
+                IsDeleted = nguoi.IsDeleted;
             }
         }
     }

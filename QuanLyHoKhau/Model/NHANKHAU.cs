@@ -21,9 +21,7 @@ namespace QuanLyHoKhau.Model
             this.PHIEUDUYETNHANKHAUs = new HashSet<PHIEUDUYETNHANKHAU>();
             this.PHIEUDUYETCHUYENKHAUs = new HashSet<PHIEUDUYETCHUYENKHAU>();
             this.PHIEUDUYETNHANKHAUs1 = new HashSet<PHIEUDUYETNHANKHAU>();
-            this.PHIEUDUYETCHUYENKHAUs1 = new HashSet<PHIEUDUYETCHUYENKHAU>();
             this.PHIEUKHAIBAOTAMVANGs = new HashSet<PHIEUKHAIBAOTAMVANG>();
-            this.PHIEUTHAYDOI_HK_NK = new HashSet<PHIEUTHAYDOI_HK_NK>();
             this.SOHOKHAUs = new HashSet<SOHOKHAU>();
         }
     
@@ -45,11 +43,7 @@ namespace QuanLyHoKhau.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHIEUDUYETNHANKHAU> PHIEUDUYETNHANKHAUs1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUDUYETCHUYENKHAU> PHIEUDUYETCHUYENKHAUs1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PHIEUKHAIBAOTAMVANG> PHIEUKHAIBAOTAMVANGs { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUTHAYDOI_HK_NK> PHIEUTHAYDOI_HK_NK { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SOHOKHAU> SOHOKHAUs { get; set; }
     }

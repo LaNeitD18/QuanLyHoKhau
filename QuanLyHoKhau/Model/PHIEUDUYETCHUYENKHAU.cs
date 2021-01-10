@@ -14,15 +14,20 @@ namespace QuanLyHoKhau.Model
     
     public partial class PHIEUDUYETCHUYENKHAU
     {
-        public string MaPD_NK { get; set; }
-        public string MaNK_PendingInfo { get; set; }
-        public string MaNK { get; set; }
+        public string MaPhieuThayDoi { get; set; }
+        public string CMND { get; set; }
+        public string MaSHKChuyenDen { get; set; }
+        public string MaSoLuuChuyenKhau { get; set; }
+        public string MaCongAn { get; set; }
+        public string LyDo { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
         public Nullable<System.DateTime> NgayDuyet { get; set; }
-        public string ActionType { get; set; }
+        public bool DaDuyet { get; set; }
         public bool IsDeleted { get; set; }
     
+        public virtual CONGAN CONGAN { get; set; }
         public virtual NHANKHAU NHANKHAU { get; set; }
-        public virtual NHANKHAU NHANKHAU1 { get; set; }
+        public virtual SOHOKHAU SOHOKHAU { get; set; }
+        public virtual SOLUUCHUYENKHAU SOLUUCHUYENKHAU { get; set; }
     }
 }

@@ -10,6 +10,7 @@ using QuanLyHoKhau.Model;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Windows;
+using QuanLyHoKhau.Utilities;
 
 namespace QuanLyHoKhau.ViewModel
 {
@@ -121,6 +122,7 @@ namespace QuanLyHoKhau.ViewModel
                 if(nk.NGUOI != null)
                     nk.NGUOI.IsDeleted = true;
 
+                Utils.RemoveInvalidChuHoInSHKs();
                 DataProvider.Ins.DB.SaveChanges();
                 Refresh();
             }

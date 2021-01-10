@@ -28,7 +28,7 @@ namespace QuanLyHoKhau.Utilities
         /// <summary>
         /// We have SoHoKhau's (a) ChuHo's SoHoKhau (b). We need (a) == (b). if not, SoHoKhau should remove this ChuHo. this function does that :^)
         /// </summary>
-        static public void AdjustChuHoInSoHoKhaus()
+        static public void RemoveInvalidChuHoInSHKs()
         {
             foreach(SOHOKHAU shk in DataProvider.Ins.DB.SOHOKHAUs)
             { 
@@ -36,8 +36,9 @@ namespace QuanLyHoKhau.Utilities
                     continue;
 
                 NHANKHAU chuHo = DataProvider.Ins.DB.NHANKHAUs.Find(shk.CMNDChuHo);
-                if(chuHo != null && chuHo.MASHK != shk.MaSHK)
-                    shk.CMNDChuHo = null;
+                if(chuHo != null)
+                    if(chuHo.IsDeleted || !chuHo.BanChinhThuc || chuHo.MASHK != shk.MaSHK)
+                        shk.CMNDChuHo = null;
             }
         }
     }

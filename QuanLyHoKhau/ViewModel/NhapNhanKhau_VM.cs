@@ -424,7 +424,7 @@ namespace QuanLyHoKhau.ViewModel
             }
             else
             {
-                if(targetNK == null)
+                if(targetNK.IsDeleted)
                 {
                     targetNK.CopyInfo(ResultNhanKhau);
                     targetNK.IsDeleted = false;
@@ -437,7 +437,7 @@ namespace QuanLyHoKhau.ViewModel
 
             // Update ChuHo of SHK:
             UpdateChuHoOfShk();
-            Utils.AdjustChuHoInSoHoKhaus();
+            Utils.RemoveInvalidChuHoInSHKs();
 
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
@@ -445,13 +445,17 @@ namespace QuanLyHoKhau.ViewModel
 
         private void UpdateChuHoOfShk()
         {
-            if(IsChuHo)
-                SelectedSoHoKhau.CMNDChuHo = CMND;
-            else
-            {
-                if(SelectedSoHoKhau.CMNDChuHo == CMND)
-                    SelectedSoHoKhau.CMNDChuHo = null;
+            if(isAddingMode)
+            { 
+                if(IsChuHo)
+                    SelectedSoHoKhau.CMNDChuHo = CMND;
+                else
+                {
+                    if(SelectedSoHoKhau.CMNDChuHo == CMND)
+                        SelectedSoHoKhau.CMNDChuHo = null;
+                }
             }
+            // CuteTN Todo: update shk's CHUHO when approving editting.
         }
 
         private void AddPendingNhanKhau()
@@ -487,13 +491,14 @@ namespace QuanLyHoKhau.ViewModel
             PHIEUDUYETNHANKHAU pdnk = new PHIEUDUYETNHANKHAU()
             {
                 MaPD_NK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs, "PDNK_", 8),
-                NgayTao = DateTime.Today,
+                NgayTao = DateTime.Now,
                 IsDeleted = false,
 
                 MaNK = targetNK.CMND,
                 MaNK_PendingInfo = tempNK.CMND,
                 
                 ActionType = "Edit",
+                DaDuyet = false,
             };
 
             DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs.Add(pdnk);

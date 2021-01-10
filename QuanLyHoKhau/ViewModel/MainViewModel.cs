@@ -29,6 +29,7 @@ namespace QuanLyHoKhau.ViewModel
         #region ICommand
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand TrangChu_SelectedCommand { get; set; }
+        public ICommand QLNhanKhau_Page_SelectedCommand { get; set; }
         public ICommand QLHoKhau_Page_SelectedCommand { get; set; }
         public ICommand QLGiayTamVang_Page_SelectedCommand { get; set; }
         public ICommand QLGiayTamTru_Page_SelectedCommand { get; set; }
@@ -81,7 +82,7 @@ namespace QuanLyHoKhau.ViewModel
                 FrameContent.DataContext = new TrangChu_VM();
             });
 
-            TrangChu_SelectedCommand = new RelayCommand((p) => {
+            QLNhanKhau_Page_SelectedCommand = new RelayCommand((p) => {
                 //Title = "Trang chủ";
                 FrameContent = new QuanLyNhanKhauPage();
                 FrameContent.DataContext = new QuanLyNhanKhau_VM();

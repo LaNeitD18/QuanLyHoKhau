@@ -81,14 +81,17 @@
         </EntityType>
         <EntityType Name="PHIEUDUYETCHUYENKHAU">
           <Key>
-            <PropertyRef Name="MaPD_NK" />
+            <PropertyRef Name="MaPhieuThayDoi" />
           </Key>
-          <Property Name="MaPD_NK" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="MaNK_PendingInfo" Type="varchar" MaxLength="20" />
-          <Property Name="MaNK" Type="varchar" MaxLength="20" />
+          <Property Name="MaPhieuThayDoi" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="CMND" Type="varchar" MaxLength="20" />
+          <Property Name="MaSHKChuyenDen" Type="varchar" MaxLength="20" />
+          <Property Name="MaSoLuuChuyenKhau" Type="varchar" MaxLength="20" />
+          <Property Name="MaCongAn" Type="varchar" MaxLength="20" />
+          <Property Name="LyDo" Type="nvarchar" MaxLength="200" />
           <Property Name="NgayTao" Type="date" />
           <Property Name="NgayDuyet" Type="date" />
-          <Property Name="ActionType" Type="varchar" MaxLength="20" />
+          <Property Name="DaDuyet" Type="bit" Nullable="false" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PHIEUDUYETNHANKHAU">
@@ -98,8 +101,10 @@
           <Property Name="MaPD_NK" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="MaNK_PendingInfo" Type="varchar" MaxLength="20" />
           <Property Name="MaNK" Type="varchar" MaxLength="20" />
+          <Property Name="MaCongAn" Type="varchar" MaxLength="20" />
           <Property Name="NgayTao" Type="date" />
           <Property Name="NgayDuyet" Type="date" />
+          <Property Name="DaDuyet" Type="bit" Nullable="false" />
           <Property Name="ActionType" Type="varchar" MaxLength="20" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
@@ -110,8 +115,10 @@
           <Property Name="MaPD_SHK" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="MaSHK_PendingInfo" Type="varchar" MaxLength="20" />
           <Property Name="MaSHK" Type="varchar" MaxLength="20" />
+          <Property Name="MaCongAn" Type="varchar" MaxLength="20" />
           <Property Name="NgayTao" Type="date" />
           <Property Name="NgayDuyet" Type="date" />
+          <Property Name="DaDuyet" Type="bit" Nullable="false" />
           <Property Name="ActionType" Type="varchar" MaxLength="20" />
           <Property Name="IsDeleted" Type="bit" Nullable="false" />
         </EntityType>
@@ -128,18 +135,6 @@
           <Property Name="NgayKetThuc" Type="date" Nullable="false" />
           <Property Name="LyDo" Type="nvarchar" MaxLength="100" />
           <Property Name="CoTreEmDiTheo" Type="int" />
-        </EntityType>
-        <EntityType Name="PHIEUTHAYDOI_HK_NK">
-          <Key>
-            <PropertyRef Name="MaPhieuThayDoi" />
-          </Key>
-          <Property Name="MaPhieuThayDoi" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="CMND" Type="varchar" MaxLength="20" />
-          <Property Name="MaSoLuuChuyenKhau" Type="varchar" MaxLength="20" />
-          <Property Name="MaCongAn" Type="varchar" MaxLength="20" />
-          <Property Name="NgayKhaiBao" Type="date" Nullable="false" />
-          <Property Name="NoiThayDoi" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="LyDo" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="QUYEN">
           <Key>
@@ -167,7 +162,7 @@
             <PropertyRef Name="MaSoLuuChuyenKhau" />
           </Key>
           <Property Name="MaSoLuuChuyenKhau" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="DiaPhuong" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DiaPhuong" Type="varchar" MaxLength="20" Nullable="false" />
         </EntityType>
         <EntityType Name="SOLUUNHANKHAU">
           <Key>
@@ -257,7 +252,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GIAYTAMTR__MaCon__5629CD9C">
+        <Association Name="FK__GIAYTAMTR__MaCon__5441852A">
           <End Role="CONGAN" Type="Self.CONGAN" Multiplicity="0..1" />
           <End Role="GIAYTAMTRU" Type="Self.GIAYTAMTRU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -269,7 +264,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GIAYTAMTR__MaGia__5812160E">
+        <Association Name="FK__GIAYTAMTR__MaGia__5629CD9C">
           <End Role="PHIEUKHAIBAOTAMVANG" Type="Self.PHIEUKHAIBAOTAMVANG" Multiplicity="0..1" />
           <End Role="GIAYTAMTRU" Type="Self.GIAYTAMTRU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -281,7 +276,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GIAYTAMTR__MaSoL__5535A963">
+        <Association Name="FK__GIAYTAMTR__MaSoL__534D60F1">
           <End Role="SOLUUTAMTRU" Type="Self.SOLUUTAMTRU" Multiplicity="0..1" />
           <End Role="GIAYTAMTRU" Type="Self.GIAYTAMTRU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -293,7 +288,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GIAYTAMTRU__CMND__571DF1D5">
+        <Association Name="FK__GIAYTAMTRU__CMND__5535A963">
           <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
           <End Role="GIAYTAMTRU" Type="Self.GIAYTAMTRU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -305,7 +300,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NHANKHAU__CMND__3E52440B">
+        <Association Name="FK__NHANKHAU__CMND__3F466844">
           <End Role="NGUOI" Type="Self.NGUOI" Multiplicity="1" />
           <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -317,7 +312,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NHANKHAU__MASHK__3F466844">
+        <Association Name="FK__NHANKHAU__MASHK__403A8C7D">
           <End Role="SOHOKHAU" Type="Self.SOHOKHAU" Multiplicity="0..1" />
           <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -329,7 +324,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDUYE__MaNK___4316F928">
+        <Association Name="FK__PHIEUDUYE__MaCon__3C69FB99">
+          <End Role="CONGAN" Type="Self.CONGAN" Multiplicity="0..1" />
+          <End Role="PHIEUDUYETSOHOKHAU" Type="Self.PHIEUDUYETSOHOKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONGAN">
+              <PropertyRef Name="MaCongAn" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETSOHOKHAU">
+              <PropertyRef Name="MaCongAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDUYE__MaCon__45F365D3">
+          <End Role="CONGAN" Type="Self.CONGAN" Multiplicity="0..1" />
+          <End Role="PHIEUDUYETNHANKHAU" Type="Self.PHIEUDUYETNHANKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONGAN">
+              <PropertyRef Name="MaCongAn" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETNHANKHAU">
+              <PropertyRef Name="MaCongAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDUYE__MaCon__5EBF139D">
+          <End Role="CONGAN" Type="Self.CONGAN" Multiplicity="0..1" />
+          <End Role="PHIEUDUYETCHUYENKHAU" Type="Self.PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONGAN">
+              <PropertyRef Name="MaCongAn" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETCHUYENKHAU">
+              <PropertyRef Name="MaCongAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDUYE__MaNK___440B1D61">
           <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
           <End Role="PHIEUDUYETNHANKHAU" Type="Self.PHIEUDUYETNHANKHAU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -337,18 +368,6 @@
               <PropertyRef Name="CMND" />
             </Principal>
             <Dependent Role="PHIEUDUYETNHANKHAU">
-              <PropertyRef Name="MaNK_PendingInfo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PHIEUDUYE__MaNK___46E78A0C">
-          <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
-          <End Role="PHIEUDUYETCHUYENKHAU" Type="Self.PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NHANKHAU">
-              <PropertyRef Name="CMND" />
-            </Principal>
-            <Dependent Role="PHIEUDUYETCHUYENKHAU">
               <PropertyRef Name="MaNK_PendingInfo" />
             </Dependent>
           </ReferentialConstraint>
@@ -377,7 +396,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDUYET__MaNK__440B1D61">
+        <Association Name="FK__PHIEUDUYE__MaSHK__5CD6CB2B">
+          <End Role="SOHOKHAU" Type="Self.SOHOKHAU" Multiplicity="0..1" />
+          <End Role="PHIEUDUYETCHUYENKHAU" Type="Self.PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOHOKHAU">
+              <PropertyRef Name="MaSHK" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETCHUYENKHAU">
+              <PropertyRef Name="MaSHKChuyenDen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDUYE__MaSoL__5DCAEF64">
+          <End Role="SOLUUCHUYENKHAU" Type="Self.SOLUUCHUYENKHAU" Multiplicity="0..1" />
+          <End Role="PHIEUDUYETCHUYENKHAU" Type="Self.PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOLUUCHUYENKHAU">
+              <PropertyRef Name="MaSoLuuChuyenKhau" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETCHUYENKHAU">
+              <PropertyRef Name="MaSoLuuChuyenKhau" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDUYET__CMND__5BE2A6F2">
+          <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
+          <End Role="PHIEUDUYETCHUYENKHAU" Type="Self.PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NHANKHAU">
+              <PropertyRef Name="CMND" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETCHUYENKHAU">
+              <PropertyRef Name="CMND" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDUYET__MaNK__44FF419A">
           <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
           <End Role="PHIEUDUYETNHANKHAU" Type="Self.PHIEUDUYETNHANKHAU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -389,19 +444,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDUYET__MaNK__47DBAE45">
-          <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
-          <End Role="PHIEUDUYETCHUYENKHAU" Type="Self.PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NHANKHAU">
-              <PropertyRef Name="CMND" />
-            </Principal>
-            <Dependent Role="PHIEUDUYETCHUYENKHAU">
-              <PropertyRef Name="MaNK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PHIEUKHAI__MaCon__4E88ABD4">
+        <Association Name="FK__PHIEUKHAI__MaCon__4CA06362">
           <End Role="CONGAN" Type="Self.CONGAN" Multiplicity="0..1" />
           <End Role="PHIEUKHAIBAOTAMVANG" Type="Self.PHIEUKHAIBAOTAMVANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -413,7 +456,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUKHAI__MaSoL__4D94879B">
+        <Association Name="FK__PHIEUKHAI__MaSoL__4BAC3F29">
           <End Role="SOLUUTAMVANG" Type="Self.SOLUUTAMVANG" Multiplicity="0..1" />
           <End Role="PHIEUKHAIBAOTAMVANG" Type="Self.PHIEUKHAIBAOTAMVANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -425,7 +468,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUKHAIB__CMND__4F7CD00D">
+        <Association Name="FK__PHIEUKHAIB__CMND__4D94879B">
           <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
           <End Role="PHIEUKHAIBAOTAMVANG" Type="Self.PHIEUKHAIBAOTAMVANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -437,43 +480,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUTHAY__MaCon__5EBF139D">
-          <End Role="CONGAN" Type="Self.CONGAN" Multiplicity="0..1" />
-          <End Role="PHIEUTHAYDOI_HK_NK" Type="Self.PHIEUTHAYDOI_HK_NK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CONGAN">
-              <PropertyRef Name="MaCongAn" />
-            </Principal>
-            <Dependent Role="PHIEUTHAYDOI_HK_NK">
-              <PropertyRef Name="MaCongAn" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PHIEUTHAY__MaSoL__5DCAEF64">
-          <End Role="SOLUUCHUYENKHAU" Type="Self.SOLUUCHUYENKHAU" Multiplicity="0..1" />
-          <End Role="PHIEUTHAYDOI_HK_NK" Type="Self.PHIEUTHAYDOI_HK_NK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SOLUUCHUYENKHAU">
-              <PropertyRef Name="MaSoLuuChuyenKhau" />
-            </Principal>
-            <Dependent Role="PHIEUTHAYDOI_HK_NK">
-              <PropertyRef Name="MaSoLuuChuyenKhau" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PHIEUTHAYD__CMND__5CD6CB2B">
-          <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
-          <End Role="PHIEUTHAYDOI_HK_NK" Type="Self.PHIEUTHAYDOI_HK_NK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NHANKHAU">
-              <PropertyRef Name="CMND" />
-            </Principal>
-            <Dependent Role="PHIEUTHAYDOI_HK_NK">
-              <PropertyRef Name="CMND" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SOHOKHAU__CMNDCh__403A8C7D">
+        <Association Name="FK__SOHOKHAU__CMNDCh__412EB0B6">
           <End Role="NHANKHAU" Type="Self.NHANKHAU" Multiplicity="0..1" />
           <End Role="SOHOKHAU" Type="Self.SOHOKHAU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -509,6 +516,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__SOLUUCHUY__DiaPh__59063A47">
+          <End Role="DIAPHUONG" Type="Self.DIAPHUONG" Multiplicity="1" />
+          <End Role="SOLUUCHUYENKHAU" Type="Self.SOLUUCHUYENKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIAPHUONG">
+              <PropertyRef Name="MaDiaPhuong" />
+            </Principal>
+            <Dependent Role="SOLUUCHUYENKHAU">
+              <PropertyRef Name="DiaPhuong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__SOLUUNHAN__DiaPh__33D4B598">
           <End Role="DIAPHUONG" Type="Self.DIAPHUONG" Multiplicity="1" />
           <End Role="SOLUUNHANKHAU" Type="Self.SOLUUNHANKHAU" Multiplicity="*" />
@@ -521,7 +540,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SOLUUTAMT__DiaPh__52593CB8">
+        <Association Name="FK__SOLUUTAMT__DiaPh__5070F446">
           <End Role="DIAPHUONG" Type="Self.DIAPHUONG" Multiplicity="1" />
           <End Role="SOLUUTAMTRU" Type="Self.SOLUUTAMTRU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -533,7 +552,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SOLUUTAMV__DiaPh__4AB81AF0">
+        <Association Name="FK__SOLUUTAMV__DiaPh__48CFD27E">
           <End Role="DIAPHUONG" Type="Self.DIAPHUONG" Multiplicity="1" />
           <End Role="SOLUUTAMVANG" Type="Self.SOLUUTAMVANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -557,7 +576,6 @@
           <EntitySet Name="PHIEUDUYETNHANKHAU" EntityType="Self.PHIEUDUYETNHANKHAU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUDUYETSOHOKHAU" EntityType="Self.PHIEUDUYETSOHOKHAU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PHIEUKHAIBAOTAMVANG" EntityType="Self.PHIEUKHAIBAOTAMVANG" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PHIEUTHAYDOI_HK_NK" EntityType="Self.PHIEUTHAYDOI_HK_NK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QUYEN" EntityType="Self.QUYEN" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SOHOKHAU" EntityType="Self.SOHOKHAU" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SOLUUCHUYENKHAU" EntityType="Self.SOLUUCHUYENKHAU" Schema="dbo" store:Type="Tables" />
@@ -585,37 +603,45 @@
             <End Role="LOAICONGAN" EntitySet="LOAICONGAN" />
             <End Role="CONGAN" EntitySet="CONGAN" />
           </AssociationSet>
-          <AssociationSet Name="FK__GIAYTAMTR__MaCon__5629CD9C" Association="Self.FK__GIAYTAMTR__MaCon__5629CD9C">
+          <AssociationSet Name="FK__GIAYTAMTR__MaCon__5441852A" Association="Self.FK__GIAYTAMTR__MaCon__5441852A">
             <End Role="CONGAN" EntitySet="CONGAN" />
             <End Role="GIAYTAMTRU" EntitySet="GIAYTAMTRU" />
           </AssociationSet>
-          <AssociationSet Name="FK__GIAYTAMTR__MaGia__5812160E" Association="Self.FK__GIAYTAMTR__MaGia__5812160E">
+          <AssociationSet Name="FK__GIAYTAMTR__MaGia__5629CD9C" Association="Self.FK__GIAYTAMTR__MaGia__5629CD9C">
             <End Role="PHIEUKHAIBAOTAMVANG" EntitySet="PHIEUKHAIBAOTAMVANG" />
             <End Role="GIAYTAMTRU" EntitySet="GIAYTAMTRU" />
           </AssociationSet>
-          <AssociationSet Name="FK__GIAYTAMTR__MaSoL__5535A963" Association="Self.FK__GIAYTAMTR__MaSoL__5535A963">
+          <AssociationSet Name="FK__GIAYTAMTR__MaSoL__534D60F1" Association="Self.FK__GIAYTAMTR__MaSoL__534D60F1">
             <End Role="SOLUUTAMTRU" EntitySet="SOLUUTAMTRU" />
             <End Role="GIAYTAMTRU" EntitySet="GIAYTAMTRU" />
           </AssociationSet>
-          <AssociationSet Name="FK__GIAYTAMTRU__CMND__571DF1D5" Association="Self.FK__GIAYTAMTRU__CMND__571DF1D5">
+          <AssociationSet Name="FK__GIAYTAMTRU__CMND__5535A963" Association="Self.FK__GIAYTAMTRU__CMND__5535A963">
             <End Role="NHANKHAU" EntitySet="NHANKHAU" />
             <End Role="GIAYTAMTRU" EntitySet="GIAYTAMTRU" />
           </AssociationSet>
-          <AssociationSet Name="FK__NHANKHAU__CMND__3E52440B" Association="Self.FK__NHANKHAU__CMND__3E52440B">
+          <AssociationSet Name="FK__NHANKHAU__CMND__3F466844" Association="Self.FK__NHANKHAU__CMND__3F466844">
             <End Role="NGUOI" EntitySet="NGUOI" />
             <End Role="NHANKHAU" EntitySet="NHANKHAU" />
           </AssociationSet>
-          <AssociationSet Name="FK__NHANKHAU__MASHK__3F466844" Association="Self.FK__NHANKHAU__MASHK__3F466844">
+          <AssociationSet Name="FK__NHANKHAU__MASHK__403A8C7D" Association="Self.FK__NHANKHAU__MASHK__403A8C7D">
             <End Role="SOHOKHAU" EntitySet="SOHOKHAU" />
             <End Role="NHANKHAU" EntitySet="NHANKHAU" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDUYE__MaNK___4316F928" Association="Self.FK__PHIEUDUYE__MaNK___4316F928">
-            <End Role="NHANKHAU" EntitySet="NHANKHAU" />
+          <AssociationSet Name="FK__PHIEUDUYE__MaCon__3C69FB99" Association="Self.FK__PHIEUDUYE__MaCon__3C69FB99">
+            <End Role="CONGAN" EntitySet="CONGAN" />
+            <End Role="PHIEUDUYETSOHOKHAU" EntitySet="PHIEUDUYETSOHOKHAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUDUYE__MaCon__45F365D3" Association="Self.FK__PHIEUDUYE__MaCon__45F365D3">
+            <End Role="CONGAN" EntitySet="CONGAN" />
             <End Role="PHIEUDUYETNHANKHAU" EntitySet="PHIEUDUYETNHANKHAU" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDUYE__MaNK___46E78A0C" Association="Self.FK__PHIEUDUYE__MaNK___46E78A0C">
-            <End Role="NHANKHAU" EntitySet="NHANKHAU" />
+          <AssociationSet Name="FK__PHIEUDUYE__MaCon__5EBF139D" Association="Self.FK__PHIEUDUYE__MaCon__5EBF139D">
+            <End Role="CONGAN" EntitySet="CONGAN" />
             <End Role="PHIEUDUYETCHUYENKHAU" EntitySet="PHIEUDUYETCHUYENKHAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUDUYE__MaNK___440B1D61" Association="Self.FK__PHIEUDUYE__MaNK___440B1D61">
+            <End Role="NHANKHAU" EntitySet="NHANKHAU" />
+            <End Role="PHIEUDUYETNHANKHAU" EntitySet="PHIEUDUYETNHANKHAU" />
           </AssociationSet>
           <AssociationSet Name="FK__PHIEUDUYE__MaSHK__3A81B327" Association="Self.FK__PHIEUDUYE__MaSHK__3A81B327">
             <End Role="SOHOKHAU" EntitySet="SOHOKHAU" />
@@ -625,39 +651,35 @@
             <End Role="SOHOKHAU" EntitySet="SOHOKHAU" />
             <End Role="PHIEUDUYETSOHOKHAU" EntitySet="PHIEUDUYETSOHOKHAU" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDUYET__MaNK__440B1D61" Association="Self.FK__PHIEUDUYET__MaNK__440B1D61">
-            <End Role="NHANKHAU" EntitySet="NHANKHAU" />
-            <End Role="PHIEUDUYETNHANKHAU" EntitySet="PHIEUDUYETNHANKHAU" />
+          <AssociationSet Name="FK__PHIEUDUYE__MaSHK__5CD6CB2B" Association="Self.FK__PHIEUDUYE__MaSHK__5CD6CB2B">
+            <End Role="SOHOKHAU" EntitySet="SOHOKHAU" />
+            <End Role="PHIEUDUYETCHUYENKHAU" EntitySet="PHIEUDUYETCHUYENKHAU" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDUYET__MaNK__47DBAE45" Association="Self.FK__PHIEUDUYET__MaNK__47DBAE45">
+          <AssociationSet Name="FK__PHIEUDUYE__MaSoL__5DCAEF64" Association="Self.FK__PHIEUDUYE__MaSoL__5DCAEF64">
+            <End Role="SOLUUCHUYENKHAU" EntitySet="SOLUUCHUYENKHAU" />
+            <End Role="PHIEUDUYETCHUYENKHAU" EntitySet="PHIEUDUYETCHUYENKHAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUDUYET__CMND__5BE2A6F2" Association="Self.FK__PHIEUDUYET__CMND__5BE2A6F2">
             <End Role="NHANKHAU" EntitySet="NHANKHAU" />
             <End Role="PHIEUDUYETCHUYENKHAU" EntitySet="PHIEUDUYETCHUYENKHAU" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUKHAI__MaCon__4E88ABD4" Association="Self.FK__PHIEUKHAI__MaCon__4E88ABD4">
+          <AssociationSet Name="FK__PHIEUDUYET__MaNK__44FF419A" Association="Self.FK__PHIEUDUYET__MaNK__44FF419A">
+            <End Role="NHANKHAU" EntitySet="NHANKHAU" />
+            <End Role="PHIEUDUYETNHANKHAU" EntitySet="PHIEUDUYETNHANKHAU" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUKHAI__MaCon__4CA06362" Association="Self.FK__PHIEUKHAI__MaCon__4CA06362">
             <End Role="CONGAN" EntitySet="CONGAN" />
             <End Role="PHIEUKHAIBAOTAMVANG" EntitySet="PHIEUKHAIBAOTAMVANG" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUKHAI__MaSoL__4D94879B" Association="Self.FK__PHIEUKHAI__MaSoL__4D94879B">
+          <AssociationSet Name="FK__PHIEUKHAI__MaSoL__4BAC3F29" Association="Self.FK__PHIEUKHAI__MaSoL__4BAC3F29">
             <End Role="SOLUUTAMVANG" EntitySet="SOLUUTAMVANG" />
             <End Role="PHIEUKHAIBAOTAMVANG" EntitySet="PHIEUKHAIBAOTAMVANG" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUKHAIB__CMND__4F7CD00D" Association="Self.FK__PHIEUKHAIB__CMND__4F7CD00D">
+          <AssociationSet Name="FK__PHIEUKHAIB__CMND__4D94879B" Association="Self.FK__PHIEUKHAIB__CMND__4D94879B">
             <End Role="NHANKHAU" EntitySet="NHANKHAU" />
             <End Role="PHIEUKHAIBAOTAMVANG" EntitySet="PHIEUKHAIBAOTAMVANG" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUTHAY__MaCon__5EBF139D" Association="Self.FK__PHIEUTHAY__MaCon__5EBF139D">
-            <End Role="CONGAN" EntitySet="CONGAN" />
-            <End Role="PHIEUTHAYDOI_HK_NK" EntitySet="PHIEUTHAYDOI_HK_NK" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PHIEUTHAY__MaSoL__5DCAEF64" Association="Self.FK__PHIEUTHAY__MaSoL__5DCAEF64">
-            <End Role="SOLUUCHUYENKHAU" EntitySet="SOLUUCHUYENKHAU" />
-            <End Role="PHIEUTHAYDOI_HK_NK" EntitySet="PHIEUTHAYDOI_HK_NK" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PHIEUTHAYD__CMND__5CD6CB2B" Association="Self.FK__PHIEUTHAYD__CMND__5CD6CB2B">
-            <End Role="NHANKHAU" EntitySet="NHANKHAU" />
-            <End Role="PHIEUTHAYDOI_HK_NK" EntitySet="PHIEUTHAYDOI_HK_NK" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SOHOKHAU__CMNDCh__403A8C7D" Association="Self.FK__SOHOKHAU__CMNDCh__403A8C7D">
+          <AssociationSet Name="FK__SOHOKHAU__CMNDCh__412EB0B6" Association="Self.FK__SOHOKHAU__CMNDCh__412EB0B6">
             <End Role="NHANKHAU" EntitySet="NHANKHAU" />
             <End Role="SOHOKHAU" EntitySet="SOHOKHAU" />
           </AssociationSet>
@@ -669,15 +691,19 @@
             <End Role="SOLUUNHANKHAU" EntitySet="SOLUUNHANKHAU" />
             <End Role="SOHOKHAU" EntitySet="SOHOKHAU" />
           </AssociationSet>
+          <AssociationSet Name="FK__SOLUUCHUY__DiaPh__59063A47" Association="Self.FK__SOLUUCHUY__DiaPh__59063A47">
+            <End Role="DIAPHUONG" EntitySet="DIAPHUONG" />
+            <End Role="SOLUUCHUYENKHAU" EntitySet="SOLUUCHUYENKHAU" />
+          </AssociationSet>
           <AssociationSet Name="FK__SOLUUNHAN__DiaPh__33D4B598" Association="Self.FK__SOLUUNHAN__DiaPh__33D4B598">
             <End Role="DIAPHUONG" EntitySet="DIAPHUONG" />
             <End Role="SOLUUNHANKHAU" EntitySet="SOLUUNHANKHAU" />
           </AssociationSet>
-          <AssociationSet Name="FK__SOLUUTAMT__DiaPh__52593CB8" Association="Self.FK__SOLUUTAMT__DiaPh__52593CB8">
+          <AssociationSet Name="FK__SOLUUTAMT__DiaPh__5070F446" Association="Self.FK__SOLUUTAMT__DiaPh__5070F446">
             <End Role="DIAPHUONG" EntitySet="DIAPHUONG" />
             <End Role="SOLUUTAMTRU" EntitySet="SOLUUTAMTRU" />
           </AssociationSet>
-          <AssociationSet Name="FK__SOLUUTAMV__DiaPh__4AB81AF0" Association="Self.FK__SOLUUTAMV__DiaPh__4AB81AF0">
+          <AssociationSet Name="FK__SOLUUTAMV__DiaPh__48CFD27E" Association="Self.FK__SOLUUTAMV__DiaPh__48CFD27E">
             <End Role="DIAPHUONG" EntitySet="DIAPHUONG" />
             <End Role="SOLUUTAMVANG" EntitySet="SOLUUTAMVANG" />
           </AssociationSet>
@@ -698,7 +724,6 @@
           <EntitySet Name="PHIEUDUYETNHANKHAUs" EntityType="QLHKModel.PHIEUDUYETNHANKHAU" />
           <EntitySet Name="PHIEUDUYETSOHOKHAUs" EntityType="QLHKModel.PHIEUDUYETSOHOKHAU" />
           <EntitySet Name="PHIEUKHAIBAOTAMVANGs" EntityType="QLHKModel.PHIEUKHAIBAOTAMVANG" />
-          <EntitySet Name="PHIEUTHAYDOI_HK_NK" EntityType="QLHKModel.PHIEUTHAYDOI_HK_NK" />
           <EntitySet Name="QUYENs" EntityType="QLHKModel.QUYEN" />
           <EntitySet Name="SOHOKHAUs" EntityType="QLHKModel.SOHOKHAU" />
           <EntitySet Name="SOLUUCHUYENKHAUs" EntityType="QLHKModel.SOLUUCHUYENKHAU" />
@@ -726,81 +751,93 @@
             <End Role="LOAICONGAN" EntitySet="LOAICONGANs" />
             <End Role="CONGAN" EntitySet="CONGANs" />
           </AssociationSet>
-          <AssociationSet Name="FK__GIAYTAMTR__MaCon__5629CD9C" Association="QLHKModel.FK__GIAYTAMTR__MaCon__5629CD9C">
+          <AssociationSet Name="FK__GIAYTAMTR__MaCon__5441852A" Association="QLHKModel.FK__GIAYTAMTR__MaCon__5441852A">
             <End Role="CONGAN" EntitySet="CONGANs" />
             <End Role="GIAYTAMTRU" EntitySet="GIAYTAMTRUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUKHAI__MaCon__4E88ABD4" Association="QLHKModel.FK__PHIEUKHAI__MaCon__4E88ABD4">
+          <AssociationSet Name="FK__PHIEUDUYE__MaCon__3C69FB99" Association="QLHKModel.FK__PHIEUDUYE__MaCon__3C69FB99">
+            <End Role="CONGAN" EntitySet="CONGANs" />
+            <End Role="PHIEUDUYETSOHOKHAU" EntitySet="PHIEUDUYETSOHOKHAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUDUYE__MaCon__45F365D3" Association="QLHKModel.FK__PHIEUDUYE__MaCon__45F365D3">
+            <End Role="CONGAN" EntitySet="CONGANs" />
+            <End Role="PHIEUDUYETNHANKHAU" EntitySet="PHIEUDUYETNHANKHAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUDUYE__MaCon__5EBF139D" Association="QLHKModel.FK__PHIEUDUYE__MaCon__5EBF139D">
+            <End Role="CONGAN" EntitySet="CONGANs" />
+            <End Role="PHIEUDUYETCHUYENKHAU" EntitySet="PHIEUDUYETCHUYENKHAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUKHAI__MaCon__4CA06362" Association="QLHKModel.FK__PHIEUKHAI__MaCon__4CA06362">
             <End Role="CONGAN" EntitySet="CONGANs" />
             <End Role="PHIEUKHAIBAOTAMVANG" EntitySet="PHIEUKHAIBAOTAMVANGs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PHIEUTHAY__MaCon__5EBF139D" Association="QLHKModel.FK__PHIEUTHAY__MaCon__5EBF139D">
-            <End Role="CONGAN" EntitySet="CONGANs" />
-            <End Role="PHIEUTHAYDOI_HK_NK" EntitySet="PHIEUTHAYDOI_HK_NK" />
           </AssociationSet>
           <AssociationSet Name="FK__SOHOKHAU__MaCong__36B12243" Association="QLHKModel.FK__SOHOKHAU__MaCong__36B12243">
             <End Role="CONGAN" EntitySet="CONGANs" />
             <End Role="SOHOKHAU" EntitySet="SOHOKHAUs" />
           </AssociationSet>
+          <AssociationSet Name="FK__SOLUUCHUY__DiaPh__59063A47" Association="QLHKModel.FK__SOLUUCHUY__DiaPh__59063A47">
+            <End Role="DIAPHUONG" EntitySet="DIAPHUONGs" />
+            <End Role="SOLUUCHUYENKHAU" EntitySet="SOLUUCHUYENKHAUs" />
+          </AssociationSet>
           <AssociationSet Name="FK__SOLUUNHAN__DiaPh__33D4B598" Association="QLHKModel.FK__SOLUUNHAN__DiaPh__33D4B598">
             <End Role="DIAPHUONG" EntitySet="DIAPHUONGs" />
             <End Role="SOLUUNHANKHAU" EntitySet="SOLUUNHANKHAUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__SOLUUTAMT__DiaPh__52593CB8" Association="QLHKModel.FK__SOLUUTAMT__DiaPh__52593CB8">
+          <AssociationSet Name="FK__SOLUUTAMT__DiaPh__5070F446" Association="QLHKModel.FK__SOLUUTAMT__DiaPh__5070F446">
             <End Role="DIAPHUONG" EntitySet="DIAPHUONGs" />
             <End Role="SOLUUTAMTRU" EntitySet="SOLUUTAMTRUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__SOLUUTAMV__DiaPh__4AB81AF0" Association="QLHKModel.FK__SOLUUTAMV__DiaPh__4AB81AF0">
+          <AssociationSet Name="FK__SOLUUTAMV__DiaPh__48CFD27E" Association="QLHKModel.FK__SOLUUTAMV__DiaPh__48CFD27E">
             <End Role="DIAPHUONG" EntitySet="DIAPHUONGs" />
             <End Role="SOLUUTAMVANG" EntitySet="SOLUUTAMVANGs" />
           </AssociationSet>
-          <AssociationSet Name="FK__GIAYTAMTR__MaGia__5812160E" Association="QLHKModel.FK__GIAYTAMTR__MaGia__5812160E">
+          <AssociationSet Name="FK__GIAYTAMTR__MaGia__5629CD9C" Association="QLHKModel.FK__GIAYTAMTR__MaGia__5629CD9C">
             <End Role="PHIEUKHAIBAOTAMVANG" EntitySet="PHIEUKHAIBAOTAMVANGs" />
             <End Role="GIAYTAMTRU" EntitySet="GIAYTAMTRUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__GIAYTAMTR__MaSoL__5535A963" Association="QLHKModel.FK__GIAYTAMTR__MaSoL__5535A963">
+          <AssociationSet Name="FK__GIAYTAMTR__MaSoL__534D60F1" Association="QLHKModel.FK__GIAYTAMTR__MaSoL__534D60F1">
             <End Role="SOLUUTAMTRU" EntitySet="SOLUUTAMTRUs" />
             <End Role="GIAYTAMTRU" EntitySet="GIAYTAMTRUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__GIAYTAMTRU__CMND__571DF1D5" Association="QLHKModel.FK__GIAYTAMTRU__CMND__571DF1D5">
+          <AssociationSet Name="FK__GIAYTAMTRU__CMND__5535A963" Association="QLHKModel.FK__GIAYTAMTRU__CMND__5535A963">
             <End Role="NHANKHAU" EntitySet="NHANKHAUs" />
             <End Role="GIAYTAMTRU" EntitySet="GIAYTAMTRUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__NHANKHAU__CMND__3E52440B" Association="QLHKModel.FK__NHANKHAU__CMND__3E52440B">
+          <AssociationSet Name="FK__NHANKHAU__CMND__3F466844" Association="QLHKModel.FK__NHANKHAU__CMND__3F466844">
             <End Role="NGUOI" EntitySet="NGUOIs" />
             <End Role="NHANKHAU" EntitySet="NHANKHAUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__NHANKHAU__MASHK__3F466844" Association="QLHKModel.FK__NHANKHAU__MASHK__3F466844">
+          <AssociationSet Name="FK__NHANKHAU__MASHK__403A8C7D" Association="QLHKModel.FK__NHANKHAU__MASHK__403A8C7D">
             <End Role="SOHOKHAU" EntitySet="SOHOKHAUs" />
             <End Role="NHANKHAU" EntitySet="NHANKHAUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDUYE__MaNK___4316F928" Association="QLHKModel.FK__PHIEUDUYE__MaNK___4316F928">
+          <AssociationSet Name="FK__PHIEUDUYE__MaNK___440B1D61" Association="QLHKModel.FK__PHIEUDUYE__MaNK___440B1D61">
             <End Role="NHANKHAU" EntitySet="NHANKHAUs" />
             <End Role="PHIEUDUYETNHANKHAU" EntitySet="PHIEUDUYETNHANKHAUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDUYE__MaNK___46E78A0C" Association="QLHKModel.FK__PHIEUDUYE__MaNK___46E78A0C">
+          <AssociationSet Name="FK__PHIEUDUYET__CMND__5BE2A6F2" Association="QLHKModel.FK__PHIEUDUYET__CMND__5BE2A6F2">
             <End Role="NHANKHAU" EntitySet="NHANKHAUs" />
             <End Role="PHIEUDUYETCHUYENKHAU" EntitySet="PHIEUDUYETCHUYENKHAUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDUYET__MaNK__440B1D61" Association="QLHKModel.FK__PHIEUDUYET__MaNK__440B1D61">
+          <AssociationSet Name="FK__PHIEUDUYET__MaNK__44FF419A" Association="QLHKModel.FK__PHIEUDUYET__MaNK__44FF419A">
             <End Role="NHANKHAU" EntitySet="NHANKHAUs" />
             <End Role="PHIEUDUYETNHANKHAU" EntitySet="PHIEUDUYETNHANKHAUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUDUYET__MaNK__47DBAE45" Association="QLHKModel.FK__PHIEUDUYET__MaNK__47DBAE45">
-            <End Role="NHANKHAU" EntitySet="NHANKHAUs" />
-            <End Role="PHIEUDUYETCHUYENKHAU" EntitySet="PHIEUDUYETCHUYENKHAUs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PHIEUKHAIB__CMND__4F7CD00D" Association="QLHKModel.FK__PHIEUKHAIB__CMND__4F7CD00D">
+          <AssociationSet Name="FK__PHIEUKHAIB__CMND__4D94879B" Association="QLHKModel.FK__PHIEUKHAIB__CMND__4D94879B">
             <End Role="NHANKHAU" EntitySet="NHANKHAUs" />
             <End Role="PHIEUKHAIBAOTAMVANG" EntitySet="PHIEUKHAIBAOTAMVANGs" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUTHAYD__CMND__5CD6CB2B" Association="QLHKModel.FK__PHIEUTHAYD__CMND__5CD6CB2B">
-            <End Role="NHANKHAU" EntitySet="NHANKHAUs" />
-            <End Role="PHIEUTHAYDOI_HK_NK" EntitySet="PHIEUTHAYDOI_HK_NK" />
-          </AssociationSet>
-          <AssociationSet Name="FK__SOHOKHAU__CMNDCh__403A8C7D" Association="QLHKModel.FK__SOHOKHAU__CMNDCh__403A8C7D">
+          <AssociationSet Name="FK__SOHOKHAU__CMNDCh__412EB0B6" Association="QLHKModel.FK__SOHOKHAU__CMNDCh__412EB0B6">
             <End Role="NHANKHAU" EntitySet="NHANKHAUs" />
             <End Role="SOHOKHAU" EntitySet="SOHOKHAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUDUYE__MaSHK__5CD6CB2B" Association="QLHKModel.FK__PHIEUDUYE__MaSHK__5CD6CB2B">
+            <End Role="SOHOKHAU" EntitySet="SOHOKHAUs" />
+            <End Role="PHIEUDUYETCHUYENKHAU" EntitySet="PHIEUDUYETCHUYENKHAUs" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PHIEUDUYE__MaSoL__5DCAEF64" Association="QLHKModel.FK__PHIEUDUYE__MaSoL__5DCAEF64">
+            <End Role="SOLUUCHUYENKHAU" EntitySet="SOLUUCHUYENKHAUs" />
+            <End Role="PHIEUDUYETCHUYENKHAU" EntitySet="PHIEUDUYETCHUYENKHAUs" />
           </AssociationSet>
           <AssociationSet Name="FK__PHIEUDUYE__MaSHK__3A81B327" Association="QLHKModel.FK__PHIEUDUYE__MaSHK__3A81B327">
             <End Role="SOHOKHAU" EntitySet="SOHOKHAUs" />
@@ -810,13 +847,9 @@
             <End Role="SOHOKHAU" EntitySet="SOHOKHAUs" />
             <End Role="PHIEUDUYETSOHOKHAU" EntitySet="PHIEUDUYETSOHOKHAUs" />
           </AssociationSet>
-          <AssociationSet Name="FK__PHIEUKHAI__MaSoL__4D94879B" Association="QLHKModel.FK__PHIEUKHAI__MaSoL__4D94879B">
+          <AssociationSet Name="FK__PHIEUKHAI__MaSoL__4BAC3F29" Association="QLHKModel.FK__PHIEUKHAI__MaSoL__4BAC3F29">
             <End Role="SOLUUTAMVANG" EntitySet="SOLUUTAMVANGs" />
             <End Role="PHIEUKHAIBAOTAMVANG" EntitySet="PHIEUKHAIBAOTAMVANGs" />
-          </AssociationSet>
-          <AssociationSet Name="FK__PHIEUTHAY__MaSoL__5DCAEF64" Association="QLHKModel.FK__PHIEUTHAY__MaSoL__5DCAEF64">
-            <End Role="SOLUUCHUYENKHAU" EntitySet="SOLUUCHUYENKHAUs" />
-            <End Role="PHIEUTHAYDOI_HK_NK" EntitySet="PHIEUTHAYDOI_HK_NK" />
           </AssociationSet>
           <AssociationSet Name="FK__SOHOKHAU__MaSoLu__37A5467C" Association="QLHKModel.FK__SOHOKHAU__MaSoLu__37A5467C">
             <End Role="SOLUUNHANKHAU" EntitySet="SOLUUNHANKHAUs" />
@@ -846,9 +879,11 @@
           <NavigationProperty Name="NGUOI" Relationship="QLHKModel.FK__CONGAN__CMND__29572725" FromRole="CONGAN" ToRole="NGUOI" />
           <NavigationProperty Name="DIAPHUONG" Relationship="QLHKModel.FK__CONGAN__MaDiaPhu__2B3F6F97" FromRole="CONGAN" ToRole="DIAPHUONG" />
           <NavigationProperty Name="LOAICONGAN" Relationship="QLHKModel.FK__CONGAN__MaLoaiCo__2A4B4B5E" FromRole="CONGAN" ToRole="LOAICONGAN" />
-          <NavigationProperty Name="GIAYTAMTRUs" Relationship="QLHKModel.FK__GIAYTAMTR__MaCon__5629CD9C" FromRole="CONGAN" ToRole="GIAYTAMTRU" />
-          <NavigationProperty Name="PHIEUKHAIBAOTAMVANGs" Relationship="QLHKModel.FK__PHIEUKHAI__MaCon__4E88ABD4" FromRole="CONGAN" ToRole="PHIEUKHAIBAOTAMVANG" />
-          <NavigationProperty Name="PHIEUTHAYDOI_HK_NK" Relationship="QLHKModel.FK__PHIEUTHAY__MaCon__5EBF139D" FromRole="CONGAN" ToRole="PHIEUTHAYDOI_HK_NK" />
+          <NavigationProperty Name="GIAYTAMTRUs" Relationship="QLHKModel.FK__GIAYTAMTR__MaCon__5441852A" FromRole="CONGAN" ToRole="GIAYTAMTRU" />
+          <NavigationProperty Name="PHIEUDUYETSOHOKHAUs" Relationship="QLHKModel.FK__PHIEUDUYE__MaCon__3C69FB99" FromRole="CONGAN" ToRole="PHIEUDUYETSOHOKHAU" />
+          <NavigationProperty Name="PHIEUDUYETNHANKHAUs" Relationship="QLHKModel.FK__PHIEUDUYE__MaCon__45F365D3" FromRole="CONGAN" ToRole="PHIEUDUYETNHANKHAU" />
+          <NavigationProperty Name="PHIEUDUYETCHUYENKHAUs" Relationship="QLHKModel.FK__PHIEUDUYE__MaCon__5EBF139D" FromRole="CONGAN" ToRole="PHIEUDUYETCHUYENKHAU" />
+          <NavigationProperty Name="PHIEUKHAIBAOTAMVANGs" Relationship="QLHKModel.FK__PHIEUKHAI__MaCon__4CA06362" FromRole="CONGAN" ToRole="PHIEUKHAIBAOTAMVANG" />
           <NavigationProperty Name="SOHOKHAUs" Relationship="QLHKModel.FK__SOHOKHAU__MaCong__36B12243" FromRole="CONGAN" ToRole="SOHOKHAU" />
         </EntityType>
         <EntityType Name="DIAPHUONG">
@@ -858,9 +893,10 @@
           <Property Name="MaDiaPhuong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="TenDiaPhuong" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CONGANs" Relationship="QLHKModel.FK__CONGAN__MaDiaPhu__2B3F6F97" FromRole="DIAPHUONG" ToRole="CONGAN" />
+          <NavigationProperty Name="SOLUUCHUYENKHAUs" Relationship="QLHKModel.FK__SOLUUCHUY__DiaPh__59063A47" FromRole="DIAPHUONG" ToRole="SOLUUCHUYENKHAU" />
           <NavigationProperty Name="SOLUUNHANKHAUs" Relationship="QLHKModel.FK__SOLUUNHAN__DiaPh__33D4B598" FromRole="DIAPHUONG" ToRole="SOLUUNHANKHAU" />
-          <NavigationProperty Name="SOLUUTAMTRUs" Relationship="QLHKModel.FK__SOLUUTAMT__DiaPh__52593CB8" FromRole="DIAPHUONG" ToRole="SOLUUTAMTRU" />
-          <NavigationProperty Name="SOLUUTAMVANGs" Relationship="QLHKModel.FK__SOLUUTAMV__DiaPh__4AB81AF0" FromRole="DIAPHUONG" ToRole="SOLUUTAMVANG" />
+          <NavigationProperty Name="SOLUUTAMTRUs" Relationship="QLHKModel.FK__SOLUUTAMT__DiaPh__5070F446" FromRole="DIAPHUONG" ToRole="SOLUUTAMTRU" />
+          <NavigationProperty Name="SOLUUTAMVANGs" Relationship="QLHKModel.FK__SOLUUTAMV__DiaPh__48CFD27E" FromRole="DIAPHUONG" ToRole="SOLUUTAMVANG" />
         </EntityType>
         <EntityType Name="GIAYTAMTRU">
           <Key>
@@ -876,10 +912,10 @@
           <Property Name="LyDo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="NoiDangKyTamTru" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="MaGiayTamVang" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CONGAN" Relationship="QLHKModel.FK__GIAYTAMTR__MaCon__5629CD9C" FromRole="GIAYTAMTRU" ToRole="CONGAN" />
-          <NavigationProperty Name="PHIEUKHAIBAOTAMVANG" Relationship="QLHKModel.FK__GIAYTAMTR__MaGia__5812160E" FromRole="GIAYTAMTRU" ToRole="PHIEUKHAIBAOTAMVANG" />
-          <NavigationProperty Name="SOLUUTAMTRU" Relationship="QLHKModel.FK__GIAYTAMTR__MaSoL__5535A963" FromRole="GIAYTAMTRU" ToRole="SOLUUTAMTRU" />
-          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__GIAYTAMTRU__CMND__571DF1D5" FromRole="GIAYTAMTRU" ToRole="NHANKHAU" />
+          <NavigationProperty Name="CONGAN" Relationship="QLHKModel.FK__GIAYTAMTR__MaCon__5441852A" FromRole="GIAYTAMTRU" ToRole="CONGAN" />
+          <NavigationProperty Name="PHIEUKHAIBAOTAMVANG" Relationship="QLHKModel.FK__GIAYTAMTR__MaGia__5629CD9C" FromRole="GIAYTAMTRU" ToRole="PHIEUKHAIBAOTAMVANG" />
+          <NavigationProperty Name="SOLUUTAMTRU" Relationship="QLHKModel.FK__GIAYTAMTR__MaSoL__534D60F1" FromRole="GIAYTAMTRU" ToRole="SOLUUTAMTRU" />
+          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__GIAYTAMTRU__CMND__5535A963" FromRole="GIAYTAMTRU" ToRole="NHANKHAU" />
         </EntityType>
         <EntityType Name="LOAICONGAN">
           <Key>
@@ -896,7 +932,7 @@
           </Key>
           <Property Name="CMND" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Ten" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="NgaySinh" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="NgaySinh" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="GioiTinh" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="NgheNghiep" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="NoiSinh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
@@ -905,7 +941,7 @@
           <Property Name="TonGiao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CONGANs" Relationship="QLHKModel.FK__CONGAN__CMND__29572725" FromRole="NGUOI" ToRole="CONGAN" />
-          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__NHANKHAU__CMND__3E52440B" FromRole="NGUOI" ToRole="NHANKHAU" />
+          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__NHANKHAU__CMND__3F466844" FromRole="NGUOI" ToRole="NHANKHAU" />
         </EntityType>
         <EntityType Name="NHANKHAU">
           <Key>
@@ -917,30 +953,33 @@
           <Property Name="ChoOHienNay" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="BanChinhThuc" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="GIAYTAMTRUs" Relationship="QLHKModel.FK__GIAYTAMTRU__CMND__571DF1D5" FromRole="NHANKHAU" ToRole="GIAYTAMTRU" />
-          <NavigationProperty Name="NGUOI" Relationship="QLHKModel.FK__NHANKHAU__CMND__3E52440B" FromRole="NHANKHAU" ToRole="NGUOI" />
-          <NavigationProperty Name="SOHOKHAU" Relationship="QLHKModel.FK__NHANKHAU__MASHK__3F466844" FromRole="NHANKHAU" ToRole="SOHOKHAU" />
-          <NavigationProperty Name="PHIEUDUYETNHANKHAUs" Relationship="QLHKModel.FK__PHIEUDUYE__MaNK___4316F928" FromRole="NHANKHAU" ToRole="PHIEUDUYETNHANKHAU" />
-          <NavigationProperty Name="PHIEUDUYETCHUYENKHAUs" Relationship="QLHKModel.FK__PHIEUDUYE__MaNK___46E78A0C" FromRole="NHANKHAU" ToRole="PHIEUDUYETCHUYENKHAU" />
-          <NavigationProperty Name="PHIEUDUYETNHANKHAUs1" Relationship="QLHKModel.FK__PHIEUDUYET__MaNK__440B1D61" FromRole="NHANKHAU" ToRole="PHIEUDUYETNHANKHAU" />
-          <NavigationProperty Name="PHIEUDUYETCHUYENKHAUs1" Relationship="QLHKModel.FK__PHIEUDUYET__MaNK__47DBAE45" FromRole="NHANKHAU" ToRole="PHIEUDUYETCHUYENKHAU" />
-          <NavigationProperty Name="PHIEUKHAIBAOTAMVANGs" Relationship="QLHKModel.FK__PHIEUKHAIB__CMND__4F7CD00D" FromRole="NHANKHAU" ToRole="PHIEUKHAIBAOTAMVANG" />
-          <NavigationProperty Name="PHIEUTHAYDOI_HK_NK" Relationship="QLHKModel.FK__PHIEUTHAYD__CMND__5CD6CB2B" FromRole="NHANKHAU" ToRole="PHIEUTHAYDOI_HK_NK" />
-          <NavigationProperty Name="SOHOKHAUs" Relationship="QLHKModel.FK__SOHOKHAU__CMNDCh__403A8C7D" FromRole="NHANKHAU" ToRole="SOHOKHAU" />
+          <NavigationProperty Name="GIAYTAMTRUs" Relationship="QLHKModel.FK__GIAYTAMTRU__CMND__5535A963" FromRole="NHANKHAU" ToRole="GIAYTAMTRU" />
+          <NavigationProperty Name="NGUOI" Relationship="QLHKModel.FK__NHANKHAU__CMND__3F466844" FromRole="NHANKHAU" ToRole="NGUOI" />
+          <NavigationProperty Name="SOHOKHAU" Relationship="QLHKModel.FK__NHANKHAU__MASHK__403A8C7D" FromRole="NHANKHAU" ToRole="SOHOKHAU" />
+          <NavigationProperty Name="PHIEUDUYETNHANKHAUs" Relationship="QLHKModel.FK__PHIEUDUYE__MaNK___440B1D61" FromRole="NHANKHAU" ToRole="PHIEUDUYETNHANKHAU" />
+          <NavigationProperty Name="PHIEUDUYETCHUYENKHAUs" Relationship="QLHKModel.FK__PHIEUDUYET__CMND__5BE2A6F2" FromRole="NHANKHAU" ToRole="PHIEUDUYETCHUYENKHAU" />
+          <NavigationProperty Name="PHIEUDUYETNHANKHAUs1" Relationship="QLHKModel.FK__PHIEUDUYET__MaNK__44FF419A" FromRole="NHANKHAU" ToRole="PHIEUDUYETNHANKHAU" />
+          <NavigationProperty Name="PHIEUKHAIBAOTAMVANGs" Relationship="QLHKModel.FK__PHIEUKHAIB__CMND__4D94879B" FromRole="NHANKHAU" ToRole="PHIEUKHAIBAOTAMVANG" />
+          <NavigationProperty Name="SOHOKHAUs" Relationship="QLHKModel.FK__SOHOKHAU__CMNDCh__412EB0B6" FromRole="NHANKHAU" ToRole="SOHOKHAU" />
         </EntityType>
         <EntityType Name="PHIEUDUYETCHUYENKHAU">
           <Key>
-            <PropertyRef Name="MaPD_NK" />
+            <PropertyRef Name="MaPhieuThayDoi" />
           </Key>
-          <Property Name="MaPD_NK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="MaNK_PendingInfo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="MaNK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaPhieuThayDoi" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CMND" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaSHKChuyenDen" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaSoLuuChuyenKhau" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaCongAn" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LyDo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="NgayTao" Type="DateTime" Precision="0" />
           <Property Name="NgayDuyet" Type="DateTime" Precision="0" />
-          <Property Name="ActionType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DaDuyet" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__PHIEUDUYE__MaNK___46E78A0C" FromRole="PHIEUDUYETCHUYENKHAU" ToRole="NHANKHAU" />
-          <NavigationProperty Name="NHANKHAU1" Relationship="QLHKModel.FK__PHIEUDUYET__MaNK__47DBAE45" FromRole="PHIEUDUYETCHUYENKHAU" ToRole="NHANKHAU" />
+          <NavigationProperty Name="CONGAN" Relationship="QLHKModel.FK__PHIEUDUYE__MaCon__5EBF139D" FromRole="PHIEUDUYETCHUYENKHAU" ToRole="CONGAN" />
+          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__PHIEUDUYET__CMND__5BE2A6F2" FromRole="PHIEUDUYETCHUYENKHAU" ToRole="NHANKHAU" />
+          <NavigationProperty Name="SOHOKHAU" Relationship="QLHKModel.FK__PHIEUDUYE__MaSHK__5CD6CB2B" FromRole="PHIEUDUYETCHUYENKHAU" ToRole="SOHOKHAU" />
+          <NavigationProperty Name="SOLUUCHUYENKHAU" Relationship="QLHKModel.FK__PHIEUDUYE__MaSoL__5DCAEF64" FromRole="PHIEUDUYETCHUYENKHAU" ToRole="SOLUUCHUYENKHAU" />
         </EntityType>
         <EntityType Name="PHIEUDUYETNHANKHAU">
           <Key>
@@ -949,12 +988,15 @@
           <Property Name="MaPD_NK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MaNK_PendingInfo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MaNK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaCongAn" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="NgayTao" Type="DateTime" Precision="0" />
           <Property Name="NgayDuyet" Type="DateTime" Precision="0" />
+          <Property Name="DaDuyet" Type="Boolean" Nullable="false" />
           <Property Name="ActionType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__PHIEUDUYE__MaNK___4316F928" FromRole="PHIEUDUYETNHANKHAU" ToRole="NHANKHAU" />
-          <NavigationProperty Name="NHANKHAU1" Relationship="QLHKModel.FK__PHIEUDUYET__MaNK__440B1D61" FromRole="PHIEUDUYETNHANKHAU" ToRole="NHANKHAU" />
+          <NavigationProperty Name="CONGAN" Relationship="QLHKModel.FK__PHIEUDUYE__MaCon__45F365D3" FromRole="PHIEUDUYETNHANKHAU" ToRole="CONGAN" />
+          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__PHIEUDUYE__MaNK___440B1D61" FromRole="PHIEUDUYETNHANKHAU" ToRole="NHANKHAU" />
+          <NavigationProperty Name="NHANKHAU1" Relationship="QLHKModel.FK__PHIEUDUYET__MaNK__44FF419A" FromRole="PHIEUDUYETNHANKHAU" ToRole="NHANKHAU" />
         </EntityType>
         <EntityType Name="PHIEUDUYETSOHOKHAU">
           <Key>
@@ -963,10 +1005,13 @@
           <Property Name="MaPD_SHK" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MaSHK_PendingInfo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="MaSHK" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MaCongAn" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="NgayTao" Type="DateTime" Precision="0" />
           <Property Name="NgayDuyet" Type="DateTime" Precision="0" />
+          <Property Name="DaDuyet" Type="Boolean" Nullable="false" />
           <Property Name="ActionType" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CONGAN" Relationship="QLHKModel.FK__PHIEUDUYE__MaCon__3C69FB99" FromRole="PHIEUDUYETSOHOKHAU" ToRole="CONGAN" />
           <NavigationProperty Name="SOHOKHAU" Relationship="QLHKModel.FK__PHIEUDUYE__MaSHK__3A81B327" FromRole="PHIEUDUYETSOHOKHAU" ToRole="SOHOKHAU" />
           <NavigationProperty Name="SOHOKHAU1" Relationship="QLHKModel.FK__PHIEUDUYE__MaSHK__3B75D760" FromRole="PHIEUDUYETSOHOKHAU" ToRole="SOHOKHAU" />
         </EntityType>
@@ -983,25 +1028,10 @@
           <Property Name="NgayKetThuc" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="LyDo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="CoTreEmDiTheo" Type="Int32" />
-          <NavigationProperty Name="CONGAN" Relationship="QLHKModel.FK__PHIEUKHAI__MaCon__4E88ABD4" FromRole="PHIEUKHAIBAOTAMVANG" ToRole="CONGAN" />
-          <NavigationProperty Name="GIAYTAMTRUs" Relationship="QLHKModel.FK__GIAYTAMTR__MaGia__5812160E" FromRole="PHIEUKHAIBAOTAMVANG" ToRole="GIAYTAMTRU" />
-          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__PHIEUKHAIB__CMND__4F7CD00D" FromRole="PHIEUKHAIBAOTAMVANG" ToRole="NHANKHAU" />
-          <NavigationProperty Name="SOLUUTAMVANG" Relationship="QLHKModel.FK__PHIEUKHAI__MaSoL__4D94879B" FromRole="PHIEUKHAIBAOTAMVANG" ToRole="SOLUUTAMVANG" />
-        </EntityType>
-        <EntityType Name="PHIEUTHAYDOI_HK_NK">
-          <Key>
-            <PropertyRef Name="MaPhieuThayDoi" />
-          </Key>
-          <Property Name="MaPhieuThayDoi" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="CMND" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="MaSoLuuChuyenKhau" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="MaCongAn" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="NgayKhaiBao" Type="DateTime" Nullable="false" Precision="0" />
-          <Property Name="NoiThayDoi" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LyDo" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="CONGAN" Relationship="QLHKModel.FK__PHIEUTHAY__MaCon__5EBF139D" FromRole="PHIEUTHAYDOI_HK_NK" ToRole="CONGAN" />
-          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__PHIEUTHAYD__CMND__5CD6CB2B" FromRole="PHIEUTHAYDOI_HK_NK" ToRole="NHANKHAU" />
-          <NavigationProperty Name="SOLUUCHUYENKHAU" Relationship="QLHKModel.FK__PHIEUTHAY__MaSoL__5DCAEF64" FromRole="PHIEUTHAYDOI_HK_NK" ToRole="SOLUUCHUYENKHAU" />
+          <NavigationProperty Name="CONGAN" Relationship="QLHKModel.FK__PHIEUKHAI__MaCon__4CA06362" FromRole="PHIEUKHAIBAOTAMVANG" ToRole="CONGAN" />
+          <NavigationProperty Name="GIAYTAMTRUs" Relationship="QLHKModel.FK__GIAYTAMTR__MaGia__5629CD9C" FromRole="PHIEUKHAIBAOTAMVANG" ToRole="GIAYTAMTRU" />
+          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__PHIEUKHAIB__CMND__4D94879B" FromRole="PHIEUKHAIBAOTAMVANG" ToRole="NHANKHAU" />
+          <NavigationProperty Name="SOLUUTAMVANG" Relationship="QLHKModel.FK__PHIEUKHAI__MaSoL__4BAC3F29" FromRole="PHIEUKHAIBAOTAMVANG" ToRole="SOLUUTAMVANG" />
         </EntityType>
         <EntityType Name="QUYEN">
           <Key>
@@ -1025,8 +1055,9 @@
           <Property Name="BanChinhThuc" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="CONGAN" Relationship="QLHKModel.FK__SOHOKHAU__MaCong__36B12243" FromRole="SOHOKHAU" ToRole="CONGAN" />
-          <NavigationProperty Name="NHANKHAUs" Relationship="QLHKModel.FK__NHANKHAU__MASHK__3F466844" FromRole="SOHOKHAU" ToRole="NHANKHAU" />
-          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__SOHOKHAU__CMNDCh__403A8C7D" FromRole="SOHOKHAU" ToRole="NHANKHAU" />
+          <NavigationProperty Name="NHANKHAUs" Relationship="QLHKModel.FK__NHANKHAU__MASHK__403A8C7D" FromRole="SOHOKHAU" ToRole="NHANKHAU" />
+          <NavigationProperty Name="NHANKHAU" Relationship="QLHKModel.FK__SOHOKHAU__CMNDCh__412EB0B6" FromRole="SOHOKHAU" ToRole="NHANKHAU" />
+          <NavigationProperty Name="PHIEUDUYETCHUYENKHAUs" Relationship="QLHKModel.FK__PHIEUDUYE__MaSHK__5CD6CB2B" FromRole="SOHOKHAU" ToRole="PHIEUDUYETCHUYENKHAU" />
           <NavigationProperty Name="PHIEUDUYETSOHOKHAUs" Relationship="QLHKModel.FK__PHIEUDUYE__MaSHK__3A81B327" FromRole="SOHOKHAU" ToRole="PHIEUDUYETSOHOKHAU" />
           <NavigationProperty Name="PHIEUDUYETSOHOKHAUs1" Relationship="QLHKModel.FK__PHIEUDUYE__MaSHK__3B75D760" FromRole="SOHOKHAU" ToRole="PHIEUDUYETSOHOKHAU" />
           <NavigationProperty Name="SOLUUNHANKHAU" Relationship="QLHKModel.FK__SOHOKHAU__MaSoLu__37A5467C" FromRole="SOHOKHAU" ToRole="SOLUUNHANKHAU" />
@@ -1036,8 +1067,9 @@
             <PropertyRef Name="MaSoLuuChuyenKhau" />
           </Key>
           <Property Name="MaSoLuuChuyenKhau" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="DiaPhuong" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="PHIEUTHAYDOI_HK_NK" Relationship="QLHKModel.FK__PHIEUTHAY__MaSoL__5DCAEF64" FromRole="SOLUUCHUYENKHAU" ToRole="PHIEUTHAYDOI_HK_NK" />
+          <Property Name="DiaPhuong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="DIAPHUONG1" Relationship="QLHKModel.FK__SOLUUCHUY__DiaPh__59063A47" FromRole="SOLUUCHUYENKHAU" ToRole="DIAPHUONG" />
+          <NavigationProperty Name="PHIEUDUYETCHUYENKHAUs" Relationship="QLHKModel.FK__PHIEUDUYE__MaSoL__5DCAEF64" FromRole="SOLUUCHUYENKHAU" ToRole="PHIEUDUYETCHUYENKHAU" />
         </EntityType>
         <EntityType Name="SOLUUNHANKHAU">
           <Key>
@@ -1054,8 +1086,8 @@
           </Key>
           <Property Name="MaSoLuuTamtru" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="DiaPhuong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DIAPHUONG1" Relationship="QLHKModel.FK__SOLUUTAMT__DiaPh__52593CB8" FromRole="SOLUUTAMTRU" ToRole="DIAPHUONG" />
-          <NavigationProperty Name="GIAYTAMTRUs" Relationship="QLHKModel.FK__GIAYTAMTR__MaSoL__5535A963" FromRole="SOLUUTAMTRU" ToRole="GIAYTAMTRU" />
+          <NavigationProperty Name="DIAPHUONG1" Relationship="QLHKModel.FK__SOLUUTAMT__DiaPh__5070F446" FromRole="SOLUUTAMTRU" ToRole="DIAPHUONG" />
+          <NavigationProperty Name="GIAYTAMTRUs" Relationship="QLHKModel.FK__GIAYTAMTR__MaSoL__534D60F1" FromRole="SOLUUTAMTRU" ToRole="GIAYTAMTRU" />
         </EntityType>
         <EntityType Name="SOLUUTAMVANG">
           <Key>
@@ -1063,8 +1095,8 @@
           </Key>
           <Property Name="MaSoLuuTamVang" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="DiaPhuong" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="DIAPHUONG1" Relationship="QLHKModel.FK__SOLUUTAMV__DiaPh__4AB81AF0" FromRole="SOLUUTAMVANG" ToRole="DIAPHUONG" />
-          <NavigationProperty Name="PHIEUKHAIBAOTAMVANGs" Relationship="QLHKModel.FK__PHIEUKHAI__MaSoL__4D94879B" FromRole="SOLUUTAMVANG" ToRole="PHIEUKHAIBAOTAMVANG" />
+          <NavigationProperty Name="DIAPHUONG1" Relationship="QLHKModel.FK__SOLUUTAMV__DiaPh__48CFD27E" FromRole="SOLUUTAMVANG" ToRole="DIAPHUONG" />
+          <NavigationProperty Name="PHIEUKHAIBAOTAMVANGs" Relationship="QLHKModel.FK__PHIEUKHAI__MaSoL__4BAC3F29" FromRole="SOLUUTAMVANG" ToRole="PHIEUKHAIBAOTAMVANG" />
         </EntityType>
         <EntityType Name="THAMSO">
           <Key>
@@ -1133,7 +1165,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GIAYTAMTR__MaCon__5629CD9C">
+        <Association Name="FK__GIAYTAMTR__MaCon__5441852A">
           <End Type="QLHKModel.CONGAN" Role="CONGAN" Multiplicity="0..1" />
           <End Type="QLHKModel.GIAYTAMTRU" Role="GIAYTAMTRU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1145,7 +1177,43 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUKHAI__MaCon__4E88ABD4">
+        <Association Name="FK__PHIEUDUYE__MaCon__3C69FB99">
+          <End Type="QLHKModel.CONGAN" Role="CONGAN" Multiplicity="0..1" />
+          <End Type="QLHKModel.PHIEUDUYETSOHOKHAU" Role="PHIEUDUYETSOHOKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONGAN">
+              <PropertyRef Name="MaCongAn" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETSOHOKHAU">
+              <PropertyRef Name="MaCongAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDUYE__MaCon__45F365D3">
+          <End Type="QLHKModel.CONGAN" Role="CONGAN" Multiplicity="0..1" />
+          <End Type="QLHKModel.PHIEUDUYETNHANKHAU" Role="PHIEUDUYETNHANKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONGAN">
+              <PropertyRef Name="MaCongAn" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETNHANKHAU">
+              <PropertyRef Name="MaCongAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDUYE__MaCon__5EBF139D">
+          <End Type="QLHKModel.CONGAN" Role="CONGAN" Multiplicity="0..1" />
+          <End Type="QLHKModel.PHIEUDUYETCHUYENKHAU" Role="PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CONGAN">
+              <PropertyRef Name="MaCongAn" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETCHUYENKHAU">
+              <PropertyRef Name="MaCongAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUKHAI__MaCon__4CA06362">
           <End Type="QLHKModel.CONGAN" Role="CONGAN" Multiplicity="0..1" />
           <End Type="QLHKModel.PHIEUKHAIBAOTAMVANG" Role="PHIEUKHAIBAOTAMVANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1153,18 +1221,6 @@
               <PropertyRef Name="MaCongAn" />
             </Principal>
             <Dependent Role="PHIEUKHAIBAOTAMVANG">
-              <PropertyRef Name="MaCongAn" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PHIEUTHAY__MaCon__5EBF139D">
-          <End Type="QLHKModel.CONGAN" Role="CONGAN" Multiplicity="0..1" />
-          <End Type="QLHKModel.PHIEUTHAYDOI_HK_NK" Role="PHIEUTHAYDOI_HK_NK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CONGAN">
-              <PropertyRef Name="MaCongAn" />
-            </Principal>
-            <Dependent Role="PHIEUTHAYDOI_HK_NK">
               <PropertyRef Name="MaCongAn" />
             </Dependent>
           </ReferentialConstraint>
@@ -1181,6 +1237,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__SOLUUCHUY__DiaPh__59063A47">
+          <End Type="QLHKModel.DIAPHUONG" Role="DIAPHUONG" Multiplicity="1" />
+          <End Type="QLHKModel.SOLUUCHUYENKHAU" Role="SOLUUCHUYENKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DIAPHUONG">
+              <PropertyRef Name="MaDiaPhuong" />
+            </Principal>
+            <Dependent Role="SOLUUCHUYENKHAU">
+              <PropertyRef Name="DiaPhuong" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__SOLUUNHAN__DiaPh__33D4B598">
           <End Type="QLHKModel.DIAPHUONG" Role="DIAPHUONG" Multiplicity="1" />
           <End Type="QLHKModel.SOLUUNHANKHAU" Role="SOLUUNHANKHAU" Multiplicity="*" />
@@ -1193,7 +1261,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SOLUUTAMT__DiaPh__52593CB8">
+        <Association Name="FK__SOLUUTAMT__DiaPh__5070F446">
           <End Type="QLHKModel.DIAPHUONG" Role="DIAPHUONG" Multiplicity="1" />
           <End Type="QLHKModel.SOLUUTAMTRU" Role="SOLUUTAMTRU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1205,7 +1273,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__SOLUUTAMV__DiaPh__4AB81AF0">
+        <Association Name="FK__SOLUUTAMV__DiaPh__48CFD27E">
           <End Type="QLHKModel.DIAPHUONG" Role="DIAPHUONG" Multiplicity="1" />
           <End Type="QLHKModel.SOLUUTAMVANG" Role="SOLUUTAMVANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1217,7 +1285,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GIAYTAMTR__MaGia__5812160E">
+        <Association Name="FK__GIAYTAMTR__MaGia__5629CD9C">
           <End Type="QLHKModel.PHIEUKHAIBAOTAMVANG" Role="PHIEUKHAIBAOTAMVANG" Multiplicity="0..1" />
           <End Type="QLHKModel.GIAYTAMTRU" Role="GIAYTAMTRU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1229,7 +1297,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GIAYTAMTR__MaSoL__5535A963">
+        <Association Name="FK__GIAYTAMTR__MaSoL__534D60F1">
           <End Type="QLHKModel.SOLUUTAMTRU" Role="SOLUUTAMTRU" Multiplicity="0..1" />
           <End Type="QLHKModel.GIAYTAMTRU" Role="GIAYTAMTRU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1241,7 +1309,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__GIAYTAMTRU__CMND__571DF1D5">
+        <Association Name="FK__GIAYTAMTRU__CMND__5535A963">
           <End Type="QLHKModel.NHANKHAU" Role="NHANKHAU" Multiplicity="0..1" />
           <End Type="QLHKModel.GIAYTAMTRU" Role="GIAYTAMTRU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1253,7 +1321,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NHANKHAU__CMND__3E52440B">
+        <Association Name="FK__NHANKHAU__CMND__3F466844">
           <End Type="QLHKModel.NGUOI" Role="NGUOI" Multiplicity="1" />
           <End Type="QLHKModel.NHANKHAU" Role="NHANKHAU" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -1265,7 +1333,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__NHANKHAU__MASHK__3F466844">
+        <Association Name="FK__NHANKHAU__MASHK__403A8C7D">
           <End Type="QLHKModel.SOHOKHAU" Role="SOHOKHAU" Multiplicity="0..1" />
           <End Type="QLHKModel.NHANKHAU" Role="NHANKHAU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1277,7 +1345,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDUYE__MaNK___4316F928">
+        <Association Name="FK__PHIEUDUYE__MaNK___440B1D61">
           <End Type="QLHKModel.NHANKHAU" Role="NHANKHAU" Multiplicity="0..1" />
           <End Type="QLHKModel.PHIEUDUYETNHANKHAU" Role="PHIEUDUYETNHANKHAU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1289,7 +1357,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDUYE__MaNK___46E78A0C">
+        <Association Name="FK__PHIEUDUYET__CMND__5BE2A6F2">
           <End Type="QLHKModel.NHANKHAU" Role="NHANKHAU" Multiplicity="0..1" />
           <End Type="QLHKModel.PHIEUDUYETCHUYENKHAU" Role="PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1297,11 +1365,11 @@
               <PropertyRef Name="CMND" />
             </Principal>
             <Dependent Role="PHIEUDUYETCHUYENKHAU">
-              <PropertyRef Name="MaNK_PendingInfo" />
+              <PropertyRef Name="CMND" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDUYET__MaNK__440B1D61">
+        <Association Name="FK__PHIEUDUYET__MaNK__44FF419A">
           <End Type="QLHKModel.NHANKHAU" Role="NHANKHAU" Multiplicity="0..1" />
           <End Type="QLHKModel.PHIEUDUYETNHANKHAU" Role="PHIEUDUYETNHANKHAU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1313,19 +1381,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUDUYET__MaNK__47DBAE45">
-          <End Type="QLHKModel.NHANKHAU" Role="NHANKHAU" Multiplicity="0..1" />
-          <End Type="QLHKModel.PHIEUDUYETCHUYENKHAU" Role="PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NHANKHAU">
-              <PropertyRef Name="CMND" />
-            </Principal>
-            <Dependent Role="PHIEUDUYETCHUYENKHAU">
-              <PropertyRef Name="MaNK" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PHIEUKHAIB__CMND__4F7CD00D">
+        <Association Name="FK__PHIEUKHAIB__CMND__4D94879B">
           <End Type="QLHKModel.NHANKHAU" Role="NHANKHAU" Multiplicity="0..1" />
           <End Type="QLHKModel.PHIEUKHAIBAOTAMVANG" Role="PHIEUKHAIBAOTAMVANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1337,19 +1393,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUTHAYD__CMND__5CD6CB2B">
-          <End Type="QLHKModel.NHANKHAU" Role="NHANKHAU" Multiplicity="0..1" />
-          <End Type="QLHKModel.PHIEUTHAYDOI_HK_NK" Role="PHIEUTHAYDOI_HK_NK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NHANKHAU">
-              <PropertyRef Name="CMND" />
-            </Principal>
-            <Dependent Role="PHIEUTHAYDOI_HK_NK">
-              <PropertyRef Name="CMND" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__SOHOKHAU__CMNDCh__403A8C7D">
+        <Association Name="FK__SOHOKHAU__CMNDCh__412EB0B6">
           <End Type="QLHKModel.NHANKHAU" Role="NHANKHAU" Multiplicity="0..1" />
           <End Type="QLHKModel.SOHOKHAU" Role="SOHOKHAU" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1358,6 +1402,30 @@
             </Principal>
             <Dependent Role="SOHOKHAU">
               <PropertyRef Name="CMNDChuHo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDUYE__MaSHK__5CD6CB2B">
+          <End Type="QLHKModel.SOHOKHAU" Role="SOHOKHAU" Multiplicity="0..1" />
+          <End Type="QLHKModel.PHIEUDUYETCHUYENKHAU" Role="PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOHOKHAU">
+              <PropertyRef Name="MaSHK" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETCHUYENKHAU">
+              <PropertyRef Name="MaSHKChuyenDen" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PHIEUDUYE__MaSoL__5DCAEF64">
+          <End Type="QLHKModel.SOLUUCHUYENKHAU" Role="SOLUUCHUYENKHAU" Multiplicity="0..1" />
+          <End Type="QLHKModel.PHIEUDUYETCHUYENKHAU" Role="PHIEUDUYETCHUYENKHAU" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SOLUUCHUYENKHAU">
+              <PropertyRef Name="MaSoLuuChuyenKhau" />
+            </Principal>
+            <Dependent Role="PHIEUDUYETCHUYENKHAU">
+              <PropertyRef Name="MaSoLuuChuyenKhau" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1385,7 +1453,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PHIEUKHAI__MaSoL__4D94879B">
+        <Association Name="FK__PHIEUKHAI__MaSoL__4BAC3F29">
           <End Type="QLHKModel.SOLUUTAMVANG" Role="SOLUUTAMVANG" Multiplicity="0..1" />
           <End Type="QLHKModel.PHIEUKHAIBAOTAMVANG" Role="PHIEUKHAIBAOTAMVANG" Multiplicity="*" />
           <ReferentialConstraint>
@@ -1394,18 +1462,6 @@
             </Principal>
             <Dependent Role="PHIEUKHAIBAOTAMVANG">
               <PropertyRef Name="MaSoLuuTamVang" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__PHIEUTHAY__MaSoL__5DCAEF64">
-          <End Type="QLHKModel.SOLUUCHUYENKHAU" Role="SOLUUCHUYENKHAU" Multiplicity="0..1" />
-          <End Type="QLHKModel.PHIEUTHAYDOI_HK_NK" Role="PHIEUTHAYDOI_HK_NK" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="SOLUUCHUYENKHAU">
-              <PropertyRef Name="MaSoLuuChuyenKhau" />
-            </Principal>
-            <Dependent Role="PHIEUTHAYDOI_HK_NK">
-              <PropertyRef Name="MaSoLuuChuyenKhau" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1421,7 +1477,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -1511,12 +1567,15 @@
             <EntityTypeMapping TypeName="QLHKModel.PHIEUDUYETCHUYENKHAU">
               <MappingFragment StoreEntitySet="PHIEUDUYETCHUYENKHAU">
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-                <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="DaDuyet" ColumnName="DaDuyet" />
                 <ScalarProperty Name="NgayDuyet" ColumnName="NgayDuyet" />
                 <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
-                <ScalarProperty Name="MaNK" ColumnName="MaNK" />
-                <ScalarProperty Name="MaNK_PendingInfo" ColumnName="MaNK_PendingInfo" />
-                <ScalarProperty Name="MaPD_NK" ColumnName="MaPD_NK" />
+                <ScalarProperty Name="LyDo" ColumnName="LyDo" />
+                <ScalarProperty Name="MaCongAn" ColumnName="MaCongAn" />
+                <ScalarProperty Name="MaSoLuuChuyenKhau" ColumnName="MaSoLuuChuyenKhau" />
+                <ScalarProperty Name="MaSHKChuyenDen" ColumnName="MaSHKChuyenDen" />
+                <ScalarProperty Name="CMND" ColumnName="CMND" />
+                <ScalarProperty Name="MaPhieuThayDoi" ColumnName="MaPhieuThayDoi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1525,8 +1584,10 @@
               <MappingFragment StoreEntitySet="PHIEUDUYETNHANKHAU">
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="DaDuyet" ColumnName="DaDuyet" />
                 <ScalarProperty Name="NgayDuyet" ColumnName="NgayDuyet" />
                 <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="MaCongAn" ColumnName="MaCongAn" />
                 <ScalarProperty Name="MaNK" ColumnName="MaNK" />
                 <ScalarProperty Name="MaNK_PendingInfo" ColumnName="MaNK_PendingInfo" />
                 <ScalarProperty Name="MaPD_NK" ColumnName="MaPD_NK" />
@@ -1538,8 +1599,10 @@
               <MappingFragment StoreEntitySet="PHIEUDUYETSOHOKHAU">
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ActionType" ColumnName="ActionType" />
+                <ScalarProperty Name="DaDuyet" ColumnName="DaDuyet" />
                 <ScalarProperty Name="NgayDuyet" ColumnName="NgayDuyet" />
                 <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+                <ScalarProperty Name="MaCongAn" ColumnName="MaCongAn" />
                 <ScalarProperty Name="MaSHK" ColumnName="MaSHK" />
                 <ScalarProperty Name="MaSHK_PendingInfo" ColumnName="MaSHK_PendingInfo" />
                 <ScalarProperty Name="MaPD_SHK" ColumnName="MaPD_SHK" />
@@ -1558,19 +1621,6 @@
                 <ScalarProperty Name="MaCongAn" ColumnName="MaCongAn" />
                 <ScalarProperty Name="MaSoLuuTamVang" ColumnName="MaSoLuuTamVang" />
                 <ScalarProperty Name="MaPhieuKhaiBao" ColumnName="MaPhieuKhaiBao" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PHIEUTHAYDOI_HK_NK">
-            <EntityTypeMapping TypeName="QLHKModel.PHIEUTHAYDOI_HK_NK">
-              <MappingFragment StoreEntitySet="PHIEUTHAYDOI_HK_NK">
-                <ScalarProperty Name="LyDo" ColumnName="LyDo" />
-                <ScalarProperty Name="NoiThayDoi" ColumnName="NoiThayDoi" />
-                <ScalarProperty Name="NgayKhaiBao" ColumnName="NgayKhaiBao" />
-                <ScalarProperty Name="MaCongAn" ColumnName="MaCongAn" />
-                <ScalarProperty Name="MaSoLuuChuyenKhau" ColumnName="MaSoLuuChuyenKhau" />
-                <ScalarProperty Name="CMND" ColumnName="CMND" />
-                <ScalarProperty Name="MaPhieuThayDoi" ColumnName="MaPhieuThayDoi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -213,8 +213,8 @@
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"
                     Tag="{StaticResource homePage}"
-                    Content="Trang chủ"
-                    Command="{Binding TrangChu_SelectedCommand}"
+                    Content="Quản lý nhân khẩu"
+                    Command="{Binding QLNhanKhau_Page_SelectedCommand}"
                     IsChecked="True"/>
                 <RadioButton
                     GroupName="Menu"
