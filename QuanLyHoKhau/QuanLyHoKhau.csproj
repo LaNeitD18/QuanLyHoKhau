@@ -120,13 +120,16 @@
     <Compile Include="Model\NHANKHAU.cs">
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\NHANKHAUCHODUYET.cs">
+    <Compile Include="Model\PHIEUDUYETCHUYENKHAU.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PHIEUDUYETNHANKHAU.cs">
+      <DependentUpon>QLHKEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PHIEUDUYETSOHOKHAU.cs">
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\PHIEUKHAIBAOTAMVANG.cs">
-      <DependentUpon>QLHKEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\PHIEUTHAYDOI_HK_NK.cs">
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\QLHKEntities.Context.cs">
@@ -148,9 +151,6 @@
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SOHOKHAU.cs">
-      <DependentUpon>QLHKEntities.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\SOHOKHAUCHODUYET.cs">
       <DependentUpon>QLHKEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\SoHoKhauModel.cs" />

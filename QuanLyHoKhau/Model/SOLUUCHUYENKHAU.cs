@@ -17,13 +17,14 @@ namespace QuanLyHoKhau.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SOLUUCHUYENKHAU()
         {
-            this.PHIEUTHAYDOI_HK_NK = new HashSet<PHIEUTHAYDOI_HK_NK>();
+            this.PHIEUDUYETCHUYENKHAUs = new HashSet<PHIEUDUYETCHUYENKHAU>();
         }
     
         public string MaSoLuuChuyenKhau { get; set; }
         public string DiaPhuong { get; set; }
     
+        public virtual DIAPHUONG DIAPHUONG1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PHIEUTHAYDOI_HK_NK> PHIEUTHAYDOI_HK_NK { get; set; }
+        public virtual ICollection<PHIEUDUYETCHUYENKHAU> PHIEUDUYETCHUYENKHAUs { get; set; }
     }
 }

@@ -18,7 +18,9 @@ namespace QuanLyHoKhau.Model
         public SOHOKHAU()
         {
             this.NHANKHAUs = new HashSet<NHANKHAU>();
-            this.NHANKHAUCHODUYETs = new HashSet<NHANKHAUCHODUYET>();
+            this.PHIEUDUYETCHUYENKHAUs = new HashSet<PHIEUDUYETCHUYENKHAU>();
+            this.PHIEUDUYETSOHOKHAUs = new HashSet<PHIEUDUYETSOHOKHAU>();
+            this.PHIEUDUYETSOHOKHAUs1 = new HashSet<PHIEUDUYETSOHOKHAU>();
         }
     
         public string MaSHK { get; set; }
@@ -27,6 +29,7 @@ namespace QuanLyHoKhau.Model
         public string MaSoLuuNhanKhau { get; set; }
         public string DiaChi { get; set; }
         public System.DateTime NgayTaoSo { get; set; }
+        public bool BanChinhThuc { get; set; }
         public bool IsDeleted { get; set; }
     
         public virtual CONGAN CONGAN { get; set; }
@@ -34,8 +37,11 @@ namespace QuanLyHoKhau.Model
         public virtual ICollection<NHANKHAU> NHANKHAUs { get; set; }
         public virtual NHANKHAU NHANKHAU { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<NHANKHAUCHODUYET> NHANKHAUCHODUYETs { get; set; }
+        public virtual ICollection<PHIEUDUYETCHUYENKHAU> PHIEUDUYETCHUYENKHAUs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PHIEUDUYETSOHOKHAU> PHIEUDUYETSOHOKHAUs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PHIEUDUYETSOHOKHAU> PHIEUDUYETSOHOKHAUs1 { get; set; }
         public virtual SOLUUNHANKHAU SOLUUNHANKHAU { get; set; }
-        public virtual SOHOKHAUCHODUYET SOHOKHAUCHODUYET { get; set; }
     }
 }

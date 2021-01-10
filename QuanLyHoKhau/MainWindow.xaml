@@ -512,7 +512,7 @@
                 Background="Teal"
                 Foreground="White"
                 Height="50"
-                Command="{Binding BtnAddSoHoKhau_Command}"
+                Command="{Binding LogOut_Command}"
                 HorizontalContentAlignment="Stretch"
                 VerticalContentAlignment="Stretch">
                 <Button.Resources>

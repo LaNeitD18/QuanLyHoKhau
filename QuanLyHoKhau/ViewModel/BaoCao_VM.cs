@@ -144,7 +144,7 @@ namespace QuanLyHoKhau.ViewModel
             NewGiayTamVangsInMonth = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.NgayKhaiBao.Month == SelectedMonth && x.NgayKhaiBao.Year == DateTime.Now.Year).Count();
             // xem va sua lai db, ko cho NgayKhaiBao nullable
             NewGiayTamTrusInMonth = DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.NgayKhaiBao.Value.Month == SelectedMonth && x.NgayKhaiBao.Value.Year == DateTime.Now.Year).Count();
-            NewGiayChuyenKhausInMonth = DataProvider.Ins.DB.PHIEUTHAYDOI_HK_NK.Where(x => x.NgayKhaiBao.Month == SelectedMonth && x.NgayKhaiBao.Year == DateTime.Now.Year).Count();
+            NewGiayChuyenKhausInMonth = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == SelectedMonth && x.NgayTao.Value.Year == DateTime.Now.Year).Count();
 
             PieSeries = new SeriesCollection {
                 new PieSeries {
@@ -186,7 +186,7 @@ namespace QuanLyHoKhau.ViewModel
                     countItemsInMonth = DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.NgayKhaiBao.Value.Year == SelectedYear && x.NgayKhaiBao.Value.Month == i).Count();
                 }
                 else if(SelectedIndexLoaiGiayTo == (int)LoaiGiayTo.GiayChuyenKhau) {
-                    countItemsInMonth = DataProvider.Ins.DB.PHIEUTHAYDOI_HK_NK.Where(x => x.NgayKhaiBao.Year == SelectedYear && x.NgayKhaiBao.Month == i).Count();
+                    countItemsInMonth = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Year == SelectedYear && x.NgayTao.Value.Month == i).Count();
                 }
                 ItemsCountedEachMonth.Add(countItemsInMonth);
             }

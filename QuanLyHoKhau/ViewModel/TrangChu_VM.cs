@@ -123,7 +123,7 @@ namespace QuanLyHoKhau.ViewModel
             NewTamTrusInfo = countNewTamTrus.ToString() + "/1000";
 
             // calculate number of new giaychuyenkhau
-            int countNewChuyenKhaus = DataProvider.Ins.DB.PHIEUTHAYDOI_HK_NK.Where(x => x.NgayKhaiBao.Month == thisMonth && x.NgayKhaiBao.Year == thisYear).Count();
+            int countNewChuyenKhaus = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear).Count();
             GiayChuyenKhauProgress = countNewChuyenKhaus / 1000;
             NewChuyenKhausInfo = countNewChuyenKhaus.ToString() + "/1000";
         }
