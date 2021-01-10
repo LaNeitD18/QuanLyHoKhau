@@ -29,6 +29,7 @@ namespace QuanLyHoKhau.ViewModel
 
             BtnChuyenKhau_Command = new RelayCommand((p) => {
                 ChuyenKhauWindow chuyenKhauWindow = new ChuyenKhauWindow();
+                chuyenKhauWindow.DataContext = new ChuyenKhau_VM();
                 chuyenKhauWindow.ShowDialog();
             });
         }
