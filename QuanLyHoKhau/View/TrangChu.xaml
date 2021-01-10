@@ -102,7 +102,7 @@
         <Grid Grid.ColumnSpan="7" Grid.RowSpan="4" Grid.Row="4">
             <customcontrols:InfoCard 
                 Margin="10,0" 
-                Text1="Sổ hộ khẩu chờ duyệt" Text2="67 Gb / 128 Gb" 
+                Text1="Sổ hộ khẩu        chờ duyệt" Text2="67 Gb / 128 Gb" 
                 imageSource="/images/classroom.png" 
                 Progress="66" 
                 IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
@@ -118,7 +118,7 @@
         <Grid Grid.Column="7" Grid.ColumnSpan="7" Grid.Row="4" Grid.RowSpan="4">
             <customcontrols:InfoCard 
                 Margin="10,0" 
-                Text1="Nhân khẩu chờ duyệt" Text2="67 Gb / 128 Gb" 
+                Text1="Nhân khẩu       chờ duyệt" Text2="67 Gb / 128 Gb" 
                 imageSource="/images/classroom.png" 
                 Progress="66" 
                 IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
@@ -180,9 +180,9 @@
         <Grid Grid.Column="7" Grid.ColumnSpan="7" Grid.Row="11" Grid.RowSpan="4">
             <customcontrols:InfoCard 
                 Margin="10,0" 
-                Text1="Giấy tạm vắng" Text2="67 Gb / 128 Gb" 
+                Text1="Giấy tạm vắng" Text2="{Binding NewTamVangsInfo}" 
                 imageSource="/images/classroom.png" 
-                Progress="66" 
+                Progress="{Binding GiayTamVangProgress}" 
                 IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
                 ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
                 ProgressBackgroundBrushMouseOver="#2B88C9" 
@@ -196,9 +196,9 @@
         <Grid Grid.Column="14" Grid.ColumnSpan="7" Grid.Row="11" Grid.RowSpan="4">
             <customcontrols:InfoCard 
                 Margin="10,0" 
-                Text1="Giấy tạm trú" Text2="67 Gb / 128 Gb" 
+                Text1="Giấy tạm trú" Text2="{Binding NewTamTrusInfo}" 
                 imageSource="/images/classroom.png" 
-                Progress="66" 
+                Progress="{Binding GiayTamTruProgress}" 
                 IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
                 ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
                 ProgressBackgroundBrushMouseOver="#2B88C9" 
@@ -212,9 +212,9 @@
         <Grid Grid.Column="21" Grid.ColumnSpan="7" Grid.Row="11" Grid.RowSpan="4">
             <customcontrols:InfoCard 
                 Margin="10,0" 
-                Text1="Giấy chuyển khẩu" Text2="67 Gb / 128 Gb" 
+                Text1="Giấy chuyển khẩu" Text2="{Binding NewChuyenKhausInfo}" 
                 imageSource="/images/classroom.png" 
-                Progress="66" 
+                Progress="{Binding GiayChuyenKhauProgress}" 
                 IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
                 ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
                 ProgressBackgroundBrushMouseOver="#2B88C9" 

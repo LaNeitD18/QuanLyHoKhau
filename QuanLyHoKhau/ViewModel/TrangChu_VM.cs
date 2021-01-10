@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyHoKhau.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,48 @@ namespace QuanLyHoKhau.ViewModel
                 _CurrentTime = value; OnPropertyChanged();
             }
         }
+
+        private double _GiayTamVangProgress;
+        public double GiayTamVangProgress
+        {
+            get { return _GiayTamVangProgress; }
+            set { _GiayTamVangProgress = value; OnPropertyChanged(); }
+        }
+
+        private string _NewTamVangsInfo;
+        public string NewTamVangsInfo
+        {
+            get { return _NewTamVangsInfo; }
+            set { _NewTamVangsInfo = value; OnPropertyChanged(); }
+        }
+
+        private double _GiayTamTruProgress;
+        public double GiayTamTruProgress
+        {
+            get { return _GiayTamTruProgress; }
+            set { _GiayTamTruProgress = value; OnPropertyChanged(); }
+        }
+
+        private string _NewTamTrusInfo;
+        public string NewTamTrusInfo
+        {
+            get { return _NewTamTrusInfo; }
+            set { _NewTamTrusInfo = value; OnPropertyChanged(); }
+        }
+
+        private double _GiayChuyenKhauProgress;
+        public double GiayChuyenKhauProgress
+        {
+            get { return _GiayChuyenKhauProgress; }
+            set { _GiayChuyenKhauProgress = value; OnPropertyChanged(); }
+        }
+
+        private string _NewChuyenKhausInfo;
+        public string NewChuyenKhausInfo
+        {
+            get { return _NewChuyenKhausInfo; }
+            set { _NewChuyenKhausInfo = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region Functions
@@ -63,6 +106,27 @@ namespace QuanLyHoKhau.ViewModel
             }
             return "";
         }
+
+        private void LoadData()
+        {
+            int thisMonth = DateTime.Now.Month;
+            int thisYear = DateTime.Now.Year;
+
+            // calculate number of new giaytamvang
+            int countNewTamVangs = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.NgayKhaiBao.Month == thisMonth && x.NgayKhaiBao.Year == thisYear).Count();
+            GiayTamVangProgress = countNewTamVangs / 1000;
+            NewTamVangsInfo = countNewTamVangs.ToString() + "/1000";
+
+            // calculate number of new giaytamtru
+            int countNewTamTrus = DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.NgayKhaiBao.Value.Month == thisMonth && x.NgayKhaiBao.Value.Year == thisYear).Count();
+            GiayTamTruProgress = countNewTamTrus / 1000;
+            NewTamTrusInfo = countNewTamTrus.ToString() + "/1000";
+
+            // calculate number of new giaychuyenkhau
+            int countNewChuyenKhaus = DataProvider.Ins.DB.PHIEUTHAYDOI_HK_NK.Where(x => x.NgayKhaiBao.Month == thisMonth && x.NgayKhaiBao.Year == thisYear).Count();
+            GiayChuyenKhauProgress = countNewChuyenKhaus / 1000;
+            NewChuyenKhausInfo = countNewChuyenKhaus.ToString() + "/1000";
+        }
         private void GetTimeNow()
         {
             CurrentTime = DateTime.Now.ToString("HH:mm:ss");
@@ -84,6 +148,7 @@ namespace QuanLyHoKhau.ViewModel
         public TrangChu_VM()
         {
             GetTimeNow();
+            LoadData();
         }
     }
 }
