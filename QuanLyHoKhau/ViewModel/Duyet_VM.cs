@@ -1,12 +1,235 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using QuanLyHoKhau.Model;
 
 namespace QuanLyHoKhau.ViewModel
 {
-    class Duyet_VM
+    public class Duyet_VM: BaseViewModel
     {
+        #region class display support
+
+        public class NhanKhauChoDuyetDisplay
+        {
+            private PHIEUDUYETNHANKHAU _phieuDuyet;
+            public PHIEUDUYETNHANKHAU PhieuDuyet
+            {
+                get { return _phieuDuyet; }
+                set { _phieuDuyet = value; }
+            }
+
+            private NHANKHAU _nhanKhau;
+            public NHANKHAU NhanKhau
+            {
+                get{ return _nhanKhau; }
+                set { _nhanKhau = value; }
+            }
+
+            private NHANKHAU _nhanKhauPending;
+            public NHANKHAU NhanKhauPending
+            {
+                get { return _nhanKhauPending; }
+                set { _nhanKhauPending = value; }
+            }
+
+            private NGUOI _nguoiInfo;
+            public NGUOI NguoiInfo
+            {
+                get { return _nguoiInfo; }
+                set { _nguoiInfo = value; }
+            }
+        }
+        #endregion
+
+        #region ComboBox LoaiGiayTo 
+        // first parameter is id
+        // second parameter is displayed string
+        private List<Tuple<int, string>> _listLoaiGiayTo;
+        public List<Tuple<int, string>> ListLoaiGiayTo
+        {
+            get
+            {
+                if(_listLoaiGiayTo == null)
+                {
+                    _listLoaiGiayTo = new List<Tuple<int, string>>();
+                    _listLoaiGiayTo.Add(new Tuple<int, string>(0, "Nhân khẩu"));
+                    _listLoaiGiayTo.Add(new Tuple<int, string>(1, "Hộ khẩu"));
+                    _listLoaiGiayTo.Add(new Tuple<int, string>(2, "Chuyển khẩu"));
+                }
+                return _listLoaiGiayTo;
+            }
+            set { _listLoaiGiayTo = value; }
+        }
+
+        private Tuple<int, string> _selectedLoaiGiayTo;
+        public Tuple<int, string> SelectedLoaiGiayTo
+        {
+            get
+            {
+                if(_selectedLoaiGiayTo == null)
+                {
+                    _selectedLoaiGiayTo = ListLoaiGiayTo[0];
+                }
+                return _selectedLoaiGiayTo;
+            }
+            set { _selectedLoaiGiayTo = value; }
+        }
+        #endregion
+
+        #region NhanKhau
+
+        private ObservableCollection<NhanKhauChoDuyetDisplay> _listNhanKhauChoDuyet;
+        public ObservableCollection<NhanKhauChoDuyetDisplay> ListNhanKhauChoDuyet
+        {
+            get
+            {
+                if(_listNhanKhauChoDuyet == null)
+                {
+                    _listNhanKhauChoDuyet = new ObservableCollection<NhanKhauChoDuyetDisplay>();
+
+                    var listPhieuDuyetNhanKhau = (from p in DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs
+                                                  where p.DaDuyet == false
+                                                  select p).ToList();
+
+                    foreach(var phieu in listPhieuDuyetNhanKhau)
+                    {
+                        NhanKhauChoDuyetDisplay nhanKhau = new NhanKhauChoDuyetDisplay();
+                        nhanKhau.NhanKhau = DataProvider.Ins.DB.NHANKHAUs.Find(phieu.MaNK);
+                        nhanKhau.NhanKhauPending = DataProvider.Ins.DB.NHANKHAUs.Find(phieu.MaNK_PendingInfo);
+                        nhanKhau.PhieuDuyet = phieu;
+                        nhanKhau.NguoiInfo = DataProvider.Ins.DB.NGUOIs.Find(nhanKhau.NhanKhau.CMND);
+
+                        _listNhanKhauChoDuyet.Add(nhanKhau);
+                    }
+                }
+
+                return _listNhanKhauChoDuyet;
+            }
+            set
+            {
+                _listNhanKhauChoDuyet = value;
+                OnPropertyChanged("ListNhanKhauChoDuyet");
+            }
+        }
+
+        #region Duyet Nhan Khau
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns>Null if success, otherwise, return error message</returns>
+        public string DuyetNhanKhau(object input)
+        {
+            NhanKhauChoDuyetDisplay nhanKhauChoDuyet = input as NhanKhauChoDuyetDisplay;
+
+            if (nhanKhauChoDuyet == null) return "DataType for input not valid"; // check data type
+
+            string errorMsg = null;
+            switch(nhanKhauChoDuyet.PhieuDuyet.ActionType)
+            {
+                case DuyetActionTypes.Add:
+                    errorMsg = AddNhanKhau(nhanKhauChoDuyet);
+                    break;
+                case DuyetActionTypes.Edit:
+                    errorMsg = EditNhanKhau(nhanKhauChoDuyet);
+                    break;
+                case DuyetActionTypes.Remove:
+                    errorMsg = RemoveNhanKhau(nhanKhauChoDuyet);
+                    break;
+            }
+
+            return errorMsg;
+        }
+
+        public string TuChoiDuyetNhanKhau(object input)
+        {
+            NhanKhauChoDuyetDisplay nhanKhauChoDuyet = input as NhanKhauChoDuyetDisplay;
+
+            if (nhanKhauChoDuyet == null) return "DataType for input not valid"; // check data type
+
+            string errorMsg = null;
+
+            nhanKhauChoDuyet.PhieuDuyet.DaDuyet = true;
+
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errorMsg = e.Message;
+                return errorMsg;
+            }
+
+            ListNhanKhauChoDuyet.Remove(nhanKhauChoDuyet);
+            return errorMsg;
+        }
+
+        private string AddNhanKhau(NhanKhauChoDuyetDisplay nhanKhau)
+        {
+            DataProvider.Ins.DB.NHANKHAUs.Add(nhanKhau.NhanKhauPending);
+
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                var msg = e.Message;
+                return msg;
+            }
+
+            ListNhanKhauChoDuyet.Remove(nhanKhau);
+            return null;
+        }
+
+        private string EditNhanKhau(NhanKhauChoDuyetDisplay nhanKhau)
+        {
+            var oldCmnd = nhanKhau.NhanKhau.CMND;
+
+            nhanKhau.NhanKhau.CopyInfo(nhanKhau.NhanKhauPending);
+
+            nhanKhau.NhanKhau.CMND = oldCmnd; // we copy info but the primary key we dont change
+            nhanKhau.NhanKhau.BanChinhThuc = true;
+
+            nhanKhau.PhieuDuyet.DaDuyet = true;
+
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch(Exception e)
+            {
+                var msg = e.Message;
+                return msg;
+            }
+
+            ListNhanKhauChoDuyet.Remove(nhanKhau);
+            return null;
+        }
+
+        private string RemoveNhanKhau(NhanKhauChoDuyetDisplay nhanKhau)
+        {
+            nhanKhau.NhanKhauPending.IsDeleted = true;
+
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                var msg = e.Message;
+                return msg;
+            }
+
+            ListNhanKhauChoDuyet.Remove(nhanKhau);
+            return null;
+        }
+
+        #endregion
+        #endregion
     }
 }

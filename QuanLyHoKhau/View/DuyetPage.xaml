@@ -76,18 +76,13 @@
                         materialDesign:HintAssist.Hint="Chọn loại giấy tờ" 
                         VerticalAlignment="Center" 
                         Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                        ItemsSource="{Binding ListSOLUUNHANKHAU}" 
+                        ItemsSource="{Binding ListLoaiGiayTo}" 
                         KeyboardNavigation.TabIndex="1" 
-                        SelectedItem="{Binding SelectedSoLuuNhanKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
+                        SelectedItem="{Binding SelectedLoaiGiayTo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" SelectionChanged="ComboBox_SelectionChanged">
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock Text="{Binding MaSoLuuNhanKhau}"></TextBlock>
+                                    <TextBlock Text="{Binding Item2}"></TextBlock>
                                 </StackPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
@@ -141,7 +136,7 @@
                 </Button.Content>
             </Button>
         </Grid>
-        <materialDesign:Card Grid.Row="3" Grid.RowSpan="14" Grid.ColumnSpan="31" Margin="5,0">
+        <materialDesign:Card x:Name="CdSHK" Grid.Row="3" Grid.RowSpan="14" Grid.ColumnSpan="31" Margin="5,0" Visibility="Hidden">
             <DataGrid 
                 x:Name="listUsingExamDatagrid"
                 HorizontalAlignment="Stretch" 
@@ -186,5 +181,90 @@
                 </i:Interaction.Triggers>
             </DataGrid>
         </materialDesign:Card>
+        <materialDesign:Card x:Name="CdNhanKhau" Grid.Row="3" Grid.RowSpan="14" Grid.ColumnSpan="31" Margin="5,0" Visibility="Visible">
+            <DataGrid 
+                x:Name="listUsingExamDatagr"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Top" 
+                ItemsSource="{Binding ListNhanKhauChoDuyet}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectionMode="Extended"
+                AutoGenerateColumns="False"
+                SelectedItem="{Binding SelectedUsingExam, Mode=TwoWay}"
+                SelectionUnit="FullRow" 
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserResizeColumns="True"
+                CanUserResizeRows="False"
+                IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="CMND" Binding="{Binding NhanKhau.CMND}"/>
+                    <DataGridTextColumn Header="Tên" Binding="{Binding NguoiInfo.Ten}"/>
+                    <DataGridTextColumn Header="Quan hệ với chủ hộ" Binding="{Binding NhanKhauPending.QuanHeVoiChuHo}"/>
+                    <DataGridTextColumn Header="Chỗ ở hiện nay" Binding="{Binding NhanKhauPending.ChoOHienNay}"/>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btnApproveNhanKhau" Content="Duyệt" Height="Auto" Width="75" Margin="5" Click="btnApproveNhanKhau_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button  x:Name="btnRejectNhanKhau" Content="Từ chối" Height="Auto" Width="75" Margin="5" Click="btnRejectNhanKhau_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </materialDesign:Card>
+        <materialDesign:Card x:Name="CdChuyenKhau" Grid.Row="3" Grid.RowSpan="14" Grid.ColumnSpan="31" Margin="5,0" Visibility="Hidden">
+            <DataGrid 
+                x:Name="listUsingExamDatagri"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Top" 
+                ItemsSource="{Binding ListFilteredSoHoKhau}"
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectionMode="Extended"
+                AutoGenerateColumns="False"
+                SelectedItem="{Binding SelectedUsingExam, Mode=TwoWay}"
+                SelectionUnit="FullRow" 
+                CanUserAddRows="False"
+                CanUserDeleteRows="False"
+                CanUserResizeColumns="True"
+                CanUserResizeRows="False"
+                IsReadOnly="True">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Mã phiếu thay đổi" Binding="{Binding MaPhieuThayDoi}"/>
+                    <DataGridTextColumn Header="CMND" Binding="{Binding CMND}"/>
+                    <DataGridTextColumn Header="Mã SHK chuyển đến" Binding="{Binding MaSHKChuyenDen}"/>
+                    <DataGridTextColumn Header="Lý do" Binding="{Binding LyDo}"/>
+                    <DataGridTextColumn Header="Ngày tạo" Binding="{Binding NgayTao}"/>
+                    <!--<DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btnApprove" Content="Duyệt" Height="Auto" Width="75" Margin="5"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button  x:Name="btnReject" Content="Từ chối" Height="Auto" Width="75" Margin="5"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>-->
+                </DataGrid.Columns>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction 
+                            Command="{Binding UsingExam_SelectionChangedCommand}"                       
+                            CommandParameter="{Binding ElementName=listUsingExamDatagrid}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </DataGrid>
+        </materialDesign:Card>
+
     </Grid>
 </Page>
