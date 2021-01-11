@@ -141,7 +141,7 @@
                 x:Name="listUsingExamDatagrid"
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Top" 
-                ItemsSource="{Binding ListFilteredSoHoKhau}"
+                ItemsSource="{Binding ListSoHoKhauChoDuyet}"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 SelectionMode="Extended"
                 AutoGenerateColumns="False"
@@ -153,24 +153,24 @@
                 CanUserResizeRows="False"
                 IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã sổ hộ khẩu" Binding="{Binding MaSHK}"/>
-                    <DataGridTextColumn Header="CMND chủ hộ" Binding="{Binding CMNDChuHo}"/>
-                    <DataGridTextColumn Header="Mã sổ lưu nhân khẩu" Binding="{Binding MaSoLuuNhanKhau}"/>
-                    <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DiaChi}"/>
-                    <!--<DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Mã sổ hộ khẩu" Binding="{Binding PhieuDuyet.MaSHK}"/>
+                    <DataGridTextColumn Header="CMND chủ hộ" Binding="{Binding SoHoKhauPending.CMNDChuHo}"/>
+                    <DataGridTextColumn Header="Mã sổ lưu nhân khẩu" Binding="{Binding SoHoKhauPending.MaSoLuuNhanKhau}"/>
+                    <DataGridTextColumn Header="Địa chỉ" Binding="{Binding SoHoKhauPending.DiaChi}"/>
+                    <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="btnApprove" Content="Duyệt" Height="Auto" Width="75" Margin="5"/>
+                                <Button x:Name="btnApproveSHK" Content="Duyệt" Height="Auto" Width="75" Margin="5" Click="btnApproveSHK_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button  x:Name="btnReject" Content="Từ chối" Height="Auto" Width="75" Margin="5"/>
+                                <Button  x:Name="btnRejectSHK" Content="Từ chối" Height="Auto" Width="75" Margin="5" Click="btnRejectSHK_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">

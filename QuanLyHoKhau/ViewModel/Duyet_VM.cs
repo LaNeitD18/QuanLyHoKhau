@@ -42,6 +42,30 @@ namespace QuanLyHoKhau.ViewModel
                 set { _nguoiInfo = value; }
             }
         }
+
+        public class SoHoKhauChoDuyetDisplay
+        {
+            private PHIEUDUYETSOHOKHAU _phieuDuyet;
+            public PHIEUDUYETSOHOKHAU PhieuDuyet
+            {
+                get { return _phieuDuyet; }
+                set { _phieuDuyet = value; }
+            }
+
+            private SOHOKHAU _soHoKhau;
+            public SOHOKHAU SoHoKhau
+            {
+                get { return _soHoKhau; }
+                set { _soHoKhau = value; }
+            }
+
+            private SOHOKHAU _soHoKhauPending;
+            public SOHOKHAU SoHoKhauPending
+            {
+                get { return _soHoKhauPending; }
+                set { _soHoKhauPending = value; }
+            }
+        }
         #endregion
 
         #region ComboBox LoaiGiayTo 
@@ -226,6 +250,152 @@ namespace QuanLyHoKhau.ViewModel
             }
 
             ListNhanKhauChoDuyet.Remove(nhanKhau);
+            return null;
+        }
+
+        #endregion
+        #endregion
+
+        #region SoHoKhau
+        private ObservableCollection<SoHoKhauChoDuyetDisplay> _listSoHoKhauChoDuyet;
+        public ObservableCollection<SoHoKhauChoDuyetDisplay> ListSoHoKhauChoDuyet
+        {
+            get
+            {
+                if (_listSoHoKhauChoDuyet == null)
+                {
+                    _listSoHoKhauChoDuyet = new ObservableCollection<SoHoKhauChoDuyetDisplay>();
+
+                    var listPhieuDuyetSoHoKhau = (from p in DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs
+                                                  where p.DaDuyet == false
+                                                  select p).ToList();
+
+                    foreach (var phieu in listPhieuDuyetSoHoKhau)
+                    {
+                        SoHoKhauChoDuyetDisplay soHoKhau = new SoHoKhauChoDuyetDisplay();
+                        soHoKhau.PhieuDuyet = phieu;
+                        soHoKhau.SoHoKhau = DataProvider.Ins.DB.SOHOKHAUs.Find(phieu.MaSHK);
+                        soHoKhau.SoHoKhauPending = DataProvider.Ins.DB.SOHOKHAUs.Find(phieu.MaSHK_PendingInfo);
+
+                        _listSoHoKhauChoDuyet.Add(soHoKhau);
+                    }
+                }
+
+                return _listSoHoKhauChoDuyet;
+            }
+            set
+            {
+                _listSoHoKhauChoDuyet = value;
+                OnPropertyChanged("ListSoHoKhauChoDuyet");
+            }
+        }
+
+        #region Duyet SHK
+        public string DuyetSoHoKhau(object input)
+        {
+            SoHoKhauChoDuyetDisplay soHoKhauChoDuyet = input as SoHoKhauChoDuyetDisplay;
+
+            if (soHoKhauChoDuyet == null) return "DataType for input not valid"; // check data type
+
+            string errorMsg = null;
+            switch (soHoKhauChoDuyet.PhieuDuyet.ActionType)
+            {
+                case DuyetActionTypes.Add:
+                    errorMsg = AddSoHoKhau(soHoKhauChoDuyet);
+                    break;
+                case DuyetActionTypes.Edit:
+                    errorMsg = EditSoHoKhau(soHoKhauChoDuyet);
+                    break;
+                case DuyetActionTypes.Remove:
+                    errorMsg = RemoveSoHoKhau(soHoKhauChoDuyet);
+                    break;
+            }
+
+            return errorMsg;
+        }
+
+        public string TuChoiDuyetSoHoKhau(object input)
+        {
+            SoHoKhauChoDuyetDisplay soHoKhauChoDuyet = input as SoHoKhauChoDuyetDisplay;
+
+            if (soHoKhauChoDuyet == null) return "DataType for input not valid"; // check data type
+
+            string errorMsg = null;
+
+            soHoKhauChoDuyet.PhieuDuyet.DaDuyet = true;
+
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errorMsg = e.Message;
+                return errorMsg;
+            }
+
+            ListSoHoKhauChoDuyet.Remove(soHoKhauChoDuyet);
+            return errorMsg;
+        }
+
+        private string AddSoHoKhau(SoHoKhauChoDuyetDisplay soHoKhau)
+        {
+            DataProvider.Ins.DB.SOHOKHAUs.Add(soHoKhau.SoHoKhau);
+
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                var msg = e.Message;
+                return msg;
+            }
+
+            ListSoHoKhauChoDuyet.Remove(soHoKhau);
+            return null;
+        }
+
+        private string EditSoHoKhau(SoHoKhauChoDuyetDisplay soHoKhau)
+        {
+            var oldMaSHK = soHoKhau.SoHoKhau.MaSHK;
+
+            soHoKhau.SoHoKhau.CopyInfo(soHoKhau.SoHoKhauPending);
+
+            soHoKhau.SoHoKhau.MaSHK = oldMaSHK; // we copy info but the primary key we dont change
+            soHoKhau.SoHoKhau.BanChinhThuc = true;
+
+            soHoKhau.PhieuDuyet.DaDuyet = true;
+
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                var msg = e.Message;
+                return msg;
+            }
+
+            ListSoHoKhauChoDuyet.Remove(soHoKhau);
+            return null;
+        }
+
+        private string RemoveSoHoKhau(SoHoKhauChoDuyetDisplay soHoKhau)
+        {
+            soHoKhau.SoHoKhau.IsDeleted = true;
+
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                var msg = e.Message;
+                return msg;
+            }
+
+            ListSoHoKhauChoDuyet.Remove(soHoKhau);
             return null;
         }
 
