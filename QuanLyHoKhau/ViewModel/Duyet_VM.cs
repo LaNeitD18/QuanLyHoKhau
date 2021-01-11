@@ -66,6 +66,16 @@ namespace QuanLyHoKhau.ViewModel
                 set { _soHoKhauPending = value; }
             }
         }
+
+        public class ChuyenKhauChoDuyetDisplay
+        {
+            private PHIEUDUYETCHUYENKHAU _phieuDuyet;
+            public PHIEUDUYETCHUYENKHAU PhieuDuyet
+            {
+                get { return _phieuDuyet; }
+                set { _phieuDuyet = value; }
+            }
+        }
         #endregion
 
         #region ComboBox LoaiGiayTo 
@@ -399,6 +409,91 @@ namespace QuanLyHoKhau.ViewModel
             return null;
         }
 
+        #endregion
+        #endregion
+
+        #region ChuyenKhau
+        private ObservableCollection<ChuyenKhauChoDuyetDisplay> _listChuyenKhauChoDuyet;
+        public ObservableCollection<ChuyenKhauChoDuyetDisplay> ListChuyenKhauChoDuyet
+        {
+            get
+            {
+                if (_listChuyenKhauChoDuyet == null)
+                {
+                    _listChuyenKhauChoDuyet = new ObservableCollection<ChuyenKhauChoDuyetDisplay>();
+
+                    var listPhieuDuyetChuyenKhau = (from p in DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs
+                                                  where p.DaDuyet == false
+                                                  select p).ToList();
+
+                    foreach (var phieu in listPhieuDuyetChuyenKhau)
+                    {
+                        ChuyenKhauChoDuyetDisplay chuyenKhau = new ChuyenKhauChoDuyetDisplay();
+                        chuyenKhau.PhieuDuyet = phieu;
+
+                        _listChuyenKhauChoDuyet.Add(chuyenKhau);
+                    }
+                }
+
+                return _listChuyenKhauChoDuyet;
+            }
+            set
+            {
+                _listChuyenKhauChoDuyet = value;
+                OnPropertyChanged("ListChuyenKhauChoDuyet");
+            }
+        }
+
+        #region Duyet Chuyen Khau
+        public string DuyetChuyenKhau(object input)
+        {
+            ChuyenKhauChoDuyetDisplay chuyenKhauChoDuyet = input as ChuyenKhauChoDuyetDisplay;
+
+            if (chuyenKhauChoDuyet == null) return "DataType for input not valid"; // check data type
+
+            string errorMsg = null;
+
+            var nhanKhau = DataProvider.Ins.DB.NHANKHAUs.Find(chuyenKhauChoDuyet.PhieuDuyet.CMND);
+
+            nhanKhau.MASHK = chuyenKhauChoDuyet.PhieuDuyet.MaSHKChuyenDen;
+            chuyenKhauChoDuyet.PhieuDuyet.DaDuyet = true;
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errorMsg = e.Message;
+                return errorMsg;
+            }
+
+            ListChuyenKhauChoDuyet.Remove(chuyenKhauChoDuyet);
+            return null;
+        }
+
+        public string TuChoiDuyetChuyenKhau(object input)
+        {
+            ChuyenKhauChoDuyetDisplay chuyenKhauChoDuyet = input as ChuyenKhauChoDuyetDisplay;
+
+            if (chuyenKhauChoDuyet == null) return "DataType for input not valid"; // check data type
+
+            string errorMsg = null;
+
+            chuyenKhauChoDuyet.PhieuDuyet.DaDuyet = true;
+
+            try
+            {
+                DataProvider.Ins.DB.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                errorMsg = e.Message;
+                return errorMsg;
+            }
+
+            ListChuyenKhauChoDuyet.Remove(chuyenKhauChoDuyet);
+            return errorMsg;
+        }
         #endregion
         #endregion
     }

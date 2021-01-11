@@ -224,7 +224,7 @@
                 x:Name="listUsingExamDatagri"
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Top" 
-                ItemsSource="{Binding ListFilteredSoHoKhau}"
+                ItemsSource="{Binding ListChuyenKhauChoDuyet}"
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
                 SelectionMode="Extended"
                 AutoGenerateColumns="False"
@@ -236,33 +236,26 @@
                 CanUserResizeRows="False"
                 IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã phiếu thay đổi" Binding="{Binding MaPhieuThayDoi}"/>
-                    <DataGridTextColumn Header="CMND" Binding="{Binding CMND}"/>
-                    <DataGridTextColumn Header="Mã SHK chuyển đến" Binding="{Binding MaSHKChuyenDen}"/>
-                    <DataGridTextColumn Header="Lý do" Binding="{Binding LyDo}"/>
-                    <DataGridTextColumn Header="Ngày tạo" Binding="{Binding NgayTao}"/>
-                    <!--<DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Mã phiếu thay đổi" Binding="{Binding PhieuDuyet.MaPhieuThayDoi}"/>
+                    <DataGridTextColumn Header="CMND" Binding="{Binding PhieuDuyet.CMND}"/>
+                    <DataGridTextColumn Header="Mã SHK chuyển đến" Binding="{Binding PhieuDuyet.MaSHKChuyenDen}"/>
+                    <DataGridTextColumn Header="Lý do" Binding="{Binding PhieuDuyet.LyDo}"/>
+                    <DataGridTextColumn Header="Ngày tạo" Binding="{Binding PhieuDuyet.NgayTao}"/>
+                    <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="btnApprove" Content="Duyệt" Height="Auto" Width="75" Margin="5"/>
+                                <Button x:Name="btnApproveChuyenKhau" Content="Duyệt" Height="Auto" Width="75" Margin="5" Click="btnApproveChuyenKhau_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button  x:Name="btnReject" Content="Từ chối" Height="Auto" Width="75" Margin="5"/>
+                                <Button  x:Name="btnRejectChuyenKhau" Content="Từ chối" Height="Auto" Width="75" Margin="5" Click="btnRejectChuyenKhau_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>-->
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
-                <i:Interaction.Triggers>
-                    <i:EventTrigger EventName="SelectionChanged">
-                        <i:InvokeCommandAction 
-                            Command="{Binding UsingExam_SelectionChangedCommand}"                       
-                            CommandParameter="{Binding ElementName=listUsingExamDatagrid}"/>
-                    </i:EventTrigger>
-                </i:Interaction.Triggers>
             </DataGrid>
         </materialDesign:Card>
 

@@ -155,5 +155,49 @@ namespace QuanLyHoKhau.View
 
             }
         }
+
+        private void btnApproveChuyenKhau_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc muốn duyệt phiếu nhân khẩu này không?", "Question?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                object selectedChuyenKhau = (sender as Button).DataContext;
+
+                var vm = DataContext as Duyet_VM;
+
+                string errorMsg = vm.DuyetChuyenKhau(selectedChuyenKhau);
+
+                if (errorMsg == null)
+                {
+                    MessageBox.Show("Duyệt thành công");
+                }
+                else
+                {
+                    MessageBox.Show("Đã xảy ra lỗi: " + errorMsg);
+                }
+
+            }
+        }
+
+        private void btnRejectChuyenKhau_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc muốn từ chối phiếu nhân khẩu này không?", "Question?", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                object selectedChuyenKhau = (sender as Button).DataContext;
+
+                var vm = DataContext as Duyet_VM;
+
+                string errorMsg = vm.TuChoiDuyetChuyenKhau(selectedChuyenKhau);
+
+                if (errorMsg == null)
+                {
+                    MessageBox.Show("Từ chối thành công");
+                }
+                else
+                {
+                    MessageBox.Show("Đã xảy ra lỗi: " + errorMsg);
+                }
+
+            }
+        }
     }
 }
