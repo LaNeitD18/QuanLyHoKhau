@@ -59,6 +59,9 @@ namespace QuanLyHoKhau.ViewModel
                 {
                     if (item.MaCongAn == UserName && item.MatKhau == Password)
                     {
+                        // Change he global state
+                        GlobalState.Ins().maCongAn = item.MaCongAn;
+
                         LoginWindow loginWindow = p as LoginWindow;
                         //Gan static TaiKhoanSuDung
                         //TaiKhoanSuDung = item;
