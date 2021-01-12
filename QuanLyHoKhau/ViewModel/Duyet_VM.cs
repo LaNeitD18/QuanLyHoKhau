@@ -204,8 +204,8 @@ namespace QuanLyHoKhau.ViewModel
 
         private string AddNhanKhau(NhanKhauChoDuyetDisplay nhanKhau)
         {
-            DataProvider.Ins.DB.NHANKHAUs.Add(nhanKhau.NhanKhauPending);
-
+            nhanKhau.NhanKhauPending.BanChinhThuc = true;
+            nhanKhau.PhieuDuyet.DaDuyet = true;
             try
             {
                 DataProvider.Ins.DB.SaveChanges();
@@ -248,6 +248,8 @@ namespace QuanLyHoKhau.ViewModel
         private string RemoveNhanKhau(NhanKhauChoDuyetDisplay nhanKhau)
         {
             nhanKhau.NhanKhauPending.IsDeleted = true;
+            nhanKhau.PhieuDuyet.DaDuyet = true;
+            nhanKhau.NguoiInfo.IsDeleted = true;
 
             try
             {
@@ -350,8 +352,8 @@ namespace QuanLyHoKhau.ViewModel
 
         private string AddSoHoKhau(SoHoKhauChoDuyetDisplay soHoKhau)
         {
-            DataProvider.Ins.DB.SOHOKHAUs.Add(soHoKhau.SoHoKhau);
-
+            soHoKhau.SoHoKhauPending.BanChinhThuc = true;
+            soHoKhau.PhieuDuyet.DaDuyet = true;
             try
             {
                 DataProvider.Ins.DB.SaveChanges();
@@ -394,6 +396,7 @@ namespace QuanLyHoKhau.ViewModel
         private string RemoveSoHoKhau(SoHoKhauChoDuyetDisplay soHoKhau)
         {
             soHoKhau.SoHoKhau.IsDeleted = true;
+            soHoKhau.PhieuDuyet.DaDuyet = true;
 
             try
             {

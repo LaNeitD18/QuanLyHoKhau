@@ -77,6 +77,7 @@ namespace QuanLyHoKhau.ViewModel
             set 
             { 
                 ResultSoHoKhau.MaSHK = value; 
+                Debug.WriteLine(ResultSoHoKhau.MaSHK);
                 ListNHANKHAUinSHK = LoadNhanKhauInSHK();
                 OnPropertyChanged(); 
             }
@@ -144,16 +145,16 @@ namespace QuanLyHoKhau.ViewModel
             if(shk == null || shk.IsDeleted)
                 return new BindingList<NHANKHAU>();
 
-            //BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
-            //    (
-            //        DataProvider.Ins.DB.NHANKHAUs.Where(nk =>
-            //            (!nk.IsDeleted) && (nk.MASHK == MaSoHoKhau)
-            //        ).ToList()
-            //    );
             BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
                 (
-                    shk.NHANKHAUs.Where(nk => nk.BanChinhThuc && !nk.IsDeleted).ToList()
+                    DataProvider.Ins.DB.NHANKHAUs.Where(nk =>
+                        (nk.BanChinhThuc) && (!nk.IsDeleted) && (nk.MASHK == MaSoHoKhau)
+                    ).ToList()
                 );
+            //BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
+            //    (
+            //        shk.NHANKHAUs.Where(nk => nk.BanChinhThuc && !nk.IsDeleted).ToList()
+            //    );
 
             return result;
         }

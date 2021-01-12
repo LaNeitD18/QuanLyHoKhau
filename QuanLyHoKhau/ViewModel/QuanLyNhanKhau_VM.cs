@@ -145,7 +145,7 @@ namespace QuanLyHoKhau.ViewModel
                 MaNK = nk.CMND,
                 MaNK_PendingInfo = nk.CMND,
 
-                ActionType = "Delete",
+                ActionType = DuyetActionTypes.Remove,
                 DaDuyet = false,
             };
 

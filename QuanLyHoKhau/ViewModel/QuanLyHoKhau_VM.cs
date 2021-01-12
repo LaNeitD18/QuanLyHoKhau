@@ -146,7 +146,7 @@ namespace QuanLyHoKhau.ViewModel
                 MaSHK = shk.MaSHK,
                 MaSHK_PendingInfo = shk.MaSHK,
 
-                ActionType = "Delete",
+                ActionType = DuyetActionTypes.Remove,
                 DaDuyet = false,
             };
 
