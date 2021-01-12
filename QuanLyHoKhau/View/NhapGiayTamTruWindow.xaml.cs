@@ -53,5 +53,11 @@ namespace QuanLyHoKhau.View
                 this.Close();
             }
         }
+
+        private void TextBox_LostFocus(object sender, RoutedEventArgs e)
+        {
+            NhapGiayTamTru_VM vm = DataContext as NhapGiayTamTru_VM;
+            vm.ReloadListPhieuTamVang();
+        }
     }
 }

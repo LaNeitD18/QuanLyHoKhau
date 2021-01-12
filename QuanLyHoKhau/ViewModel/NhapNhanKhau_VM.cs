@@ -365,12 +365,6 @@ namespace QuanLyHoKhau.ViewModel
                 return false;
             }
 
-            if(DateTime.Today.Year - NgaySinh.Year < 15)
-            {
-                errors = $"Công dân phải từ đủ 15 tuổi trở lên để được cấp giấy CMND";
-                return false;
-            }
-
             if(SelectedSoHoKhau == null)
             {
                 errors = $"Vui lòng chọn mã sổ hộ khẩu";

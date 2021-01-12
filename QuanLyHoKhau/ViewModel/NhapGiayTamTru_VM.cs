@@ -1,6 +1,8 @@
 ﻿using QuanLyHoKhau.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -76,6 +78,26 @@ namespace QuanLyHoKhau.ViewModel
             {
                 _noiDKTamTru = value;
             }
+        }
+
+        private BindingList<string> _listMaGiayTamVang;
+        public BindingList<string> ListMaGiayTamVang
+        {
+            get
+            {
+                if (_listMaGiayTamVang == null) _listMaGiayTamVang = new BindingList<string>();
+                _listMaGiayTamVang.Clear();
+                var listGiayTamVangFiltered = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.CMND == maNhanKhau).ToList();
+
+                foreach(var giayTamVang in listGiayTamVangFiltered)
+                {
+                    _listMaGiayTamVang.Add(giayTamVang.MaPhieuKhaiBao);
+                }
+
+                return _listMaGiayTamVang;
+            }
+
+            set { _listMaGiayTamVang = value; }
         }
 
         private ICommand _acceptCommand;
@@ -159,12 +181,12 @@ namespace QuanLyHoKhau.ViewModel
 
             string DiaPhuong = DataProvider.Ins.DB.CONGANs.Find(GlobalState.Ins().maCongAn).MaDiaPhuong;
 
-            string pre_id = this.maNhanKhau + this.startDate.Day.ToString().PadLeft(2, '0') + this.startDate.Month.ToString().PadLeft(2, '0') + this.startDate.Year.ToString();
-            string pos_id = DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.MaGiayTamTru.Contains(pre_id)).ToList().Count.ToString().PadLeft(2, '0');
+            //string pre_id = this.maNhanKhau + this.startDate.Day.ToString().PadLeft(2, '0') + this.startDate.Month.ToString().PadLeft(2, '0') + this.startDate.Year.ToString();
+            //string pos_id = DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.MaGiayTamTru.Contains(pre_id)).ToList().Count.ToString().PadLeft(2, '0');
 
             GIAYTAMTRU phieu = new GIAYTAMTRU();
 
-            phieu.MaGiayTamTru = pre_id + pos_id;
+            phieu.MaGiayTamTru = Utilities.Utils.GenerateNewId(DataProvider.Ins.DB.GIAYTAMTRUs, "GTT_", 8) /*pre_id + pos_id*/;
             phieu.MaSoLuuTamTru = DataProvider.Ins.DB.SOLUUTAMVANGs.Where(x => x.DiaPhuong == DiaPhuong).Single().MaSoLuuTamVang;
             phieu.MaCongAn = GlobalState.Ins().maCongAn;
             phieu.CMND = this.maNhanKhau;
@@ -207,6 +229,11 @@ namespace QuanLyHoKhau.ViewModel
             this.noiDKTamTru = null;
             this.startDate = this.endDate = DateTime.Now;
 
+        }
+
+        public void ReloadListPhieuTamVang()
+        {
+            OnPropertyChanged("ListMaGiayTamVang");
         }
 
         #endregion

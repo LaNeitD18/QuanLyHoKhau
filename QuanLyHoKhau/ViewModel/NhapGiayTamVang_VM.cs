@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using QuanLyHoKhau.Model;
+using QuanLyHoKhau.Utilities;
 
 namespace QuanLyHoKhau.ViewModel
 {
@@ -126,12 +127,12 @@ namespace QuanLyHoKhau.ViewModel
 
             string DiaPhuong = DataProvider.Ins.DB.CONGANs.Find(GlobalState.Ins().maCongAn).MaDiaPhuong;
 
-            string pre_id = this.maNhanKhau + this.startDate.Day.ToString().PadLeft(2, '0') + this.startDate.Month.ToString().PadLeft(2, '0') + this.startDate.Year.ToString();
-            string pos_id = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.MaPhieuKhaiBao.Contains(pre_id)).ToList().Count.ToString().PadLeft(2, '0');
+            //string pre_id = this.maNhanKhau + this.startDate.Day.ToString().PadLeft(2, '0') + this.startDate.Month.ToString().PadLeft(2, '0') + this.startDate.Year.ToString();
+            //string pos_id = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.MaPhieuKhaiBao.Contains(pre_id)).ToList().Count.ToString().PadLeft(2, '0');
 
             PHIEUKHAIBAOTAMVANG phieu = new PHIEUKHAIBAOTAMVANG();
 
-            phieu.MaPhieuKhaiBao = pre_id + pos_id;
+            phieu.MaPhieuKhaiBao = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs, "PKBTV_", 8) /*pre_id + pos_id*/;
             phieu.MaSoLuuTamVang = DataProvider.Ins.DB.SOLUUTAMVANGs.Where(x => x.DiaPhuong == DiaPhuong).Single().MaSoLuuTamVang;
             phieu.MaCongAn = GlobalState.Ins().maCongAn;
             phieu.CMND = this.maNhanKhau;
