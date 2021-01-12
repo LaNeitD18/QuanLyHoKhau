@@ -293,28 +293,20 @@ namespace QuanLyHoKhau.ViewModel
 
             SOHOKHAU targetSHK = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
 
-            if(targetSHK == null)
-            { 
-                MaSoHoKhau = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, SOHOKHAU_ID_PREFIX, SOHOKHAU_ID_LENGTH);
-                DataProvider.Ins.DB.SOHOKHAUs.Add(ResultSoHoKhau);
+            if(targetSHK == null || targetSHK.IsDeleted)
+            {
+                AddPendingAddSoHoKhau();
             }
             else
-            {
-                if(targetSHK.IsDeleted)
-                { 
-                    targetSHK.CopyInfo(ResultSoHoKhau);
-                }
-                else
-                {
-                    AddPendingSoHoKhau();
-                }
+            { 
+                AddPendingEditSoHoKhau();
             }
 
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
         }
 
-        private void AddPendingSoHoKhau()
+        private void AddPendingEditSoHoKhau()
         {
             SOHOKHAU targetSHK = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
             SOHOKHAU tempSHK = new SOHOKHAU(ResultSoHoKhau)
@@ -337,7 +329,7 @@ namespace QuanLyHoKhau.ViewModel
 
             PHIEUDUYETSOHOKHAU pdshk = new PHIEUDUYETSOHOKHAU()
             {
-                MaPD_SHK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs, "PDSHK_", 8),
+                MaPD_SHK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs, "PDSHK_", 8),
                 NgayTao = DateTime.Now,
                 IsDeleted = false,
 
@@ -345,6 +337,38 @@ namespace QuanLyHoKhau.ViewModel
                 MaSHK_PendingInfo = tempSHK.MaSHK,
 
                 ActionType = "Edit",
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Add(pdshk);
+        }
+
+        private void AddPendingAddSoHoKhau()
+        {
+            SOHOKHAU targetSHK = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+            ResultSoHoKhau.BanChinhThuc = false;
+
+            if (targetSHK == null)
+            {
+                MaSoHoKhau = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, SOHOKHAU_ID_PREFIX, SOHOKHAU_ID_LENGTH);
+                DataProvider.Ins.DB.SOHOKHAUs.Add(ResultSoHoKhau);
+            }
+            else if (targetSHK.IsDeleted)
+            {
+                targetSHK.CopyInfo(ResultSoHoKhau);
+                targetSHK.IsDeleted = false;
+            }
+
+            PHIEUDUYETSOHOKHAU pdshk = new PHIEUDUYETSOHOKHAU()
+            {
+                MaPD_SHK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs, "PDSHK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaSHK = MaSoHoKhau,
+                MaSHK_PendingInfo = MaSoHoKhau,
+
+                ActionType = "Add",
                 DaDuyet = false,
             };
 

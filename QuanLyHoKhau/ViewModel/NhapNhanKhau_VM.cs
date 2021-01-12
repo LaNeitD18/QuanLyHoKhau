@@ -345,6 +345,12 @@ namespace QuanLyHoKhau.ViewModel
                     errors = $"Công dân với CMND {CMND} đã tồn tại trong hệ thống";
                     return false;
                 }
+
+                if(CMND.IndexOf('_') >= 0)
+                {
+                    errors = "Số CMND không được chứa ký tư \"_\"";
+                    return false;
+                }
             }
 
             if(string.IsNullOrEmpty(HoTen))
@@ -417,23 +423,6 @@ namespace QuanLyHoKhau.ViewModel
                 targetNguoi.CopyInfo(ResultNguoi);
                 targetNguoi.IsDeleted = false;
             }
-
-            //if (targetNK == null)
-            //{
-            //    DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
-            //}
-            //else
-            //{
-            //    if(targetNK.IsDeleted)
-            //    {
-            //        targetNK.CopyInfo(ResultNhanKhau);
-            //        targetNK.IsDeleted = false;
-            //    }
-            //    else
-            //    {
-            //        AddPendingEditNhanKhau();
-            //    }
-            //}
 
             if(targetNK != null && !targetNK.IsDeleted)
             {
