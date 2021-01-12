@@ -239,5 +239,12 @@ namespace QuanLyHoKhau.View
 
             }
         }
+
+        private void btnRefreshData_Click(object sender, RoutedEventArgs e)
+        {
+            var vm = DataContext as Duyet_VM;
+
+            vm.refreshData();
+        }
     }
 }

@@ -91,7 +91,7 @@
             </Border>
         </Grid>
         <Grid Grid.Column="12" Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <Button>
+            <Button x:Name="btnRefreshData" Click="btnRefreshData_Click">
                 <Button.Content>
                     <Path
                         Style="{StaticResource {x:Type Path}}"

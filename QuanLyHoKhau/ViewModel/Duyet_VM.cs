@@ -635,5 +635,16 @@ namespace QuanLyHoKhau.ViewModel
             return null;
         }
         #endregion
+
+        public void refreshData()
+        {
+            _listNhanKhauChoDuyet = null;
+            _listSoHoKhauChoDuyet = null;
+            _listChuyenKhauChoDuyet = null;
+
+            OnPropertyChanged("ListNhanKhauChoDuyet");
+            OnPropertyChanged("ListSoHoKhauChoDuyet");
+            OnPropertyChanged("ListChuyenKhauChoDuyet");
+        }
     }
 }
