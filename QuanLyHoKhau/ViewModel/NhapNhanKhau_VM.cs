@@ -418,21 +418,30 @@ namespace QuanLyHoKhau.ViewModel
                 targetNguoi.IsDeleted = false;
             }
 
-            if (targetNK == null)
+            //if (targetNK == null)
+            //{
+            //    DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
+            //}
+            //else
+            //{
+            //    if(targetNK.IsDeleted)
+            //    {
+            //        targetNK.CopyInfo(ResultNhanKhau);
+            //        targetNK.IsDeleted = false;
+            //    }
+            //    else
+            //    {
+            //        AddPendingEditNhanKhau();
+            //    }
+            //}
+
+            if(targetNK != null && !targetNK.IsDeleted)
             {
-                DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
+                AddPendingEditNhanKhau();
             }
             else
             {
-                if(targetNK.IsDeleted)
-                {
-                    targetNK.CopyInfo(ResultNhanKhau);
-                    targetNK.IsDeleted = false;
-                }
-                else
-                {
-                    AddPendingNhanKhau();
-                }
+                AddPendingAddNhanKhau();
             }
 
             // Update ChuHo of SHK:
@@ -458,7 +467,7 @@ namespace QuanLyHoKhau.ViewModel
             // CuteTN Todo: update shk's CHUHO when approving editting.
         }
 
-        private void AddPendingNhanKhau()
+        private void AddPendingEditNhanKhau()
         {
             NHANKHAU targetNK = DataProvider.Ins.DB.NHANKHAUs.Find(CMND);
             NHANKHAU tempNK = new NHANKHAU(ResultNhanKhau) 
@@ -498,6 +507,37 @@ namespace QuanLyHoKhau.ViewModel
                 MaNK_PendingInfo = tempNK.CMND,
                 
                 ActionType = "Edit",
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs.Add(pdnk);
+        }
+
+        private void AddPendingAddNhanKhau()
+        {
+            NHANKHAU targetNK = DataProvider.Ins.DB.NHANKHAUs.Find(CMND);
+            ResultNhanKhau.BanChinhThuc = false;
+
+            if(targetNK == null)
+            {
+                DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
+            }
+            else if(targetNK.IsDeleted)
+            {
+                targetNK.CopyInfo(ResultNhanKhau);
+                targetNK.IsDeleted = false;
+            }
+
+            PHIEUDUYETNHANKHAU pdnk = new PHIEUDUYETNHANKHAU()
+            {
+                MaPD_NK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs, "PDNK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaNK = CMND,
+                MaNK_PendingInfo = CMND,
+
+                ActionType = "Add",
                 DaDuyet = false,
             };
 
