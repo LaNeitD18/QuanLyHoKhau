@@ -496,5 +496,144 @@ namespace QuanLyHoKhau.ViewModel
         }
         #endregion
         #endregion
+
+        #region Duyet all
+        
+        public string DuyetAll()
+        {
+            string errorString = null;
+            switch(SelectedLoaiGiayTo.Item1)
+            {
+                case 0:
+                    errorString = DuyetAllNhanKhau();
+                    break;
+                case 1:
+                    errorString = DuyetAllSoHoKhau();
+                    break;
+                case 2:
+                    errorString = DuyetAllChuyenKhau();
+                    break;
+            }
+
+            return errorString;
+        }
+
+        private string DuyetAllNhanKhau()
+        {
+            string errorString = null;
+            var ListDuyet = ListNhanKhauChoDuyet.ToList();
+            foreach (var nhanKhau in ListDuyet)
+            {
+                errorString = DuyetNhanKhau(nhanKhau);
+
+                if(errorString != null)
+                {
+                    return errorString;
+                }
+            }
+            return null;
+        }
+
+        private string DuyetAllSoHoKhau()
+        {
+            string errorString = null;
+            var ListDuyet = ListSoHoKhauChoDuyet.ToList();
+            foreach (var soHoKhau in ListDuyet)
+            {
+                errorString = DuyetSoHoKhau(soHoKhau);
+
+                if (errorString != null)
+                {
+                    return errorString;
+                }
+            }
+            return null;
+        }
+
+        private string DuyetAllChuyenKhau()
+        {
+            string errorString = null;
+            var ListDuyet = ListChuyenKhauChoDuyet.ToList();
+            foreach (var nhanKhau in ListDuyet)
+            {
+                errorString = DuyetNhanKhau(nhanKhau);
+
+                if (errorString != null)
+                {
+                    return errorString;
+                }
+            }
+            return null;
+        }
+        #endregion
+
+        #region Tu choi all
+        public string TuChoiAll()
+        {
+            string errorString = null;
+            switch (SelectedLoaiGiayTo.Item1)
+            {
+                case 0:
+                    errorString = TuChoiAllNhanKhau();
+                    break;
+                case 1:
+                    errorString = TuChoiAllSoHoKhau();
+                    break;
+                case 2:
+                    errorString = TuChoiAllChuyenKhau();
+                    break;
+            }
+
+            return errorString;
+        }
+
+        private string TuChoiAllNhanKhau()
+        {
+            string errorString = null;
+            var ListDuyet = ListNhanKhauChoDuyet.ToList();
+            foreach (var nhanKhau in ListDuyet)
+            {
+                errorString = TuChoiDuyetNhanKhau(nhanKhau);
+
+                if (errorString != null)
+                {
+                    return errorString;
+                }
+            }
+            return null;
+        }
+
+        private string TuChoiAllSoHoKhau()
+        {
+            string errorString = null;
+            var ListDuyet = ListSoHoKhauChoDuyet.ToList();
+            foreach (var soHoKhau in ListDuyet)
+            {
+                errorString = TuChoiDuyetSoHoKhau(soHoKhau);
+
+                if (errorString != null)
+                {
+                    return errorString;
+                }
+            }
+            return null;
+        }
+
+        private string TuChoiAllChuyenKhau()
+        {
+            string errorString = null;
+            var ListDuyet = ListChuyenKhauChoDuyet.ToList();
+            foreach (var nhanKhau in ListDuyet)
+            {
+                errorString = TuChoiDuyetChuyenKhau(nhanKhau);
+
+                if (errorString != null)
+                {
+                    return errorString;
+                }
+            }
+            return null;
+        }
+        #endregion
     }
 }
