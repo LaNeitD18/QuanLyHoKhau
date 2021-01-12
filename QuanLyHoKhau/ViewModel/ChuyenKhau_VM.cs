@@ -1,6 +1,7 @@
 ﻿using QuanLyHoKhau.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -140,6 +141,57 @@ namespace QuanLyHoKhau.ViewModel
         }
         #endregion
 
+        #region ListSelectedNHANKHAUinFromSHK
+        private ObservableCollection<NHANKHAU> _listSelectedNHANKHAUinFromSHK = new ObservableCollection<NHANKHAU>();
+        public ObservableCollection<NHANKHAU> ListSelectedNHANKHAUinFromSHK
+        {
+            get => _listSelectedNHANKHAUinFromSHK;
+            set
+            {
+                _listSelectedNHANKHAUinFromSHK = value;
+                ListNHANKHAUinFromSHKDataGrid_OnSelectionChanged();
+                OnPropertyChanged();
+            }
+        }
+
+        private ICommand _listNHANKHAUinFromSHKDataGrid_SelectionChangedCmd = null;
+        public ICommand ListNHANKHAUinFromSHKDataGrid_SelectionChangedCmd
+        {
+            get
+            {
+                if (_listNHANKHAUinFromSHKDataGrid_SelectionChangedCmd == null)
+                    _listNHANKHAUinFromSHKDataGrid_SelectionChangedCmd = new RelayCommand(obj => ListNHANKHAUinFromSHKDataGrid_OnSelectionChanged(obj));
+                return _listNHANKHAUinFromSHKDataGrid_SelectionChangedCmd;
+            }
+            set
+            {
+                _listNHANKHAUinFromSHKDataGrid_SelectionChangedCmd = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private void GetDataGridSelectedItems(System.Windows.Controls.DataGrid datagrid)
+        {
+            ListSelectedNHANKHAUinFromSHK.Clear();
+
+            foreach (var item in datagrid.SelectedItems)
+            {
+                NHANKHAU nk = (NHANKHAU)item;
+                if (nk != null && !ListSelectedNHANKHAUinFromSHK.Contains(nk))
+                    ListSelectedNHANKHAUinFromSHK.Add(nk);
+            }
+        }
+
+        private void ListNHANKHAUinFromSHKDataGrid_OnSelectionChanged(Object obj = null)
+        {
+            System.Windows.Controls.DataGrid dataGrid = obj as System.Windows.Controls.DataGrid;
+            if (dataGrid == null)
+                return;
+
+            GetDataGridSelectedItems(dataGrid);
+        }
+        #endregion
+
         #region Confirm Button
         ICommand _cmdConfirm = null;
         public ICommand CmdConfirm
@@ -173,11 +225,98 @@ namespace QuanLyHoKhau.ViewModel
             get => _cmdCancel != null ? _cmdConfirm : new RelayCommand(HandleCancelButton);
             set { _cmdCancel = value; OnPropertyChanged(); }
         }
-
         void HandleCancelButton(Object obj)
         {
             (obj as System.Windows.Window)?.Close();
         }
         #endregion
+
+        #region ChuyenKhau Button
+        ICommand _cmdChuyenKhau = null;
+        public ICommand CmdChuyenKhau
+        {
+            get => _cmdChuyenKhau != null ? _cmdConfirm : new RelayCommand(HandleChuyenKhauButton);
+            set { _cmdChuyenKhau = value; OnPropertyChanged(); }
+        }
+
+        void HandleChuyenKhauButton(Object obj)
+        {
+            string error;
+
+            if (ValidateForChuyenKhau(out error))
+            {
+                List<NHANKHAU> temp = new List<NHANKHAU>(ListSelectedNHANKHAUinFromSHK);
+                foreach (var nk in temp)
+                {
+                    ChuyenKhauForPreviewing(nk);
+                }
+            }
+            else
+            {
+                System.Windows.MessageBox.Show(error, "Lỗi", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
+        }
+        #endregion
+
+        #region Reset Button
+        ICommand _cmdReset = null;
+        public ICommand CmdReset
+        {
+            get => _cmdReset != null ? _cmdConfirm : new RelayCommand(HandleResetButton);
+            set { _cmdReset = value; OnPropertyChanged(); }
+        }
+
+        void HandleResetButton(Object obj)
+        {
+            ResetChuyenKhau();
+        }
+        #endregion
+
+        #region Logics
+        private bool ValidateForChuyenKhau(out string errors)
+        {
+            errors = "";
+
+            if(SelectedFromSoHoKhau == null)
+            {
+                errors = "Vui lòng chọn hộ khẩu hiện tại";
+                return false;
+            }
+
+            if(SelectedToSoHoKhau == null)
+            {
+                errors = "Vui lòng chọn hộ khẩu chuyển đến";
+                return false;
+            }
+
+            if(SelectedFromSoHoKhau == SelectedToSoHoKhau)
+            {
+                errors = "Sổ hộ khẩu chuyển đến không được trùng với sổ hộ khẩu hiên tại";
+                return false;
+            }
+
+            if(ListSelectedNHANKHAUinFromSHK.Count == 0)
+            {
+                errors = "Vui lòng chọn nhân khẩu cần chuyển từ sổ hộ khẩu hiện tại";
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ResetChuyenKhau()
+        {
+            ListNHANKHAUinFromSHK = LoadNhanKhauInSHK(SelectedFromSoHoKhau);
+            ListNHANKHAUinToSHK = LoadNhanKhauInSHK(SelectedToSoHoKhau);
+        }
+
+        private void ChuyenKhauForPreviewing(NHANKHAU nk)
+        {
+            ListNHANKHAUinFromSHK.Remove(nk);
+            ListNHANKHAUinToSHK.Add(nk);
+        }
+        #endregion
+
+
     }
 }

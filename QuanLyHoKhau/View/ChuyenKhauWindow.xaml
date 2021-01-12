@@ -98,22 +98,48 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction 
-                            Command="{Binding UsingExam_SelectionChangedCommand}"                       
-                            CommandParameter="{Binding ElementName=listUsingExamDatagrid}"/>
+                                Command="{Binding ListNHANKHAUinFromSHKDataGrid_SelectionChangedCmd}"                       
+                                CommandParameter="{Binding ElementName=ListNHANKHAUinFromSHKDataGrid}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </DataGrid>
                 </Grid>
             </materialDesign:Card>
-            <Button Grid.Column="1">
-                <Button.Content>
-                    <Path
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button 
+                    Command="{Binding CmdReset}"
+                    Grid.Row="0"
+                    >
+                    <Button.Content>
+                        <Path
+                        Style="{StaticResource {x:Type Path}}"
+                        Data="{StaticResource clearmemory}"
+                        Fill="White"
+                        HorizontalAlignment="Center"/>
+                    </Button.Content>
+                </Button>
+                <Button 
+                    Grid.Row="2"
+                    Command="{Binding CmdChuyenKhau}"
+                    >
+                    <Button.Content>
+                        <Path
                         Style="{StaticResource {x:Type Path}}"
                         Data="{StaticResource right}"
                         Fill="White"
-                        HorizontalAlignment="Center"/>
-                </Button.Content>
-            </Button>
+                        HorizontalAlignment="Center"
+                        />
+                    </Button.Content>
+                </Button>
+            </Grid>
+
             <materialDesign:Card Grid.Column="2" Margin="5">
                 <Grid>
                     <Grid.RowDefinitions>
