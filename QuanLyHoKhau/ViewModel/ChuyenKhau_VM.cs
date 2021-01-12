@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using QuanLyHoKhau.Utilities;
 
 namespace QuanLyHoKhau.ViewModel
 {
@@ -202,19 +203,18 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleConfirmButton(Object obj)
         {
-            System.Windows.MessageBox.Show("xac nhan cai ne!");
-            (obj as System.Windows.Window)?.Close();
-            //string error;
+            string error;
 
-            //if (ValidateResult(out error))
-            //{
-            //    UpsertResult();
-            //    (obj as System.Windows.Window)?.Close();
-            //}
-            //else
-            //{
-            //    System.Windows.MessageBox.Show(error, "Lỗi", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
-            //}
+            if (Validate(out error))
+            {
+                FilterAllNhanKhauToChuyenKhau().ForEach(AddPendingChuyenKhau);
+                DataProvider.Ins.DB.SaveChanges();
+                (obj as System.Windows.Window)?.Close();
+            }
+            else
+            {
+                System.Windows.MessageBox.Show(error, "Lỗi", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+            }
         }
         #endregion
 
@@ -315,8 +315,55 @@ namespace QuanLyHoKhau.ViewModel
             ListNHANKHAUinFromSHK.Remove(nk);
             ListNHANKHAUinToSHK.Add(nk);
         }
+
+        private List<NHANKHAU> FilterAllNhanKhauToChuyenKhau()
+        {
+            var result = new List<NHANKHAU>();
+
+            foreach(var nk in ListNHANKHAUinToSHK)
+            {
+                if(nk.MASHK != SelectedToSoHoKhau.MaSHK)
+                {
+                    result.Add(nk);
+                }
+            }
+
+            return result;
+        }
+
+        private void AddPendingChuyenKhau(NHANKHAU nk)
+        {
+            if(nk == null)
+                return;
+
+            PHIEUDUYETCHUYENKHAU pdck = new PHIEUDUYETCHUYENKHAU()
+            {
+                MaPhieuThayDoi = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs, "PDCK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+                DaDuyet = false,
+
+                MaSoLuuChuyenKhau = SelectedSoLuuChuyenKhau.MaSoLuuChuyenKhau,
+                CMND = nk.CMND,
+                MaSHKChuyenDen = SelectedToSoHoKhau.MaSHK,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Add(pdck);
+        }
+
+        private bool Validate(out string errors)
+        {
+            errors = "";
+
+            if(SelectedSoLuuChuyenKhau == null)
+            {
+                errors = "Vui lòng chọn sổ lưu nhân khẩu";
+                return false;
+            }
+
+            return true;
+        }
+
         #endregion
-
-
     }
 }
