@@ -36,6 +36,20 @@ namespace QuanLyHoKhau.ViewModel
             }
         }
 
+        private double _SoHoKhauProgress;
+        public double SoHoKhauProgress
+        {
+            get { return _SoHoKhauProgress; }
+            set { _SoHoKhauProgress = value; OnPropertyChanged(); }
+        }
+
+        private string _NewSoHoKhausInfo;
+        public string NewSoHoKhausInfo
+        {
+            get { return _NewSoHoKhausInfo; }
+            set { _NewSoHoKhausInfo = value; OnPropertyChanged(); }
+        }
+
         private double _GiayTamVangProgress;
         public double GiayTamVangProgress
         {
@@ -77,6 +91,48 @@ namespace QuanLyHoKhau.ViewModel
             get { return _NewChuyenKhausInfo; }
             set { _NewChuyenKhausInfo = value; OnPropertyChanged(); }
         }
+
+        private double _SoHoKhauChoDuyetProgress;
+        public double SoHoKhauChoDuyetProgress
+        {
+            get { return _SoHoKhauChoDuyetProgress; }
+            set { _SoHoKhauChoDuyetProgress = value; OnPropertyChanged(); }
+        }
+
+        private string _SoHoKhauChoDuyetsInfo;
+        public string SoHoKhauChoDuyetsInfo
+        {
+            get { return _SoHoKhauChoDuyetsInfo; }
+            set { _SoHoKhauChoDuyetsInfo = value; OnPropertyChanged(); }
+        }
+
+        private double _NhanKhauChoDuyetProgress;
+        public double NhanKhauChoDuyetProgress
+        {
+            get { return _NhanKhauChoDuyetProgress; }
+            set { _NhanKhauChoDuyetProgress = value; OnPropertyChanged(); }
+        }
+
+        private string _NhanKhauChoDuyetsInfo;
+        public string NhanKhauChoDuyetsInfo
+        {
+            get { return _NhanKhauChoDuyetsInfo; }
+            set { _NhanKhauChoDuyetsInfo = value; OnPropertyChanged(); }
+        }
+
+        private double _GiayChuyenKhauChoDuyetProgress;
+        public double GiayChuyenKhauChoDuyetProgress
+        {
+            get { return _GiayChuyenKhauChoDuyetProgress; }
+            set { _GiayChuyenKhauChoDuyetProgress = value; OnPropertyChanged(); }
+        }
+
+        private string _GiayChuyenKhauChoDuyetsInfo;
+        public string GiayChuyenKhauChoDuyetsInfo
+        {
+            get { return _GiayChuyenKhauChoDuyetsInfo; }
+            set { _GiayChuyenKhauChoDuyetsInfo = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region Functions
@@ -107,10 +163,15 @@ namespace QuanLyHoKhau.ViewModel
             return "";
         }
 
-        private void LoadData()
+        private void CountNewItems()
         {
             int thisMonth = DateTime.Now.Month;
             int thisYear = DateTime.Now.Year;
+
+            // calculate number of new sohokhau
+            int countNewSoHoKhaus = DataProvider.Ins.DB.SOHOKHAUs.Where(x => x.NgayTaoSo.Month == thisMonth && x.NgayTaoSo.Year == thisYear && x.BanChinhThuc == true && x.IsDeleted == false).Count();
+            SoHoKhauProgress = countNewSoHoKhaus / 1000;
+            NewSoHoKhausInfo = countNewSoHoKhaus.ToString() + "/1000";
 
             // calculate number of new giaytamvang
             int countNewTamVangs = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.NgayKhaiBao.Month == thisMonth && x.NgayKhaiBao.Year == thisYear).Count();
@@ -126,6 +187,36 @@ namespace QuanLyHoKhau.ViewModel
             int countNewChuyenKhaus = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear).Count();
             GiayChuyenKhauProgress = countNewChuyenKhaus / 1000;
             NewChuyenKhausInfo = countNewChuyenKhaus.ToString() + "/1000";
+        }
+
+        private void CountWaitApprovingItems()
+        {
+            int thisMonth = DateTime.Now.Month;
+            int thisYear = DateTime.Now.Year;
+
+            // calculate number of choduyet sohokhau
+            int countCDSoHoKhaus = DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.DaDuyet == false && x.IsDeleted == false).Count();
+            int allCDSoHoKhauInMonth = DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.IsDeleted == false).Count(); 
+            SoHoKhauChoDuyetProgress = countCDSoHoKhaus / 1000;
+            SoHoKhauChoDuyetsInfo = countCDSoHoKhaus.ToString() + "/" + allCDSoHoKhauInMonth.ToString();
+
+            // calculate number of choduyet nhankhau
+            int countCDNhanKhaus = DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.DaDuyet == false && x.IsDeleted == false).Count();
+            int allCDNhanKhauInMonth = DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.IsDeleted == false).Count();
+            NhanKhauChoDuyetProgress = countCDNhanKhaus / 1000;
+            NhanKhauChoDuyetsInfo = countCDNhanKhaus.ToString() + "/" + allCDNhanKhauInMonth.ToString();
+
+            // calculate number of choduyet giaychuyenkhau
+            int countCDChuyenKhaus = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.DaDuyet == false && x.IsDeleted == false).Count();
+            int allCDChuyenKhauInMonth = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.IsDeleted == false).Count();
+            GiayChuyenKhauChoDuyetProgress = countCDChuyenKhaus / 1000;
+            GiayChuyenKhauChoDuyetsInfo = countCDChuyenKhaus.ToString() + "/" + allCDChuyenKhauInMonth.ToString();
+        }
+
+        private void LoadData()
+        {
+            CountNewItems();
+            CountWaitApprovingItems();
         }
         private void GetTimeNow()
         {

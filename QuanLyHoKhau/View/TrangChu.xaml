@@ -102,9 +102,9 @@
         <Grid Grid.ColumnSpan="7" Grid.RowSpan="4" Grid.Row="4">
             <customcontrols:InfoCard 
                 Margin="10,0" 
-                Text1="Sổ hộ khẩu        chờ duyệt" Text2="67 Gb / 128 Gb" 
+                Text1="Sổ hộ khẩu        chờ duyệt" Text2="{Binding SoHoKhauChoDuyetsInfo}" 
                 imageSource="/images/classroom.png" 
-                Progress="66" 
+                Progress="{Binding SoHoKhauChoDuyetProgress}" 
                 IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
                 ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
                 ProgressBackgroundBrushMouseOver="#2B88C9" 
@@ -118,9 +118,9 @@
         <Grid Grid.Column="7" Grid.ColumnSpan="7" Grid.Row="4" Grid.RowSpan="4">
             <customcontrols:InfoCard 
                 Margin="10,0" 
-                Text1="Nhân khẩu       chờ duyệt" Text2="67 Gb / 128 Gb" 
+                Text1="Nhân khẩu       chờ duyệt" Text2="{Binding NhanKhauChoDuyetsInfo}" 
                 imageSource="/images/classroom.png" 
-                Progress="66" 
+                Progress="{Binding NhanKhauChoDuyetProgress}" 
                 IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
                 ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
                 ProgressBackgroundBrushMouseOver="#2B88C9" 
@@ -134,9 +134,9 @@
         <Grid Grid.Column="14" Grid.ColumnSpan="7" Grid.Row="4" Grid.RowSpan="4">
             <customcontrols:InfoCard 
                 Margin="10,0" 
-                Text1="Giấy chuyển khẩu chờ duyệt" Text2="67 Gb / 128 Gb" 
+                Text1="Giấy chuyển khẩu chờ duyệt" Text2="{Binding GiayChuyenKhauChoDuyetsInfo}" 
                 imageSource="/images/classroom.png" 
-                Progress="66" 
+                Progress="{Binding GiayChuyenKhauChoDuyetProgress}" 
                 IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
                 ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
                 ProgressBackgroundBrushMouseOver="#2B88C9" 
@@ -164,9 +164,9 @@
         <Grid Grid.ColumnSpan="7" Grid.RowSpan="4" Grid.Row="11">
             <customcontrols:InfoCard 
                 Margin="10,0" 
-                Text1="Sổ hộ khẩu" Text2="67 Gb / 128 Gb" 
+                Text1="Sổ hộ khẩu" Text2="{Binding NewSoHoKhausInfo}" 
                 imageSource="/images/classroom.png" 
-                Progress="66" 
+                Progress="{Binding SoHoKhauProgress}" 
                 IconBackground="#F0F5F8" IconBackgroundMouseOver="White" 
                 ProgressBarThickness="4" ProgressBackgroundBrush="#F0F5F8" 
                 ProgressBackgroundBrushMouseOver="#2B88C9" 
