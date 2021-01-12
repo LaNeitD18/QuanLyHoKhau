@@ -77,6 +77,7 @@ namespace QuanLyHoKhau.ViewModel
             set 
             { 
                 ResultSoHoKhau.MaSHK = value; 
+                Debug.WriteLine(ResultSoHoKhau.MaSHK);
                 ListNHANKHAUinSHK = LoadNhanKhauInSHK();
                 OnPropertyChanged(); 
             }
@@ -144,16 +145,16 @@ namespace QuanLyHoKhau.ViewModel
             if(shk == null || shk.IsDeleted)
                 return new BindingList<NHANKHAU>();
 
-            //BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
-            //    (
-            //        DataProvider.Ins.DB.NHANKHAUs.Where(nk =>
-            //            (!nk.IsDeleted) && (nk.MASHK == MaSoHoKhau)
-            //        ).ToList()
-            //    );
             BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
                 (
-                    shk.NHANKHAUs.Where(nk => !nk.IsDeleted).ToList()
+                    DataProvider.Ins.DB.NHANKHAUs.Where(nk =>
+                        (nk.BanChinhThuc) && (!nk.IsDeleted) && (nk.MASHK == MaSoHoKhau)
+                    ).ToList()
                 );
+            //BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
+            //    (
+            //        shk.NHANKHAUs.Where(nk => nk.BanChinhThuc && !nk.IsDeleted).ToList()
+            //    );
 
             return result;
         }
@@ -272,7 +273,7 @@ namespace QuanLyHoKhau.ViewModel
 
                 // check if this person is actually a NHANKHAU
                 var nguoiDo = filteredNguoi.First();
-                var filteredNhanKhau = DataProvider.Ins.DB.NHANKHAUs.Where(nhankhau => (nhankhau.CMND == nguoiDo.CMND) && (!nhankhau.IsDeleted));
+                var filteredNhanKhau = DataProvider.Ins.DB.NHANKHAUs.Where(nhankhau => (nhankhau.CMND == nguoiDo.CMND) && (nhankhau.BanChinhThuc && !nhankhau.IsDeleted));
 
                 if(filteredNhanKhau.Count() == 0)
                 {
@@ -293,18 +294,86 @@ namespace QuanLyHoKhau.ViewModel
 
             SOHOKHAU targetSHK = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
 
-            if(targetSHK == null)
-            { 
-                MaSoHoKhau = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, SOHOKHAU_ID_PREFIX, SOHOKHAU_ID_LENGTH);
-                DataProvider.Ins.DB.SOHOKHAUs.Add(ResultSoHoKhau);
+            if(targetSHK == null || targetSHK.IsDeleted)
+            {
+                AddPendingAddSoHoKhau();
             }
             else
-            {
-                targetSHK.CopyInfo(ResultSoHoKhau);
+            { 
+                AddPendingEditSoHoKhau();
             }
 
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
+        }
+
+        private void AddPendingEditSoHoKhau()
+        {
+            SOHOKHAU targetSHK = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+            SOHOKHAU tempSHK = new SOHOKHAU(ResultSoHoKhau)
+            {
+                MaSHK = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, $"{MaSoHoKhau}_", 3),
+                BanChinhThuc = false,
+                IsDeleted = false,
+            };
+
+            // if the info has not been changed, then it's no need to create Pending entry
+            if (
+                targetSHK.MaSoLuuNhanKhau == tempSHK.MaSoLuuNhanKhau &&
+                targetSHK.DiaChi == tempSHK.DiaChi
+            )
+            {
+                return;
+            }
+
+            DataProvider.Ins.DB.SOHOKHAUs.Add(tempSHK);
+
+            PHIEUDUYETSOHOKHAU pdshk = new PHIEUDUYETSOHOKHAU()
+            {
+                MaPD_SHK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs, "PDSHK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaSHK = targetSHK.MaSHK,
+                MaSHK_PendingInfo = tempSHK.MaSHK,
+
+                ActionType = "Edit",
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Add(pdshk);
+        }
+
+        private void AddPendingAddSoHoKhau()
+        {
+            SOHOKHAU targetSHK = DataProvider.Ins.DB.SOHOKHAUs.Find(MaSoHoKhau);
+            ResultSoHoKhau.BanChinhThuc = false;
+
+            if (targetSHK == null)
+            {
+                MaSoHoKhau = Utils.GenerateNewId(DataProvider.Ins.DB.SOHOKHAUs, SOHOKHAU_ID_PREFIX, SOHOKHAU_ID_LENGTH);
+                DataProvider.Ins.DB.SOHOKHAUs.Add(ResultSoHoKhau);
+            }
+            else if (targetSHK.IsDeleted)
+            {
+                targetSHK.CopyInfo(ResultSoHoKhau);
+                targetSHK.IsDeleted = false;
+            }
+
+            PHIEUDUYETSOHOKHAU pdshk = new PHIEUDUYETSOHOKHAU()
+            {
+                MaPD_SHK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs, "PDSHK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaSHK = MaSoHoKhau,
+                MaSHK_PendingInfo = MaSoHoKhau,
+
+                ActionType = "Add",
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Add(pdshk);
         }
         #endregion
 

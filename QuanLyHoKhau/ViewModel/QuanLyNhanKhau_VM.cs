@@ -10,6 +10,7 @@ using QuanLyHoKhau.Model;
 using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Windows;
+using QuanLyHoKhau.Utilities;
 
 namespace QuanLyHoKhau.ViewModel
 {
@@ -18,7 +19,7 @@ namespace QuanLyHoKhau.ViewModel
         #region List Nhan khau (full)
         ObservableCollection<NHANKHAU> LoadNhanKhaus()
         {
-            return new ObservableCollection<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.Where(nk => !nk.IsDeleted).ToList());
+            return new ObservableCollection<NHANKHAU>(DataProvider.Ins.DB.NHANKHAUs.Where(nk => nk.BanChinhThuc && !nk.IsDeleted).ToList());
         }
 
         ObservableCollection<NHANKHAU> _listNhanKhau = null;
@@ -116,14 +117,39 @@ namespace QuanLyHoKhau.ViewModel
             MessageBoxResult msgRes = MessageBox.Show($"Bạn có chắc muốn xoá thông tin nhân khẩu {nk.CMND} không?", "Xoá", MessageBoxButton.YesNo);
             if (msgRes == MessageBoxResult.Yes)
             {
-                nk.IsDeleted = true;
+                //nk.IsDeleted = true;
                 
-                if(nk.NGUOI != null)
-                    nk.NGUOI.IsDeleted = true;
+                //if(nk.NGUOI != null)
+                //    nk.NGUOI.IsDeleted = true;
+
+                //Utils.RemoveInvalidChuHoInSHKs();
+
+                AddPendingDeleteNhanKhau(nk);
 
                 DataProvider.Ins.DB.SaveChanges();
                 Refresh();
             }
+        }
+
+        private void AddPendingDeleteNhanKhau(NHANKHAU nk)
+        {
+            if(nk == null)
+                return;
+
+            PHIEUDUYETNHANKHAU pdnk = new PHIEUDUYETNHANKHAU()
+            {
+                MaPD_NK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs, "PDNK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaNK = nk.CMND,
+                MaNK_PendingInfo = nk.CMND,
+
+                ActionType = DuyetActionTypes.Remove,
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs.Add(pdnk);
         }
         #endregion
 

@@ -13,10 +13,34 @@
         DataContext="{StaticResource ChuyenKhauVM}">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
             <RowDefinition/>
             <RowDefinition Height="80"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
+            <ComboBox 
+                    FontSize="18" Width="400" MinWidth="100"
+                    materialDesign:HintAssist.Hint="Mã sổ lưu chuyển khẩu" 
+                    VerticalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    ItemsSource="{Binding ListSOLUUCHUYENKHAU}" 
+                    KeyboardNavigation.TabIndex="1" 
+                    SelectedItem="{Binding SelectedSoLuuChuyenKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding MaSoLuuChuyenKhau}"></TextBlock>
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+        </Grid>
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="50"/>
@@ -28,80 +52,142 @@
                         <RowDefinition Height="80"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBox 
-                    Width="250"
-                    MinWidth="100"
-                    FontSize="18" 
-                    materialDesign:HintAssist.Hint="Mã nhân khẩu" 
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                    Text="{Binding maNhanKhau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <ComboBox 
+                    FontSize="18" Width="300" MinWidth="100"
+                    materialDesign:HintAssist.Hint="Hộ Khẩu hiện tại" 
+                    VerticalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    ItemsSource="{Binding ListSOHOKHAU}" 
+                    KeyboardNavigation.TabIndex="1" 
+                    SelectedItem="{Binding SelectedFromSoHoKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding MaSHK}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <DataGrid 
                     Grid.Row="1"
-                    x:Name="listUsingExamDatagrid"
+                    x:Name="ListNHANKHAUinFromSHKDataGrid"
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Top" 
-                    ItemsSource="{Binding ListSoHoKhau}"
+                    ItemsSource="{Binding ListNHANKHAUinFromSHK}"
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                     SelectionMode="Extended"
                     AutoGenerateColumns="False"
-                    SelectedItem="{Binding SelectedUsingExam, Mode=TwoWay}"
+                    SelectedItem="{Binding YenCute, Mode=TwoWay}"
                     SelectionUnit="FullRow" 
-                    CanUserAddRows="False">
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    CanUserResizeColumns="True"
+                    CanUserResizeRows="False"
+                    IsReadOnly="True"
+                    >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding StatusString}"/>
-                            <DataGridTextColumn Header="Phòng" Binding="{Binding RoomID}"/>
-                            <DataGridTextColumn Header="Lớp" Binding="{Binding EXAM.CLASS.ClassName}"/>
-                            <DataGridTextColumn Header="Giám thị" Binding="{Binding EXAM.LECTURER.LecturerName}"/>
+                            <DataGridTextColumn Header="CMND" Binding="{Binding CMND}"/>
+                            <DataGridTextColumn Header="Họ và tên" Binding="{Binding NGUOI.Ten}"/>
+                            <DataGridTextColumn Header="Quan hệ với chủ hộ" Binding="{Binding QuanHeVoiChuHo}"/>
                         </DataGrid.Columns>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction 
-                            Command="{Binding UsingExam_SelectionChangedCommand}"                       
-                            CommandParameter="{Binding ElementName=listUsingExamDatagrid}"/>
+                                Command="{Binding ListNHANKHAUinFromSHKDataGrid_SelectionChangedCmd}"                       
+                                CommandParameter="{Binding ElementName=ListNHANKHAUinFromSHKDataGrid}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </DataGrid>
                 </Grid>
             </materialDesign:Card>
-            <Button Grid.Column="1">
-                <Button.Content>
-                    <Path
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button 
+                    Command="{Binding CmdReset}"
+                    Grid.Row="0"
+                    >
+                    <Button.Content>
+                        <Path
+                        Style="{StaticResource {x:Type Path}}"
+                        Data="{StaticResource clearmemory}"
+                        Fill="White"
+                        HorizontalAlignment="Center"/>
+                    </Button.Content>
+                </Button>
+                <Button 
+                    Grid.Row="2"
+                    Command="{Binding CmdChuyenKhau}"
+                    >
+                    <Button.Content>
+                        <Path
                         Style="{StaticResource {x:Type Path}}"
                         Data="{StaticResource right}"
                         Fill="White"
-                        HorizontalAlignment="Center"/>
-                </Button.Content>
-            </Button>
+                        HorizontalAlignment="Center"
+                        />
+                    </Button.Content>
+                </Button>
+            </Grid>
+
             <materialDesign:Card Grid.Column="2" Margin="5">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="80"/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBox 
-                    Width="250"
-                    MinWidth="100"
-                    FontSize="18" 
-                    materialDesign:HintAssist.Hint="Mã nhân khẩu" 
-                    Style="{StaticResource MaterialDesignFloatingHintTextBox}" VerticalAlignment="Center"
-                    Text="{Binding maNhanKhau, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                    <ComboBox 
+                    FontSize="18" Width="300" MinWidth="100"
+                    materialDesign:HintAssist.Hint="Hộ Khẩu chuyển đến" 
+                    VerticalAlignment="Center" 
+                    Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                    ItemsSource="{Binding ListSOHOKHAU}" 
+                    KeyboardNavigation.TabIndex="1" 
+                    SelectedItem="{Binding SelectedToSoHoKhau, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding Class_SelectionChangedCommand}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding MaSHK}"></TextBlock>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
                     <DataGrid 
                     Grid.Row="1"
-                    x:Name="listDatagrid"
+                    x:Name="ListNHANKHAUinToSHKDataGrid"
                     HorizontalAlignment="Stretch" 
                     VerticalAlignment="Top" 
-                    ItemsSource="{Binding ListHoKhau}"
+                    ItemsSource="{Binding ListNHANKHAUinToSHK}"
                     ScrollViewer.VerticalScrollBarVisibility="Auto"
                     SelectionMode="Extended"
                     AutoGenerateColumns="False"
-                    SelectedItem="{Binding SelectedUsingExam, Mode=TwoWay}"
+                    SelectedItem="{Binding YenCute, Mode=TwoWay}"
                     SelectionUnit="FullRow" 
-                    CanUserAddRows="False">
+                    CanUserAddRows="False"
+                    CanUserDeleteRows="False"
+                    CanUserResizeColumns="True"
+                    CanUserResizeRows="False"
+                    IsReadOnly="True"
+                    >
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Trạng thái" Binding="{Binding StatusString}"/>
-                            <DataGridTextColumn Header="Phòng" Binding="{Binding RoomID}"/>
-                            <DataGridTextColumn Header="Lớp" Binding="{Binding EXAM.CLASS.ClassName}"/>
-                            <DataGridTextColumn Header="Giám thị" Binding="{Binding EXAM.LECTURER.LecturerName}"/>
+                            <DataGridTextColumn Header="CMND" Binding="{Binding CMND}"/>
+                            <DataGridTextColumn Header="Họ và tên" Binding="{Binding NGUOI.Ten}"/>
+                            <DataGridTextColumn Header="Quan hệ với chủ hộ" Binding="{Binding QuanHeVoiChuHo}"/>
                         </DataGrid.Columns>
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
@@ -121,12 +207,18 @@
                 Style="{StaticResource MaterialDesignRaisedButton}" 
                 Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
                 Width="150" Height="35"
-                IsEnabled="{Binding IsAddingEnabled}"/>
+                IsEnabled="{Binding IsAddingEnabled}"
+                Command="{Binding CmdConfirm}"    
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+                />
                 <Button 
                 Style="{StaticResource MaterialDesignRaisedButton}" 
                 Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
                 Width="150" Height="35"
-                IsEnabled="{Binding IsAddingEnabled}"/>
+                IsEnabled="{Binding IsAddingEnabled}"
+                Command="{Binding CmdCancel}"    
+                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
+                />
             </StackPanel>
         </Grid>
     </Grid>

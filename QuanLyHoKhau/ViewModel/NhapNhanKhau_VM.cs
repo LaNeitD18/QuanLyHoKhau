@@ -16,11 +16,18 @@ namespace QuanLyHoKhau.ViewModel
         #region Init
         bool isAddingMode = true;
 
-        private bool _isCmndReadOnly = false;
+        private bool _isCmndReadOnly = true;
         public bool IsCmndReadOnly
         {
             get => _isCmndReadOnly;
             set { _isCmndReadOnly = value; OnPropertyChanged(); }
+        }
+
+        private bool _isMaShkEnable = true;
+        public bool IsMaShkEnable
+        {
+            get => _isMaShkEnable;
+            set { _isMaShkEnable = value; OnPropertyChanged(); }
         }
 
         public NhapNhanKhau_VM() : this(null, null)
@@ -31,6 +38,7 @@ namespace QuanLyHoKhau.ViewModel
         {
             isAddingMode = (nguoi == null) || (nhanKhau == null);
             IsCmndReadOnly = !isAddingMode;
+            IsMaShkEnable = isAddingMode;
 
             Reset();
             LoadInfo(nguoi, nhanKhau);
@@ -226,7 +234,7 @@ namespace QuanLyHoKhau.ViewModel
         #region ListSOHOKHAU
         private BindingList<SOHOKHAU> LoadSoHoKhau()
         {
-            BindingList<SOHOKHAU> result = new BindingList<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.Where(shk => !shk.IsDeleted).ToList());
+            BindingList<SOHOKHAU> result = new BindingList<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.Where(shk => shk.BanChinhThuc && !shk.IsDeleted).ToList());
             return result;
         }
 
@@ -337,6 +345,12 @@ namespace QuanLyHoKhau.ViewModel
                     errors = $"Công dân với CMND {CMND} đã tồn tại trong hệ thống";
                     return false;
                 }
+
+                if(CMND.IndexOf('_') >= 0)
+                {
+                    errors = "Số CMND không được chứa ký tư \"_\"";
+                    return false;
+                }
             }
 
             if(string.IsNullOrEmpty(HoTen))
@@ -410,19 +424,18 @@ namespace QuanLyHoKhau.ViewModel
                 targetNguoi.IsDeleted = false;
             }
 
-            if (targetNK == null)
+            if(targetNK != null && !targetNK.IsDeleted)
             {
-                DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
+                AddPendingEditNhanKhau();
             }
             else
             {
-                targetNK.CopyInfo(ResultNhanKhau);
-                targetNK.IsDeleted = false;
+                AddPendingAddNhanKhau();
             }
 
             // Update ChuHo of SHK:
             UpdateChuHoOfShk();
-            Utils.AdjustChuHoInSoHoKhaus();
+            Utils.RemoveInvalidChuHoInSHKs();
 
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
@@ -430,13 +443,94 @@ namespace QuanLyHoKhau.ViewModel
 
         private void UpdateChuHoOfShk()
         {
-            if(IsChuHo)
-                SelectedSoHoKhau.CMNDChuHo = CMND;
-            else
-            {
-                if(SelectedSoHoKhau.CMNDChuHo == CMND)
-                    SelectedSoHoKhau.CMNDChuHo = null;
+            if(isAddingMode)
+            { 
+                if(IsChuHo)
+                    SelectedSoHoKhau.CMNDChuHo = CMND;
+                else
+                {
+                    if(SelectedSoHoKhau.CMNDChuHo == CMND)
+                        SelectedSoHoKhau.CMNDChuHo = null;
+                }
             }
+            // CuteTN Todo: update shk's CHUHO when approving editting.
+        }
+
+        private void AddPendingEditNhanKhau()
+        {
+            NHANKHAU targetNK = DataProvider.Ins.DB.NHANKHAUs.Find(CMND);
+            NHANKHAU tempNK = new NHANKHAU(ResultNhanKhau) 
+            { 
+                CMND = Utils.GenerateNewId(DataProvider.Ins.DB.NHANKHAUs, $"{CMND}_", 3),
+                BanChinhThuc = false,
+                IsDeleted = false,
+            };
+
+            // if the info has not been changed, then it's no need to create Pending entry
+            if(
+                targetNK.QuanHeVoiChuHo == tempNK.QuanHeVoiChuHo &&
+                targetNK.ChoOHienNay == tempNK.ChoOHienNay
+            )
+            {
+                return;
+            }
+
+            // CuteTN Note: this is hot fix :)
+            // because if we don't add a temp NGUOI, the db will raise Foreign key constrain error
+            NGUOI tempN = new NGUOI(ResultNguoi)
+            {
+                CMND = tempNK.CMND,
+                IsDeleted = true,
+            };
+            DataProvider.Ins.DB.NGUOIs.Add(tempN);
+
+            DataProvider.Ins.DB.NHANKHAUs.Add(tempNK);
+
+            PHIEUDUYETNHANKHAU pdnk = new PHIEUDUYETNHANKHAU()
+            {
+                MaPD_NK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs, "PDNK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaNK = targetNK.CMND,
+                MaNK_PendingInfo = tempNK.CMND,
+                
+                ActionType = "Edit",
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs.Add(pdnk);
+        }
+
+        private void AddPendingAddNhanKhau()
+        {
+            NHANKHAU targetNK = DataProvider.Ins.DB.NHANKHAUs.Find(CMND);
+            ResultNhanKhau.BanChinhThuc = false;
+
+            if(targetNK == null)
+            {
+                DataProvider.Ins.DB.NHANKHAUs.Add(ResultNhanKhau);
+            }
+            else if(targetNK.IsDeleted)
+            {
+                targetNK.CopyInfo(ResultNhanKhau);
+                targetNK.IsDeleted = false;
+            }
+
+            PHIEUDUYETNHANKHAU pdnk = new PHIEUDUYETNHANKHAU()
+            {
+                MaPD_NK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs, "PDNK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaNK = CMND,
+                MaNK_PendingInfo = CMND,
+
+                ActionType = "Add",
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs.Add(pdnk);
         }
         #endregion
 

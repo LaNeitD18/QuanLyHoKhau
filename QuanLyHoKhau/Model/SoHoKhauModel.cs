@@ -23,6 +23,7 @@ namespace QuanLyHoKhau.Model
                 MaSoLuuNhanKhau = null;
                 DiaChi = "";
                 NgayTaoSo = DateTime.Now;
+                BanChinhThuc = true;
                 IsDeleted = false;
             }
             else
@@ -33,6 +34,7 @@ namespace QuanLyHoKhau.Model
                 this.MaSoLuuNhanKhau = shk.MaSoLuuNhanKhau;
                 this.DiaChi = shk.DiaChi;
                 this.NgayTaoSo = shk.NgayTaoSo;
+                this.BanChinhThuc = shk.BanChinhThuc;
                 this.IsDeleted = shk.IsDeleted;
             }
         }

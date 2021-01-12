@@ -47,7 +47,7 @@
             <Grid Grid.ColumnSpan="2" Margin="0,42,-0.4,42.2" Grid.RowSpan="3">
                 <ComboBox 
                     FontSize="18" Width="400" MinWidth="100"
-                    materialDesign:HintAssist.Hint="Chọn mã sổ lưu nhân khẩu" 
+                    materialDesign:HintAssist.Hint="Mã sổ lưu nhân khẩu" 
                     VerticalAlignment="Center" 
                     Style="{StaticResource MaterialDesignFloatingHintComboBox}"
                     ItemsSource="{Binding ListSOLUUNHANKHAU}" 

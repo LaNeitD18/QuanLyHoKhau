@@ -1,4 +1,5 @@
 ﻿using QuanLyHoKhau.Model;
+using QuanLyHoKhau.Utilities;
 using QuanLyHoKhau.View;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace QuanLyHoKhau.ViewModel
 
             BtnChuyenKhau_Command = new RelayCommand((p) => {
                 ChuyenKhauWindow chuyenKhauWindow = new ChuyenKhauWindow();
+                chuyenKhauWindow.DataContext = new ChuyenKhau_VM();
                 chuyenKhauWindow.ShowDialog();
             });
         }
@@ -37,7 +39,7 @@ namespace QuanLyHoKhau.ViewModel
         #region List So ho khau (full)
         ObservableCollection<SOHOKHAU> LoadSoHoKhaus()
         {
-            return new ObservableCollection<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.Where(shk => !shk.IsDeleted).ToList());
+            return new ObservableCollection<SOHOKHAU>(DataProvider.Ins.DB.SOHOKHAUs.Where(shk => shk.BanChinhThuc && !shk.IsDeleted).ToList());
         }
 
         ObservableCollection<SOHOKHAU> _listSoHoKhau = null;
@@ -122,10 +124,33 @@ namespace QuanLyHoKhau.ViewModel
             MessageBoxResult msgRes = MessageBox.Show($"Bạn có chắc muốn xoá thông tin sổ hộ khẩu {shk.MaSHK} không?", "Xoá", MessageBoxButton.YesNo);
             if(msgRes == MessageBoxResult.Yes)
             {
-                shk.IsDeleted = true;
+                // shk.IsDeleted = true;
+                AddPendingDeleteSoHoKhau(shk);
+
                 DataProvider.Ins.DB.SaveChanges();
                 Refresh();
             }
+        }
+
+        private void AddPendingDeleteSoHoKhau(SOHOKHAU shk)
+        {
+            if(shk == null)
+                return;
+
+            PHIEUDUYETSOHOKHAU pdshk = new PHIEUDUYETSOHOKHAU()
+            {
+                MaPD_SHK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs, "PDSHK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaSHK = shk.MaSHK,
+                MaSHK_PendingInfo = shk.MaSHK,
+
+                ActionType = DuyetActionTypes.Remove,
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Add(pdshk);
         }
         #endregion
 
