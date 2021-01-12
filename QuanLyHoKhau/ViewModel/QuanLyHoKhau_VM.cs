@@ -1,4 +1,5 @@
 ﻿using QuanLyHoKhau.Model;
+using QuanLyHoKhau.Utilities;
 using QuanLyHoKhau.View;
 using System;
 using System.Collections.Generic;
@@ -123,10 +124,33 @@ namespace QuanLyHoKhau.ViewModel
             MessageBoxResult msgRes = MessageBox.Show($"Bạn có chắc muốn xoá thông tin sổ hộ khẩu {shk.MaSHK} không?", "Xoá", MessageBoxButton.YesNo);
             if(msgRes == MessageBoxResult.Yes)
             {
-                shk.IsDeleted = true;
+                // shk.IsDeleted = true;
+                AddPendingDeleteSoHoKhau(shk);
+
                 DataProvider.Ins.DB.SaveChanges();
                 Refresh();
             }
+        }
+
+        private void AddPendingDeleteSoHoKhau(SOHOKHAU shk)
+        {
+            if(shk == null)
+                return;
+
+            PHIEUDUYETSOHOKHAU pdshk = new PHIEUDUYETSOHOKHAU()
+            {
+                MaPD_SHK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs, "PDSHK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaSHK = shk.MaSHK,
+                MaSHK_PendingInfo = shk.MaSHK,
+
+                ActionType = "Delete",
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Add(pdshk);
         }
         #endregion
 

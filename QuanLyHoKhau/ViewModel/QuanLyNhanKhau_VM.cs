@@ -117,15 +117,39 @@ namespace QuanLyHoKhau.ViewModel
             MessageBoxResult msgRes = MessageBox.Show($"Bạn có chắc muốn xoá thông tin nhân khẩu {nk.CMND} không?", "Xoá", MessageBoxButton.YesNo);
             if (msgRes == MessageBoxResult.Yes)
             {
-                nk.IsDeleted = true;
+                //nk.IsDeleted = true;
                 
-                if(nk.NGUOI != null)
-                    nk.NGUOI.IsDeleted = true;
+                //if(nk.NGUOI != null)
+                //    nk.NGUOI.IsDeleted = true;
 
-                Utils.RemoveInvalidChuHoInSHKs();
+                //Utils.RemoveInvalidChuHoInSHKs();
+
+                AddPendingDeleteNhanKhau(nk);
+
                 DataProvider.Ins.DB.SaveChanges();
                 Refresh();
             }
+        }
+
+        private void AddPendingDeleteNhanKhau(NHANKHAU nk)
+        {
+            if(nk == null)
+                return;
+
+            PHIEUDUYETNHANKHAU pdnk = new PHIEUDUYETNHANKHAU()
+            {
+                MaPD_NK = Utils.GenerateNewId(DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs, "PDNK_", 8),
+                NgayTao = DateTime.Now,
+                IsDeleted = false,
+
+                MaNK = nk.CMND,
+                MaNK_PendingInfo = nk.CMND,
+
+                ActionType = "Delete",
+                DaDuyet = false,
+            };
+
+            DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs.Add(pdnk);
         }
         #endregion
 
