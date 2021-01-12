@@ -31,6 +31,9 @@
             <SolidColorBrush x:Key="MidNight" Color="#1c2938"/>
             <SolidColorBrush x:Key="Bunting" Color="#263246"/>
             <SolidColorBrush x:Key="DarkGrayishBlue" Color="#3D435A"/>
+            <SolidColorBrush x:Key="Green" Color="#00A86B"/>
+            <SolidColorBrush x:Key="PrimaryGreen" Color="#50C878"/>
+            <SolidColorBrush x:Key="AccentGreen" Color="#73D393"/>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />

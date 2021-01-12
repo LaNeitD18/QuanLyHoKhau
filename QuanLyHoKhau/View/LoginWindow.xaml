@@ -74,7 +74,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.ColumnSpan="13" Grid.RowSpan="17" Background="{StaticResource DarkGrayishBlue}">
+        <Grid Grid.ColumnSpan="13" Grid.RowSpan="17" Background="{StaticResource Green}">
             <TextBlock 
                 Margin="15" 
                 FontSize="30" 

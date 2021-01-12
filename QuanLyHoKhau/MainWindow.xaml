@@ -55,7 +55,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            
+
             <!--/-->
             <!--<Style x:Key="ExpanderRightHeaderStyle" TargetType="{x:Type ToggleButton}">
                 <Setter Property="Template">
@@ -343,7 +343,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.ColumnSpan="5" Grid.RowSpan="3" Background="{DynamicResource MidNight}">
+        <Grid Grid.ColumnSpan="5" Grid.RowSpan="3" Background="{DynamicResource Green}">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"></DropShadowEffect>
             </Grid.Effect>
@@ -359,12 +359,16 @@
                 </TextBlock>
             </StackPanel>
         </Grid>
-        
+
         <Grid
             x:Name="menuGrid"
             Grid.Row="3"
             Grid.RowSpan="12" Grid.ColumnSpan="5"
             Background="WhiteSmoke">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="26*"/>
+            </Grid.ColumnDefinitions>
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"></DropShadowEffect>
             </Grid.Effect>
@@ -433,7 +437,7 @@
                     </Canvas>
                 </WrapPanel>
             </DockPanel>-->
-            <StackPanel Margin="0,10">
+            <StackPanel Margin="0,10,0,10.2" Grid.ColumnSpan="2">
                 <RadioButton
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"
@@ -456,7 +460,7 @@
                             <Image  Margin="8" 
                                 Source="/images/nhanKhaus.png" Width="18"/>
                             <Label Grid.Column="1" Padding="0" Margin="5,0" VerticalAlignment="Center">Quản lý nhân khẩu</Label>
-                            
+
                         </Grid>
                     </Expander.Header>
                     <StackPanel
@@ -477,7 +481,7 @@
                             Command="{Binding QLHoKhau_Page_SelectedCommand}"/>
                     </StackPanel>
                 </Expander>
-                
+
                 <RadioButton
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"
@@ -493,15 +497,15 @@
                 <RadioButton
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"
-                    Tag="{StaticResource tamTru}"
-                    Content="Duyệt/Từ chối"
-                    Command="{Binding Duyet_Page_SelectedCommand}"/>
-                <RadioButton
-                    GroupName="Menu"
-                    Style="{StaticResource MenuButtonStyle}"
                     Tag="{StaticResource documentfile}"
                     Content="Báo cáo"
                     Command="{Binding BaoCao_Page_SelectedCommand}"/>
+                <RadioButton
+                    GroupName="Menu"
+                    Style="{StaticResource MenuButtonStyle}"
+                    Tag="{StaticResource tamTru}"
+                    Content="Duyệt/Từ chối"
+                    Command="{Binding Duyet_Page_SelectedCommand}"/>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="15" Grid.RowSpan="2" Grid.ColumnSpan="5" Background="WhiteSmoke">

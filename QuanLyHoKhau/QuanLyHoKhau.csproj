@@ -368,6 +368,7 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\nhanKhaus.png" />
+    <Resource Include="images\hk1.png" />
     <Content Include="Model\QLHKEntities.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>QLHKEntities.edmx</DependentUpon>
