@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using QuanLyHoKhau.Model;
@@ -265,20 +266,20 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleConfirmButton(Object obj)
         {
-            System.Windows.MessageBoxResult dlgRes;
-
-            if(isAddingMode)
-                dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc thêm nhân khẩu {CMND}", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
-            else
-                dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc sửa nhân khẩu {CMND}", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
-
-            if(dlgRes == System.Windows.MessageBoxResult.No)
-                return;
-
             string error;
 
             if (ValidateResult(out error))
             {
+                System.Windows.MessageBoxResult dlgRes;
+
+                if (isAddingMode)
+                    dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc thêm nhân khẩu {CMND}", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+                else
+                    dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc sửa nhân khẩu {CMND}", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+
+                if (dlgRes == System.Windows.MessageBoxResult.No)
+                    return;
+
                 UpsertResult();
                 
                 if(isAddingMode)
@@ -365,11 +366,12 @@ namespace QuanLyHoKhau.ViewModel
                     return false;
                 }
 
-                if(CMND.IndexOf('_') >= 0)
+                if(CMND.Any(c => c < '0' || c > '9'))
                 {
-                    errors = "Số CMND không được chứa ký tư \"_\"";
+                    errors = $"Số CMND chỉ được phép chứa chữ số";
                     return false;
                 }
+
             }
 
             if(string.IsNullOrEmpty(HoTen))
@@ -447,27 +449,14 @@ namespace QuanLyHoKhau.ViewModel
             }
 
             // Update ChuHo of SHK:
-            UpdateChuHoOfShk();
+            // UpdateChuHoOfShk();
             Utils.RemoveInvalidChuHoInSHKs();
 
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
         }
 
-        private void UpdateChuHoOfShk()
-        {
-            if(isAddingMode)
-            { 
-                if(IsChuHo)
-                    SelectedSoHoKhau.CMNDChuHo = CMND;
-                else
-                {
-                    if(SelectedSoHoKhau.CMNDChuHo == CMND)
-                        SelectedSoHoKhau.CMNDChuHo = null;
-                }
-            }
-            // CuteTN Todo: update shk's CHUHO when approving editting.
-        }
+
 
         private void AddPendingEditNhanKhau()
         {

@@ -14,6 +14,13 @@ namespace QuanLyHoKhau.ViewModel
     class ChuyenKhau_VM : BaseViewModel
     {
         #region Fields
+        private bool _isComboboxesSHKEnabled = true;
+        public bool IsComboboxesSHKEnabled
+        {
+            get => _isComboboxesSHKEnabled;
+            set { _isComboboxesSHKEnabled = value; OnPropertyChanged(); }
+        }
+
         private SOLUUCHUYENKHAU _selectedSoLuuChuyenKhau = null;
         public SOLUUCHUYENKHAU SelectedSoLuuChuyenKhau
         {
@@ -219,20 +226,25 @@ namespace QuanLyHoKhau.ViewModel
                 return;
             }
 
-            System.Windows.MessageBoxResult dlgRes = System.Windows.MessageBox.Show($"Bạn có chắc muốn lưu thông tin chuyển khẩu cho {filteredNK.Count} nhân khẩu không?", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
-            if(dlgRes == System.Windows.MessageBoxResult.No)
-                return;
-
             string error;
 
             if (Validate(out error))
             {
+                string msgNKs = filteredNK.Select(nk => nk.CMND + "\n").Aggregate((s1, s2) => s1 + s2);
+                string msg = $"Bạn có chắc muốn lưu thông tin chuyển khẩu cho {filteredNK.Count} nhân khẩu không?";
+                msg += "Danh sách nhân khẩu sẽ chuyển:\n";
+                msg += msgNKs;
+
+                System.Windows.MessageBoxResult dlgRes = System.Windows.MessageBox.Show(msg, "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+                if (dlgRes == System.Windows.MessageBoxResult.No)
+                    return;
+
                 filteredNK.ForEach(AddPendingChuyenKhau);
                 DataProvider.Ins.DB.SaveChanges();
 
-                string msg = $"Đã thêm phiếu chuyển khẩu cho {filteredNK.Count} nhân khẩu từ hộ khẩu {SelectedFromSoHoKhau.MaSHK} đến hộ khẩu {SelectedToSoHoKhau.MaSHK} thành công.\n";
+                msg = $"Đã thêm phiếu chuyển khẩu cho {filteredNK.Count} nhân khẩu từ hộ khẩu {SelectedFromSoHoKhau.MaSHK} đến hộ khẩu {SelectedToSoHoKhau.MaSHK} thành công.\n";
                 msg += "Danh sách nhân khẩu đã chuyển:\n";
-                msg += filteredNK.Select(nk => nk.CMND + "\n").Aggregate((s1, s2) => s1 + s2);
+                msg += msgNKs;
                 msg += $"Vui lòng chờ duyệt thay đổi để cập nhật.";
 
                 System.Windows.MessageBox.Show(msg, "Thông báo");
@@ -273,10 +285,18 @@ namespace QuanLyHoKhau.ViewModel
 
             if (ValidateForChuyenKhau(out error))
             {
+                IsComboboxesSHKEnabled = false;
+
                 List<NHANKHAU> temp = new List<NHANKHAU>(ListSelectedNHANKHAUinFromSHK);
                 foreach (var nk in temp)
                 {
-                    ChuyenKhauForPreviewing(nk);
+                    // Cannot chuyen khau ChuHo
+                    if(SelectedFromSoHoKhau.CMNDChuHo != nk.CMND)
+                        ChuyenKhauForPreviewing(nk);
+                    else
+                    {
+                        System.Windows.MessageBox.Show("Không được phép chuyển khẩu chủ hộ", "Lỗi", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    }
                 }
             }
             else
@@ -296,6 +316,7 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleResetButton(Object obj)
         {
+            IsComboboxesSHKEnabled = true;
             ResetChuyenKhau();
         }
         #endregion

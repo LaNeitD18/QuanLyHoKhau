@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using QuanLyHoKhau.Model;
+using QuanLyHoKhau.ViewModel;
 
 namespace QuanLyHoKhau.Utilities
 {
@@ -39,6 +40,28 @@ namespace QuanLyHoKhau.Utilities
                 if(chuHo != null)
                     if(chuHo.IsDeleted || !chuHo.BanChinhThuc || chuHo.MASHK != shk.MaSHK)
                         shk.CMNDChuHo = null;
+            }
+        }
+
+
+        /// <summary>
+        /// CuteTN's function: auto set ChuHo of SHK.
+        /// </summary>
+        /// <param name="nk"></param>
+        static public void UpdateChuHoOfShk(NHANKHAU nk)
+        {
+            SOHOKHAU shk = DataProvider.Ins.DB.SOHOKHAUs.Find(nk.MASHK);
+            if (shk == null)
+                return;
+
+            if (nk.QuanHeVoiChuHo == GlobalState.Ins().chuHo)
+            {
+                shk.CMNDChuHo = nk.CMND;
+            }
+            else
+            {
+                if (shk.CMNDChuHo == nk.CMND)
+                    shk.CMNDChuHo = null;
             }
         }
     }

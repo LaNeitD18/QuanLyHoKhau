@@ -150,6 +150,8 @@ namespace QuanLyHoKhau.ViewModel
         }
 
         #region Duyet Nhan Khau
+
+
         /// <summary>
         /// 
         /// </summary>
@@ -174,6 +176,8 @@ namespace QuanLyHoKhau.ViewModel
                     errorMsg = RemoveNhanKhau(nhanKhauChoDuyet);
                     break;
             }
+
+            Utilities.Utils.RemoveInvalidChuHoInSHKs();
 
             return errorMsg;
         }
@@ -206,6 +210,7 @@ namespace QuanLyHoKhau.ViewModel
         {
             nhanKhau.NhanKhauPending.BanChinhThuc = true;
             nhanKhau.PhieuDuyet.DaDuyet = true;
+            Utilities.Utils.UpdateChuHoOfShk(nhanKhau.NhanKhauPending);
             try
             {
                 DataProvider.Ins.DB.SaveChanges();
@@ -223,13 +228,17 @@ namespace QuanLyHoKhau.ViewModel
         private string EditNhanKhau(NhanKhauChoDuyetDisplay nhanKhau)
         {
             var oldCmnd = nhanKhau.NhanKhau.CMND;
+            var oldShk = nhanKhau.NhanKhau.MASHK;
 
             nhanKhau.NhanKhau.CopyInfo(nhanKhau.NhanKhauPending);
 
             nhanKhau.NhanKhau.CMND = oldCmnd; // we copy info but the primary key we dont change
+            nhanKhau.NhanKhau.MASHK = oldShk;
+
             nhanKhau.NhanKhau.BanChinhThuc = true;
 
             nhanKhau.PhieuDuyet.DaDuyet = true;
+            Utilities.Utils.UpdateChuHoOfShk(nhanKhau.NhanKhau);
 
             try
             {
@@ -322,6 +331,8 @@ namespace QuanLyHoKhau.ViewModel
                     errorMsg = RemoveSoHoKhau(soHoKhauChoDuyet);
                     break;
             }
+
+            Utilities.Utils.RemoveInvalidChuHoInSHKs();
 
             return errorMsg;
         }
@@ -460,6 +471,8 @@ namespace QuanLyHoKhau.ViewModel
 
             nhanKhau.MASHK = chuyenKhauChoDuyet.PhieuDuyet.MaSHKChuyenDen;
             chuyenKhauChoDuyet.PhieuDuyet.DaDuyet = true;
+            Utilities.Utils.UpdateChuHoOfShk(nhanKhau);
+
             try
             {
                 DataProvider.Ins.DB.SaveChanges();
@@ -471,6 +484,7 @@ namespace QuanLyHoKhau.ViewModel
             }
 
             ListChuyenKhauChoDuyet.Remove(chuyenKhauChoDuyet);
+            Utilities.Utils.RemoveInvalidChuHoInSHKs();
             return null;
         }
 

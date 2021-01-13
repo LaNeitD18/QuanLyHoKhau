@@ -16,8 +16,8 @@ namespace QuanLyHoKhau.ViewModel
     {
         // CuteTN Note: the goal is to make this class immutable from the outside :)
 
-        const int SOHOKHAU_ID_LENGTH = 5;
-        const string SOHOKHAU_ID_PREFIX = "SHK";
+        const int SOHOKHAU_ID_LENGTH = 9;
+        const string SOHOKHAU_ID_PREFIX = "SHK_";
 
         #region Init
         bool isAddingMode = true;
@@ -186,20 +186,20 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleConfirmButton(Object obj)
         {
-            System.Windows.MessageBoxResult dlgRes;
-
-            if (isAddingMode)
-                dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc thêm hộ khẩu mới", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
-            else
-                dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc sửa hộ khẩu {MaSoHoKhau}", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
-
-            if (dlgRes == System.Windows.MessageBoxResult.No)
-                return;
-
             string error;
 
             if(ValidateResult(out error))
-            { 
+            {
+                System.Windows.MessageBoxResult dlgRes;
+
+                if (isAddingMode)
+                    dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc thêm hộ khẩu mới", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+                else
+                    dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc sửa hộ khẩu {MaSoHoKhau}", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+
+                if (dlgRes == System.Windows.MessageBoxResult.No)
+                    return;
+
                 UpsertResult();
 
                 if (isAddingMode)
