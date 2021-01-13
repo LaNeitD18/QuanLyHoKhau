@@ -114,6 +114,7 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button 
+                    Background="Teal"
                     Command="{Binding CmdReset}"
                     Grid.Row="0"
                     >
@@ -126,6 +127,7 @@
                     </Button.Content>
                 </Button>
                 <Button 
+                    Background="Teal"
                     Grid.Row="2"
                     Command="{Binding CmdChuyenKhau}"
                     >
@@ -204,6 +206,7 @@
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button 
+                    Background="Teal"
                 Style="{StaticResource MaterialDesignRaisedButton}" 
                 Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
                 Width="150" Height="35"
@@ -212,6 +215,7 @@
                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
                 />
                 <Button 
+                    Background="Teal"
                 Style="{StaticResource MaterialDesignRaisedButton}" 
                 Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
                 Width="150" Height="35"

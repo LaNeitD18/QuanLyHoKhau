@@ -1,6 +1,8 @@
-﻿using QuanLyHoKhau.View;
+﻿using QuanLyHoKhau.Model;
+using QuanLyHoKhau.View;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,6 +26,51 @@ namespace QuanLyHoKhau.ViewModel
         static public DispatcherTimer _timer;
 
         public bool isLoaded = false;
+
+        // 1
+        private bool _IsDashboardEnabled;
+        public bool IsDashboardEnabled
+        {
+            get { return _IsDashboardEnabled; }
+            set { _IsDashboardEnabled = value; OnPropertyChanged(); }
+        }
+
+        private Visibility _VisibilityOfDashboard;
+        public Visibility VisibilityOfDashboard
+        {
+            get { return _VisibilityOfDashboard; }
+            set { _VisibilityOfDashboard = value; OnPropertyChanged(); }
+        }
+
+        // 2
+        private bool _IsQLHGDEnabled;
+        public bool IsQLHGDEnabled
+        {
+            get { return _IsQLHGDEnabled; }
+            set { _IsQLHGDEnabled = value; OnPropertyChanged(); }
+        }
+
+        private Visibility _VisibilityOfQLHGD;
+        public Visibility VisibilityOfQLHGD
+        {
+            get { return _VisibilityOfQLHGD; }
+            set { _VisibilityOfQLHGD = value; OnPropertyChanged(); }
+        }
+
+        // 8
+        private bool _IsDuyetEnabled;
+        public bool IsDuyetEnabled
+        {
+            get { return _IsDuyetEnabled; }
+            set { _IsDuyetEnabled = value; OnPropertyChanged(); }
+        }
+
+        private Visibility _VisibilityOfDuyet;
+        public Visibility VisibilityOfDuyet
+        {
+            get { return _VisibilityOfDuyet; }
+            set { _VisibilityOfDuyet = value; OnPropertyChanged(); }
+        }
         #endregion
 
         #region ICommand
@@ -35,10 +82,69 @@ namespace QuanLyHoKhau.ViewModel
         public ICommand QLGiayTamTru_Page_SelectedCommand { get; set; }
         public ICommand Duyet_Page_SelectedCommand { get; set; }
         public ICommand BaoCao_Page_SelectedCommand { get; set; }
+        public ICommand ThongKeNK_Page_SelectedCommand { get; set; }
         #endregion
 
         #region Functions
+        private void DisableButtons()
+        {
+            // disable and hidden all buttons
+            IsDuyetEnabled = false;
+            VisibilityOfDuyet = Visibility.Hidden;
+        }
 
+        private void InitButton(int featureID)
+        {
+            switch (featureID)
+            {
+                case 1:
+                    IsDashboardEnabled = true;
+                    VisibilityOfDashboard = Visibility.Visible;
+                    break;
+                case 2:
+                    IsQLHGDEnabled = true;
+                    VisibilityOfQLHGD = Visibility.Visible;
+                    break;
+                //case 3:
+                //    IsRoomEnabled = true;
+                //    IsRoomVisible = Visibility.Visible;
+                //    break;
+                //case 4:
+                //    IsTimetableInputEnabled = true;
+                //    IsTimetableInputVisible = Visibility.Visible;
+                //    break;
+                //case 5:
+                //    IsEventInputEnabled = true;
+                //    IsEventInputVisible = Visibility.Visible;
+                //    break;
+                //case 6:
+                //    IsExamInputEnabled = true;
+                //    IsExamInputVisible = Visibility.Visible;
+                //    break;
+                //case 7:
+                //    IsRoomManagementEnabled = true;
+                //    IsRoomManagementVisible = Visibility.Visible;
+                //    break;
+                case 8:
+                    IsDuyetEnabled = true;
+                    VisibilityOfDuyet = Visibility.Visible;
+                    break;
+            }
+        }
+
+        private void InitButtonsForUsing(string userID)
+        {
+            DisableButtons();
+            ObservableCollection<CHITIET_PHANQUYEN> listPermission = new ObservableCollection<CHITIET_PHANQUYEN>(DataProvider.Ins.DB.CHITIET_PHANQUYEN);
+            foreach (var item in listPermission)
+            {
+                if (item.MaLoaiCongAn == userID)
+                {
+                    int id = Convert.ToInt32(item.MaQuyen);
+                    InitButton(id);
+                }
+            }
+        }
         #endregion
 
         public MainViewModel()
@@ -47,7 +153,6 @@ namespace QuanLyHoKhau.ViewModel
                 if (p == null)
                     MessageBox.Show(p.GetType().Name);
                 Window mainWindow = p as Window;
-                mainWindow.DataContext = new MainViewModel();
                 mainWindow.Hide(); // main view hide in login window
                 LoginWindow loginWindow = new LoginWindow();
                 loginWindow.ShowDialog();
@@ -65,21 +170,21 @@ namespace QuanLyHoKhau.ViewModel
 
                 //}
 
-                //_timer = new DispatcherTimer(DispatcherPriority.Render);
-                //_timer.Interval = TimeSpan.FromSeconds(1);
-                //_timer.Tick += (sender, args) =>
-                //{
-                //    if (LoginViewModel.currentUser != null)
-                //    {
-                //        InitButtonsForUsing(LoginViewModel.currentUser);
+                _timer = new DispatcherTimer(DispatcherPriority.Render);
+                _timer.Interval = TimeSpan.FromSeconds(1);
+                _timer.Tick += (sender, args) =>
+                {
+                    if (GlobalState.Ins() != null)
+                    {
+                        InitButtonsForUsing(GlobalState.Ins().maCongAn);
 
-                //        _timer.Stop();
-                //    }
-                //};
-                //_timer.Start();
+                        _timer.Stop();
+                    }
+                };
+                _timer.Start();
 
                 FrameContent = new TrangChu();
-                FrameContent.DataContext = new TrangChu_VM();
+                //FrameContent.DataContext = new TrangChu_VM();
             });
 
             TrangChu_SelectedCommand = new RelayCommand((p) => {
@@ -122,6 +227,12 @@ namespace QuanLyHoKhau.ViewModel
                 //Title = "Trang chủ";
                 FrameContent = new BaoCaoPage();
                 FrameContent.DataContext = new BaoCao_VM();
+            });
+
+            ThongKeNK_Page_SelectedCommand = new RelayCommand((p) => {
+                //Title = "Trang chủ";
+                FrameContent = new ThongKeNhanKhauPage();
+                FrameContent.DataContext = new ThongKeNhanKhau_VM();
             });
         }
     }

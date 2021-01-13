@@ -74,6 +74,8 @@
                 VerticalAlignment="Top">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="150"/>
                     <ColumnDefinition Width="150"/>
                 </Grid.ColumnDefinitions>
                 <Border 
@@ -103,7 +105,7 @@
                     </Grid>
                 </Border>
                 <Button 
-                    Grid.Column="1"
+                    Grid.Column="3"
                     Margin="25, 0, 0, 0"
                     BorderThickness="0"
                     Background="Teal"

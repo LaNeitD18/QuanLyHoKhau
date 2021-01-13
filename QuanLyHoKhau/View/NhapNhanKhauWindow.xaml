@@ -32,6 +32,7 @@
             <Grid Grid.Row="0"/>
             <Grid Grid.Row="0">
                 <TextBox 
+                    x:Name="cmndTxb"
                 Width="400"
                 MinWidth="100"
                 FontSize="18" 
@@ -146,16 +147,17 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </Grid>
-            <Grid Grid.Row="10">
+            <Grid Grid.Row="10" Width="{Binding ElementName=cmndTxb, Path=ActualWidth}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
                     <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <Grid Grid.Column="0">
+                <Grid Grid.Column="0" Grid.ColumnSpan="2">
                     <CheckBox
-                        Width="400"
+                        Margin="5"
                         MinWidth="100"
                         FontSize="18" 
                         IsChecked="{Binding IsChuHo}"
@@ -163,9 +165,9 @@
                         <TextBlock>Là chủ hộ</TextBlock>
                     </CheckBox>
                 </Grid>
-                <Grid Grid.Column="1" Grid.ColumnSpan="3">
+                <Grid Grid.Column="2" Grid.ColumnSpan="3">
                     <TextBox 
-                        Width="400"
+                        Margin="16,0,0,0"
                         MinWidth="100"
                         FontSize="18" 
                         materialDesign:HintAssist.Hint="Quan hệ với chủ hộ" 
@@ -189,7 +191,7 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <Button 
+                    <Button Background="Teal"
                     Style="{StaticResource MaterialDesignRaisedButton}" 
                     Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
                     Width="150" Height="35"
@@ -199,7 +201,7 @@
                     />
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Button 
+                    <Button Background="Teal"
                     Style="{StaticResource MaterialDesignRaisedButton}" 
                     Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
                     Width="150" Height="35"

@@ -74,7 +74,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Grid Grid.ColumnSpan="13" Grid.RowSpan="17" Background="{StaticResource Green}">
+        <Grid Grid.ColumnSpan="13" Grid.RowSpan="17" Background="Teal">
             <TextBlock 
                 Margin="15" 
                 FontSize="30" 
@@ -83,7 +83,7 @@
                 FontWeight="SemiBold"
                 VerticalAlignment="Top"
                 Text="Quản lý hộ khẩu"/>
-            <Image Source="/images/classroom.png"></Image>
+            <Image Width="200" Source="/images/hk1.png"></Image>
         </Grid>
         <materialDesign:Card Background="WhiteSmoke" Grid.Column="13" Grid.Row="0" Grid.ColumnSpan="18" Grid.RowSpan="17">
             <Grid 
@@ -122,14 +122,14 @@
                         Content="Đăng nhập"
                         Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=loginWindow}"
                         Style="{StaticResource MaterialDesignRaisedButton}" IsDefault="True"
-                        Background="{StaticResource MidNight}"/>
+                        Background="Teal"/>
                     <Button 
                         Grid.Column="1"
                         Margin="10,0" 
                         Content="Thoát"
                         Command="{Binding ExitCommand}" CommandParameter="{Binding ElementName=loginWindow}"
                         Style="{StaticResource MaterialDesignRaisedButton}" IsDefault="True"
-                        Background="{StaticResource MidNight}"/>
+                        Background="Teal"/>
                 </Grid>
             </Grid>
         </materialDesign:Card>
