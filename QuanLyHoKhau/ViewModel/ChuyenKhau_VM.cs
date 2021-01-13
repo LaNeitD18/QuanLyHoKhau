@@ -281,7 +281,15 @@ namespace QuanLyHoKhau.ViewModel
                 List<NHANKHAU> temp = new List<NHANKHAU>(ListSelectedNHANKHAUinFromSHK);
                 foreach (var nk in temp)
                 {
-                    ChuyenKhauForPreviewing(nk);
+                    // Cannot chuyen khau ChuHo
+                    if(SelectedFromSoHoKhau.CMNDChuHo != nk.CMND)
+                        ChuyenKhauForPreviewing(nk);
+                    else
+                    {
+                        System.Windows.MessageBox.Show("Không được phép chuyển khẩu chủ hộ", "Lỗi", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                    }
+
+
                 }
             }
             else
