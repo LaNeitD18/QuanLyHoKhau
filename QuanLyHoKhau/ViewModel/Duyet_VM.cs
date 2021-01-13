@@ -151,26 +151,6 @@ namespace QuanLyHoKhau.ViewModel
 
         #region Duyet Nhan Khau
 
-        /// <summary>
-        /// CuteTN's function: auto set ChuHo of SHK.
-        /// </summary>
-        /// <param name="nk"></param>
-        private void UpdateChuHoOfShk(NHANKHAU nk)
-        {
-            SOHOKHAU shk = DataProvider.Ins.DB.SOHOKHAUs.Find(nk.MASHK);
-            if(shk == null)
-                return;
-
-            if (nk.QuanHeVoiChuHo == GlobalState.Ins().chuHo)
-            { 
-                shk.CMNDChuHo = nk.CMND;
-            }
-            else
-            {
-                if (shk.CMNDChuHo == nk.CMND)
-                    shk.CMNDChuHo = null;
-            }
-        }
 
         /// <summary>
         /// 
@@ -230,7 +210,7 @@ namespace QuanLyHoKhau.ViewModel
         {
             nhanKhau.NhanKhauPending.BanChinhThuc = true;
             nhanKhau.PhieuDuyet.DaDuyet = true;
-            UpdateChuHoOfShk(nhanKhau.NhanKhauPending);
+            Utilities.Utils.UpdateChuHoOfShk(nhanKhau.NhanKhauPending);
             try
             {
                 DataProvider.Ins.DB.SaveChanges();
@@ -258,7 +238,7 @@ namespace QuanLyHoKhau.ViewModel
             nhanKhau.NhanKhau.BanChinhThuc = true;
 
             nhanKhau.PhieuDuyet.DaDuyet = true;
-            UpdateChuHoOfShk(nhanKhau.NhanKhau);
+            Utilities.Utils.UpdateChuHoOfShk(nhanKhau.NhanKhau);
 
             try
             {
@@ -491,7 +471,7 @@ namespace QuanLyHoKhau.ViewModel
 
             nhanKhau.MASHK = chuyenKhauChoDuyet.PhieuDuyet.MaSHKChuyenDen;
             chuyenKhauChoDuyet.PhieuDuyet.DaDuyet = true;
-            UpdateChuHoOfShk(nhanKhau);
+            Utilities.Utils.UpdateChuHoOfShk(nhanKhau);
 
             try
             {

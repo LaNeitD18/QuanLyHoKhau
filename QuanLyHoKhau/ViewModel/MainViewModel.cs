@@ -284,6 +284,9 @@ namespace QuanLyHoKhau.ViewModel
 
                 FrameContent = new TrangChu();
                 //FrameContent.DataContext = new TrangChu_VM();
+
+                // CuteTN
+                AdjustDbOnLoad();
             });
 
             TrangChu_SelectedCommand = new RelayCommand((p) => {
@@ -342,5 +345,18 @@ namespace QuanLyHoKhau.ViewModel
                 }
             });
         }
+
+        #region CuteTN: Adjust DB on load
+        private void AdjustDbOnLoad()
+        {
+            foreach(var nk in DataProvider.Ins.DB.NHANKHAUs)
+            {
+                if(nk != null && nk.BanChinhThuc && !nk.IsDeleted)
+                    Utilities.Utils.UpdateChuHoOfShk(nk);
+            }
+
+            DataProvider.Ins.DB.SaveChanges();
+        }
+        #endregion
     }
 }
