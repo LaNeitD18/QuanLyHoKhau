@@ -372,71 +372,6 @@
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"></DropShadowEffect>
             </Grid.Effect>
-            <!--<DockPanel
-                Background="{DynamicResource Bunting}" 
-                Panel.ZIndex="2" 
-                LastChildFill="True">
-                <WrapPanel DockPanel.Dock="Top" Margin="0,30,0,10" IsEnabled="{Binding IsHomeEnabled}" Visibility="{Binding IsHomeVisible}">
-                    <Canvas>
-                        <md:PackIcon Kind="Home" Panel.ZIndex="0" Margin="5,10,5,0" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="30" Height="30" />
-                        <Button
-                            Panel.ZIndex="1"
-                            Width="{Binding ElementName=menuGrid, Path=ActualWidth}"
-                            MinHeight="50"
-                            Command="{Binding TrangChu_SelectedCommand}" 
-                            Background="{x:Null}" 
-                            HorizontalAlignment="Center" VerticalAlignment="Center" 
-                            Margin="0">
-                            <TextBlock Text="Trang chủ" Foreground="White" FontSize="16" HorizontalAlignment="Center"></TextBlock>
-                        </Button>
-                    </Canvas>
-                </WrapPanel>
-                <WrapPanel DockPanel.Dock="Top" Margin="0,80,0,10" IsEnabled="{Binding IsHomeEnabled}" Visibility="{Binding IsHomeVisible}">
-                    <Canvas>
-                        <md:PackIcon Kind="Home" Panel.ZIndex="0" Margin="5,10,5,0" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="30" Height="30" />
-                        <Button
-                            Panel.ZIndex="1"
-                            Width="{Binding ElementName=menuGrid, Path=ActualWidth}"
-                            MinHeight="50"
-                            Command="{Binding NhapHoKhau_Page_SelectedCommand}" 
-                            Background="{x:Null}" 
-                            HorizontalAlignment="Center" VerticalAlignment="Center" 
-                            Margin="0">
-                            <TextBlock Text="Nhập hộ khẩu" Foreground="White" FontSize="16" HorizontalAlignment="Center"></TextBlock>
-                        </Button>
-                    </Canvas>
-                </WrapPanel>
-                <WrapPanel DockPanel.Dock="Top" Margin="0,80,0,10" IsEnabled="{Binding IsHomeEnabled}" Visibility="{Binding IsHomeVisible}">
-                    <Canvas>
-                        <md:PackIcon Kind="Home" Panel.ZIndex="0" Margin="5,10,5,0" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="30" Height="30" />
-                        <Button
-                            Panel.ZIndex="1"
-                            Width="{Binding ElementName=menuGrid, Path=ActualWidth}"
-                            MinHeight="50"
-                            Command="{Binding NhapGiayTamVang_Page_SelectedCommand}" 
-                            Background="{x:Null}" 
-                            HorizontalAlignment="Center" VerticalAlignment="Center" 
-                            Margin="0">
-                            <TextBlock Text="Nhập phiếu tạm vắng" Foreground="White" FontSize="16" HorizontalAlignment="Center"></TextBlock>
-                        </Button>
-                    </Canvas>
-                </WrapPanel>
-                <WrapPanel DockPanel.Dock="Top" Margin="0,80,0,10" IsEnabled="{Binding IsHomeEnabled}" Visibility="{Binding IsHomeVisible}">
-                    <Canvas>
-                        <md:PackIcon Kind="Home" Panel.ZIndex="0" Margin="5,10,5,0" Foreground="White" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="30" Height="30" />
-                        <Button
-                            Panel.ZIndex="1"
-                            Width="{Binding ElementName=menuGrid, Path=ActualWidth}"
-                            MinHeight="50"
-                            Command="{Binding NhapGiayTamTru_Page_SelectedCommand}" 
-                            Background="{x:Null}" 
-                            HorizontalAlignment="Center" VerticalAlignment="Center" 
-                            Margin="0">
-                            <TextBlock Text="Nhập giấy tạm trú" Foreground="White" FontSize="16" HorizontalAlignment="Center"></TextBlock>
-                        </Button>
-                    </Canvas>
-                </WrapPanel>
-            </DockPanel>-->
             <StackPanel Margin="0,10,0,10.2" Grid.ColumnSpan="2">
                 <RadioButton
                     IsEnabled="{Binding IsDashboardEnabled}"
@@ -448,13 +383,10 @@
                     Command="{Binding TrangChu_SelectedCommand}"
                     IsChecked="True"/>
                 <Expander
-                    
                     x:Name="ImageExpander" Style="{DynamicResource ExpanderStyle1}"
                     Background="WhiteSmoke"
-                    HorizontalAlignment="Stretch"
-                    >
+                    HorizontalAlignment="Stretch">
                     <Expander.Header>
-
                         <Grid >
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40"  />
@@ -462,8 +394,7 @@
                             </Grid.ColumnDefinitions>
                             <Image  Margin="8" 
                                 Source="/images/nhanKhaus.png" Width="18"/>
-                            <Label Grid.Column="1" Padding="0" Margin="5,0" VerticalAlignment="Center">Quản lý nhân khẩu</Label>
-
+                            <Label Grid.Column="1" Padding="0" Margin="5,0" VerticalAlignment="Center">Quản lý hộ gia đình</Label>
                         </Grid>
                     </Expander.Header>
                     <StackPanel
@@ -471,24 +402,27 @@
                         TextBlock.Foreground="{DynamicResource MaterialDesignBody}"
                         Margin="24,0,0,0">
                         <RadioButton
-                            
+                            IsEnabled="{Binding IsQLHKEnabled}"
+                            Visibility="{Binding VisibilityOfQLHK}"
+                            GroupName="Menu"
+                            Style="{StaticResource MenuButtonStyle}"
+                            Tag="{StaticResource hoKhau}"
+                            Content="Quản lý hộ khẩu"
+                            Command="{Binding QLHoKhau_Page_SelectedCommand}"/>
+                        <RadioButton
+                            IsEnabled="{Binding IsQLNKEnabled}"
+                            Visibility="{Binding VisibilityOfQLNK}"
                             GroupName="Menu"
                             Style="{StaticResource MenuButtonStyle}"
                             Tag="{StaticResource nhanKhau}"
-                            Content="Nhân khẩu"
+                            Content="Quản lý nhân khẩu"
                             Command="{Binding QLNhanKhau_Page_SelectedCommand}"/>
                         <RadioButton
-                            
+                            IsEnabled="{Binding IsTKNKEnabled}"
+                            Visibility="{Binding VisibilityOfTKNK}"
                             GroupName="Menu"
                             Style="{StaticResource MenuButtonStyle}"
-                            Tag="{StaticResource hoKhau}"
-                            Content="Hộ khẩu"
-                            Command="{Binding QLHoKhau_Page_SelectedCommand}"/>
-                        <RadioButton
-                            
-                            GroupName="Menu"
-                            Style="{StaticResource MenuButtonStyle}"
-                            Tag="{StaticResource hoKhau}"
+                            Tag="{StaticResource statistics}"
                             Content="Thống kê nhân khẩu"
                             Command="{Binding ThongKeNK_Page_SelectedCommand}"/>
                     </StackPanel>
@@ -523,7 +457,7 @@
                     Visibility="{Binding VisibilityOfDuyet}"
                     GroupName="Menu"
                     Style="{StaticResource MenuButtonStyle}"
-                    Tag="{StaticResource tamTru}"
+                    Tag="{StaticResource duyet}"
                     Content="Duyệt/Từ chối"
                     Command="{Binding Duyet_Page_SelectedCommand}"/>
             </StackPanel>

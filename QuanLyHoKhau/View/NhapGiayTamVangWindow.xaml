@@ -64,20 +64,20 @@
                     <ColumnDefinition></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid Grid.Column="0">
-                    <Button Background="Teal"
-                    Style="{StaticResource MaterialDesignRaisedButton}" 
-                    Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
-                    Width="150" Height="35"
-                    IsEnabled="{Binding IsAddingEnabled}"
-                    RenderTransformOrigin="0.5,0.505" Click="Button_Click_1"/>
+                    <Button Background="Teal" BorderThickness="0"
+                        Style="{StaticResource MaterialDesignRaisedButton}" 
+                        Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
+                        Width="150" Height="35"
+                        IsEnabled="{Binding IsAddingEnabled}"
+                        RenderTransformOrigin="0.5,0.505" Click="Button_Click_1"/>
                 </Grid>
                 <Grid Grid.Column="1">
-                    <Button Background="Teal"
-                    Style="{StaticResource MaterialDesignRaisedButton}" 
-                    Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
-                    Width="150" Height="35"
-                    IsEnabled="{Binding IsAddingEnabled}"
-                    Command="{Binding AddRoomCommand}" Click="Button_Click"/>
+                    <Button Background="Teal" BorderThickness="0"
+                        Style="{StaticResource MaterialDesignRaisedButton}" 
+                        Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
+                        Width="150" Height="35"
+                        IsEnabled="{Binding IsAddingEnabled}"
+                        Command="{Binding AddRoomCommand}" Click="Button_Click"/>
                 </Grid>
             </Grid>
 

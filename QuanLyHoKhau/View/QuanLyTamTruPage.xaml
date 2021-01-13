@@ -149,7 +149,11 @@
                         AutoGenerateColumns="False"
                         SelectedItem="{Binding SelectedPhieuTamTru, Mode=TwoWay}"
                         SelectionUnit="FullRow" 
-                        CanUserAddRows="False">
+                        CanUserAddRows="False"
+                        CanUserDeleteRows="False"
+                        CanUserResizeColumns="True"
+                        CanUserResizeRows="False"
+                        IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Mã Phiếu" Binding="{Binding MaGiayTamTru}"/>
                             <DataGridTextColumn Header="Mã nhân khẩu" Binding="{Binding CMND}"/>
@@ -161,14 +165,14 @@
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5" Click="btnEdit_Click"/>
+                                        <Button BorderThickness="0" Background="Teal" x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5" Click="btnEdit_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5" Click="btnDelete_Click"/>
+                                        <Button BorderThickness="0" Background="Teal" x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5" Click="btnDelete_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
