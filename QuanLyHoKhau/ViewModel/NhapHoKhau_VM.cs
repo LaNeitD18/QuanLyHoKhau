@@ -16,8 +16,8 @@ namespace QuanLyHoKhau.ViewModel
     {
         // CuteTN Note: the goal is to make this class immutable from the outside :)
 
-        const int SOHOKHAU_ID_LENGTH = 5;
-        const string SOHOKHAU_ID_PREFIX = "SHK";
+        const int SOHOKHAU_ID_LENGTH = 9;
+        const string SOHOKHAU_ID_PREFIX = "SHK_";
 
         #region Init
         bool isAddingMode = true;
