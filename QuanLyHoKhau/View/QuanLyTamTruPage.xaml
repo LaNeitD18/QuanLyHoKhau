@@ -155,13 +155,13 @@
                         CanUserResizeRows="False"
                         IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã Phiếu" Binding="{Binding MaGiayTamTru}"/>
-                            <DataGridTextColumn Header="Mã nhân khẩu" Binding="{Binding CMND}"/>
-                            <DataGridTextColumn Header="Ngày khai báo" Binding="{Binding NgayKhaiBao, StringFormat={}{0:dd/MM/yyyy}}"/>
-                            <DataGridTextColumn Header="Bắt đầu" Binding="{Binding NgayBatDau, StringFormat={}{0:dd/MM/yyyy}}"/>
-                            <DataGridTextColumn Header="Kết thúc" Binding="{Binding NgayKetThuc, StringFormat={}{0:dd/MM/yyyy}}"/>
-                            <DataGridTextColumn Header="Nơi đăng ký tạm trú" Binding="{Binding NoiDangKyTamTru}"/>
-                            <DataGridTextColumn Header="Mã giấy tạm vắng" Binding="{Binding MaGiayTamVang}"/>
+                            <DataGridTextColumn Width="120" Header="Mã Phiếu" Binding="{Binding MaGiayTamTru}"/>
+                            <DataGridTextColumn Width="120" Header="Mã nhân khẩu" Binding="{Binding CMND}"/>
+                            <DataGridTextColumn Width="120" Header="Ngày khai báo" Binding="{Binding NgayKhaiBao, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Width="120" Header="Bắt đầu" Binding="{Binding NgayBatDau, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Width="120" Header="Kết thúc" Binding="{Binding NgayKetThuc, StringFormat={}{0:dd/MM/yyyy}}"/>
+                            <DataGridTextColumn Width="150" Header="Mã giấy tạm vắng" Binding="{Binding MaGiayTamVang}"/>
+                            <DataGridTextColumn Width="270" Header="Nơi đăng ký tạm trú" Binding="{Binding NoiDangKyTamTru}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

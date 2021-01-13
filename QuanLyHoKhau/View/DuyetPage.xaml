@@ -162,21 +162,21 @@
                 CanUserResizeRows="False"
                 IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã sổ hộ khẩu" Binding="{Binding PhieuDuyet.MaSHK}"/>
-                    <DataGridTextColumn Header="CMND chủ hộ" Binding="{Binding SoHoKhauPending.CMNDChuHo}"/>
-                    <DataGridTextColumn Header="Mã sổ lưu nhân khẩu" Binding="{Binding SoHoKhauPending.MaSoLuuNhanKhau}"/>
-                    <DataGridTextColumn Header="Địa chỉ" Binding="{Binding SoHoKhauPending.DiaChi}"/>
+                    <DataGridTextColumn Width="150" Header="Mã sổ hộ khẩu" Binding="{Binding PhieuDuyet.MaSHK}"/>
+                    <DataGridTextColumn Width="150" Header="CMND chủ hộ" Binding="{Binding SoHoKhauPending.CMNDChuHo}"/>
+                    <DataGridTextColumn Width="200" Header="Mã sổ lưu nhân khẩu" Binding="{Binding SoHoKhauPending.MaSoLuuNhanKhau}"/>
+                    <DataGridTextColumn Width="500" Header="Địa chỉ" Binding="{Binding SoHoKhauPending.DiaChi}"/>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="btnApproveSHK" Content="Duyệt" Height="Auto" Width="75" Margin="5" Click="btnApproveSHK_Click"/>
+                                <Button Background="Teal" BorderThickness="0" x:Name="btnApproveSHK" Content="Duyệt" Height="Auto" Width="75" Margin="5" Click="btnApproveSHK_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button  x:Name="btnRejectSHK" Content="Từ chối" Height="Auto" Width="75" Margin="5" Click="btnRejectSHK_Click"/>
+                                <Button Background="Teal" BorderThickness="0" x:Name="btnRejectSHK" Content="Từ chối" Height="Auto" Width="100" Margin="5" Click="btnRejectSHK_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -207,21 +207,21 @@
                 CanUserResizeRows="False"
                 IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="CMND" Binding="{Binding NhanKhau.CMND}"/>
-                    <DataGridTextColumn Header="Tên" Binding="{Binding NguoiInfo.Ten}"/>
-                    <DataGridTextColumn Header="Quan hệ với chủ hộ" Binding="{Binding NhanKhauPending.QuanHeVoiChuHo}"/>
-                    <DataGridTextColumn Header="Chỗ ở hiện nay" Binding="{Binding NhanKhauPending.ChoOHienNay}"/>
+                    <DataGridTextColumn Width="150" Header="CMND" Binding="{Binding NhanKhau.CMND}"/>
+                    <DataGridTextColumn Width="200" Header="Tên" Binding="{Binding NguoiInfo.Ten}"/>
+                    <DataGridTextColumn Width="200" Header="Quan hệ với chủ hộ" Binding="{Binding NhanKhauPending.QuanHeVoiChuHo}"/>
+                    <DataGridTextColumn Width="450" Header="Chỗ ở hiện nay" Binding="{Binding NhanKhauPending.ChoOHienNay}"/>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="btnApproveNhanKhau" Content="Duyệt" Height="Auto" Width="75" Margin="5" Click="btnApproveNhanKhau_Click"/>
+                                <Button Background="Teal" BorderThickness="0" x:Name="btnApproveNhanKhau" Content="Duyệt" Height="Auto" Width="75" Margin="5" Click="btnApproveNhanKhau_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button  x:Name="btnRejectNhanKhau" Content="Từ chối" Height="Auto" Width="75" Margin="5" Click="btnRejectNhanKhau_Click"/>
+                                <Button Background="Teal" BorderThickness="0" x:Name="btnRejectNhanKhau" Content="Từ chối" Height="Auto" Width="100" Margin="5" Click="btnRejectNhanKhau_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -245,22 +245,22 @@
                 CanUserResizeRows="False"
                 IsReadOnly="True">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Mã phiếu thay đổi" Binding="{Binding PhieuDuyet.MaPhieuThayDoi}"/>
-                    <DataGridTextColumn Header="CMND" Binding="{Binding PhieuDuyet.CMND}"/>
-                    <DataGridTextColumn Header="Mã SHK chuyển đến" Binding="{Binding PhieuDuyet.MaSHKChuyenDen}"/>
-                    <DataGridTextColumn Header="Lý do" Binding="{Binding PhieuDuyet.LyDo}"/>
-                    <DataGridTextColumn Header="Ngày tạo" Binding="{Binding PhieuDuyet.NgayTao}"/>
+                    <DataGridTextColumn Width="150" Header="Mã phiếu thay đổi" Binding="{Binding PhieuDuyet.MaPhieuThayDoi}"/>
+                    <DataGridTextColumn Width="120" Header="CMND" Binding="{Binding PhieuDuyet.CMND}"/>
+                    <DataGridTextColumn Width="180" Header="Mã SHK chuyển đến" Binding="{Binding PhieuDuyet.MaSHKChuyenDen}"/>
+                    <DataGridTextColumn Width="200" Header="Ngày tạo" Binding="{Binding PhieuDuyet.NgayTao}"/>
+                    <DataGridTextColumn Width="350" Header="Lý do" Binding="{Binding PhieuDuyet.LyDo}"/>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button x:Name="btnApproveChuyenKhau" Content="Duyệt" Height="Auto" Width="75" Margin="5" Click="btnApproveChuyenKhau_Click"/>
+                                <Button Background="Teal" BorderThickness="0" x:Name="btnApproveChuyenKhau" Content="Duyệt" Height="Auto" Width="75" Margin="5" Click="btnApproveChuyenKhau_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button  x:Name="btnRejectChuyenKhau" Content="Từ chối" Height="Auto" Width="75" Margin="5" Click="btnRejectChuyenKhau_Click"/>
+                                <Button Background="Teal" BorderThickness="0" x:Name="btnRejectChuyenKhau" Content="Từ chối" Height="Auto" Width="100" Margin="5" Click="btnRejectChuyenKhau_Click"/>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>

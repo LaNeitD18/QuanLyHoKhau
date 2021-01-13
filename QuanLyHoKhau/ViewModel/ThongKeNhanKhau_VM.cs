@@ -17,9 +17,10 @@ namespace QuanLyHoKhau.ViewModel
         {
             All = 0,
             LowerThanEighteen = 1,
-            EighteenToFifty = 2,
-            FiftyToEighty = 3,
-            HigherThanEighty = 4
+            EighteenToTwentySeven = 2,
+            TwentyEightToSixty = 3,
+            SixtyOneToEighty = 4,
+            HigherThanEighty = 5
         };
 
         #region Variables
@@ -97,11 +98,14 @@ namespace QuanLyHoKhau.ViewModel
             LoadNhanKhauInRangeOfAge(0, 17);
             int lowerThanEighteen = ListFilteredNhanKhau.Count();
 
-            LoadNhanKhauInRangeOfAge(18, 50);
-            int eighteenToFifty = ListFilteredNhanKhau.Count();
+            LoadNhanKhauInRangeOfAge(18, 27);
+            int eighteenToTwentySeven = ListFilteredNhanKhau.Count();
 
-            LoadNhanKhauInRangeOfAge(51, 80);
-            int fiftyToEighty = ListFilteredNhanKhau.Count();
+            LoadNhanKhauInRangeOfAge(28, 60);
+            int twentyEightToSixty = ListFilteredNhanKhau.Count();
+
+            LoadNhanKhauInRangeOfAge(61, 80);
+            int sixtyOneToEighty = ListFilteredNhanKhau.Count();
 
             LoadNhanKhauInRangeOfAge(81, 300);
             int higherThanEighty = ListFilteredNhanKhau.Count();
@@ -114,13 +118,17 @@ namespace QuanLyHoKhau.ViewModel
                     //Fill = DangerBrushFill
                 },
                 new PieSeries {
-                    Title = "18-50 tuổi",
-                    Values = new ChartValues<int>{ eighteenToFifty },
+                    Title = "18-27 tuổi",
+                    Values = new ChartValues<int>{ eighteenToTwentySeven },
                     //Fill = DangerBrushFill
                 },
                 new PieSeries {
-                    Title = "51-80 tuổi",
-                    Values = new ChartValues<int>{ fiftyToEighty }
+                    Title = "28-60 tuổi",
+                    Values = new ChartValues<int>{ twentyEightToSixty }
+                },
+                new PieSeries {
+                    Title = "61-80 tuổi",
+                    Values = new ChartValues<int>{ sixtyOneToEighty }
                 },
                 new PieSeries {
                     Title = ">80 tuổi",
@@ -141,7 +149,7 @@ namespace QuanLyHoKhau.ViewModel
 
         private void LoadNhanKhauInRangeOfAge(int minAge, int maxAge)
         {
-            SetRangeOfAge(); // sửa lại hàm ko tham số sau
+            //SetRangeOfAge(); // sửa lại hàm ko tham số sau
             int thisYear = DateTime.Now.Year;
             IQueryable<NHANKHAU> listFilteredNhanKhau;
 
@@ -165,14 +173,19 @@ namespace QuanLyHoKhau.ViewModel
             {
                 MaxAge = 17;
             }
-            else if (SelectedIndexAge == (int)RangeOfAge.EighteenToFifty)
+            else if (SelectedIndexAge == (int)RangeOfAge.EighteenToTwentySeven)
             {
                 MinAge = 18;
-                MaxAge = 50;
+                MaxAge = 27;
             }
-            else if (SelectedIndexAge == (int)RangeOfAge.FiftyToEighty)
+            else if (SelectedIndexAge == (int)RangeOfAge.TwentyEightToSixty)
             {
-                MinAge = 51;
+                MinAge = 28;
+                MaxAge = 60;
+            }
+            else if (SelectedIndexAge == (int)RangeOfAge.SixtyOneToEighty)
+            {
+                MinAge = 61;
                 MaxAge = 80;
             }
             else if (SelectedIndexAge == (int)RangeOfAge.HigherThanEighty)
@@ -184,14 +197,16 @@ namespace QuanLyHoKhau.ViewModel
 
         private void LoadData()
         {
-            ListAge = new ObservableCollection<string>() { "Mọi lứa tuổi", "Dưới 18 tuổi", "Từ 18 đến 50 tuổi", "Từ 50 đến 80 tuổi", "Trên 80 tuổi" };
+            ListAge = new ObservableCollection<string>() { "Mọi lứa tuổi", "Dưới 18 tuổi", "Từ 18 đến 27 tuổi", "Từ 28 đến 60 tuổi", "Từ 61 đến 80 tuổi", "Trên 80 tuổi" };
             SelectedIndexAge = 0;
+
+            // pie chart
+            LoadPieChartInput();
 
             SetRangeOfAge();
             LoadNhanKhauInRangeOfAge(MinAge, MaxAge);
 
-            // pie chart
-            LoadPieChartInput();
+            
         }
 
         #endregion

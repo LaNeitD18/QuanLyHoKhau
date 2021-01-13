@@ -155,12 +155,12 @@
                         CanUserResizeRows="False"
                         IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="CMND" Binding="{Binding CMND}"/>
-                            <DataGridTextColumn Header="Họ tên" Binding="{Binding NGUOI.Ten}"/>
-                            <DataGridTextColumn Header="Giới tính" Binding="{Binding NGUOI.GioiTinh}"/>
-                            <DataGridTextColumn Header="Quê quán" Binding="{Binding NGUOI.QueQuan}"/>
-                            <DataGridTextColumn Header="Mã SHK" Binding="{Binding MASHK}"/>
-                            <DataGridTextColumn Header="Chỗ ở hiện nay" Binding="{Binding ChoOHienNay}"/>
+                            <DataGridTextColumn Width="120" Header="CMND" Binding="{Binding CMND}"/>
+                            <DataGridTextColumn Width="200" Header="Họ tên" Binding="{Binding NGUOI.Ten}"/>
+                            <DataGridTextColumn Width="100" Header="Giới tính" Binding="{Binding NGUOI.GioiTinh}"/>
+                            <DataGridTextColumn Width="150" Header="Quê quán" Binding="{Binding NGUOI.QueQuan}"/>
+                            <DataGridTextColumn Width="150" Header="Mã SHK" Binding="{Binding MASHK}"/>
+                            <DataGridTextColumn Width="300" Header="Chỗ ở hiện nay" Binding="{Binding ChoOHienNay}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

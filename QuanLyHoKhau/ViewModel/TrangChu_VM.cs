@@ -169,24 +169,24 @@ namespace QuanLyHoKhau.ViewModel
             int thisYear = DateTime.Now.Year;
 
             // calculate number of new sohokhau
-            int countNewSoHoKhaus = DataProvider.Ins.DB.SOHOKHAUs.Where(x => x.NgayTaoSo.Month == thisMonth && x.NgayTaoSo.Year == thisYear && x.BanChinhThuc == true && x.IsDeleted == false).Count();
-            SoHoKhauProgress = countNewSoHoKhaus / 1000;
-            NewSoHoKhausInfo = countNewSoHoKhaus.ToString() + "/1000";
+            double countNewSoHoKhaus = DataProvider.Ins.DB.SOHOKHAUs.Where(x => x.NgayTaoSo.Month == thisMonth && x.NgayTaoSo.Year == thisYear && x.BanChinhThuc == true && x.IsDeleted == false).Count();
+            SoHoKhauProgress = countNewSoHoKhaus / 100 * 100;
+            NewSoHoKhausInfo = countNewSoHoKhaus.ToString() + "/100";
 
             // calculate number of new giaytamvang
-            int countNewTamVangs = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.NgayKhaiBao.Month == thisMonth && x.NgayKhaiBao.Year == thisYear).Count();
-            GiayTamVangProgress = countNewTamVangs / 1000;
-            NewTamVangsInfo = countNewTamVangs.ToString() + "/1000";
+            double countNewTamVangs = DataProvider.Ins.DB.PHIEUKHAIBAOTAMVANGs.Where(x => x.NgayKhaiBao.Month == thisMonth && x.NgayKhaiBao.Year == thisYear).Count();
+            GiayTamVangProgress = countNewTamVangs / 100 * 100;
+            NewTamVangsInfo = countNewTamVangs.ToString() + "/100";
 
             // calculate number of new giaytamtru
-            int countNewTamTrus = DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.NgayKhaiBao.Value.Month == thisMonth && x.NgayKhaiBao.Value.Year == thisYear).Count();
-            GiayTamTruProgress = countNewTamTrus / 1000;
-            NewTamTrusInfo = countNewTamTrus.ToString() + "/1000";
+            double countNewTamTrus = DataProvider.Ins.DB.GIAYTAMTRUs.Where(x => x.NgayKhaiBao.Value.Month == thisMonth && x.NgayKhaiBao.Value.Year == thisYear).Count();
+            GiayTamTruProgress = countNewTamTrus / 100 * 100;
+            NewTamTrusInfo = countNewTamTrus.ToString() + "/100";
 
             // calculate number of new giaychuyenkhau
-            int countNewChuyenKhaus = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear).Count();
-            GiayChuyenKhauProgress = countNewChuyenKhaus / 1000;
-            NewChuyenKhausInfo = countNewChuyenKhaus.ToString() + "/1000";
+            double countNewChuyenKhaus = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear).Count();
+            GiayChuyenKhauProgress = countNewChuyenKhaus / 100 * 100;
+            NewChuyenKhausInfo = countNewChuyenKhaus.ToString() + "/100";
         }
 
         private void CountWaitApprovingItems()
@@ -195,21 +195,36 @@ namespace QuanLyHoKhau.ViewModel
             int thisYear = DateTime.Now.Year;
 
             // calculate number of choduyet sohokhau
-            int countCDSoHoKhaus = DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.DaDuyet == false && x.IsDeleted == false).Count();
-            int allCDSoHoKhauInMonth = DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.IsDeleted == false).Count(); 
-            SoHoKhauChoDuyetProgress = countCDSoHoKhaus / 1000;
+            double countCDSoHoKhaus = DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.DaDuyet == false && x.IsDeleted == false).Count();
+            double allCDSoHoKhauInMonth = DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.IsDeleted == false).Count(); 
+            if(allCDSoHoKhauInMonth == 0) {
+                SoHoKhauChoDuyetProgress = 0;
+            }
+            else {
+                SoHoKhauChoDuyetProgress = countCDSoHoKhaus / allCDSoHoKhauInMonth * 100;
+            }
             SoHoKhauChoDuyetsInfo = countCDSoHoKhaus.ToString() + "/" + allCDSoHoKhauInMonth.ToString();
 
             // calculate number of choduyet nhankhau
-            int countCDNhanKhaus = DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.DaDuyet == false && x.IsDeleted == false).Count();
-            int allCDNhanKhauInMonth = DataProvider.Ins.DB.PHIEUDUYETSOHOKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.IsDeleted == false).Count();
-            NhanKhauChoDuyetProgress = countCDNhanKhaus / 1000;
+            double countCDNhanKhaus = DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.DaDuyet == false && x.IsDeleted == false).Count();
+            double allCDNhanKhauInMonth = DataProvider.Ins.DB.PHIEUDUYETNHANKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.IsDeleted == false).Count();
+            if(allCDNhanKhauInMonth == 0) {
+                NhanKhauChoDuyetProgress = 0;
+            }
+            else {
+                NhanKhauChoDuyetProgress = countCDNhanKhaus / allCDNhanKhauInMonth * 100;
+            }
             NhanKhauChoDuyetsInfo = countCDNhanKhaus.ToString() + "/" + allCDNhanKhauInMonth.ToString();
 
             // calculate number of choduyet giaychuyenkhau
-            int countCDChuyenKhaus = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.DaDuyet == false && x.IsDeleted == false).Count();
-            int allCDChuyenKhauInMonth = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.IsDeleted == false).Count();
-            GiayChuyenKhauChoDuyetProgress = countCDChuyenKhaus / 1000;
+            double countCDChuyenKhaus = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.DaDuyet == false && x.IsDeleted == false).Count();
+            double allCDChuyenKhauInMonth = DataProvider.Ins.DB.PHIEUDUYETCHUYENKHAUs.Where(x => x.NgayTao.Value.Month == thisMonth && x.NgayTao.Value.Year == thisYear && x.IsDeleted == false).Count();
+            if(allCDChuyenKhauInMonth == 0) {
+                GiayChuyenKhauChoDuyetProgress = 0;
+            }
+            else {
+                GiayChuyenKhauChoDuyetProgress = countCDChuyenKhaus / allCDChuyenKhauInMonth * 100;
+            }
             GiayChuyenKhauChoDuyetsInfo = countCDChuyenKhaus.ToString() + "/" + allCDChuyenKhauInMonth.ToString();
         }
 

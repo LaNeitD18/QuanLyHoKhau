@@ -176,10 +176,10 @@
                         CanUserResizeRows="False"
                         IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Mã sổ hộ khẩu" Binding="{Binding MaSHK}"/>
-                            <DataGridTextColumn Header="CMND chủ hộ" Binding="{Binding CMNDChuHo}"/>
-                            <DataGridTextColumn Header="Mã sổ lưu nhân khẩu" Binding="{Binding MaSoLuuNhanKhau}"/>
-                            <DataGridTextColumn Header="Địa chỉ" Binding="{Binding DiaChi}"/>
+                            <DataGridTextColumn Width="150" Header="Mã sổ hộ khẩu" Binding="{Binding MaSHK}"/>
+                            <DataGridTextColumn Width="150" Header="CMND chủ hộ" Binding="{Binding CMNDChuHo}"/>
+                            <DataGridTextColumn Width="200" Header="Mã sổ lưu nhân khẩu" Binding="{Binding MaSoLuuNhanKhau}"/>
+                            <DataGridTextColumn Width="520" Header="Địa chỉ" Binding="{Binding DiaChi}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

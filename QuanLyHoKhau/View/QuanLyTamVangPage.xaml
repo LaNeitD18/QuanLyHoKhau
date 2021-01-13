@@ -160,8 +160,7 @@
                             <DataGridTextColumn Width="140" Header="Ngày khai báo" Binding="{Binding NgayKhaiBao, StringFormat={}{0:dd/MM/yyyy}}"/>
                             <DataGridTextColumn Width="140" Header="Bắt đầu" Binding="{Binding NgayBatDau, StringFormat={}{0:dd/MM/yyyy}}"/>
                             <DataGridTextColumn Width="140" Header="Kết thúc" Binding="{Binding NgayKetThuc, StringFormat={}{0:dd/MM/yyyy}}"/>
-                            <DataGridTextColumn Width="150" Header="Lý do" Binding="{Binding LyDo}"/>
-                            <DataGridTextColumn Width="150" Header="Trẻ em" Binding="{Binding CoTreEmDiTheo}"/>
+                            <DataGridTextColumn Width="300" Header="Lý do" Binding="{Binding LyDo}"/>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>

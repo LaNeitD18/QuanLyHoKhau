@@ -283,7 +283,7 @@ namespace QuanLyHoKhau.ViewModel
                 _timer.Start();
 
                 FrameContent = new TrangChu();
-                //FrameContent.DataContext = new TrangChu_VM();
+                FrameContent.DataContext = new TrangChu_VM();
             });
 
             TrangChu_SelectedCommand = new RelayCommand((p) => {
