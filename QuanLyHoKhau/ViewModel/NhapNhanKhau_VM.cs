@@ -265,11 +265,27 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleConfirmButton(Object obj)
         {
+            System.Windows.MessageBoxResult dlgRes;
+
+            if(isAddingMode)
+                dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc thêm nhân khẩu {CMND}", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+            else
+                dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc sửa nhân khẩu {CMND}", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+
+            if(dlgRes == System.Windows.MessageBoxResult.No)
+                return;
+
             string error;
 
             if (ValidateResult(out error))
             {
                 UpsertResult();
+                
+                if(isAddingMode)
+                    System.Windows.MessageBox.Show($"Đã thêm nhân khẩu {CMND} thành công.\nVui lòng chờ duyệt thay đổi để cập nhật.", "Thông báo");
+                else
+                    System.Windows.MessageBox.Show($"Đã sửa nhân khẩu {CMND} thành công.\nVui lòng chờ duyệt thay đổi để cập nhật.", "Thông báo");
+
                 (obj as System.Windows.Window)?.Close();
             }
             else
@@ -289,7 +305,10 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleCancelButton(Object obj)
         {
-            (obj as System.Windows.Window)?.Close();
+            System.Windows.MessageBoxResult msgRes = System.Windows.MessageBox.Show($"Bạn có chắc muốn huỷ thông tin đang nhập không?", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+
+            if (msgRes == System.Windows.MessageBoxResult.Yes)
+                (obj as System.Windows.Window)?.Close();
         }
         #endregion
 

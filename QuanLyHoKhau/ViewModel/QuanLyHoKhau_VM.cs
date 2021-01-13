@@ -129,6 +129,8 @@ namespace QuanLyHoKhau.ViewModel
 
                 DataProvider.Ins.DB.SaveChanges();
                 Refresh();
+
+                System.Windows.MessageBox.Show($"Đã xoá hộ khẩu {shk.MaSHK} thành công.\nVui lòng chờ duyệt thay đổi để cập nhật.", "Thông báo");
             }
         }
 

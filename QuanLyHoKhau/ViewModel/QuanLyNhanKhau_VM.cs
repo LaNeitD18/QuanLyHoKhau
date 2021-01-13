@@ -114,7 +114,7 @@ namespace QuanLyHoKhau.ViewModel
             if (nk == null)
                 return;
 
-            MessageBoxResult msgRes = MessageBox.Show($"Bạn có chắc muốn xoá thông tin nhân khẩu {nk.CMND} không?", "Xoá", MessageBoxButton.YesNo);
+            MessageBoxResult msgRes = MessageBox.Show($"Bạn có chắc muốn xoá thông tin nhân khẩu {nk.CMND} không?", "Xác nhận", MessageBoxButton.YesNo);
             if (msgRes == MessageBoxResult.Yes)
             {
                 //nk.IsDeleted = true;
@@ -128,6 +128,8 @@ namespace QuanLyHoKhau.ViewModel
 
                 DataProvider.Ins.DB.SaveChanges();
                 Refresh();
+
+                System.Windows.MessageBox.Show($"Đã xoá nhân khẩu {nk.CMND} thành công.\nVui lòng chờ duyệt thay đổi để cập nhật.", "Thông báo");
             }
         }
 

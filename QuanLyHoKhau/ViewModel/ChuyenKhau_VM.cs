@@ -203,12 +203,32 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleConfirmButton(Object obj)
         {
+            var filteredNK = FilterAllNhanKhauToChuyenKhau();
+            
+            if(filteredNK.Count == 0)
+            {
+                System.Windows.MessageBox.Show("Vui lòng chọn các nhân khẩu cần chuyển", "Lỗi", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+                return;
+            }
+
+            System.Windows.MessageBoxResult dlgRes = System.Windows.MessageBox.Show($"Bạn có chắc muốn lưu thông tin chuyển khẩu cho {filteredNK.Count} nhân khẩu không?", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+            if(dlgRes == System.Windows.MessageBoxResult.No)
+                return;
+
             string error;
 
             if (Validate(out error))
             {
-                FilterAllNhanKhauToChuyenKhau().ForEach(AddPendingChuyenKhau);
+                filteredNK.ForEach(AddPendingChuyenKhau);
                 DataProvider.Ins.DB.SaveChanges();
+
+                string msg = $"Đã thêm phiếu chuyển khẩu cho {filteredNK.Count} nhân khẩu từ hộ khẩu {SelectedFromSoHoKhau.MaSHK} đến hộ khẩu {SelectedToSoHoKhau.MaSHK} thành công.\n";
+                msg += "Danh sách nhân khẩu đã chuyển:\n";
+                msg += filteredNK.Select(nk => nk.CMND + "\n").Aggregate((s1, s2) => s1 + s2);
+                msg += $"Vui lòng chờ duyệt thay đổi để cập nhật.";
+
+                System.Windows.MessageBox.Show(msg, "Thông báo");
+
                 (obj as System.Windows.Window)?.Close();
             }
             else
