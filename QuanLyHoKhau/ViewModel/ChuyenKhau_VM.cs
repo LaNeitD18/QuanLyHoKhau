@@ -101,10 +101,18 @@ namespace QuanLyHoKhau.ViewModel
             if (shk == null || shk.IsDeleted)
                 return new BindingList<NHANKHAU>();
 
+            // crash
+            //BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
+            //    (
+            //        shk.NHANKHAUs.Where(nk => nk.BanChinhThuc && !nk.IsDeleted).ToList()
+            //    );
+
             BindingList<NHANKHAU> result = new BindingList<NHANKHAU>
-                (
-                    shk.NHANKHAUs.Where(nk => nk.BanChinhThuc && !nk.IsDeleted).ToList()
-                );
+            (
+                DataProvider.Ins.DB.NHANKHAUs.Where(nk =>
+                    (nk.BanChinhThuc) && (!nk.IsDeleted) && (nk.MASHK == shk.MaSHK)
+                ).ToList()
+            );
 
             return result;
         }
