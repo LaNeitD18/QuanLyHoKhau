@@ -186,20 +186,20 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleConfirmButton(Object obj)
         {
-            System.Windows.MessageBoxResult dlgRes;
-
-            if (isAddingMode)
-                dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc thêm hộ khẩu mới", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
-            else
-                dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc sửa hộ khẩu {MaSoHoKhau}", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
-
-            if (dlgRes == System.Windows.MessageBoxResult.No)
-                return;
-
             string error;
 
             if(ValidateResult(out error))
-            { 
+            {
+                System.Windows.MessageBoxResult dlgRes;
+
+                if (isAddingMode)
+                    dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc thêm hộ khẩu mới", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+                else
+                    dlgRes = System.Windows.MessageBox.Show($"Vui lòng xác nhận việc sửa hộ khẩu {MaSoHoKhau}", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+
+                if (dlgRes == System.Windows.MessageBoxResult.No)
+                    return;
+
                 UpsertResult();
 
                 if (isAddingMode)

@@ -219,20 +219,25 @@ namespace QuanLyHoKhau.ViewModel
                 return;
             }
 
-            System.Windows.MessageBoxResult dlgRes = System.Windows.MessageBox.Show($"Bạn có chắc muốn lưu thông tin chuyển khẩu cho {filteredNK.Count} nhân khẩu không?", "Xác nhận", System.Windows.MessageBoxButton.YesNo);
-            if(dlgRes == System.Windows.MessageBoxResult.No)
-                return;
-
             string error;
 
             if (Validate(out error))
             {
+                string msgNKs = filteredNK.Select(nk => nk.CMND + "\n").Aggregate((s1, s2) => s1 + s2);
+                string msg = $"Bạn có chắc muốn lưu thông tin chuyển khẩu cho {filteredNK.Count} nhân khẩu không?";
+                msg += "Danh sách nhân khẩu sẽ chuyển:\n";
+                msg += msgNKs;
+
+                System.Windows.MessageBoxResult dlgRes = System.Windows.MessageBox.Show(msg, "Xác nhận", System.Windows.MessageBoxButton.YesNo);
+                if (dlgRes == System.Windows.MessageBoxResult.No)
+                    return;
+
                 filteredNK.ForEach(AddPendingChuyenKhau);
                 DataProvider.Ins.DB.SaveChanges();
 
-                string msg = $"Đã thêm phiếu chuyển khẩu cho {filteredNK.Count} nhân khẩu từ hộ khẩu {SelectedFromSoHoKhau.MaSHK} đến hộ khẩu {SelectedToSoHoKhau.MaSHK} thành công.\n";
+                msg = $"Đã thêm phiếu chuyển khẩu cho {filteredNK.Count} nhân khẩu từ hộ khẩu {SelectedFromSoHoKhau.MaSHK} đến hộ khẩu {SelectedToSoHoKhau.MaSHK} thành công.\n";
                 msg += "Danh sách nhân khẩu đã chuyển:\n";
-                msg += filteredNK.Select(nk => nk.CMND + "\n").Aggregate((s1, s2) => s1 + s2);
+                msg += msgNKs;
                 msg += $"Vui lòng chờ duyệt thay đổi để cập nhật.";
 
                 System.Windows.MessageBox.Show(msg, "Thông báo");

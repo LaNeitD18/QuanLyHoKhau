@@ -175,6 +175,8 @@ namespace QuanLyHoKhau.ViewModel
                     break;
             }
 
+            Utilities.Utils.RemoveInvalidChuHoInSHKs();
+
             return errorMsg;
         }
 
@@ -322,6 +324,8 @@ namespace QuanLyHoKhau.ViewModel
                     errorMsg = RemoveSoHoKhau(soHoKhauChoDuyet);
                     break;
             }
+
+            Utilities.Utils.RemoveInvalidChuHoInSHKs();
 
             return errorMsg;
         }
@@ -471,6 +475,7 @@ namespace QuanLyHoKhau.ViewModel
             }
 
             ListChuyenKhauChoDuyet.Remove(chuyenKhauChoDuyet);
+            Utilities.Utils.RemoveInvalidChuHoInSHKs();
             return null;
         }
 
