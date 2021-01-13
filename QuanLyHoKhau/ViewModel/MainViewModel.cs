@@ -197,12 +197,12 @@ namespace QuanLyHoKhau.ViewModel
                     VisibilityOfQLHGD = Visibility.Visible;
                     break;
                 case 3:
-                    IsQLNKEnabled = true;
-                    VisibilityOfQLNK = Visibility.Visible;
-                    break;
-                case 4:
                     IsQLHKEnabled = true;
                     VisibilityOfQLHK = Visibility.Visible;
+                    break;
+                case 4:
+                    IsQLNKEnabled = true;
+                    VisibilityOfQLNK = Visibility.Visible;
                     break;
                 case 5:
                     IsTKNKEnabled = true;
@@ -222,7 +222,7 @@ namespace QuanLyHoKhau.ViewModel
                     break;
                 case 9:
                     IsDuyetEnabled = true;
-                    VisibilityOfBaoCao = Visibility.Visible;
+                    VisibilityOfDuyet = Visibility.Visible;
                     break;
             }
         }

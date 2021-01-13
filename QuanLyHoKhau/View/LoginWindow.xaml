@@ -130,7 +130,7 @@
                         Content="Thoát"
                         Command="{Binding ExitCommand}" CommandParameter="{Binding ElementName=loginWindow}"
                         Style="{StaticResource MaterialDesignRaisedButton}" IsDefault="True"
-                        Background="Teal"
+                        Background="{StaticResource Green}"
                         BorderThickness="0"/>
                 </Grid>
             </Grid>

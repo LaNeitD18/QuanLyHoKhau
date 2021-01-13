@@ -343,16 +343,16 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid Grid.ColumnSpan="5" Grid.RowSpan="3" Background="{DynamicResource Green}">
+        <Grid Grid.ColumnSpan="5" Grid.RowSpan="3" Background="Teal">
             <Grid.Effect>
                 <DropShadowEffect BlurRadius="15" Direction="-90" RenderingBias="Quality" ShadowDepth="2"></DropShadowEffect>
             </Grid.Effect>
             <StackPanel 
                 Orientation="Vertical"
                 VerticalAlignment="Center" HorizontalAlignment="Center">
-                <Image Source="/images/classroom.png" MaxHeight="100"></Image>
+                <Image Source="/images/hk1.png" MaxHeight="100"></Image>
                 <TextBlock Foreground="White"
-                    Text="ZZZ"
+                    Text="Quản lý hộ khẩu"
                     FontWeight="Bold"
                     FontSize="16"
                     HorizontalAlignment="Center">
@@ -467,7 +467,7 @@
                 Grid.Column="1"
                 Margin="30,10"
                 BorderThickness="0"
-                Background="Teal"
+                Background="{StaticResource Green}"
                 Foreground="White"
                 Height="50"
                 Command="{Binding LogOut_Command}"
