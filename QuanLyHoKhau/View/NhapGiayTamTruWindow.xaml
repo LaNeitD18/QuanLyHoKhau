@@ -79,14 +79,14 @@
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <Button Background="Teal"
+                        <Button Background="Teal" BorderThickness="0"
                             Style="{StaticResource MaterialDesignRaisedButton}" 
                             Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
                             Width="150" Height="35"
                             IsEnabled="{Binding IsAddingEnabled}" Click="Button_Click"/>
                     </Grid>
                     <Grid Grid.Column="1">
-                        <Button Background="Teal"
+                        <Button Background="Teal" BorderThickness="0"
                             Style="{StaticResource MaterialDesignRaisedButton}" 
                             Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
                             Width="150" Height="35"

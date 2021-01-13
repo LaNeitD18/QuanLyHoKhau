@@ -57,7 +57,97 @@ namespace QuanLyHoKhau.ViewModel
             set { _VisibilityOfQLHGD = value; OnPropertyChanged(); }
         }
 
+        // 3
+        private bool _IsQLNKEnabled;
+        public bool IsQLNKEnabled
+        {
+            get { return _IsQLNKEnabled; }
+            set { _IsQLNKEnabled = value; OnPropertyChanged(); }
+        }
+
+        private Visibility _VisibilityOfQLNK;
+        public Visibility VisibilityOfQLNK
+        {
+            get { return _VisibilityOfQLNK; }
+            set { _VisibilityOfQLNK = value; OnPropertyChanged(); }
+        }
+
+        // 4
+        private bool _IsQLHKEnabled;
+        public bool IsQLHKEnabled
+        {
+            get { return _IsQLHKEnabled; }
+            set { _IsQLHKEnabled = value; OnPropertyChanged(); }
+        }
+
+        private Visibility _VisibilityOfQLHK;
+        public Visibility VisibilityOfQLHK
+        {
+            get { return _VisibilityOfQLHK; }
+            set { _VisibilityOfQLHK = value; OnPropertyChanged(); }
+        }
+
+        // 5
+        private bool _IsTKNKEnabled;
+        public bool IsTKNKEnabled
+        {
+            get { return _IsTKNKEnabled; }
+            set { _IsTKNKEnabled = value; OnPropertyChanged(); }
+        }
+
+        private Visibility _VisibilityOfTKNK;
+        public Visibility VisibilityOfTKNK
+        {
+            get { return _VisibilityOfTKNK; }
+            set { _VisibilityOfTKNK = value; OnPropertyChanged(); }
+        }
+
+        // 6
+        private bool _IsQLTVEnabled;
+        public bool IsQLTVEnabled
+        {
+            get { return _IsQLTVEnabled; }
+            set { _IsQLTVEnabled = value; OnPropertyChanged(); }
+        }
+
+        private Visibility _VisibilityOfQLTV;
+        public Visibility VisibilityOfQLTV
+        {
+            get { return _VisibilityOfQLTV; }
+            set { _VisibilityOfQLTV = value; OnPropertyChanged(); }
+        }
+
+        // 7
+        private bool _IsQLTTEnabled;
+        public bool IsQLTTEnabled
+        {
+            get { return _IsQLTTEnabled; }
+            set { _IsQLTTEnabled = value; OnPropertyChanged(); }
+        }
+
+        private Visibility _VisibilityOfQLTT;
+        public Visibility VisibilityOfQLTT
+        {
+            get { return _VisibilityOfQLTT; }
+            set { _VisibilityOfQLTT = value; OnPropertyChanged(); }
+        }
+
         // 8
+        private bool _IsBaoCaoEnabled;
+        public bool IsBaoCaoEnabled
+        {
+            get { return _IsBaoCaoEnabled; }
+            set { _IsBaoCaoEnabled = value; OnPropertyChanged(); }
+        }
+
+        private Visibility _VisibilityOfBaoCao;
+        public Visibility VisibilityOfBaoCao
+        {
+            get { return _VisibilityOfBaoCao; }
+            set { _VisibilityOfBaoCao = value; OnPropertyChanged(); }
+        }
+
+        // 9
         private bool _IsDuyetEnabled;
         public bool IsDuyetEnabled
         {
@@ -83,13 +173,14 @@ namespace QuanLyHoKhau.ViewModel
         public ICommand Duyet_Page_SelectedCommand { get; set; }
         public ICommand BaoCao_Page_SelectedCommand { get; set; }
         public ICommand ThongKeNK_Page_SelectedCommand { get; set; }
+        public ICommand LogOut_Command { get; set; }
         #endregion
 
         #region Functions
         private void DisableButtons()
         {
             // disable and hidden all buttons
-            IsDuyetEnabled = false;
+            IsDashboardEnabled = IsQLHGDEnabled = IsQLNKEnabled = IsQLHKEnabled = IsTKNKEnabled = IsQLTVEnabled = IsQLTTEnabled = IsBaoCaoEnabled = IsDuyetEnabled = false;
             VisibilityOfDuyet = Visibility.Hidden;
         }
 
@@ -105,40 +196,48 @@ namespace QuanLyHoKhau.ViewModel
                     IsQLHGDEnabled = true;
                     VisibilityOfQLHGD = Visibility.Visible;
                     break;
-                //case 3:
-                //    IsRoomEnabled = true;
-                //    IsRoomVisible = Visibility.Visible;
-                //    break;
-                //case 4:
-                //    IsTimetableInputEnabled = true;
-                //    IsTimetableInputVisible = Visibility.Visible;
-                //    break;
-                //case 5:
-                //    IsEventInputEnabled = true;
-                //    IsEventInputVisible = Visibility.Visible;
-                //    break;
-                //case 6:
-                //    IsExamInputEnabled = true;
-                //    IsExamInputVisible = Visibility.Visible;
-                //    break;
-                //case 7:
-                //    IsRoomManagementEnabled = true;
-                //    IsRoomManagementVisible = Visibility.Visible;
-                //    break;
+                case 3:
+                    IsQLNKEnabled = true;
+                    VisibilityOfQLNK = Visibility.Visible;
+                    break;
+                case 4:
+                    IsQLHKEnabled = true;
+                    VisibilityOfQLHK = Visibility.Visible;
+                    break;
+                case 5:
+                    IsTKNKEnabled = true;
+                    VisibilityOfTKNK = Visibility.Visible;
+                    break;
+                case 6:
+                    IsQLTVEnabled = true;
+                    VisibilityOfQLTV = Visibility.Visible;
+                    break;
+                case 7:
+                    IsQLTTEnabled = true;
+                    VisibilityOfQLTT = Visibility.Visible;
+                    break;
                 case 8:
+                    IsBaoCaoEnabled = true;
+                    VisibilityOfBaoCao = Visibility.Visible;
+                    break;
+                case 9:
                     IsDuyetEnabled = true;
-                    VisibilityOfDuyet = Visibility.Visible;
+                    VisibilityOfBaoCao = Visibility.Visible;
                     break;
             }
         }
 
         private void InitButtonsForUsing(string userID)
         {
+            var congAn = DataProvider.Ins.DB.CONGANs.Where(x => x.MaCongAn == userID).SingleOrDefault();
+            CONGAN currentUser = congAn as CONGAN;
+
             DisableButtons();
-            ObservableCollection<CHITIET_PHANQUYEN> listPermission = new ObservableCollection<CHITIET_PHANQUYEN>(DataProvider.Ins.DB.CHITIET_PHANQUYEN);
-            foreach (var item in listPermission)
+            var listPermission = DataProvider.Ins.DB.CHITIET_PHANQUYEN.ToList();
+            ObservableCollection<CHITIET_PHANQUYEN> ListPermission = new ObservableCollection<CHITIET_PHANQUYEN>(listPermission);
+            foreach (var item in ListPermission)
             {
-                if (item.MaLoaiCongAn == userID)
+                if (item.MaLoaiCongAn == currentUser.MaLoaiCongAn)
                 {
                     int id = Convert.ToInt32(item.MaQuyen);
                     InitButton(id);
@@ -174,7 +273,7 @@ namespace QuanLyHoKhau.ViewModel
                 _timer.Interval = TimeSpan.FromSeconds(1);
                 _timer.Tick += (sender, args) =>
                 {
-                    if (GlobalState.Ins() != null)
+                    if (GlobalState.Ins().maCongAn != null)
                     {
                         InitButtonsForUsing(GlobalState.Ins().maCongAn);
 
@@ -233,6 +332,14 @@ namespace QuanLyHoKhau.ViewModel
                 //Title = "Trang chủ";
                 FrameContent = new ThongKeNhanKhauPage();
                 FrameContent.DataContext = new ThongKeNhanKhau_VM();
+            });
+
+            LogOut_Command = new RelayCommand((p) => {
+                var dlgRes = System.Windows.MessageBox.Show("Bạn có muốn đăng xuất không?", "Thông báo", MessageBoxButton.YesNo);
+                if(dlgRes == MessageBoxResult.Yes) {
+                    System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                    Application.Current.Shutdown();
+                }
             });
         }
     }

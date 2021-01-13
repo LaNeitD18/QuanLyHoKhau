@@ -122,14 +122,16 @@
                         Content="Đăng nhập"
                         Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=loginWindow}"
                         Style="{StaticResource MaterialDesignRaisedButton}" IsDefault="True"
-                        Background="Teal"/>
+                        Background="Teal"
+                        BorderThickness="0"/>
                     <Button 
                         Grid.Column="1"
                         Margin="10,0" 
                         Content="Thoát"
                         Command="{Binding ExitCommand}" CommandParameter="{Binding ElementName=loginWindow}"
                         Style="{StaticResource MaterialDesignRaisedButton}" IsDefault="True"
-                        Background="Teal"/>
+                        Background="Teal"
+                        BorderThickness="0"/>
                 </Grid>
             </Grid>
         </materialDesign:Card>

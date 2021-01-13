@@ -114,23 +114,23 @@
                     <RowDefinition></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button 
+                    BorderThickness="0"
                     Background="Teal"
                     Command="{Binding CmdReset}"
-                    Grid.Row="0"
-                    >
+                    Grid.Row="0">
                     <Button.Content>
                         <Path
                         Style="{StaticResource {x:Type Path}}"
-                        Data="{StaticResource clearmemory}"
+                        Data="{StaticResource reset}"
                         Fill="White"
                         HorizontalAlignment="Center"/>
                     </Button.Content>
                 </Button>
                 <Button 
+                    BorderThickness="0"
                     Background="Teal"
                     Grid.Row="2"
-                    Command="{Binding CmdChuyenKhau}"
-                    >
+                    Command="{Binding CmdChuyenKhau}">
                     <Button.Content>
                         <Path
                         Style="{StaticResource {x:Type Path}}"
@@ -206,23 +206,23 @@
         <Grid Grid.Row="2">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button 
+                    BorderThickness="0"
                     Background="Teal"
-                Style="{StaticResource MaterialDesignRaisedButton}" 
-                Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
-                Width="150" Height="35"
-                IsEnabled="{Binding IsAddingEnabled}"
-                Command="{Binding CmdConfirm}"    
-                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
-                />
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
+                    Margin="5,0,5,0" Content="Xác nhận" HorizontalAlignment="Center"
+                    Width="150" Height="35"
+                    IsEnabled="{Binding IsAddingEnabled}"
+                    Command="{Binding CmdConfirm}"    
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
                 <Button 
+                    BorderThickness="0"
                     Background="Teal"
-                Style="{StaticResource MaterialDesignRaisedButton}" 
-                Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
-                Width="150" Height="35"
-                IsEnabled="{Binding IsAddingEnabled}"
-                Command="{Binding CmdCancel}"    
-                CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
-                />
+                    Style="{StaticResource MaterialDesignRaisedButton}" 
+                    Margin="5,0,5,0" Content="Hủy" HorizontalAlignment="Center"
+                    Width="150" Height="35"
+                    IsEnabled="{Binding IsAddingEnabled}"
+                    Command="{Binding CmdCancel}"    
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
             </StackPanel>
         </Grid>
     </Grid>

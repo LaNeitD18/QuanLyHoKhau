@@ -174,8 +174,7 @@
                         CanUserDeleteRows="False"
                         CanUserResizeColumns="True"
                         CanUserResizeRows="False"
-                        IsReadOnly="True"
-                        >
+                        IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Header="Mã sổ hộ khẩu" Binding="{Binding MaSHK}"/>
                             <DataGridTextColumn Header="CMND chủ hộ" Binding="{Binding CMNDChuHo}"/>
@@ -184,14 +183,14 @@
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5" Click="btnEditSoHoKhau_Click"/>
+                                        <Button BorderThickness="0" Background="Teal" x:Name="btnEdit" Content="Sửa" Height="Auto" Width="75" Margin="5" Click="btnEditSoHoKhau_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTemplateColumn>
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button  x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5" Click="btnDeleteSoHoKhau_Click"/>
+                                        <Button BorderThickness="0" Background="Teal" x:Name="btnDelete" Content="Xóa" Height="Auto" Width="75" Margin="5" Click="btnDeleteSoHoKhau_Click"/>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
