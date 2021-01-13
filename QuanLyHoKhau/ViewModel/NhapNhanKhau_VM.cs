@@ -449,27 +449,14 @@ namespace QuanLyHoKhau.ViewModel
             }
 
             // Update ChuHo of SHK:
-            UpdateChuHoOfShk();
+            // UpdateChuHoOfShk();
             Utils.RemoveInvalidChuHoInSHKs();
 
             DataProvider.Ins.DB.SaveChanges();
             OnDatabaseUpdated?.Invoke(this, null);
         }
 
-        private void UpdateChuHoOfShk()
-        {
-            if(isAddingMode)
-            { 
-                if(IsChuHo)
-                    SelectedSoHoKhau.CMNDChuHo = CMND;
-                else
-                {
-                    if(SelectedSoHoKhau.CMNDChuHo == CMND)
-                        SelectedSoHoKhau.CMNDChuHo = null;
-                }
-            }
-            // CuteTN Todo: update shk's CHUHO when approving editting.
-        }
+
 
         private void AddPendingEditNhanKhau()
         {
