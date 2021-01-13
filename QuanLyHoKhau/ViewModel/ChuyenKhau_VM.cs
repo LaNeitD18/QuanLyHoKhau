@@ -14,6 +14,13 @@ namespace QuanLyHoKhau.ViewModel
     class ChuyenKhau_VM : BaseViewModel
     {
         #region Fields
+        private bool _isComboboxesSHKEnabled = true;
+        public bool IsComboboxesSHKEnabled
+        {
+            get => _isComboboxesSHKEnabled;
+            set { _isComboboxesSHKEnabled = value; OnPropertyChanged(); }
+        }
+
         private SOLUUCHUYENKHAU _selectedSoLuuChuyenKhau = null;
         public SOLUUCHUYENKHAU SelectedSoLuuChuyenKhau
         {
@@ -278,6 +285,8 @@ namespace QuanLyHoKhau.ViewModel
 
             if (ValidateForChuyenKhau(out error))
             {
+                IsComboboxesSHKEnabled = false;
+
                 List<NHANKHAU> temp = new List<NHANKHAU>(ListSelectedNHANKHAUinFromSHK);
                 foreach (var nk in temp)
                 {
@@ -288,8 +297,6 @@ namespace QuanLyHoKhau.ViewModel
                     {
                         System.Windows.MessageBox.Show("Không được phép chuyển khẩu chủ hộ", "Lỗi", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
                     }
-
-
                 }
             }
             else
@@ -309,6 +316,7 @@ namespace QuanLyHoKhau.ViewModel
 
         void HandleResetButton(Object obj)
         {
+            IsComboboxesSHKEnabled = true;
             ResetChuyenKhau();
         }
         #endregion
