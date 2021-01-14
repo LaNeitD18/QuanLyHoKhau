@@ -186,6 +186,7 @@
     <Compile Include="ViewModel\NhapNhanKhau_VM.cs" />
     <Compile Include="ViewModel\QuanLyHoKhau_VM.cs" />
     <Compile Include="ViewModel\QuanLyNhanKhau_VM.cs" />
+    <Compile Include="ViewModel\QuanLyTaiKhoan_VM.cs" />
     <Compile Include="ViewModel\QuanLyTamTru_VM.cs" />
     <Compile Include="ViewModel\QuanLyTamVang_VM.cs" />
     <Compile Include="ViewModel\ThongKeNhanKhau_VM.cs" />
@@ -219,6 +220,9 @@
     </Compile>
     <Compile Include="View\QuanLyNhanKhauPage.xaml.cs">
       <DependentUpon>QuanLyNhanKhauPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuanLyTaiKhoan.xaml.cs">
+      <DependentUpon>QuanLyTaiKhoan.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\QuanLyTamTruPage.xaml.cs">
       <DependentUpon>QuanLyTamTruPage.xaml</DependentUpon>
@@ -303,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\QuanLyNhanKhauPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\QuanLyTaiKhoan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
