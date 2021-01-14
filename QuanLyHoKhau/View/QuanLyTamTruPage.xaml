@@ -91,7 +91,7 @@
                             Style="{StaticResource {x:Type Path}}"
                             Data="{StaticResource search}"/>
                         <TextBox
-                            materialDesign:HintAssist.Hint="Tìm giấy tạm trú"
+                            materialDesign:HintAssist.Hint="Tìm giấy tạm trú (CMND, ngày)"
                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                             BorderThickness="0"
                             AcceptsReturn="True"

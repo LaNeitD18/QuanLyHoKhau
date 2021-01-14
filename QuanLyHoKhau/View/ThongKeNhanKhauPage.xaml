@@ -128,7 +128,7 @@
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="CMND" Binding="{Binding CMND}"/>
                         <DataGridTextColumn Header="Họ tên" Binding="{Binding NGUOI.Ten}"/>
-                        <DataGridTextColumn Header="Ngày sinh" Binding="{Binding NGUOI.NgaySinh}"/>
+                        <DataGridTextColumn Header="Ngày sinh" Binding="{Binding NGUOI.NgaySinh, StringFormat={}{0:dd/MM/yyyy}}"/>
                         <DataGridTextColumn Header="Giới tính" Binding="{Binding NGUOI.GioiTinh}"/>
                         <DataGridTextColumn Header="Quê quán" Binding="{Binding NGUOI.QueQuan}"/>
                         <DataGridTextColumn Header="Chỗ ở hiện nay" Binding="{Binding ChoOHienNay}"/>
@@ -143,7 +143,16 @@
                 </DataGrid>
             </materialDesign:Card>
         </Grid>
-        <materialDesign:Card Grid.Row="3" Grid.RowSpan="14" Grid.ColumnSpan="12" Padding="64">
+        <materialDesign:Card Grid.Row="3" Grid.ColumnSpan="12">
+            <TextBlock 
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Center"
+                Text="Biểu đồ so sánh tổng số nhân khẩu ở các độ tuổi khác nhau"
+                TextAlignment="Center"
+                FontSize="18"
+                FontWeight="SemiBold"></TextBlock>
+        </materialDesign:Card>
+        <materialDesign:Card Grid.Row="4" Grid.RowSpan="14" Grid.ColumnSpan="12" Padding="64">
             <lvc:PieChart 
                 LegendLocation="Bottom" 
                 Series="{Binding PieSeries}">

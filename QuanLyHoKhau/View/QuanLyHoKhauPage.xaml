@@ -91,7 +91,7 @@
                             Style="{StaticResource {x:Type Path}}"
                             Data="{StaticResource search}"/>
                         <TextBox
-                            materialDesign:HintAssist.Hint="Tìm sổ hộ khẩu"
+                            materialDesign:HintAssist.Hint="Tìm sổ hộ khẩu (Mã SHK, CMND chủ hộ)"
                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                             BorderThickness="0"
                             AcceptsReturn="True"

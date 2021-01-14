@@ -91,7 +91,7 @@
                             Style="{StaticResource {x:Type Path}}"
                             Data="{StaticResource search}"/>
                         <TextBox
-                            materialDesign:HintAssist.Hint="Tìm nhân khẩu"
+                            materialDesign:HintAssist.Hint="Tìm nhân khẩu (CMND, Họ tên)"
                             materialDesign:TextFieldAssist.DecorationVisibility="Hidden"
                             BorderThickness="0"
                             AcceptsReturn="True"
